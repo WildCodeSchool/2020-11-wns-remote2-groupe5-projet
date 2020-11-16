@@ -7,7 +7,7 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'airbnb',
+    // 'airbnb',
     'plugin:prettier/recommended',
     'prettier/react',
     'plugin:jest/recommended',
@@ -24,7 +24,6 @@ module.exports = {
   rules: {
     'prettier/prettier': ['error'],
     'react/react-in-jsx-scope': 0,
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.ts'] }],
   },
   settings: {
     react: {
