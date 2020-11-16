@@ -4,14 +4,6 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    // 'airbnb',
-    'plugin:prettier/recommended',
-    'prettier/react',
-    'plugin:jest/recommended',
-  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -20,11 +12,14 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'prettier', 'jest'],
-  rules: {
-    'prettier/prettier': ['error'],
-    'react/react-in-jsx-scope': 0,
-  },
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
+    'prettier/react',
+    'plugin:jest/recommended',
+  ],
+  plugins: ['@typescript-eslint', 'react', 'prettier', 'jest'],
   settings: {
     react: {
       version: 'latest',
