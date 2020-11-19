@@ -1,12 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'tailwindcss/tailwind.css';
 
 const App = (): JSX.Element => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <header className="max-w-md mx-auto flex p-6 bg-gray-100 mt-10 rounded-lg shadow-xl">
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
