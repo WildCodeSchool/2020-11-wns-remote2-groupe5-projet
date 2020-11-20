@@ -1,4 +1,10 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  Unique,
+} from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 
 @Entity()
@@ -9,10 +15,12 @@ export default class User extends BaseEntity {
   userID!: number;
 
   @Column()
+  @Unique(['pseudo'])
   @Field(() => String)
   pseudo!: string;
 
   @Column()
+  @Unique(['email'])
   @Field(() => String)
   email!: string;
 
@@ -29,8 +37,8 @@ export default class User extends BaseEntity {
   city!: string;
 
   @Column()
-  @Field(() => Number)
-  phoneNumber!: number;
+  @Field(() => String)
+  phoneNumber!: string;
 
   @Column()
   @Field(() => String)
