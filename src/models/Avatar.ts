@@ -3,10 +3,10 @@ import { ObjectType, Field, ID } from 'type-graphql';
 
 @Entity()
 @ObjectType()
-export default class Book extends BaseEntity {
+export default class Avatar extends BaseEntity {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  id!: string;
+  avatarID!: string;
 
   @Column()
   @Field(() => String)
