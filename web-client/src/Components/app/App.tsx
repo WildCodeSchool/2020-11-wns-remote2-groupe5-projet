@@ -1,24 +1,17 @@
 import React from 'react';
+import Main from '../Main';
 import './App.css';
 import 'tailwindcss/tailwind.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+import GlobalContext from '../../utils/GlobalContext';
 
 const App = (): JSX.Element => {
   return (
-    <div className="App">
-      <header className="max-w-md mx-auto flex p-6 bg-gray-100 mt-10 rounded-lg shadow-xl">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalContext.Provider value={{}}>
+      <Router>
+        <Main />
+      </Router>
+    </GlobalContext.Provider>
   );
 };
 
