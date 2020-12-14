@@ -3,23 +3,23 @@ import { InputType, Field } from 'type-graphql';
 @InputType()
 export default class CreateUserInput {
   @Field()
-  pseudo!: string;
+  pseudo: string;
 
   @Field()
-  email!: string;
+  email: string;
 
   @Field()
-  password!: string;
+  password: string;
 
   @Field()
-  age!: number;
+  age: number;
 
   @Field()
-  city!: string;
+  city: string;
 
   @Field()
-  phoneNumber!: string;
+  phoneNumber: string;
 
   @Field()
-  bio!: string;
+  bio: string;
 }
