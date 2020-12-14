@@ -6,7 +6,7 @@ import Login from './Login/Login';
 import ArticleCreation from './MainSection/FeedPage/ArticleCreation/ArticleCreation';
 import ArticlePage from './MainSection/FeedPage/Articles/ArticlePage/ArticlePage';
 import Articles from './MainSection/FeedPage/Articles/Articles';
-import Publication from './MainSection/FeedPage/Publication/Publication';
+import PublicationCloneTsx from './MainSection/FeedPage/Publication/PublicationCloneTsx/PublicationCloneTsx';
 
 const Main = () => {
   return (
@@ -26,7 +26,7 @@ const Main = () => {
         component={ProfilModification}
       />
       {/*  */}
-      <Route exact path="/publication" component={Publication} />
+      <Route exact path="/publication" component={PublicationCloneTsx} />
     </Switch>
   );
 };
