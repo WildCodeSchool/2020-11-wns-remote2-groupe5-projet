@@ -1,10 +1,11 @@
-import { logRoles } from '@testing-library/react';
-import { LOADIPHLPAPI } from 'dns';
 import React, { useState } from 'react';
-import { LanguageServiceMode } from 'typescript';
 import './PublicationCloneTsx.css';
 
+import data from '../../../../../data-samples/articles-journal.json';
+
 export default function PublicationCloneTsx() {
+  const article = data[0];
+  console.log('article', article);
   return (
     <div className="lg:p-10 xl:p-10 bg-gray-300 space-y-5 flex items-center justify-center ">
       <section className="p-1 m-10">
@@ -13,16 +14,17 @@ export default function PublicationCloneTsx() {
             <div className="px-4">
               <img
                 className="rounded-full h-16 w-16 flex items-center justify-center"
-                src="https://www.w3schools.com/howto/img_avatar.png"
                 alt="avatar"
               />
             </div>
             <div>
               <div>
-                <span>Pseudo</span>
+                <span>{article.User.Pseudo}</span>
                 <span className="italic underline">S abonner</span>
               </div>
-              <div>Date | #Communauté tag</div>
+              <div>
+                {article.Date} | {article.Communaute.Name} {article.Skills.Name}
+              </div>
             </div>
           </div>
           <div className="font-bold text-5xl mx-2 leading-3">...</div>
