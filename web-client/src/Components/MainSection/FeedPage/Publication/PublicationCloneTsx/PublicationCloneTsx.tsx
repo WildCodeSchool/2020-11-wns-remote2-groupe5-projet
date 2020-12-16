@@ -9,7 +9,7 @@ export default function PublicationCloneTsx() {
     <div className="lg:p-10 bg-gray-300 space-y-5 flex flex-col items-center justify-center">
       {data.map((article) => (
         <section key={article.ArticleID} className="p-1 max-w-screen-lg">
-          <div className="flex bg-black text-white justify-between rounded-tl rounded-tr p-4">
+          <div className="flex bg-black text-white justify-between rounded-tl-md rounded-tr-md p-4">
             <div className="flex flex-col md:flex-row items-center text-center md:text-left w-full md:self-start">
               <div className="px-4">
                 <img
@@ -20,7 +20,7 @@ export default function PublicationCloneTsx() {
               </div>
               <div>
                 <div className="mt-5 text-lg">
-                  <span>{article.User.Pseudo}</span>&nbsp;
+                  <span>{article.User.Pseudo}</span>&nbsp;&nbsp;
                   <span className="italic underline">S&rsquo;abonner</span>
                 </div>
                 <div>
@@ -37,10 +37,10 @@ export default function PublicationCloneTsx() {
               <span>.</span>
             </div>
           </div>
-          <article className="bg-white rounded-br rounded-bl md:flex">
+          <article className="bg-white rounded-br-md rounded-bl-md md:flex">
             <div className="py-3 md:w-1/2 md:mx-2 mx-auto flex items-center">
               <img
-                className="rounded mx-auto"
+                className="rounded-md mx-auto"
                 src={article.Content.Img}
                 alt=""
               />
@@ -52,7 +52,7 @@ export default function PublicationCloneTsx() {
                 </h3>
                 <p className="text-justify px-4">{article.Content.Text}</p>
               </div>
-              <div className="w-full md:w-1/4 self-end py-2 rounded-tl rounded-br bg-black text-white hover:bg-white hover:text-black font-semibold">
+              <div className="w-full md:w-1/4 self-end py-2 rounded-md md:rounded-tr-none md:rounded-bl-none bg-black text-white hover:bg-white hover:text-black font-semibold">
                 Lire la suite
                 <span>fleche</span>
               </div>
