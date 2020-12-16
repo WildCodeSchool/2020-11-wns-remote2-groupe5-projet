@@ -16,6 +16,10 @@ export default class User extends BaseEntity {
   @Field(() => ID)
   userID: number;
 
+  @OneToMany(() => Article, (articles) => articles.user)
+  @Field(() => [Article])
+  articles: Article[];
+
   @Column()
   @Unique(['pseudo'])
   @Field(() => String)
@@ -30,23 +34,19 @@ export default class User extends BaseEntity {
   @Field(() => String)
   password: string;
 
-  @Column()
-  @Field(() => Number)
+  @Column({ nullable: true })
+  @Field(() => Number, { nullable: true })
   age: number;
 
-  @Column()
-  @Field(() => String)
+  @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
   city: string;
 
-  @Column()
-  @Field(() => String)
+  @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
   phoneNumber: string;
 
-  @Column()
-  @Field(() => String)
+  @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
   bio: string;
-
-  @OneToMany(() => Article, (article) => article.userID)
-  @Field(() => [Article])
-  article: Article[];
 }

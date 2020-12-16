@@ -2,24 +2,24 @@ import { InputType, Field } from 'type-graphql';
 
 @InputType()
 export default class CreateUserInput {
-  @Field()
+  @Field({ nullable: true })
   pseudo: string;
 
-  @Field()
+  @Field({ nullable: true })
   email: string;
 
-  @Field()
+  @Field({ nullable: true })
   password: string;
 
-  @Field()
+  @Field({ nullable: true })
   age: number;
 
-  @Field()
+  @Field({ nullable: true })
   city: string;
 
-  @Field()
+  @Field({ nullable: true })
   phoneNumber: string;
 
-  @Field()
+  @Field({ nullable: true })
   bio: string;
 }
