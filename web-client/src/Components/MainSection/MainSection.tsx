@@ -1,7 +1,11 @@
 import React from 'react';
-import PublicationCloneTsx from './FeedPage/Publication/PublicationCloneTsx/PublicationCloneTsx';
+import LogIn from '../LogIn/LogIn';
 import './MainSection.css';
 
 export default function MainSection() {
-  return <div>MAIN SECTION</div>;
+  return (
+    <div>
+      <LogIn />
+    </div>
+  );
 }
