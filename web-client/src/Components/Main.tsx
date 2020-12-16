@@ -4,7 +4,7 @@ import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import ProfilModification from './Header/UserProfil/ProfilModification/ProfilModification';
 import ProfilView from './Header/UserProfil/ProfilView/ProfilView';
-import Login from './Login/Login';
+import LogIn from './LogIn/LogIn';
 import ArticleCreation from './MainSection/FeedPage/ArticleCreation/ArticleCreation';
 import ArticlePage from './MainSection/FeedPage/Articles/ArticlePage/ArticlePage';
 import Articles from './MainSection/FeedPage/Articles/Articles';
@@ -14,11 +14,11 @@ import MainSection from './MainSection/MainSection';
 
 const Main = () => {
   return (
-    <div className="container h-screen bg-green-500">
-      <Header />
+    <div className="container h-screen bg-gray-900">
+      {/* <Header /> */}
       <Switch>
         <Route exact path="/" component={MainSection} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/logIn" component={LogIn} />
         <Route exact path="/articles" component={Articles} />
         <Route exact path="/articles/:article" component={ArticlePage} />
         <Route
@@ -35,7 +35,7 @@ const Main = () => {
         {/*  */}
         <Route exact path="/publication" component={PublicationCloneTsx} />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

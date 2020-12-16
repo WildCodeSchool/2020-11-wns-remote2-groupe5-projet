@@ -8,6 +8,11 @@ import GlobalContext from '../../utils/GlobalContext';
 const App = (): JSX.Element => {
   return (
     <GlobalContext.Provider value={{}}>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.css"
+      />
+
       <Router>
         <Main />
       </Router>
