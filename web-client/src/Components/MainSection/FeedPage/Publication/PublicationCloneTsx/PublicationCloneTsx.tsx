@@ -1,6 +1,6 @@
 import { logRoles } from '@testing-library/react';
 import { LOADIPHLPAPI } from 'dns';
-import React from 'react';
+import React, { useState } from 'react';
 import { LanguageServiceMode } from 'typescript';
 import './PublicationCloneTsx.css';
 
@@ -19,7 +19,7 @@ export default function PublicationCloneTsx() {
             </div>
             <div>
               <div>
-                <span>Nom</span>
+                <span>Pseudo</span>
                 <span className="italic underline">S abonner</span>
               </div>
               <div>Date | #Communauté tag</div>
