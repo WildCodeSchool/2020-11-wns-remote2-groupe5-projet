@@ -8,6 +8,7 @@ import Login from './Login/Login';
 import ArticleCreation from './MainSection/FeedPage/ArticleCreation/ArticleCreation';
 import ArticlePage from './MainSection/FeedPage/Articles/ArticlePage/ArticlePage';
 import Articles from './MainSection/FeedPage/Articles/Articles';
+import PublicationCloneTsx from './MainSection/FeedPage/Publication/PublicationCloneTsx/PublicationCloneTsx';
 import Publication from './MainSection/FeedPage/Publication/Publication';
 import MainSection from './MainSection/MainSection';
 
@@ -32,7 +33,7 @@ const Main = () => {
           component={ProfilModification}
         />
         {/*  */}
-        <Route exact path="/publication" component={Publication} />
+        <Route exact path="/publication" component={PublicationCloneTsx} />
       </Switch>
       <Footer />
     </div>
