@@ -14,8 +14,8 @@ import MainSection from './MainSection/MainSection';
 
 const Main = () => {
   return (
-    <div className="container h-screen bg-gray-900">
-      {/* <Header /> */}
+    <div className="h-screen bg-green-500">
+      <Header />
       <Switch>
         <Route exact path="/" component={MainSection} />
         <Route exact path="/logIn" component={LogIn} />
