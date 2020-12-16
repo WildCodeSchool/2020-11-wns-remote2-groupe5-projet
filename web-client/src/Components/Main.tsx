@@ -20,12 +20,12 @@ const Main = () => {
         <Route exact path="/" component={MainSection} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/articles" component={Articles} />
-        <Route exact path="/articles/:article" component={ArticlePage} />
         <Route
           exact
           path="/articles/article-creation"
           component={ArticleCreation}
         />
+        <Route exact path="/articles/:article" component={ArticlePage} />
         <Route exact path="/profil" component={ProfilView} />
         <Route
           exact
