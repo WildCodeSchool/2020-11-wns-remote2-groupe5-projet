@@ -5,9 +5,11 @@ import {
   Column,
   Unique,
   OneToMany,
+  BeforeInsert,
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import Article from './Article';
+import { hash } from 'bcrypt';
 
 @Entity()
 @ObjectType()
@@ -49,4 +51,9 @@ export default class User extends BaseEntity {
   @Column({ nullable: true })
   @Field(() => String, { nullable: true })
   bio: string;
+
+  @BeforeInsert()
+  async hashPassword(): Promise<void> {
+    this.password = await hash(this.password, 10);
+  }
 }
