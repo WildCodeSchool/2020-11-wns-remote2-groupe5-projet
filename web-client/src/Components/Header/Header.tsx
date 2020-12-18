@@ -10,13 +10,15 @@ export default function Header() {
     setOpenProfilDropdown(!openProfilDropdown)
   );
 
+  const [openSearchbar, setOpenSearchbar] = useState<boolean>(false);
+
   return (
     <nav className="bg-gray-800">
       <div className="mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           {/* /***** Searchbar */}
-          <div className=" bg-gray-200">
-            <div className="relative">
+          <div className="bg-gray-200">
+            <div className="hidden lg:block relative">
               <input
                 type="text"
                 className="h-8 w-96 pr-8 pl-5 rounded z-0 focus:shadow-color-white focus:"
@@ -26,17 +28,31 @@ export default function Header() {
                 <i className="fa fa-search text-gray-400 z-20 hover:text-gray-500" />
               </div>
             </div>
+            <div className="block lg:hidden">
+              <button onClick={() => setOpenSearchbar(!openSearchbar)}>
+                SEARCH
+              </button>
+              {openSearchbar && (
+                <>
+                  <input
+                    type="text"
+                    className="absolute top-4 h-8 w-5/6 pr-8 pl-5 rounded z-0 focus:shadow-color-white z-10"
+                    placeholder="Search anything..."
+                  />
+                </>
+              )}
+            </div>
           </div>
           {/*  */}
           <div className="flex-1 flex items-center justify-center sm:items-stretch">
-            <div className="flex-shrink-0 flex items-center">
+            <div className="flex-shrink-0 flex items-center lg:mr-80">
               {/* <img
                 className="block lg:hidden h-8 w-auto"
                 src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                 alt="Workflow"
               /> */}
               <img
-                className="hidden lg:block h-8 w-auto"
+                className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
                 alt="Workflow"
               />
