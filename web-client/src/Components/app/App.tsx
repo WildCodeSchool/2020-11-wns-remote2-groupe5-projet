@@ -14,19 +14,18 @@ const App = (): JSX.Element => {
   const islogIn = true;
   return (
     <GlobalContext.Provider value={{}}>
-      {!islogIn ? (
+      {/* {!islogIn ? (
         <>
           <LogIn />
         </>
       ) : (
         <div>
-          <Header />
-          <Router>
-            <Main />
-          </Router>
-          <Footer />
-        </div>
-      )}
+          <Header /> */}
+      <Router>
+        <Main />
+      </Router>
+      {/* <Footer />
+        </div> */}
     </GlobalContext.Provider>
   );
 };

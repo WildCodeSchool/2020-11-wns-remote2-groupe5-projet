@@ -13,14 +13,19 @@ import ArticlePage from './MainSection/FeedPage/Articles/ArticlePage/ArticlePage
 import ProfilView from './Header/UserProfil/ProfilView/ProfilView';
 import ProfilModification from './Header/UserProfil/ProfilModification/ProfilModification';
 import MainPanel from './MainSection/MainPanel/MainPanel';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
+import PublicationCloneTsx from './MainSection/FeedPage/Publication/PublicationCloneTsx/PublicationCloneTsx';
 
-export default function Main(): JSX.Element {
+export default function Main(props: any): JSX.Element {
+  console.log('main', props);
   return (
     <>
       {/* <MainPanel /> */}
+      <Header />
       <Switch>
-        {/* <Route exact path="/" component={LogIn} /> */}
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={LogIn} />
+        <Route exact path="/homePage" component={HomePage} />
         <Route exact path="/articles" component={Articles} />
         <Route path="/articles/article-creation" component={ArticleCreation} />
         <Route path="/articles/:id" component={ArticlePage} />
@@ -30,8 +35,10 @@ export default function Main(): JSX.Element {
           path="/profil/profil-modification"
           component={ProfilModification}
         />
+        <Route exact path="/publication" component={PublicationCloneTsx} />
         {/*  */}
       </Switch>
+      <Footer />
     </>
   );
 }
