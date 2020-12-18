@@ -1,11 +1,15 @@
 import React from 'react';
-import LogIn from '../LogIn/LogIn';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import FeedPage from './FeedPage/FeedPage';
 import './MainSection.css';
 
-export default function MainSection() {
+export default function MainSection(): JSX.Element {
   return (
     <div>
-      <LogIn />
+      <Header />
+      <FeedPage />
+      <Footer />
     </div>
   );
 }
