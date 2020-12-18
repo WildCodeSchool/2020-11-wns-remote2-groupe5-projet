@@ -10,7 +10,7 @@ import UserSession from '../models/UserSession';
 @Resolver()
 export default class UserResolver {
   @Mutation(() => User)
-  async signin(@Arg('data') data: CreateUserInput): Promise<User> {
+  async signIn(@Arg('data') data: CreateUserInput): Promise<User> {
     const user = User.create(data);
     await user.save();
     return user;
@@ -44,18 +44,22 @@ export default class UserResolver {
   }
 
   @Mutation(() => User)
-  async putUserInfos(
-    @Arg('userID') userID: string,
+  async updateUserInfos(
+    // @Arg('userID') userID: string,
+    @Ctx() { user }: { user: User | null },
     @Arg('data') data: CreateUserInput
   ): Promise<User> {
+    if (!user) {
+      throw Error('You are not authenticated.');
+    }
     await getConnection()
       .createQueryBuilder()
       .update(User)
       .set(data)
-      .where('userID = :id', { id: userID })
+      .where('userID = :id', { id: user.userID })
       .execute();
 
-    return User.findOne(userID) as Promise<User>;
+    return User.findOne(user.userID) as Promise<User>;
   }
 
   @Query(() => User)
