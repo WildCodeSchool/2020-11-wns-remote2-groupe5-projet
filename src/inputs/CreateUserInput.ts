@@ -1,14 +1,18 @@
 import { InputType, Field } from 'type-graphql';
+import { MaxLength, MinLength } from 'class-validator';
 
 @InputType()
 export default class CreateUserInput {
   @Field({ nullable: true })
+  @MaxLength(20)
   pseudo: string;
 
   @Field({ nullable: true })
+  @MaxLength(40)
   email: string;
 
   @Field({ nullable: true })
+  @MinLength(8)
   password: string;
 
   @Field({ nullable: true })
