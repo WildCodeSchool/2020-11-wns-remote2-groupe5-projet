@@ -6,6 +6,7 @@ import CreateSessionInput from '../inputs/CreateSessionInput';
 import CreateUserInput from '../inputs/CreateUserInput';
 import User from '../models/User';
 import UserSession from '../models/UserSession';
+import { SECURE_COOKIES } from '../config';
 
 @Resolver()
 export default class UserResolver {
@@ -37,7 +38,7 @@ export default class UserResolver {
     await userSession.save();
     res.set('set-cookie', [
       `sessionId=${userSession.uuid}; Max-Age=2592000; HttpOnly;${
-        process.env.SECURE_COOKIES ? ' Secure;' : ''
+        SECURE_COOKIES ? ' Secure;' : ''
       } SameSite=Strict`,
     ]);
     return user;
