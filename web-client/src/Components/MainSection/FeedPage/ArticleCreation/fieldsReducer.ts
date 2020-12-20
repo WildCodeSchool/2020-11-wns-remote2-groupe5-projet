@@ -27,6 +27,10 @@ export type Action =
   | {
       type: 'SET_VALUE';
       payload: { index: number; value: string };
+    }
+  | {
+      type: 'DRAG_DROP';
+      payload: { index: number; newIndex?: number };
     };
 
 const fieldsReducer = (state: State, action: Action): State => {
@@ -60,6 +64,22 @@ const fieldsReducer = (state: State, action: Action): State => {
       const fields = [...state];
       fields[index].value = value;
       return fields;
+    }
+
+    case 'DRAG_DROP': {
+      const { index, newIndex } = action.payload;
+
+      if (newIndex) {
+        const movedItem = state[index];
+        const remainingItems = state.filter((item, i) => i !== index);
+
+        return [
+          ...remainingItems.slice(0, newIndex),
+          movedItem,
+          ...remainingItems.slice(newIndex),
+        ];
+      }
+      return state;
     }
 
     default:
