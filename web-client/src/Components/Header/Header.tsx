@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import './Header.css';
 import useOnClickOutside from '../../utils/CloseOnOutsideClick';
 
-export default function Header() {
+export default function Header(): JSX.Element {
   const refProfil = useRef(null);
 
   const [openProfilDropdown, setOpenProfilDropdown] = useState<boolean>(false);

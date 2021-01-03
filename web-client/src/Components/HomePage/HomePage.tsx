@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import FeedPage from '../MainSection/FeedPage/FeedPage';
+import React from 'react';
 import PublicationCloneTsx from '../MainSection/FeedPage/Publication/PublicationCloneTsx/PublicationCloneTsx';
 
 export default function HomePage(): JSX.Element {

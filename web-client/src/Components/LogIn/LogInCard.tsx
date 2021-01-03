@@ -1,7 +1,5 @@
 import React from 'react';
-
 import InputCustom from '../helpers/InputCustom';
-import LogoCustom from '../helpers/LogoCustom';
 
 export default function LogInCard(): JSX.Element {
   return (

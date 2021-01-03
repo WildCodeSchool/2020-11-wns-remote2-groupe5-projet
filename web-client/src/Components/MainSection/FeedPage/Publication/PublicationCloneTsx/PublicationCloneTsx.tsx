@@ -1,10 +1,8 @@
 import React from 'react';
 import './PublicationCloneTsx.css';
-
 import data from '../../../../../data-samples/articles-journal.json';
-import ArticleCreation from '../../ArticleCreation/ArticleCreation';
 
-export default function PublicationCloneTsx() {
+export default function PublicationCloneTsx(): JSX.Element {
   return (
     <div className="lg:p-10 bg-gray-300 space-y-5 flex flex-col items-center justify-center">
       {data.map((article) => (
