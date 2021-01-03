@@ -20,15 +20,18 @@ import PublicationCloneTsx from './MainSection/FeedPage/Publication/PublicationC
 export default function Main(props: any): JSX.Element {
   console.log('main', props);
   return (
-    <>
-      {/* <MainPanel /> */}
+    <div className="h-screen bg-green-500">
       <Header />
       <Switch>
         <Route exact path="/" component={LogIn} />
         <Route exact path="/homePage" component={HomePage} />
         <Route exact path="/articles" component={Articles} />
-        <Route path="/articles/article-creation" component={ArticleCreation} />
-        <Route path="/articles/:id" component={ArticlePage} />
+        <Route
+          exact
+          path="/articles/article-creation"
+          component={ArticleCreation}
+        />
+        <Route exact path="/articles/:article" component={ArticlePage} />
         <Route exact path="/profil" component={ProfilView} />
         <Route
           exact
@@ -39,6 +42,6 @@ export default function Main(props: any): JSX.Element {
         {/*  */}
       </Switch>
       <Footer />
-    </>
+    </div>
   );
 }

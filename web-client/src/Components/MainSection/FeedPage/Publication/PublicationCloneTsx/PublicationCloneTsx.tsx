@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './PublicationCloneTsx.css';
 
 import data from '../../../../../data-samples/articles-journal.json';
