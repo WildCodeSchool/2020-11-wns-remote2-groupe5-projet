@@ -3,6 +3,11 @@ import React from 'react';
 import LogoCustom from '../../common/helpers/LogoCustom';
 import LogInCard from './LogInCard';
 
+// const initialState = {
+//   userEmail: '',
+//   userPassword: '',
+// }
+
 export default function LogIn(): JSX.Element {
   return (
     <main>

@@ -3,11 +3,13 @@ import React from 'react';
 interface InputProps {
   placeholder: string;
   type: string;
-  // avatarPath: string;
+  value: string;
+  setValue: any;
+  //setValue: Dispatch<SetStateAction<string>>
 }
 
 export default function InputCustom(props: InputProps): JSX.Element {
-  const { placeholder, type } = props;
+  const { placeholder, type, value, setValue } = props;
   return (
     <div className="relative w-full mb-3">
       <label
@@ -21,6 +23,8 @@ export default function InputCustom(props: InputProps): JSX.Element {
         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
         placeholder={placeholder}
         style={{ transition: 'all .15s ease' }}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
       />
     </div>
   );

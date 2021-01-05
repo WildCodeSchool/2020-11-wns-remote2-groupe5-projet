@@ -12,7 +12,7 @@ import Header from './common/Header/Header';
 import Footer from './common/Footer/Footer';
 
 export default function App(): JSX.Element {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return (
     <GlobalContext.Provider value={{}}>
