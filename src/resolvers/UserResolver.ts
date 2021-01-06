@@ -64,10 +64,12 @@ export default class UserResolver {
   }
 
   @Query(() => User)
-  user(@Arg('userID') userID: string): Promise<User> {
-    return User.findOne(userID, {
-      relations: ['articles'],
-    }) as Promise<User>;
+  user(@Ctx() { user }: { user: User | null }): Promise<User> {
+    if (!user) {
+      throw Error('You are not authenticated.');
+    }
+
+    return User.findOne(user.userID) as Promise<User>;
   }
 
   @Query(() => [User])
