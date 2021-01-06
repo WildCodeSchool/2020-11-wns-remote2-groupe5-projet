@@ -1,6 +1,6 @@
 import React from 'react';
 import InputCustom from '../../common/helpers/InputCustom';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql, ApolloError } from '@apollo/client';
 
 export default function LogInCard(): JSX.Element {
   const AUTHENT = gql`
@@ -14,8 +14,22 @@ export default function LogInCard(): JSX.Element {
 
   const [userEmail, setUserEmail] = React.useState('');
   const [userPassword, setUserPassword] = React.useState('');
-  const [authent, { data, error }] = useMutation(AUTHENT);
-  console.log('error', error);
+  const [errorMessage, setErrorMessage] = React.useState('');
+  const [authenticate, { data }] = useMutation(AUTHENT);
+
+  const authenticateAndHandleError = async () => {
+    try {
+      await authenticate({
+        variables: {
+          input: { email: userEmail, password: userPassword },
+        },
+      });
+    } catch (error) {
+      console.log('coucou');
+      setErrorMessage(error.message);
+    }
+  };
+
   return (
     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
       <div className="rounded-t mb-0 px-6 py-6">
@@ -35,11 +49,7 @@ export default function LogInCard(): JSX.Element {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            authent({
-              variables: {
-                input: { email: userEmail, password: userPassword },
-              },
-            });
+            authenticateAndHandleError();
           }}
         >
           <InputCustom
@@ -54,6 +64,7 @@ export default function LogInCard(): JSX.Element {
             setValue={setUserPassword}
             value={userPassword}
           />
+          {errorMessage ? <p>{errorMessage}</p> : <p></p>}
           <div>
             <label className="inline-flex items-center cursor-pointer">
               <input
@@ -72,11 +83,9 @@ export default function LogInCard(): JSX.Element {
               className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
               type="submit"
               style={{ transition: 'all .15s ease' }}
-              onClick={() => console.log('result', data)}
             >
               log in
             </button>
-            {error ? <p>Incorrect password/email</p> : null}
           </div>
         </form>
       </div>
