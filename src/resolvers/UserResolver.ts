@@ -64,7 +64,7 @@ export default class UserResolver {
   }
 
   @Query(() => User)
-  user(@Ctx() { user }: { user: User | null }): Promise<User> {
+  me(@Ctx() { user }: { user: User | null }): Promise<User> {
     if (!user) {
       throw Error('You are not authenticated.');
     }

@@ -1,8 +1,14 @@
 import React from 'react';
 import InputCustom from '../../common/helpers/InputCustom';
-import { useMutation, gql, ApolloError } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 
-export default function LogInCard(): JSX.Element {
+type LogInCardProps = {
+  setIsAuthenticate: any;
+};
+
+export default function LogInCard({
+  setIsAuthenticate,
+}: LogInCardProps): JSX.Element {
   const AUTHENT = gql`
     mutation createSession($input: CreateSessionInput!) {
       createSession(input: $input) {
@@ -24,6 +30,7 @@ export default function LogInCard(): JSX.Element {
           input: { email: userEmail, password: userPassword },
         },
       });
+      setIsAuthenticate(true);
     } catch (error) {
       console.log('coucou');
       setErrorMessage(error.message);

@@ -3,12 +3,11 @@ import React from 'react';
 import LogoCustom from '../../common/helpers/LogoCustom';
 import LogInCard from './LogInCard';
 
-// const initialState = {
-//   userEmail: '',
-//   userPassword: '',
-// }
+type LogInProps = {
+  setIsAuthenticate: any;
+};
 
-export default function LogIn(): JSX.Element {
+export default function LogIn({ setIsAuthenticate }: LogInProps): JSX.Element {
   return (
     <main>
       <section className="absolute w-full h-full">
@@ -24,7 +23,7 @@ export default function LogIn(): JSX.Element {
         <div className="container mx-auto px-4 h-full">
           <div className="flex content-center items-center justify-center h-full">
             <div className="w-full lg:w-4/12 px-4">
-              <LogInCard />
+              <LogInCard setIsAuthenticate={setIsAuthenticate} />
             </div>
             <div className="w-full z-10 lg:w-4/12 px-4">
               <LogoCustom />
