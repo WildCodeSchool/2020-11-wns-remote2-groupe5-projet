@@ -1,27 +1,19 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { AUTH } from '../../../queries/user-queries';
 import InputCustom from '../../common/helpers/InputCustom';
-import { useMutation, gql } from '@apollo/client';
 
 type LogInCardProps = {
-  setIsAuthenticate: any;
+  setIsAuthenticate: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function LogInCard({
   setIsAuthenticate,
 }: LogInCardProps): JSX.Element {
-  const AUTHENT = gql`
-    mutation createSession($input: CreateSessionInput!) {
-      createSession(input: $input) {
-        pseudo
-        userID
-      }
-    }
-  `;
-
-  const [userEmail, setUserEmail] = React.useState('');
-  const [userPassword, setUserPassword] = React.useState('');
-  const [errorMessage, setErrorMessage] = React.useState('');
-  const [authenticate, { data }] = useMutation(AUTHENT);
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [authenticate] = useMutation(AUTH);
 
   const authenticateAndHandleError = async () => {
     try {
@@ -32,7 +24,6 @@ export default function LogInCard({
       });
       setIsAuthenticate(true);
     } catch (error) {
-      console.log('coucou');
       setErrorMessage(error.message);
     }
   };

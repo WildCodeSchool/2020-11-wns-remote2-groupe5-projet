@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 import LogoCustom from '../../common/helpers/LogoCustom';
 import LogInCard from './LogInCard';
 
 type LogInProps = {
-  setIsAuthenticate: any;
+  setIsAuthenticate: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function LogIn({ setIsAuthenticate }: LogInProps): JSX.Element {
