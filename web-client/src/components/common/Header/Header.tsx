@@ -1,17 +1,35 @@
-import React, { useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import './Header.css';
 import useOnClickOutside from '../../../utils/CloseOnOutsideClick';
 import { NavLink } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { LOG_OUT } from '../../../queries/user-queries';
 
-export default function Header(): JSX.Element {
+type HeaderProps = {
+  setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function Header({
+  setIsAuthenticated,
+}: HeaderProps): JSX.Element {
   const refProfil = useRef(null);
-
+  const [openSearchbar, setOpenSearchbar] = useState<boolean>(false);
   const [openProfilDropdown, setOpenProfilDropdown] = useState<boolean>(false);
+  const [logout] = useMutation(LOG_OUT);
+
+  const clickToLogOut = async () => {
+    try {
+      await logout();
+      setIsAuthenticated(false);
+    } catch (error) {
+      console.log('error');
+      // setErrorMessage(error.message);
+    }
+  };
+
   useOnClickOutside(refProfil, () =>
     setOpenProfilDropdown(!openProfilDropdown)
   );
-
-  const [openSearchbar, setOpenSearchbar] = useState<boolean>(false);
 
   return (
     <nav className="bg-gray-800 flex-none">
@@ -111,6 +129,7 @@ export default function Header(): JSX.Element {
                   </a>
                   <a
                     href="#"
+                    onClick={() => clickToLogOut()}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     role="menuitem"
                   >

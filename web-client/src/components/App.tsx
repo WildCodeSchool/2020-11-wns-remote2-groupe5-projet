@@ -15,7 +15,7 @@ export default function App(): JSX.Element {
       {!loading && (
         <GlobalContext.Provider value={{}}>
           {isAuthenticated ? (
-            <Routes />
+            <Routes setIsAuthenticated={setIsAuthenticated} />
           ) : (
             <>
               <LogIn setIsAuthenticated={setIsAuthenticated} />

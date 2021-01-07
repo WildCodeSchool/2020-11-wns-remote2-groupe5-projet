@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -12,10 +12,16 @@ import DegreeModification from './common/Header/UserProfil/ProfilModification/De
 import ExperienceModification from './common/Header/UserProfil/ProfilModification/ExperienceModification';
 import Header from './common/Header/Header';
 
-export default function Routes(): JSX.Element {
+type RoutesProps = {
+  setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function Routes({
+  setIsAuthenticated,
+}: RoutesProps): JSX.Element {
   return (
     <Router>
-      <Header />
+      <Header setIsAuthenticated={setIsAuthenticated} />
       <div className="flex-grow">
         <Switch>
           <Route exact path="/" component={HomePage} />
