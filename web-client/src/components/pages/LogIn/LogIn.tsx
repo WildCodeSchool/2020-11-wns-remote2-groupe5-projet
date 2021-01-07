@@ -4,10 +4,10 @@ import LogoCustom from '../../common/helpers/LogoCustom';
 import LogInCard from './LogInCard';
 
 type LogInProps = {
-  setIsAuthenticate: Dispatch<SetStateAction<boolean>>;
+  setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function LogIn({ setIsAuthenticate }: LogInProps): JSX.Element {
+export default function LogIn({ setIsAuthenticated }: LogInProps): JSX.Element {
   return (
     <main>
       <section className="absolute w-full h-full">
@@ -23,7 +23,7 @@ export default function LogIn({ setIsAuthenticate }: LogInProps): JSX.Element {
         <div className="container mx-auto px-4 h-full">
           <div className="flex content-center items-center justify-center h-full">
             <div className="w-full lg:w-4/12 px-4">
-              <LogInCard setIsAuthenticate={setIsAuthenticate} />
+              <LogInCard setIsAuthenticated={setIsAuthenticated} />
             </div>
             <div className="w-full z-10 lg:w-4/12 px-4">
               <LogoCustom />

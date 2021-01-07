@@ -4,11 +4,11 @@ import { AUTH } from '../../../queries/user-queries';
 import InputCustom from '../../common/helpers/InputCustom';
 
 type LogInCardProps = {
-  setIsAuthenticate: Dispatch<SetStateAction<boolean>>;
+  setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function LogInCard({
-  setIsAuthenticate,
+  setIsAuthenticated,
 }: LogInCardProps): JSX.Element {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
@@ -22,7 +22,7 @@ export default function LogInCard({
           input: { email: userEmail, password: userPassword },
         },
       });
-      setIsAuthenticate(true);
+      setIsAuthenticated(true);
     } catch (error) {
       setErrorMessage(error.message);
     }
