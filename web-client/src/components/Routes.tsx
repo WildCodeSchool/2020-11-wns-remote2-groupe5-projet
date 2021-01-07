@@ -8,7 +8,7 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import ProfilView from './common/Header/UserProfil/ProfilView/ProfilView';
 import ProfilModification from './common/Header/UserProfil/ProfilModification/ProfilModification';
 
-export default function RoutesIfLoggedIn(): JSX.Element {
+export default function Routes(): JSX.Element {
   return (
     <Router>
       <Switch>
