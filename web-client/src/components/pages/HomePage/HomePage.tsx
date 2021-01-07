@@ -1,5 +1,7 @@
 import React from 'react';
 import data from '../../../data-samples/articles-journal.json';
+import { ReactComponent as IconArrow } from '../../../assets/icons/icon_arrow.svg';
+import { Link } from 'react-router-dom';
 
 export default function HomePage(): JSX.Element {
   return (
@@ -49,9 +51,11 @@ export default function HomePage(): JSX.Element {
                 </h3>
                 <p className="text-justify px-4">{article.Content.Text}</p>
               </div>
-              <div className="w-full md:w-1/4 self-end py-2 rounded-md md:rounded-tr-none md:rounded-bl-none bg-black text-white hover:bg-white hover:text-black font-semibold">
-                Lire la suite
-                <span>fleche</span>
+              <div className="w-full md:w-1/4 self-end py-2 rounded-md md:rounded-tr-none md:rounded-bl-none bg-black text-white hover:bg-gray-600 font-semibold">
+                <Link to={'articles/' + article.ArticleID}>
+                  Lire la suite
+                  <IconArrow className="w-7 h-9 inline" />
+                </Link>
               </div>
             </div>
           </article>
