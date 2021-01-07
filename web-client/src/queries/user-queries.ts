@@ -16,3 +16,11 @@ export const CHECK_AUTH = gql`
     }
   }
 `;
+
+export const LOG_OUT = gql`
+  mutation {
+    deleteSession {
+      userID
+    }
+  }
+`;
