@@ -8,7 +8,7 @@ export default function HomePage(): JSX.Element {
     <div className="lg:p-10 bg-gray-300 space-y-5 flex flex-col items-center justify-center">
       {data.map((article) => (
         <section key={article.ArticleID} className="p-1 max-w-screen-lg">
-          <div className="flex bg-black text-white justify-between rounded-tl-md rounded-tr-md p-4">
+          <div className="flex bg-gray-800 text-white justify-between rounded-tl-md rounded-tr-md p-4">
             <div className="flex flex-col md:flex-row items-center text-center md:text-left w-full md:self-start">
               <div className="px-4">
                 <img
@@ -51,7 +51,7 @@ export default function HomePage(): JSX.Element {
                 </h3>
                 <p className="text-justify px-4">{article.Content.Text}</p>
               </div>
-              <div className="w-full md:w-1/4 self-end py-2 rounded-md md:rounded-tr-none md:rounded-bl-none bg-black text-white hover:bg-gray-600 font-semibold">
+              <div className="w-full md:w-1/4 self-end py-2 rounded-md md:rounded-tr-none md:rounded-bl-none bg-gray-800 text-white hover:bg-gray-600 font-semibold">
                 <Link to={'articles/' + article.ArticleID}>
                   Lire la suite
                   <IconArrow className="w-7 h-9 inline" />

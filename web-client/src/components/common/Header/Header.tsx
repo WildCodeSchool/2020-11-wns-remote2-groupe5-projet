@@ -4,6 +4,7 @@ import useOnClickOutside from '../../../utils/CloseOnOutsideClick';
 import { NavLink } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOG_OUT } from '../../../queries/user-queries';
+import { ReactComponent as Logo } from '../../../assets/icons/logo_SkillShare.svg';
 
 type HeaderProps = {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
@@ -32,7 +33,7 @@ export default function Header({
   );
 
   return (
-    <nav className="bg-gray-800 flex-none h-16 w-full">
+    <nav className="bg-gray-800 items-center flex-none w-full z-10 shadow-xl py-3">
       <div className="mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           {/* /***** Searchbar */}
@@ -65,17 +66,19 @@ export default function Header({
           {/*  */}
           <div className="flex-1 flex items-center justify-center sm:items-stretch">
             <div className="flex-shrink-0 flex items-center lg:mr-80">
-              {/* <img
-                className="block lg:hidden h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                alt="Workflow"
-              /> */}
-              <NavLink to="/">
+              {/* <NavLink to="/">
                 <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                  className="block lg:hidden h-8 w-auto"
+                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                   alt="Workflow"
                 />
+              </NavLink> */}
+              <NavLink to="/">
+                <div className="flex flex-row justify-around items-center">
+                  <p className="text-white text-5xl font-roboto">Skillz</p>
+                  <Logo className="h-24 w-24" />
+                  <p className="text-white text-5xl font-roboto">Share</p>
+                </div>
               </NavLink>
             </div>
           </div>

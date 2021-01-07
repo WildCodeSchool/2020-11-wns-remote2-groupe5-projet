@@ -12,8 +12,8 @@ export const theme = {
   },
   colors: {
     //black
-    primary: {
-      main: '#1B262C',
+    gray: {
+      base: '#1B262C',
       dark: '#000000',
       light: '#393E46',
     },

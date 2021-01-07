@@ -20,7 +20,7 @@ export default function EditionTools({
 
   return (
     <section className="fixed right-0 h-full flex">
-      <ul className="self-center bg-black rounded-l-xl text-white">
+      <ul className="self-center bg-gray-800 rounded-l-xl text-white">
         {contentTypes.map((contentType, index) => {
           return (
             <Fragment key={index}>

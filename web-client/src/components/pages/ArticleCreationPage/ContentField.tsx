@@ -30,7 +30,7 @@ export default function ContentField({
           ref={provided.innerRef}
           className="flex flex-col m-4"
         >
-          <div className="bg-black rounded-t-md">
+          <div className="bg-gray-800 rounded-t-md">
             <div className="flex items-center justify-between text-white">
               <span>{contentType}</span>
               {contentType !== 'Titre' && (
