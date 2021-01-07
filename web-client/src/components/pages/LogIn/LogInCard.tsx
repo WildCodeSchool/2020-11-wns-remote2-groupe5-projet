@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { AUTH } from '../../../queries/user-queries';
 import InputCustom from '../../common/helpers/InputCustom';
 
-export default function LogInCard(): JSX.Element {
+type LogInCardProps = {
+  setIsAuthenticate: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function LogInCard({
+  setIsAuthenticate,
+}: LogInCardProps): JSX.Element {
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [authenticate] = useMutation(AUTH);
+
+  const authenticateAndHandleError = async () => {
+    try {
+      await authenticate({
+        variables: {
+          input: { email: userEmail, password: userPassword },
+        },
+      });
+      setIsAuthenticate(true);
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+  };
+
   return (
     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
       <div className="rounded-t mb-0 px-6 py-6">
@@ -18,9 +44,25 @@ export default function LogInCard(): JSX.Element {
         <div className="text-gray-500 text-center mb-3 font-bold">
           <small>Or log in with credentials</small>
         </div>
-        <form>
-          <InputCustom type="email" placeholder="email" />
-          <InputCustom type="password" placeholder="password" />
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            authenticateAndHandleError();
+          }}
+        >
+          <InputCustom
+            type="email"
+            placeholder="email"
+            setValue={setUserEmail}
+            value={userEmail}
+          />
+          <InputCustom
+            type="password"
+            placeholder="password"
+            setValue={setUserPassword}
+            value={userPassword}
+          />
+          {errorMessage ? <p>{errorMessage}</p> : <p></p>}
           <div>
             <label className="inline-flex items-center cursor-pointer">
               <input
@@ -37,7 +79,7 @@ export default function LogInCard(): JSX.Element {
           <div className="text-center mt-6">
             <button
               className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-              type="button"
+              type="submit"
               style={{ transition: 'all .15s ease' }}
             >
               log in

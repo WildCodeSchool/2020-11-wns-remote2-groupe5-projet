@@ -5,10 +5,12 @@ interface InputProps {
   type: string;
   // avatarPath: string;
   textColor?: string;
+  value?: string;
+  setValue?: any;
 }
 
 export default function InputCustom(props: InputProps): JSX.Element {
-  const { placeholder, type, textColor } = props;
+  const { placeholder, type, value, setValue, textColor } = props;
 
   const [coloringText, setColoringText] = useState(textColor);
 
@@ -29,6 +31,8 @@ export default function InputCustom(props: InputProps): JSX.Element {
         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
         placeholder={placeholder}
         style={{ transition: 'all .15s ease' }}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
       />
     </div>
   );
