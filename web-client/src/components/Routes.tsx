@@ -11,6 +11,7 @@ import InformationModification from './common/Header/UserProfil/ProfilModificati
 import DegreeModification from './common/Header/UserProfil/ProfilModification/DegreeModification';
 import ExperienceModification from './common/Header/UserProfil/ProfilModification/ExperienceModification';
 import Header from './common/Header/Header';
+import MainPanel from './common/MainPanel/MainPanel';
 
 type RoutesProps = {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
@@ -22,33 +23,36 @@ export default function Routes({
   return (
     <Router>
       <Header setIsAuthenticated={setIsAuthenticated} />
-      <div className="flex-grow">
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route
-            path="/articles/article-creation"
-            component={ArticleCreationPage}
-          />
-          <Route path="/articles/:article" component={ArticlePage} />
-          <Route path="/profil" component={ProfilView} />
-          {/* <Route
+      <div className="flex flex-row flex-grow overflow-y-hidden">
+        <MainPanel />
+        <div className="flex-grow overflow-y-auto">
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route
+              path="/articles/article-creation"
+              component={ArticleCreationPage}
+            />
+            <Route path="/articles/:article" component={ArticlePage} />
+            <Route path="/profil" component={ProfilView} />
+            {/* <Route
                     exact
                     path="/profil/profil-modification"
                     component={ProfilModification}
                   /> */}
-          <Route
-            path="/profil/profil-modification/general-information"
-            component={InformationModification}
-          />
-          <Route
-            path="/profil/profil-modification/degrees"
-            component={DegreeModification}
-          />
-          <Route
-            path="/profil/profil-modification/experiences"
-            component={ExperienceModification}
-          />
-        </Switch>
+            <Route
+              path="/profil/profil-modification/general-information"
+              component={InformationModification}
+            />
+            <Route
+              path="/profil/profil-modification/degrees"
+              component={DegreeModification}
+            />
+            <Route
+              path="/profil/profil-modification/experiences"
+              component={ExperienceModification}
+            />
+          </Switch>
+        </div>
       </div>
     </Router>
   );

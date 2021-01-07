@@ -11,7 +11,7 @@ export default function App(): JSX.Element {
   const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
 
   return (
-    <div className="h-screen bg-gray-300">
+    <div className="h-screen flex flex-col overflow-y-hidden bg-gray-300">
       {!loading && (
         <GlobalContext.Provider value={{}}>
           {isAuthenticated ? (

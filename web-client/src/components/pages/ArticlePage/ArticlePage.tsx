@@ -13,7 +13,7 @@ export default function ArticlePage(): JSX.Element {
     (item) => item.ArticleID === Number(article)
   )[0];
   return (
-    <div className="lg:p-10 bg-gray-300 space-y-5 flex items-center justify-center">
+    <div className="lg:p-10 space-y-5 flex items-center justify-center">
       <section
         key={displayArticle.ArticleID}
         className="p-1 w-4/5 max-w-screen-lg"

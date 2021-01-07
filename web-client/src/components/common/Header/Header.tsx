@@ -32,7 +32,7 @@ export default function Header({
   );
 
   return (
-    <nav className="bg-gray-800 flex-none">
+    <nav className="bg-gray-800 flex-none h-16 w-full">
       <div className="mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           {/* /***** Searchbar */}
