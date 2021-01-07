@@ -18,7 +18,7 @@ export default function ArticlePage(): JSX.Element {
         key={displayArticle.ArticleID}
         className="p-1 w-4/5 max-w-screen-lg"
       >
-        <div className="flex bg-black text-white justify-between rounded-tl-md rounded-tr-md p-4">
+        <div className="flex bg-gray-800 text-white justify-between rounded-tl-md rounded-tr-md p-4">
           <div className="flex flex-col md:flex-row items-center text-center md:text-left md:self-start">
             <div className="px-4">
               <img

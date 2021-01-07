@@ -8,7 +8,7 @@ import { ReactComponent as IconWarning } from '../../../assets/icons/icon_warnin
 export default function ArticleTools(): JSX.Element {
   return (
     <section className="fixed right-0 h-full flex">
-      <ul className="self-center bg-black rounded-l-xl text-white p-2">
+      <ul className="self-center bg-gray-800 rounded-l-xl text-white p-2">
         <li className="mr-4 ml-2">
           <IconTools className="w-9 h-9" />
         </li>

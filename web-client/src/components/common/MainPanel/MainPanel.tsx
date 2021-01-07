@@ -9,7 +9,7 @@ import './MainPanel.css';
 
 export default function MainPanel(): JSX.Element {
   return (
-    <div className="bg-black flex flex-col items-center">
+    <div className="bg-gray-800 flex flex-col items-center">
       <Link to="/">
         <IconHome className="w-14 h-14 m-2" />
       </Link>
