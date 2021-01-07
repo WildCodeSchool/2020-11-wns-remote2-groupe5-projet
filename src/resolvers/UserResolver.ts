@@ -1,4 +1,11 @@
-import { Resolver, Query, Mutation, Arg, Ctx } from 'type-graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Arg,
+  Ctx,
+  createResolversMap,
+} from 'type-graphql';
 import { Response } from 'express';
 import { compare } from 'bcrypt';
 import { getConnection } from 'typeorm';
@@ -68,6 +75,21 @@ export default class UserResolver {
     if (!user) {
       throw Error('You are not authenticated.');
     }
+
+    return User.findOne(user.userID) as Promise<User>;
+  }
+
+  @Mutation(() => User)
+  async deleteSession(@Ctx() { user }: { user: User | null }): Promise<User> {
+    if (!user) {
+      throw Error('You are not authenticated.');
+    }
+    await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(UserSession)
+      .where('userUserID = :id', { id: user.userID })
+      .execute();
 
     return User.findOne(user.userID) as Promise<User>;
   }
