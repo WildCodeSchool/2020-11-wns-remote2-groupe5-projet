@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import './Header.css';
 import useOnClickOutside from '../../../utils/CloseOnOutsideClick';
+import { NavLink } from 'react-router-dom';
 
 export default function Header(): JSX.Element {
   const refProfil = useRef(null);
@@ -13,7 +14,7 @@ export default function Header(): JSX.Element {
   const [openSearchbar, setOpenSearchbar] = useState<boolean>(false);
 
   return (
-    <nav className="bg-gray-800">
+    <nav className="bg-gray-800 flex-none">
       <div className="mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           {/* /***** Searchbar */}
@@ -51,11 +52,13 @@ export default function Header(): JSX.Element {
                 src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                 alt="Workflow"
               /> */}
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                alt="Workflow"
-              />
+              <NavLink to="/">
+                <img
+                  className="h-8 w-auto"
+                  src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                  alt="Workflow"
+                />
+              </NavLink>
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -93,13 +96,12 @@ export default function Header(): JSX.Element {
                   aria-labelledby="user-menu"
                   ref={refProfil}
                 >
-                  <a
-                    href="#"
+                  <NavLink
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
+                    to="/profil"
                   >
-                    Your Profile
-                  </a>
+                    Profile
+                  </NavLink>
                   <a
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
