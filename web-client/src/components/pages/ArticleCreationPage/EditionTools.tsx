@@ -28,7 +28,7 @@ export default function EditionTools({
                 onClick={() => {
                   dispatch({ type: 'ADD', payload: { contentType } });
                 }}
-                className="flex items-center mr-4 ml-2"
+                className="flex items-center mr-4 ml-2 cursor-pointer hover:text-gray-400"
               >
                 <IconPlus className="w-9 h-9" />
                 <span className="text-xl m-3">{contentType}</span>
@@ -39,14 +39,14 @@ export default function EditionTools({
             </Fragment>
           );
         })}
-        <li className="flex items-center mr-4 ml-2">
+        <li className="flex items-center mr-4 ml-2 cursor-pointer hover:text-gray-400">
           <IconApercu className="w-9 h-9" />
           <span className="text-xl m-3">Aperçu</span>
         </li>
         <li className="flex justify-center">
           <hr className="w-3/4" />
         </li>
-        <li className="flex items-center mr-4 ml-2">
+        <li className="flex items-center mr-4 ml-2 cursor-pointer hover:text-gray-400">
           <IconSend className="w-9 h-9" />
           <span className="text-xl m-3">Publier</span>
         </li>

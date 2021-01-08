@@ -31,7 +31,7 @@ export default function ContentField({
           className="flex flex-col m-4"
         >
           <div className="bg-gray-800 rounded-t-md">
-            <div className="flex items-center justify-between text-white">
+            <div className="flex items-center justify-between text-white py-2 px-4">
               <span>{contentType}</span>
               {contentType !== 'Titre' && (
                 <div className="flex">
@@ -40,7 +40,7 @@ export default function ContentField({
                       onClick={() =>
                         dispatch({ type: 'MOVE_UP', payload: { index } })
                       }
-                      className="w-10 h-10"
+                      className="w-6 h-6"
                     />
                   )}
                   {!isLast && (
@@ -48,14 +48,14 @@ export default function ContentField({
                       onClick={() =>
                         dispatch({ type: 'MOVE_DOWN', payload: { index } })
                       }
-                      className="w-10 h-10 transform rotate-180"
+                      className="w-6 h-6 transform rotate-180"
                     />
                   )}
                   <IconTrash
                     onClick={() => {
                       dispatch({ type: 'REMOVE', payload: { index } });
                     }}
-                    className="w-10 h-10"
+                    className="w-6 h-6"
                   />
                 </div>
               )}
@@ -70,7 +70,7 @@ export default function ContentField({
                 })
               }
               value={value}
-              className="resize-y rounded-b-md"
+              className="resize-y rounded-b-md py-2 px-4"
             />
           ) : (
             <input
@@ -81,7 +81,7 @@ export default function ContentField({
                 })
               }
               value={value}
-              className="rounded-b-md h-10"
+              className="rounded-b-md h-10 py-2 px-4"
             />
           )}
         </section>
