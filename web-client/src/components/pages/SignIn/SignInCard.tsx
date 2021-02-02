@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { AUTH, SIGN_IN } from '../../../queries/user-queries';
 import InputCustom from '../../common/helpers/InputCustom';
+import { Redirect } from 'react-router-dom';
 //import User from '../../../../../src/models/User';
 
 type User = {
@@ -30,6 +31,9 @@ const defaultUser: User = {
 
 export default function SignInCard(): JSX.Element {
   const [user, setUser] = useState(defaultUser);
+  const [redirect, setRedirect] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const [signIn] = useMutation(SIGN_IN);
 
   const onUserChange = <P extends keyof User>(prop: P, value: User[P]) => {
@@ -38,7 +42,6 @@ export default function SignInCard(): JSX.Element {
   };
   // const [userEmail, setUserEmail] = useState('');
   // const [userPassword, setUserPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const submitForm = async () => {
     try {
@@ -55,6 +58,8 @@ export default function SignInCard(): JSX.Element {
           },
         },
       });
+      alert('vous etes inscrit');
+      setRedirect(true);
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -62,6 +67,7 @@ export default function SignInCard(): JSX.Element {
 
   return (
     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+      {redirect && <Redirect to="/" />}
       <div className="rounded-t mb-0 px-6 py-6">
         <div className="text-center mb-3">
           <h6 className="text-gray-600 text-sm font-bold">Sign In</h6>
