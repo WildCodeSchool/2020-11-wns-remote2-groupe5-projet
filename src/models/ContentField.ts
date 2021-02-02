@@ -9,7 +9,6 @@ import {
 import { ObjectType, Field, ID } from 'type-graphql';
 
 import Article from './Article';
-import ContentType from './ContentType';
 
 @Entity()
 @ObjectType()
@@ -23,14 +22,9 @@ export default class ContentField extends BaseEntity {
   @Field(() => Article)
   article: Article;
 
-  @ManyToOne(() => ContentType)
-  @JoinColumn({ name: 'contentTypeID' })
-  @Field(() => ContentType)
-  contentType: ContentType;
-
   @Column()
-  @Field(() => ID)
-  contentTypeID: string;
+  @Field(() => String)
+  contentType: string;
 
   @Column()
   @Field(() => String)

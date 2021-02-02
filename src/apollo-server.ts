@@ -4,11 +4,10 @@ import { buildSchema } from 'type-graphql';
 import UserSession from './models/UserSession';
 import UserResolver from './resolvers/UserResolver';
 import ArticleResolver from './resolvers/ArticleResolver';
-import ContentTypeResolver from './resolvers/ContentTypeResolver';
 
 export const getApolloServer = async (): Promise<ApolloServer> => {
   const schema = await buildSchema({
-    resolvers: [UserResolver, ArticleResolver, ContentTypeResolver],
+    resolvers: [UserResolver, ArticleResolver],
   });
   const context = async ({ req, res }: { req: Request; res: Response }) => {
     const { sessionId } = req.cookies;

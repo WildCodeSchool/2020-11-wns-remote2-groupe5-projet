@@ -1,11 +1,4 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Arg,
-  Ctx,
-  createResolversMap,
-} from 'type-graphql';
+import { Resolver, Query, Mutation, Arg, Ctx } from 'type-graphql';
 import { Response } from 'express';
 import { compare } from 'bcrypt';
 import { getConnection } from 'typeorm';
@@ -53,7 +46,6 @@ export default class UserResolver {
 
   @Mutation(() => User)
   async updateUserInfos(
-    // @Arg('userID') userID: string,
     @Ctx() { user }: { user: User | null },
     @Arg('data') data: CreateUserInput
   ): Promise<User> {

@@ -3,11 +3,33 @@ import ContentField from './ContentField';
 import EditionTools from './EditionTools';
 import fieldsReducer from './fieldsReducer';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { useMutation } from '@apollo/client';
+import { PUBLISH_ARTICLE } from '../../../queries/createArticle-queries';
 
 export default function ArticleCreationPage(): JSX.Element {
   const [fields, dispatch] = useReducer(fieldsReducer, [
     { contentType: 'Titre', value: 'This is a test' },
   ]);
+
+  const [usePostArticle] = useMutation(PUBLISH_ARTICLE);
+  const postArticle = async () => {
+    try {
+      await usePostArticle({
+        variables: {
+          data: { date: new Date(), title: fields[0].value },
+          fields: fields.map((field, index) => ({
+            contentType: field.contentType,
+            content: field.value,
+            placeNumber: index,
+          })),
+        },
+      });
+      alert('Article posté :)');
+    } catch (error) {
+      console.log(error);
+      alert('Erreur => go voir la console');
+    }
+  };
 
   return (
     <div className="flex justify-center">
@@ -45,7 +67,7 @@ export default function ArticleCreationPage(): JSX.Element {
           )}
         </Droppable>
       </DragDropContext>
-      <EditionTools dispatch={dispatch} />
+      <EditionTools dispatch={dispatch} postArticle={postArticle} />
     </div>
   );
 }
