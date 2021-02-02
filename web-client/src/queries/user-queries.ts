@@ -17,6 +17,19 @@ export const CHECK_AUTH = gql`
   }
 `;
 
+export const SIGN_IN = gql`
+  mutation signIn($data: CreateUserInput!) {
+    signIn(data: $data) {
+      pseudo
+      email
+      phoneNumber
+      age
+      city
+      bio
+    }
+  }
+`;
+
 export const LOG_OUT = gql`
   mutation {
     deleteSession {
