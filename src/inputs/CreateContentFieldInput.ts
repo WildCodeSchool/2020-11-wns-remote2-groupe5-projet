@@ -3,7 +3,7 @@ import { InputType, Field } from 'type-graphql';
 @InputType()
 export default class CreateContentFieldInput {
   @Field()
-  contentTypeID: string;
+  contentType: string;
 
   @Field()
   content: string;
