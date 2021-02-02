@@ -8,10 +8,26 @@ import User from '../models/User';
 @Resolver()
 export default class ArticleResolver {
   @Query(() => [Article])
-  articles(): Promise<Article[]> {
+  articles(@Ctx() { user }: { user: User | null }): Promise<Article[]> {
+    if (!user) {
+      throw Error('You are not authenticated.');
+    }
     return Article.find({
       relations: ['user', 'contentFields'],
     });
+  }
+
+  @Query(() => Article)
+  oneArticle(
+    @Ctx() { user }: { user: User | null },
+    @Arg('articleID') articleID: string
+  ): Promise<Article> {
+    if (!user) {
+      throw Error('You are not authenticated.');
+    }
+    return Article.findOne(articleID, {
+      relations: ['user', 'contentFields'],
+    }) as Promise<Article>;
   }
 
   @Mutation(() => Article)
