@@ -15,3 +15,22 @@ export const PUBLISH_ARTICLE = gql`
     }
   }
 `;
+
+export const GET_ALL_ARTICLES = gql`
+  query Articles {
+    articles {
+      articleID
+      date
+      title
+      description
+      user {
+        pseudo
+      }
+      contentFields {
+        content
+        contentType
+        placeNumber
+      }
+    }
+  }
+`;

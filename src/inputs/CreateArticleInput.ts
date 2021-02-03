@@ -7,4 +7,7 @@ export default class CreateArticleInput {
 
   @Field()
   date: Date;
+
+  @Field()
+  description: string;
 }

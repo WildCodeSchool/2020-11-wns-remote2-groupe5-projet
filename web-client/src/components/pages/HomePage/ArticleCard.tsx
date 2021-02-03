@@ -1,5 +1,4 @@
 import React from 'react';
-import data from '../../../data-samples/articles-journal.json';
 import { ReactComponent as IconArrow } from '../../../assets/icons/icon_arrow.svg';
 import { Link } from 'react-router-dom';
 
@@ -31,7 +30,8 @@ type ArticleCardProps = {
   date: string;
   content: Content;
 };
-export default function ArticleCard(article: ArticleCardProps): JSX.Element {
+
+export default function ArticleCard(article: any): JSX.Element {
   return (
     <section className="p-1 max-w-screen-lg">
       <div className="flex bg-gray-800 text-white justify-between rounded-tl-md rounded-tr-md p-4">
@@ -39,7 +39,11 @@ export default function ArticleCard(article: ArticleCardProps): JSX.Element {
           <div className="px-4">
             <img
               className="rounded-full h-16 w-16 flex items-center justify-center"
-              src={article.user.avatar}
+              src={
+                article?.user?.avatar
+                  ? article.user.avatar
+                  : 'https://www.w3schools.com/howto/img_avatar.png'
+              }
               alt="avatar"
             />
           </div>
@@ -50,9 +54,11 @@ export default function ArticleCard(article: ArticleCardProps): JSX.Element {
             </div>
             <div>
               {Date}&nbsp;|&nbsp;
-              <span className="font-bold">#{article.communaute.name}</span>
+              <span className="font-bold">
+                #{article?.communaute?.name ? article.communaute.name : 'dev'}
+              </span>
               &nbsp;#
-              {article.skills.name}
+              {article?.skills?.name ? article.skills.name : 'javascript'}
             </div>
           </div>
         </div>
@@ -66,16 +72,20 @@ export default function ArticleCard(article: ArticleCardProps): JSX.Element {
         <div className="py-3 md:w-1/2 md:mx-2 mx-auto flex items-center">
           <img
             className="rounded-md mx-auto"
-            src={article.content.img}
+            src={
+              article?.content?.img
+                ? article.content.img
+                : 'https://img-19.ccm2.net/QeOmxQpB5sfw25JvsKbirn-eulw=/250x/6aab65a776614b8bba8c8b4e8c1848c9/ccm-encyclopedia/0px-Unofficial_JavaScript_logo_2.svg.png'
+            }
             alt=""
           />
         </div>
         <div className="flex flex-col justify-between text-center">
           <div className="py-5 px-2">
             <h3 className="font-bold uppercase text-xl mb-3">
-              {article.content.title}
+              {article.title}
             </h3>
-            <p className="text-justify px-4">{article.content.text}</p>
+            <p className="text-justify px-4">{article.description}</p>
           </div>
           <div className="w-full md:w-1/4 self-end py-2 rounded-md md:rounded-tr-none md:rounded-bl-none bg-gray-800 text-white hover:bg-gray-600 font-semibold">
             <Link to={'articles/' + article.articleID}>

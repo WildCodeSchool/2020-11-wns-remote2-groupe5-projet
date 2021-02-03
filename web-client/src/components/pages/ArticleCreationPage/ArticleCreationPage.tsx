@@ -4,7 +4,7 @@ import EditionTools from './EditionTools';
 import fieldsReducer from './fieldsReducer';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useMutation } from '@apollo/client';
-import { PUBLISH_ARTICLE } from '../../../queries/createArticle-queries';
+import { PUBLISH_ARTICLE } from '../../../queries/article-queries';
 
 export default function ArticleCreationPage(): JSX.Element {
   const [fields, dispatch] = useReducer(fieldsReducer, [
@@ -14,9 +14,18 @@ export default function ArticleCreationPage(): JSX.Element {
   const [usePostArticle] = useMutation(PUBLISH_ARTICLE);
   const postArticle = async () => {
     try {
+      if (fields.length < 2) {
+        throw new Error();
+      }
+
+      const description =
+        fields.filter((field) => {
+          return field.contentType === 'Paragraphe';
+        })[0].value || '';
+
       await usePostArticle({
         variables: {
-          data: { date: new Date(), title: fields[0].value },
+          data: { date: new Date(), title: fields[0].value, description },
           fields: fields.map((field, index) => ({
             contentType: field.contentType,
             content: field.value,

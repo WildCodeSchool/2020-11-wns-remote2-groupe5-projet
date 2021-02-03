@@ -38,4 +38,8 @@ export default class Article extends BaseEntity {
   @Column()
   @Field(() => Date)
   date: Date;
+
+  @Column()
+  @Field(() => String)
+  description: string;
 }
