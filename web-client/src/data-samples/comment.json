@@ -1,0 +1,50 @@
+[
+  {
+    "CommentaireArticleID": 0,
+    "ArticleID": 1,
+    "User": {
+      "UserID": 1,
+      "Pseudo": "Guillaume",
+      "Avatar": "https://www.w3schools.com/howto/img_avatar.png"
+    },
+    "Like": 2,
+    "Date": "Nov 20 2020",
+    "Content": "Quibus ita sceleste patratis Paulus cruore perfusus reversusque ad principis castra multos coopertos paene catenis adduxit in squalorem deiectos atque maestitiam, quorum adventu intendebantur eculei uncosque parabat carnifex et tormenta. et ex is proscripti sunt plures actique in exilium alii"
+  },
+  {
+    "CommentaireArticleID": 1,
+    "ArticleID": 1,
+    "User": {
+      "UserID": 1,
+      "Pseudo": "Paul",
+      "Avatar": "https://www.w3schools.com/howto/img_avatar.png"
+    },
+    "Like": 10,
+    "Date": "Nov 20 2020",
+    "Content": "Quibus ita sceleste patratis Paulus cruore perfusus reversusque ad principis castra multos coopertos paene catenis adduxit in squalorem deiectos atque maestitiam, quorum adventu intendebantur eculei uncosque parabat carnifex et tormenta. et ex is proscripti sunt plures actique in exilium alii"
+  },
+  {
+    "CommentaireArticleID": 2,
+    "ArticleID": 1,
+    "User": {
+      "UserID": 51,
+      "Pseudo": "Same",
+      "Avatar": "https://www.w3schools.com/howto/img_avatar.png"
+    },
+    "Like": 2,
+    "Date": "Nov 20 2020",
+    "Content": "Quibus ita sceleste patratis Paulus cruore perfusus reversusque ad principis castra multos coopertos paene catenis adduxit in squalorem deiectos atque maestitiam, quorum adventu intendebantur eculei uncosque parabat carnifex et tormenta. et ex is proscripti sunt plures actique in exilium alii"
+  },
+  {
+    "CommentaireArticleID": 3,
+    "ArticleID": 1,
+    "User": {
+      "UserID": 1,
+      "Pseudo": "Zora",
+      "Avatar": "https://www.w3schools.com/howto/img_avatar.png"
+    },
+    "Like": 25,
+    "Date": "Nov 20 2020",
+    "Content": "Quibus ita sceleste patratis Paulus cruore perfusus reversusque ad principis castra multos coopertos paene catenis adduxit in squalorem deiectos atque maestitiam, quorum adventu intendebantur eculei uncosque parabat carnifex et tormenta. et ex is proscripti sunt plures actique in exilium alii"
+  }
+]

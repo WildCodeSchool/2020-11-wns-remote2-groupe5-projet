@@ -9,6 +9,9 @@ import Footer from './common/Footer/Footer';
 import SignIn from './pages/SignIn/SignIn';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+// import { Route, Switch } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
+
 export default function App(): JSX.Element {
   const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
 

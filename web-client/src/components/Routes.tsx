@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage/HomePage';
 import ArticleCreationPage from './pages/ArticleCreationPage/ArticleCreationPage';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
 import ProfilView from './common/Header/UserProfil/ProfilView/ProfilView';
-import ProfilModification from './common/Header/UserProfil/ProfilModification/ProfilModification';
+// import ProfilModification from './common/Header/UserProfil/ProfilModification/ProfilModification';
 import InformationModification from './common/Header/UserProfil/ProfilModification/InformationModification';
 import DegreeModification from './common/Header/UserProfil/ProfilModification/DegreeModification';
 import ExperienceModification from './common/Header/UserProfil/ProfilModification/ExperienceModification';
