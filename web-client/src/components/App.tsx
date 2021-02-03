@@ -7,6 +7,9 @@ import LogIn from './pages/LogIn/LogIn';
 import Routes from './Routes';
 import Footer from './common/Footer/Footer';
 
+// import { Route, Switch } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
+
 export default function App(): JSX.Element {
   const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
 
@@ -17,10 +20,16 @@ export default function App(): JSX.Element {
           {isAuthenticated ? (
             <Routes setIsAuthenticated={setIsAuthenticated} />
           ) : (
-            <>
-              <LogIn setIsAuthenticated={setIsAuthenticated} />
-              <Footer />
-            </>
+            <LogIn setIsAuthenticated={setIsAuthenticated} />
+            // <Router>
+            //   <Switch>
+            //     <Route
+            //       path="/"
+            //       component={() => (
+            //         )}
+            //     />
+            //   </Switch>
+            // </Router>
           )}
         </GlobalContext.Provider>
       )}
