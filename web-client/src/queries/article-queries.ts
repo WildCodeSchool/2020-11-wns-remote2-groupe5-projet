@@ -34,3 +34,22 @@ export const GET_ALL_ARTICLES = gql`
     }
   }
 `;
+
+export const GET_ONE_BY_ID = gql`
+  query OneArticle($articleID: String!) {
+    oneArticle(articleID: $articleID) {
+      title
+      description
+      date
+      user {
+        pseudo
+      }
+      contentFields {
+        contentFieldID
+        contentType
+        content
+        placeNumber
+      }
+    }
+  }
+`;
