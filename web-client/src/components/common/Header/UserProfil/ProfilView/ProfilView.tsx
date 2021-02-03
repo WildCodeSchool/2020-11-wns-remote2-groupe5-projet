@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ProfilView.css';
-import InputCustom from '../../../helpers/InputCustom';
+import InformationModification from '../ProfilModification/InformationModification';
+import ExperienceModification from '../ProfilModification/ExperienceModification';
+import DegreeModification from '../ProfilModification/DegreeModification';
+import PreviousNextButtons from './PreviousNextButtons';
 
 export default function ProfilView(): JSX.Element {
+  const [actualPage, setActualPage] = useState<string>(
+    'Informations générales'
+  );
+
   return (
     <div className="lg:p-10 bg-gray-300 space-y-5 flex flex-col items-center justify-center h-full pt-30">
       <span className="flex-col flex items-center absolute top-16 mt-6 z-10">
@@ -14,43 +21,20 @@ export default function ProfilView(): JSX.Element {
         User Name
       </span>
       <div className="w-8/12 h-full bg-white rounded-md">
-        <h2 className="mt-44 ml-28 text-2xl">Informations générales</h2>
+        <h1 className="mt-44 mb-2 text-3xl text-center">{actualPage}</h1>
         <div className="flex flex-col items-center">
           <div className="w-4/5 bg-gray-800 rounded-md">
-            <div className="px-36 py-10">
-              <InputCustom
-                type="text"
-                placeholder="Prénom"
-                textColor="text-white"
-              />
-              <InputCustom
-                type="text"
-                placeholder="Nom de famille"
-                textColor="text-white"
-              />
-              <InputCustom
-                type="number"
-                placeholder="Âge"
-                textColor="text-white"
-              />
-              <InputCustom
-                type="email"
-                placeholder="Email"
-                textColor="text-white"
-              />
-              <InputCustom
-                type="tel"
-                placeholder="Numéro de téléphone"
-                textColor="text-white"
-              />
-              <InputCustom
-                type="text"
-                placeholder="Biographie"
-                textColor="text-white"
-              />
-            </div>
+            {actualPage == 'Informations générales' && (
+              <InformationModification />
+            )}
+            {actualPage == 'Expériences' && <ExperienceModification />}
+            {actualPage == 'Diplômes' && <DegreeModification />}
           </div>
         </div>
+        <PreviousNextButtons
+          actualPage={actualPage}
+          setActualPage={setActualPage}
+        />
       </div>
     </div>
   );
