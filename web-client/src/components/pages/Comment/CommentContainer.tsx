@@ -2,10 +2,11 @@ import React from 'react';
 import { ReactComponent as IconLike } from '../../../assets/icons/icon_like.svg';
 import data from '../../../data-samples/comment.json';
 import CommentCard from './CommentCard';
+import './Comment.css';
 
 export default function CommentContainer(): JSX.Element {
   return (
-    <div className="">
+    <div className="w-1/4 mt-0 py-1">
       {data.map((comment) => {
         return (
           <CommentCard

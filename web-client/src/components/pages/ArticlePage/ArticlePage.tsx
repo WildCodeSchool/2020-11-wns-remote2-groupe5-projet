@@ -20,10 +20,10 @@ export default function ArticlePage(): JSX.Element {
   console.log('user', data && data.oneArticle.contentFields);
 
   return (
-    <div className="lg:p-10 space-y-5 flex items-center justify-center">
+    <div className="lg:p-10 space-y-5 flex justify-center">
       <section
         key={data && data.articleID}
-        className="p-1 w-4/5 max-w-screen-lg"
+        className="p-1 w-3/4 max-w-screen-lg"
       >
         <div className="flex bg-gray-800 text-white justify-between rounded-tl-md rounded-tr-md p-4">
           <div className="flex flex-col md:flex-row items-center text-center md:text-left md:self-start">
