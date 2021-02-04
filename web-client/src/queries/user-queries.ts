@@ -37,3 +37,12 @@ export const LOG_OUT = gql`
     }
   }
 `;
+
+export const GET_ALL_USERS = gql`
+  query allUsers {
+    allUsers {
+      pseudo
+      email
+    }
+  }
+`;

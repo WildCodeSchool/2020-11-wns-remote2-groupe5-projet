@@ -30,24 +30,18 @@ export default function LogInCard({
   };
 
   return (
-    <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+    <div className="relative flex flex-col min-w-0 break-words w-full h-530 mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
       <div className="rounded-t mb-0 px-6 py-6">
         <div className="text-center mb-3">
-          <button>
-            <Link to="/signIn">
-              <h6 className="text-gray-600 text-sm font-bold">Sign In</h6>
-            </Link>
-          </button>
-        </div>
-        <div className="btn-wrapper text-center">
-          {/* <ButtonCustom label="google" avatarPath={logoGoogle} /> */}
-          {/* <ButtonCustom label="GitHub" avatarPath={logoGithub} /> */}
+          <h4 className="text-gray-600 uppercase font-bold">log in</h4>
         </div>
         <hr className="mt-6 border-b-1 border-gray-400" />
       </div>
       <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
         <div className="text-gray-500 text-center mb-3 font-bold">
-          <small>Or log in with credentials</small>
+          <Link to="/signIn">
+            <small>Or SIGN IN if you don&apos;t have account</small>
+          </Link>
         </div>
         <form
           onSubmit={(e) => {

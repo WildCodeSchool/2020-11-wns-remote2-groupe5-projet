@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as IconArrow } from '../../../assets/icons/icon_arrow.svg';
+import { ReactComponent as IconArrow } from '../../../assets/icons/icon_arrow_right.svg';
 import { Link } from 'react-router-dom';
 
 interface User {
