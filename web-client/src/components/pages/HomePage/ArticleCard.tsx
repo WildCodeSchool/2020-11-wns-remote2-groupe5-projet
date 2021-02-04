@@ -33,7 +33,7 @@ type ArticleCardProps = {
 
 export default function ArticleCard(article: any): JSX.Element {
   return (
-    <section className="p-1 max-w-screen-lg">
+    <section className="p-1 w-4/5 max-w-screen-lg">
       <div className="flex bg-gray-800 text-white justify-between rounded-tl-md rounded-tr-md p-4">
         <div className="flex flex-col md:flex-row items-center text-center md:text-left w-full md:self-start">
           <div className="px-4">
@@ -69,9 +69,9 @@ export default function ArticleCard(article: any): JSX.Element {
         </div>
       </div>
       <article className="bg-white rounded-br-md rounded-bl-md md:flex">
-        <div className="py-3 md:w-1/2 md:mx-2 mx-auto flex items-center">
+        <div className="py-3 w-2/5 md:mx-2 mx-auto flex items-center">
           <img
-            className="rounded-md mx-auto"
+            className="rounded-md mx-auto w-full"
             src={
               article?.content?.img
                 ? article.content.img
@@ -80,19 +80,20 @@ export default function ArticleCard(article: any): JSX.Element {
             alt=""
           />
         </div>
-        <div className="flex flex-col justify-between text-center">
-          <div className="py-5 px-2">
+        <div className="w-3/5 flex flex-col justify-between text-center">
+          <div className="py-5 px-2 break-words">
             <h3 className="font-bold uppercase text-xl mb-3">
               {article.title}
             </h3>
             <p className="text-justify px-4">{article.description}</p>
           </div>
-          <div className="w-full md:w-1/4 self-end py-2 rounded-md md:rounded-tr-none md:rounded-bl-none bg-gray-800 text-white hover:bg-gray-600 font-semibold">
-            <Link to={'articles/' + article.articleID}>
-              Lire la suite
-              <IconArrow className="w-7 h-9 inline" />
-            </Link>
-          </div>
+          <Link
+            to={'articles/' + article.articleID}
+            className="w-full md:w-1/4 self-end py-2 rounded-md md:rounded-tr-none md:rounded-bl-none bg-gray-800 text-white hover:bg-gray-600 font-semibold"
+          >
+            Lire la suite
+            <IconArrow className="w-7 h-9 inline" />
+          </Link>
         </div>
       </article>
     </section>

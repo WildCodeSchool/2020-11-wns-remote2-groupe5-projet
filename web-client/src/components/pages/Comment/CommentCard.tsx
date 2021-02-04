@@ -17,7 +17,7 @@ export default function CommentCard({
 }: CommentCardProps): JSX.Element {
   return (
     <section className=" mx-auto mb-5">
-      <div className="flex bg-gray-800 text-white justify-between rounded-tr-lg p-4 items-center">
+      <div className="flex bg-gray-800 text-white justify-between rounded-tr-lg px-4 py-1 items-center">
         <div className="flex flex-col md:flex-row  text-center md:text-left md:self-start items-center">
           <img
             className="rounded-full h-10 w-10 flex items-center justify-center"
