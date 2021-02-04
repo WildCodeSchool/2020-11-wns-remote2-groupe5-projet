@@ -1,9 +1,12 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { AUTH, SIGN_IN } from '../../../queries/user-queries';
+import { SIGN_IN } from '../../../queries/user-queries';
 import InputCustom from '../../common/helpers/InputCustom';
 import { Redirect } from 'react-router-dom';
-//import User from '../../../../../src/models/User';
+import { Link } from 'react-router-dom';
+import SignInForm01 from './SignInForm01';
+import SignInForm02 from './SignInForm02';
+import SignInForm03 from './SignInForm03';
 
 type User = {
   pseudo: string;
@@ -19,7 +22,7 @@ type User = {
 //type SignUpCardProps = {};
 
 const defaultUser: User = {
-  pseudo: 'gigi',
+  pseudo: '',
   email: 'gigi@gmail.com',
   phoneNumber: '0607080504',
   password: '12345678',
@@ -33,7 +36,7 @@ export default function SignInCard(): JSX.Element {
   const [user, setUser] = useState(defaultUser);
   const [redirect, setRedirect] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [displaySignInCard, setDisplaySignInCard] = useState(0);
   const [signIn] = useMutation(SIGN_IN);
 
   const onUserChange = <P extends keyof User>(prop: P, value: User[P]) => {
@@ -65,117 +68,96 @@ export default function SignInCard(): JSX.Element {
     }
   };
 
+  const onPlusSignInForm = () => {
+    setDisplaySignInCard(displaySignInCard + 1);
+    console.log('count', displaySignInCard);
+  };
+
+  const onMinusSignInForm = () => {
+    setDisplaySignInCard(displaySignInCard - 1);
+    console.log('count', displaySignInCard);
+  };
+
+  const renderSignInForm = () => {
+    if (displaySignInCard <= 0) {
+      return (
+        <SignInForm01
+          user={user}
+          onUserChange={onUserChange}
+          onChangeSignInForm={onPlusSignInForm}
+        />
+      );
+    }
+    if (displaySignInCard === 1) {
+      return (
+        <SignInForm02
+          user={user}
+          onUserChange={onUserChange}
+          onMinusSignInForm={onMinusSignInForm}
+          onPlusSignInForm={onPlusSignInForm}
+        />
+      );
+    }
+    if (displaySignInCard === 2) {
+      return (
+        <SignInForm03
+          user={user}
+          onUserChange={onUserChange}
+          onMinusSignInForm={onMinusSignInForm}
+        />
+      );
+    }
+  };
+
   return (
-    <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+    <div className="relative flex flex-col min-w-0 break-words w-full h-550 mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
       {redirect && <Redirect to="/" />}
       <div className="rounded-t mb-0 px-6 py-6">
         <div className="text-center mb-3">
-          <h6 className="text-gray-600 text-sm font-bold">Sign In</h6>
-        </div>
-        <div className="btn-wrapper text-center">
-          {/* <ButtonCustom label="google" avatarPath={logoGoogle} /> */}
-          {/* <ButtonCustom label="GitHub" avatarPath={logoGithub} /> */}
+          <h4 className="text-gray-600 uppercase font-bold">Sign In</h4>
         </div>
         <hr className="mt-6 border-b-1 border-gray-400" />
       </div>
-      <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-        <div className="text-gray-500 text-center mb-3 font-bold">
-          <small>Or log in with credentials</small>
+      <div className="flex-auto px-4 lg: px-8 py-10 pt-0">
+        <div className="text-gray-500 text-center mb-3 font-bold pb-2">
+          <Link to="/">
+            <small>Or LOG IN with credentials</small>
+          </Link>
         </div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            submitForm();
-          }}
-        >
-          <InputCustom
-            type="text"
-            placeholder="Pseudo"
-            value={user.pseudo}
-            setValue={(e: string) => {
-              onUserChange('pseudo', e);
+        <div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              submitForm();
             }}
-          />
-          <InputCustom
-            type="email"
-            placeholder="Email"
-            value={user.email}
-            setValue={(e: string) => {
-              onUserChange('email', e);
-            }}
-          />
-          <InputCustom
-            type="text"
-            placeholder="Numéro de téléphone"
-            value={user.phoneNumber}
-            setValue={(e: string) => {
-              onUserChange('phoneNumber', e);
-            }}
-          />
-          <InputCustom
-            type="password"
-            placeholder="Mot de passe"
-            value={user.password}
-            setValue={(e: string) => {
-              onUserChange('password', e);
-            }}
-          />
-          <InputCustom
-            type="password"
-            placeholder="Vérifiez votre mot de passe"
-            value={user.surePassword}
-            setValue={(e: string) => {
-              onUserChange('surePassword', e);
-            }}
-          />
-          <InputCustom
-            type="city"
-            placeholder="Ville"
-            value={user.city}
-            setValue={(e: string) => {
-              onUserChange('city', e);
-            }}
-          />
-          <InputCustom
-            type="text"
-            placeholder="Age"
-            value={user.age}
-            setValue={(e: string) => {
-              onUserChange('age', e);
-            }}
-          />
-          <InputCustom
-            type="text"
-            placeholder="Bio"
-            value={user.bio}
-            setValue={(e: string) => {
-              onUserChange('bio', e);
-            }}
-          />
-          {errorMessage ? <p>{errorMessage}</p> : <p></p>}
-          <div>
-            <label className="inline-flex items-center cursor-pointer">
-              <input
-                id="customCheckLogin"
-                type="checkbox"
-                className="form-checkbox text-gray-800 ml-1 w-5 h-5"
-                style={{ transition: 'all .15s ease' }}
-              />
-              <span className="ml-2 text-sm font-semibold text-gray-700">
-                J&apos;accepte la politique de confidentialité
-              </span>
-            </label>
-          </div>
-          <div className="text-center mt-6">
-            <button
-              className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-              type="submit"
-              style={{ transition: 'all .15s ease' }}
-            >
-              SIGN IN
-            </button>
-          </div>
-        </form>
+          >
+            {renderSignInForm()}
+            {displaySignInCard === 2 ? (
+              <div className="text-center mt-6">
+                <div>
+                  <label className="inline-flex items-center cursor-pointer">
+                    <input
+                      id="customCheckLogin"
+                      type="checkbox"
+                      className="form-checkbox text-gray-800 ml-1 w-5 h-5"
+                      style={{ transition: 'all .15s ease' }}
+                    />
+                    <span className="ml-2 text-sm font-semibold text-gray-700">
+                      J&apos;accepte la politique de confidentialité
+                    </span>
+                  </label>
+                </div>
+                <button
+                  className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                  type="submit"
+                  style={{ transition: 'all .15s ease' }}
+                >
+                  SIGN IN
+                </button>
+              </div>
+            ) : null}
+          </form>
+        </div>
       </div>
     </div>
   );
