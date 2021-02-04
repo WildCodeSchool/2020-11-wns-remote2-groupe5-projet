@@ -17,7 +17,6 @@ export default function ArticlePage(): JSX.Element {
       articleID: article,
     },
   });
-  console.log('user', data && data.oneArticle.contentFields);
 
   return (
     <div className="lg:p-10 space-y-5 flex items-center justify-center">
@@ -41,11 +40,8 @@ export default function ArticlePage(): JSX.Element {
               </div>
               <div>
                 {data && data.oneArticle.date}&nbsp;|&nbsp;
-                <span className="font-bold">
-                  {/* #{data && data.communaute.name} */}
-                </span>
-                &nbsp;#
-                {/* {data && data.skills.name} */}
+                <span className="font-bold">Dev</span>
+                &nbsp;# Javascript
               </div>
             </div>
           </div>
@@ -69,18 +65,6 @@ export default function ArticlePage(): JSX.Element {
         <article className="bg-white rounded-br-md rounded-bl-md">
           <div className="flex flex-col justify-between text-center">
             <div className="py-5 px-2">
-              {/* <h3 className="font-bold uppercase text-xl mb-3">
-                {data && data.oneArticle.title}
-              </h3> */}
-              {/* <p className="text-justify px-4">
-                {data && data.oneArticle.text}
-              </p> */}
-              <img
-                className="rounded-md mx-auto my-5"
-                // src={data && data.content.img}
-                alt=""
-              />
-              <p className="text-justify px-4">{data && data.text}</p>
               <div>
                 {data && (
                   <ContentFields
