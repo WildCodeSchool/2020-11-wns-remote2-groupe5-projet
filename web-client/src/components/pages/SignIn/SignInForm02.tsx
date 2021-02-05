@@ -64,7 +64,7 @@ export default function SignInForm02({
           }}
         />
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row justify-between ">
         <ButtonCustom
           label="Prev"
           onClick={onMinusSignInForm}
