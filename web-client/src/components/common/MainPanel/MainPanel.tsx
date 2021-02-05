@@ -1,36 +1,34 @@
 import React from 'react';
-import { ReactComponent as IconHome } from '../../../assets/icons/icon_home.svg';
-import { ReactComponent as IconEdit } from '../../../assets/icons/icon_edit.svg';
-import { ReactComponent as IconNotif } from '../../../assets/icons/icon_notif.svg';
-import { ReactComponent as IconRegister } from '../../../assets/icons/icon_register.svg';
-import { ReactComponent as IconApercu } from '../../../assets/icons/icon_apercu.svg';
 import { Link } from 'react-router-dom';
 import './MainPanel.css';
 
 export default function MainPanel(): JSX.Element {
   return (
-    <div className="bg-gray-800 flex flex-col items-center">
+    <div className="bg-gray-800 flex flex-col items-center text-4xl text-white">
       <Link to="/">
-        <IconHome className="w-14 h-14 m-2" />
+        <i className="fas fa-home m-2 my-3"></i>
       </Link>
       <div className="flex justify-center">
         <hr className="w-3/4" />
       </div>
       <Link to="/articles/article-creation">
-        <IconEdit className="w-14 h-14 m-2" />
+        <i className="fas fa-edit m-2 my-3"></i>
       </Link>
       <div className="flex justify-center">
         <hr className="w-3/4" />
       </div>
-      <IconNotif className="w-14 h-14 m-2" />
+
+      <i className="far fa-bell m-2 my-3"></i>
       <div className="flex justify-center">
         <hr className="w-3/4" />
       </div>
-      <IconRegister className="w-14 h-14 m-2" />
+
+      <i className="far fa-bookmark m-2 my-3"></i>
       <div className="flex justify-center">
         <hr className="w-3/4" />
       </div>
-      <IconApercu className="w-14 h-14 m-2" />
+
+      <i className="fas fa-eye m-2 my-3"></i>
     </div>
   );
 }

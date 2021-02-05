@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactComponent as IconArrow } from '../../../assets/icons/icon_arrow_right.svg';
 import { Link } from 'react-router-dom';
 
 interface User {
@@ -91,8 +90,8 @@ export default function ArticleCard(article: any): JSX.Element {
             to={'articles/' + article.articleID}
             className="w-full md:w-1/4 self-end py-2 rounded-md md:rounded-tr-none md:rounded-bl-none bg-gray-800 text-white hover:bg-gray-600 font-semibold"
           >
-            Lire la suite
-            <IconArrow className="w-7 h-9 inline" />
+            Lire la suite&nbsp;
+            <i className="fas fa-arrow-right text-xl"></i>
           </Link>
         </div>
       </article>
