@@ -4,8 +4,6 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   Column,
-  JoinColumn,
-  OneToMany,
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import User from './User';
@@ -17,6 +15,10 @@ export default class Experience extends BaseEntity {
   @Field(() => ID)
   experienceID: string;
 
+  @ManyToOne(() => User)
+  @Field(() => User)
+  user: User;
+
   @Column({ nullable: true })
   @Field(() => String, { nullable: true })
   jobName: string;
@@ -26,12 +28,12 @@ export default class Experience extends BaseEntity {
   company: string;
 
   @Column({ nullable: true })
-  @Field(() => String, { nullable: true })
-  dateStart: string;
+  @Field(() => Date, { nullable: true })
+  dateStart: Date;
 
   @Column({ nullable: true })
-  @Field(() => String, { nullable: true })
-  dateEnd: string;
+  @Field(() => Date, { nullable: true })
+  dateEnd: Date;
 
   @Column({ nullable: true })
   @Field(() => Boolean, { nullable: true })

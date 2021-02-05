@@ -68,7 +68,9 @@ export default class UserResolver {
       throw Error('You are not authenticated.');
     }
 
-    return User.findOne(user.userID) as Promise<User>;
+    return User.findOne(user.userID, {
+      relations: ['articles', 'experiences'],
+    }) as Promise<User>;
   }
 
   @Mutation(() => User)
