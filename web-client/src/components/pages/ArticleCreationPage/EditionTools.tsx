@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
-import { ReactComponent as IconPlus } from '../../../assets/icons/icon_plus.svg';
-import { ReactComponent as IconApercu } from '../../../assets/icons/icon_apercu.svg';
-import { ReactComponent as IconSend } from '../../../assets/icons/icon_send.svg';
+
 import { Action, ContentType } from './fieldsReducer';
 
 type EdtitionToolsProps = {
@@ -32,7 +30,7 @@ export default function EditionTools({
                 }}
                 className="flex items-center mr-4 ml-2 cursor-pointer hover:text-gray-400"
               >
-                <IconPlus className="w-9 h-9" />
+                <i className="fas fa-plus border-2 rounded-full p-2"></i>
                 <span className="text-xl m-3">{contentType}</span>
               </li>
               <li className="flex justify-center">
@@ -41,8 +39,8 @@ export default function EditionTools({
             </Fragment>
           );
         })}
-        <li className="flex items-center mr-4 ml-2 cursor-pointer hover:text-gray-400">
-          <IconApercu className="w-9 h-9" />
+        <li className="flex items-center mr-4 ml-1 cursor-pointer hover:text-gray-400">
+          <i className="fas fa-eye m-2 my-3 text-2xl"></i>
           <span className="text-xl m-3">Aperçu</span>
         </li>
         <li className="flex justify-center">
@@ -52,8 +50,8 @@ export default function EditionTools({
           onClick={() => postArticle()}
           className="flex items-center mr-4 ml-2 cursor-pointer hover:text-gray-400"
         >
-          <IconSend className="w-9 h-9" />
-          <span className="text-xl m-3">Publier</span>
+          <i className="far fa-paper-plane text-2xl"></i>
+          <span className="text-xl m-3 ml-5">Publier</span>
         </li>
       </ul>
     </section>
