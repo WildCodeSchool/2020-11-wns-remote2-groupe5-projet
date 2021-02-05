@@ -33,7 +33,7 @@ export default function CommentCard({
           3<i className="fas fa-heart text-red-500"></i>
         </div>
       </div>
-      <div className="bg-white rounded-b-lg p-3">{content}</div>
+      <div className="bg-white rounded-b-lg p-3 break-words">{content}</div>
     </section>
   );
 }
