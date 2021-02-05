@@ -1,11 +1,13 @@
 import { type } from 'os';
 import React from 'react';
-import { ReactComponent as IconLike } from '../../../assets/icons/icon_like.svg';
+
 import data from '../../../data-samples/comment.json';
+import moment from 'moment';
+import { parseDateComment } from '../../../utils/Date';
 
 type CommentCardProps = {
   pseudo: string;
-  date: string;
+  date: moment.unitOfTime.StartOf | any;
   avatar: string;
   content: string;
 };
@@ -25,14 +27,13 @@ export default function CommentCard({
             alt="avatar"
           />
           <span>{pseudo}</span>
-          <span className="text-gray-400 pl-5">{date}</span>
+          <span className="text-gray-400 pl-5">{parseDateComment(date)}</span>
         </div>
         <div>
-          3
-          <IconLike className="w-7 h-7 inline" />
+          3<i className="fas fa-heart text-red-500"></i>
         </div>
       </div>
-      <div className="bg-white rounded-b-lg p-3">{content}</div>
+      <div className="bg-white rounded-b-lg p-3 break-words">{content}</div>
     </section>
   );
 }

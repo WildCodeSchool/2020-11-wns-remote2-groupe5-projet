@@ -44,7 +44,7 @@ export default function Header({
                 className="h-8 w-96 pr-8 pl-5 rounded z-0 focus:shadow-color-white focus:"
                 placeholder="Search anything..."
               />
-              <div className="absolute top-4 right-3">
+              <div className="absolute top-2 right-3">
                 <i className="fa fa-search text-gray-400 z-20 hover:text-gray-500" />
               </div>
             </div>

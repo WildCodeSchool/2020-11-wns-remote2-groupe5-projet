@@ -1,6 +1,4 @@
 import React from 'react';
-import { ReactComponent as IconTrash } from '../../../assets/icons/icon_trash.svg';
-import { ReactComponent as IconArrow } from '../../../assets/icons/icon_simple_arrow_up.svg';
 import { Action, ContentType } from './fieldsReducer';
 import { Draggable } from 'react-beautiful-dnd';
 
@@ -36,27 +34,28 @@ export default function ContentField({
               {contentType !== 'Titre' && (
                 <div className="flex">
                   {!isFirst && (
-                    <IconArrow
+                    <i
+                      className="fas fa-chevron-up mx-2"
                       onClick={() =>
                         dispatch({ type: 'MOVE_UP', payload: { index } })
                       }
-                      className="w-6 h-6"
-                    />
+                    ></i>
                   )}
                   {!isLast && (
-                    <IconArrow
+                    <i
+                      className="fas fa-chevron-down mx-2"
                       onClick={() =>
                         dispatch({ type: 'MOVE_DOWN', payload: { index } })
                       }
-                      className="w-6 h-6 transform rotate-180"
-                    />
+                    ></i>
                   )}
-                  <IconTrash
+
+                  <i
+                    className="far fa-trash-alt"
                     onClick={() => {
                       dispatch({ type: 'REMOVE', payload: { index } });
                     }}
-                    className="w-6 h-6"
-                  />
+                  ></i>
                 </div>
               )}
             </div>
