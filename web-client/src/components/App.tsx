@@ -1,16 +1,15 @@
 import React from 'react';
-
 import GlobalContext from '../utils/GlobalContext';
 import useAuthentication from '../utils/useAuthentication';
-
 import LogIn from './pages/LogIn/LogIn';
 import Routes from './Routes';
-import Footer from './common/Footer/Footer';
 import SignIn from './pages/SignIn/SignIn';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-// import { Route, Switch } from 'react-router-dom';
-// import { BrowserRouter as Router } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 
 export default function App(): JSX.Element {
   const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
@@ -23,6 +22,7 @@ export default function App(): JSX.Element {
             <Routes setIsAuthenticated={setIsAuthenticated} />
           ) : (
             <Router>
+              {!isAuthenticated && <Redirect to="/" />}
               <Switch>
                 <Route
                   exact
