@@ -12,6 +12,8 @@ type User = {
   age: string;
   city: string;
   bio: string;
+  skillz: string;
+  community: string;
 };
 
 type SignInForm01Props = {
@@ -27,24 +29,22 @@ export default function SignInForm03({
 }: SignInForm01Props): JSX.Element {
   return (
     <div>
-      <div>
-        <InputCustom
-          type="text"
-          placeholder="Communauté"
-          value={user.phoneNumber}
-          setValue={(e: string) => {
-            onUserChange('phoneNumber', e);
-          }}
-        />
-        <InputCustom
-          type="city"
-          placeholder="Skillz"
-          value={user.city}
-          setValue={(e: string) => {
-            onUserChange('city', e);
-          }}
-        />
-      </div>
+      <InputCustom
+        type="text"
+        placeholder="Communauté"
+        value={user.community}
+        setValue={(e: string) => {
+          onUserChange('phoneNumber', e);
+        }}
+      />
+      <InputCustom
+        type="city"
+        placeholder="Skillz"
+        value={user.skillz}
+        setValue={(e: string) => {
+          onUserChange('city', e);
+        }}
+      />
       <div className="flex flex-row-reverse">
         <ButtonCustom
           label="Prev"

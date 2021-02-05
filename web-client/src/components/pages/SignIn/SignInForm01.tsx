@@ -31,13 +31,17 @@ export default function SignInForm01({
 
   const conditionsToGoToNextForm = () => {
     if (data.allUsers.some((item: User) => item.pseudo === user.pseudo)) {
-      return alert('pseudo deja pris batard');
+      return alert('Ce pseudo est déjà pris :(');
+    } else if (user.pseudo === '') {
+      return alert(
+        `Vous devez renseigner un pseudo pour passer à l'étape suivante`
+      );
     } else if (data.allUsers.some((item: User) => item.email === user.email)) {
-      return alert('email deja pris batard');
+      return alert(`Cet email n'est pas disponible`);
     } else if (user.password !== user.surePassword) {
-      return alert('les mots de passe sont différents');
+      return alert('Les mots de passe ne correspondent pas');
     } else if (user.password.length < 8) {
-      return alert('le mot de passe est trop court');
+      return alert('Le mot de passe doit faire au minimum 8 caractères...');
     } else onChangeSignInForm();
   };
 

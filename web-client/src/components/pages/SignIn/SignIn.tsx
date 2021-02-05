@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 import LogoCustom from '../../common/helpers/LogoCustom';
 import SignInCard from './SignInCard';
@@ -10,13 +10,11 @@ export default function SignIn(): JSX.Element {
         <div
           className="absolute top-0 w-full h-full bg-gray-900"
           style={{
-            // backgroundImage:
-            //   'url(' + require('assets/img/register_bg_2.png') + ')',
             backgroundSize: '100%',
             backgroundRepeat: 'no-repeat',
           }}
         ></div>
-        <div className="container mx-auto px-4 h-full">
+        <div className="container mx-auto px-4 w-full h-full">
           <div className="flex content-center items-center justify-center h-full">
             <div className="w-full lg:w-4/12 px-4">
               <SignInCard />

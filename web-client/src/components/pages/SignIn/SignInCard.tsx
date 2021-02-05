@@ -1,7 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SIGN_IN } from '../../../queries/user-queries';
-import InputCustom from '../../common/helpers/InputCustom';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import SignInForm01 from './SignInForm01';
@@ -17,19 +16,21 @@ type User = {
   age: string;
   city: string;
   bio: string;
+  skillz: string;
+  community: string;
 };
 
-//type SignUpCardProps = {};
-
 const defaultUser: User = {
-  pseudo: '',
-  email: 'gigi@gmail.com',
+  pseudo: 'guigui55',
+  email: 'guigui55@gmail.com',
   phoneNumber: '0607080504',
   password: '12345678',
   surePassword: '12345678',
   age: '23',
-  city: 'TLSE',
-  bio: 'YOOOSHA',
+  city: 'Toulouse',
+  bio: 'salut',
+  skillz: 'javascript',
+  community: 'DEV',
 };
 
 export default function SignInCard(): JSX.Element {
@@ -41,10 +42,7 @@ export default function SignInCard(): JSX.Element {
 
   const onUserChange = <P extends keyof User>(prop: P, value: User[P]) => {
     setUser({ ...user, [prop]: value });
-    // console.log('user', user);
   };
-  // const [userEmail, setUserEmail] = useState('');
-  // const [userPassword, setUserPassword] = useState('');
 
   const submitForm = async () => {
     try {
@@ -65,17 +63,16 @@ export default function SignInCard(): JSX.Element {
       setRedirect(true);
     } catch (error) {
       setErrorMessage(error.message);
+      alert(errorMessage);
     }
   };
 
   const onPlusSignInForm = () => {
     setDisplaySignInCard(displaySignInCard + 1);
-    console.log('count', displaySignInCard);
   };
 
   const onMinusSignInForm = () => {
     setDisplaySignInCard(displaySignInCard - 1);
-    console.log('count', displaySignInCard);
   };
 
   const renderSignInForm = () => {
@@ -109,8 +106,36 @@ export default function SignInCard(): JSX.Element {
     }
   };
 
+  const renderProgressBar = (step: number) => {
+    if (step <= 0) {
+      return (
+        <div className="flex items-center mt-6">
+          <div className=" box-content bg-gray-900 h-3 w-20 mx-5 rounded" />
+          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
+          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
+        </div>
+      );
+    } else if (step === 1) {
+      return (
+        <div className="flex items-center mt-6">
+          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
+          <div className=" box-content bg-gray-900 h-3 w-20 mx-5 rounded" />
+          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
+        </div>
+      );
+    } else if (step === 2) {
+      return (
+        <div className="flex items-center mt-6">
+          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
+          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
+          <div className=" box-content bg-gray-900 h-3 w-20 mx-5 rounded" />
+        </div>
+      );
+    }
+  };
+
   return (
-    <div className="relative flex flex-col min-w-0 break-words w-full h-550 mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+    <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
       {redirect && <Redirect to="/" />}
       <div className="rounded-t mb-0 px-6 py-6">
         <div className="text-center mb-3">
@@ -132,23 +157,24 @@ export default function SignInCard(): JSX.Element {
             }}
           >
             {renderSignInForm()}
+            {renderProgressBar(displaySignInCard)}
             {displaySignInCard === 2 ? (
-              <div className="text-center mt-6">
-                <div>
+              <div className="text-center mt-8">
+                <div className="my-6">
                   <label className="inline-flex items-center cursor-pointer">
                     <input
                       id="customCheckLogin"
                       type="checkbox"
-                      className="form-checkbox text-gray-800 ml-1 w-5 h-5"
+                      className="form-checkbox text-gray-800 ml-1 w-4 h-4"
                       style={{ transition: 'all .15s ease' }}
                     />
-                    <span className="ml-2 text-sm font-semibold text-gray-700">
+                    <span className="ml-2 text-sm text-gray-700">
                       J&apos;accepte la politique de confidentialité
                     </span>
                   </label>
                 </div>
                 <button
-                  className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                  className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-full"
                   type="submit"
                   style={{ transition: 'all .15s ease' }}
                 >
