@@ -15,7 +15,6 @@ export default function ArticlePage(): JSX.Element {
       articleID: article,
     },
   });
-  console.log('user', data && data.oneArticle.contentFields);
 
   return (
     <div className="lg:p-10 space-y-5 flex justify-center">
@@ -40,12 +39,8 @@ export default function ArticlePage(): JSX.Element {
               <div>
                 {data && parseDateArticle(data.oneArticle.date)}
                 &nbsp;|&nbsp;
-                {/* {data && data.oneArticle.date}&nbsp;|&nbsp; */}
-                <span className="font-bold">
-                  {/* #{data && data.communaute.name} */}
-                </span>
-                &nbsp;#
-                {/* {data && data.skills.name} */}
+                <span className="font-bold">Dev</span>
+                &nbsp;# Javascript
               </div>
             </div>
           </div>
