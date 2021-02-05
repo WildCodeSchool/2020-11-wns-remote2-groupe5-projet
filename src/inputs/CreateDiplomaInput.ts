@@ -1,12 +1,12 @@
 import { InputType, Field } from 'type-graphql';
 
 @InputType()
-export default class CreateExperienceInput {
+export default class CreateDiplomaInput {
   @Field({ nullable: true })
-  jobName: string;
+  diplomaName: string;
 
   @Field({ nullable: true })
-  company: string;
+  school: string;
 
   @Field({ nullable: true })
   dateStart: Date;
@@ -15,7 +15,7 @@ export default class CreateExperienceInput {
   dateEnd: Date;
 
   @Field({ nullable: true })
-  isActualJob: boolean;
+  isActualSchool: boolean;
 
   @Field({ nullable: true })
   description: string;

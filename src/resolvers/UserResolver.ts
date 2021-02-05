@@ -69,7 +69,7 @@ export default class UserResolver {
     }
 
     return User.findOne(user.userID, {
-      relations: ['articles', 'experiences'],
+      relations: ['articles', 'experiences', 'diplomas'],
     }) as Promise<User>;
   }
 
