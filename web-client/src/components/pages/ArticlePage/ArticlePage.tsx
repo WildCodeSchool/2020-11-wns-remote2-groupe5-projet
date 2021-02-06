@@ -1,7 +1,7 @@
 import React from 'react';
 import './ArticlePage.css';
 // import ArticleTools from './ArticleTools';
-import CommentPage from '../Comment/CommentContainer';
+import CommentPage from './Comment/CommentContainer';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_ONE_BY_ID } from '../../../queries/article-queries';

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { parseDateComment } from '../../../utils/Date';
+import { parseDateComment } from '../../../../utils/Date';
 
 type CommentCardProps = {
   pseudo: string;

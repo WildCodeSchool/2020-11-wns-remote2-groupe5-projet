@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
-import LogoCustom from '../../common/helpers/LogoCustom';
+import LogoCustom from '../helpers/LogoCustom';
 import LogInCard from './LogInCard';
 
 type LogInProps = {

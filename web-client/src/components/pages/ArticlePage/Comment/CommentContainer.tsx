@@ -1,6 +1,6 @@
 import React from 'react';
 
-import data from '../../../data-samples/comment.json';
+import data from '../../../../data-samples/comment.json';
 import CommentCard from './CommentCard';
 import './Comment.css';
 
