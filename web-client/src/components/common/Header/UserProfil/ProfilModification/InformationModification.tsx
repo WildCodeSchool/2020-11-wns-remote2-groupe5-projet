@@ -4,7 +4,7 @@ import InputCustom from '../../../helpers/InputCustom';
 export default function ExperienceModification(): JSX.Element {
   return (
     <div className=" py-10 md:px-16 sm:px-4">
-      <InputCustom type="text" placeholder="Prénom" textColor="text-white" />
+      {/* <InputCustom type="text" placeholder="Prénom" textColor="text-white" />
       <InputCustom
         type="text"
         placeholder="Nom de famille"
@@ -16,7 +16,7 @@ export default function ExperienceModification(): JSX.Element {
         type="tel"
         placeholder="Numéro de téléphone"
         textColor="text-white"
-      />
+      /> */}
       <label className="text-white block uppercase text-xs font-bold">
         Biographie
         <textarea

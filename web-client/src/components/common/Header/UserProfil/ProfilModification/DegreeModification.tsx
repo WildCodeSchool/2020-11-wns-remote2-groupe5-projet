@@ -4,7 +4,7 @@ import InputCustom from '../../../helpers/InputCustom';
 export default function DegreeModification(): JSX.Element {
   return (
     <div className=" py-10 md:px-16 sm:px-4">
-      <InputCustom
+      {/* <InputCustom
         type="text"
         placeholder="Intitulé du Diplôme"
         textColor="text-white"
@@ -14,9 +14,9 @@ export default function DegreeModification(): JSX.Element {
         type="text"
         placeholder="Niveau d'étude"
         textColor="text-white"
-      />
+      /> */}
       <span className="flex space-x-8">
-        <InputCustom
+        {/* <InputCustom
           type="date"
           placeholder="Date de début"
           textColor="text-white"
@@ -25,7 +25,7 @@ export default function DegreeModification(): JSX.Element {
           type="date"
           placeholder="Date de fin"
           textColor="text-white"
-        />
+        /> */}
         <label className="text-white block uppercase text-xs font-bold">
           Ecole actuelle
           <input type="checkbox" name="Ecole actuel" />

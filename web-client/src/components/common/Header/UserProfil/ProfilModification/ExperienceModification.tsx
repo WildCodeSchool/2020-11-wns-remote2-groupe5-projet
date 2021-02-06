@@ -4,7 +4,7 @@ import InputCustom from '../../../helpers/InputCustom';
 export default function ExperienceModification(): JSX.Element {
   return (
     <div className=" py-10 md:px-16 sm:px-4">
-      <InputCustom
+      {/* <InputCustom
         type="text"
         placeholder="Intitulé du poste"
         textColor="text-white"
@@ -18,9 +18,9 @@ export default function ExperienceModification(): JSX.Element {
         type="email"
         placeholder="Email pro"
         textColor="text-white"
-      />
+      /> */}
       <span className="flex space-x-8">
-        <InputCustom
+        {/* <InputCustom
           type="date"
           placeholder="Date de début"
           textColor="text-white"
@@ -29,7 +29,7 @@ export default function ExperienceModification(): JSX.Element {
           type="date"
           placeholder="Date de fin"
           textColor="text-white"
-        />
+        /> */}
         <label className="text-white block uppercase text-xs font-bold">
           Poste actuel
           <input type="checkbox" name="Poste actuel" />

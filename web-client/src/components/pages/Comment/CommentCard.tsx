@@ -1,13 +1,10 @@
-import { type } from 'os';
 import React from 'react';
-
-import data from '../../../data-samples/comment.json';
 import moment from 'moment';
 import { parseDateComment } from '../../../utils/Date';
 
 type CommentCardProps = {
   pseudo: string;
-  date: moment.unitOfTime.StartOf | any;
+  date: moment.unitOfTime.StartOf;
   avatar: string;
   content: string;
 };

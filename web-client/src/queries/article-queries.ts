@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const PUBLISH_ARTICLE = gql`
-  mutation publishArticle(
+  mutation CreateArticle(
     $data: CreateArticleInput!
     $fields: [CreateContentFieldInput!]!
   ) {

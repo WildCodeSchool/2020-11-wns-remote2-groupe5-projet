@@ -63,17 +63,7 @@ export default function ArticlePage(): JSX.Element {
         <article className="bg-white rounded-br-md rounded-bl-md">
           <div className="flex flex-col justify-between text-center">
             <div className="py-5 px-2 break-words">
-              {/* <h3 className="font-bold uppercase text-xl mb-3">
-                {data && data.oneArticle.title}
-              </h3> */}
-              {/* <p className="text-justify px-4">
-                {data && data.oneArticle.text}
-              </p> */}
-              <img
-                className="rounded-md mx-auto my-5"
-                // src={data && data.content.img}
-                alt=""
-              />
+              <img className="rounded-md mx-auto my-5" alt="" />
               <p className="text-justify px-4">{data && data.text}</p>
               <div>
                 {data && (

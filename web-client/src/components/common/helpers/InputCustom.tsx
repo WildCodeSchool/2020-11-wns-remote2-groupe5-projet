@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
 interface InputProps {
-  placeholder: string;
+  placeholder?: string;
   type: string;
-  // avatarPath: string;
   textColor?: string;
-  value?: string;
-  setValue?: any;
+  value: string;
+  setValue: (value: string) => void;
 }
 
 export default function InputCustom(props: InputProps): JSX.Element {
