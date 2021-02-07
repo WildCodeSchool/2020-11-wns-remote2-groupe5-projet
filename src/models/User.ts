@@ -10,6 +10,8 @@ import {
 import { ObjectType, Field, ID } from 'type-graphql';
 import Article from './Article';
 import { hash } from 'bcrypt';
+import Experience from './Experience';
+import Diploma from './Diploma';
 
 @Entity()
 @ObjectType()
@@ -21,6 +23,14 @@ export default class User extends BaseEntity {
   @OneToMany(() => Article, (articles) => articles.user)
   @Field(() => [Article])
   articles: Article[];
+
+  @OneToMany(() => Experience, (experiences) => experiences.user)
+  @Field(() => [Experience])
+  experiences: Experience[];
+
+  @OneToMany(() => Diploma, (diplomas) => diplomas.user)
+  @Field(() => [Diploma])
+  diplomas: Diploma[];
 
   @Column()
   @Unique(['pseudo'])

@@ -26,7 +26,7 @@ export default function ArticleCard({
               <span className="italic underline">S&rsquo;abonner</span>
             </div>
             <div>
-              {Date}&nbsp;|&nbsp;
+              3 nov 2019&nbsp;|&nbsp;
               <span className="font-bold">#{'dev'}</span>
               &nbsp;#
               {'javascript'}

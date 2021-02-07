@@ -31,7 +31,7 @@ export default function App(): JSX.Element {
                     <LogIn setIsAuthenticated={setIsAuthenticated} />
                   )}
                 />
-                <Route path="/signIn" component={() => <SignIn />} />
+                <Route path="/signIn" component={SignIn} />
               </Switch>
             </Router>
           )}
