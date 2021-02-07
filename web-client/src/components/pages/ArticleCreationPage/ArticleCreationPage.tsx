@@ -1,51 +1,39 @@
 import React, { useReducer } from 'react';
-import EditionTools from './EditionTools';
-import fieldsReducer from './fieldsReducer';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { useMutation } from '@apollo/client';
-import { PUBLISH_ARTICLE } from '../../../queries/article-queries';
+import { useArticlePublication } from './useArticlePublication';
+import fieldsReducer from './fieldsReducer';
+import EditionTools from './EditionTools';
 import Paragraphe from './ContentFields/Paragraphe';
 import Image from './ContentFields/Image';
 import Lien from './ContentFields/Lien';
 import SousTitre from './ContentFields/Sous-titre';
 import Titre from './ContentFields/Titre';
+import PublishModal from './PublishModal';
 
 export default function ArticleCreationPage(): JSX.Element {
   const [fields, dispatch] = useReducer(fieldsReducer, [
-    { contentType: 'Titre', value: 'This is a test' },
+    { contentType: 'Titre', value: '' },
   ]);
 
-  const [usePostArticle] = useMutation(PUBLISH_ARTICLE);
-  const postArticle = async () => {
-    try {
-      if (fields.length < 2) {
-        throw new Error();
-      }
-
-      const description =
-        fields.filter((field) => {
-          return field.contentType === 'Paragraphe';
-        })[0].value || '';
-
-      await usePostArticle({
-        variables: {
-          data: { date: new Date(), title: fields[0].value, description },
-          fields: fields.map((field, index) => ({
-            contentType: field.contentType,
-            content: field.value,
-            placeNumber: index,
-          })),
-        },
-      });
-      alert('Article posté :)');
-    } catch (error) {
-      console.log(error);
-      alert('Erreur => go voir la console');
-    }
-  };
+  const {
+    publishModal,
+    setPublishModal,
+    openPublishModal,
+    postArticle,
+    defaultDescription,
+  } = useArticlePublication(fields);
 
   return (
     <div className="flex justify-center">
+      <PublishModal
+        isOpen={publishModal}
+        title={fields[0].value}
+        description={defaultDescription()}
+        setPublishModal={setPublishModal}
+        postArticle={postArticle}
+      />
+
+      <EditionTools dispatch={dispatch} openPublishModal={openPublishModal} />
       <DragDropContext
         onDragEnd={(e) =>
           dispatch({
@@ -92,7 +80,6 @@ export default function ArticleCreationPage(): JSX.Element {
           </Droppable>
         </div>
       </DragDropContext>
-      <EditionTools dispatch={dispatch} postArticle={postArticle} />
     </div>
   );
 }

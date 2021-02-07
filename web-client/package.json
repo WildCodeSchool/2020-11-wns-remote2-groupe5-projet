@@ -19,6 +19,7 @@
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^17.0.1",
+    "react-modal": "^3.12.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "tailwindcss": "^2.0.1",
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "@types/react-beautiful-dnd": "^13.0.0",
+    "@types/react-modal": "^3.12.0",
     "apollo": "^2.31.1"
   },
   "proxy": "http://localhost:4000"

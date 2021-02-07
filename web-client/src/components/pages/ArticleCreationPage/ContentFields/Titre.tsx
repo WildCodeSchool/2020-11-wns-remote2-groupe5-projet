@@ -27,6 +27,7 @@ export default function Titre({
           })
         }
         value={value}
+        placeholder="Ecrivez un titre"
         className="rounded-b-md h-10 py-2 px-4"
       />
     </section>

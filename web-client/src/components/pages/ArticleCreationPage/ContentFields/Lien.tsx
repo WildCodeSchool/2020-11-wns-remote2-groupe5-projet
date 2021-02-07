@@ -32,7 +32,7 @@ export default function Lien({
               <div className="flex">
                 {!isFirst && (
                   <i
-                    className="fas fa-chevron-up mx-2"
+                    className="fas fa-chevron-up mx-2 cursor-pointer"
                     onClick={() =>
                       dispatch({ type: 'MOVE_UP', payload: { index } })
                     }
@@ -40,7 +40,7 @@ export default function Lien({
                 )}
                 {!isLast && (
                   <i
-                    className="fas fa-chevron-down mx-2"
+                    className="fas fa-chevron-down mx-2 cursor-pointer"
                     onClick={() =>
                       dispatch({ type: 'MOVE_DOWN', payload: { index } })
                     }
@@ -48,7 +48,7 @@ export default function Lien({
                 )}
 
                 <i
-                  className="far fa-trash-alt"
+                  className="far fa-trash-alt cursor-pointer ml-3"
                   onClick={() => {
                     dispatch({ type: 'REMOVE', payload: { index } });
                   }}
@@ -64,6 +64,7 @@ export default function Lien({
               })
             }
             value={value}
+            placeholder="Indiquez votre url"
             className="rounded-b-md h-10 py-2 px-4"
           />
         </section>

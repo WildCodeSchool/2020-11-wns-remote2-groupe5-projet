@@ -4,12 +4,12 @@ import { Action, ContentType } from './fieldsReducer';
 
 type EdtitionToolsProps = {
   dispatch: React.Dispatch<Action>;
-  postArticle: () => void;
+  openPublishModal: () => void;
 };
 
 export default function EditionTools({
   dispatch,
-  postArticle,
+  openPublishModal,
 }: EdtitionToolsProps): JSX.Element {
   const contentTypes: ContentType[] = [
     'Sous-titre',
@@ -47,7 +47,7 @@ export default function EditionTools({
           <hr className="w-3/4" />
         </li>
         <li
-          onClick={() => postArticle()}
+          onClick={() => openPublishModal()}
           className="flex items-center mr-4 ml-2 cursor-pointer hover:text-gray-400"
         >
           <i className="far fa-paper-plane text-2xl"></i>
