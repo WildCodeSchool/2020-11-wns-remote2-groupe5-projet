@@ -1,36 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-interface User {
-  userID: number;
-  pseudo: string;
-  avatar: string;
-}
-interface Community {
-  communauteID: number;
-  name: string;
-}
-interface Skills {
-  skillID: number;
-  name: string;
-}
-interface Content {
-  img: string;
-  title: string;
-  text: string;
-}
+import { Articles_articles } from '../../../schemaTypes';
 
 type ArticleCardProps = {
-  key: number;
-  articleID: number;
-  user: User;
-  communaute: Community;
-  skills: Skills;
-  date: string;
-  content: Content;
+  article: Articles_articles;
 };
 
-export default function ArticleCard(article: any): JSX.Element {
+export default function ArticleCard({
+  article,
+}: ArticleCardProps): JSX.Element {
   return (
     <section className="p-1 w-4/5 max-w-screen-lg">
       <div className="flex bg-gray-800 text-white justify-between rounded-tl-md rounded-tr-md p-4">
@@ -38,11 +16,7 @@ export default function ArticleCard(article: any): JSX.Element {
           <div className="px-4">
             <img
               className="rounded-full h-16 w-16 flex items-center justify-center"
-              src={
-                article?.user?.avatar
-                  ? article.user.avatar
-                  : 'https://www.w3schools.com/howto/img_avatar.png'
-              }
+              src={'https://www.w3schools.com/howto/img_avatar.png'}
               alt="avatar"
             />
           </div>
@@ -52,12 +26,10 @@ export default function ArticleCard(article: any): JSX.Element {
               <span className="italic underline">S&rsquo;abonner</span>
             </div>
             <div>
-              {Date}&nbsp;|&nbsp;
-              <span className="font-bold">
-                #{article?.communaute?.name ? article.communaute.name : 'dev'}
-              </span>
+              3 nov 2019&nbsp;|&nbsp;
+              <span className="font-bold">#{'dev'}</span>
               &nbsp;#
-              {article?.skills?.name ? article.skills.name : 'javascript'}
+              {'javascript'}
             </div>
           </div>
         </div>
@@ -72,9 +44,7 @@ export default function ArticleCard(article: any): JSX.Element {
           <img
             className="rounded-md mx-auto w-full"
             src={
-              article?.content?.img
-                ? article.content.img
-                : 'https://img-19.ccm2.net/QeOmxQpB5sfw25JvsKbirn-eulw=/250x/6aab65a776614b8bba8c8b4e8c1848c9/ccm-encyclopedia/0px-Unofficial_JavaScript_logo_2.svg.png'
+              'https://img-19.ccm2.net/QeOmxQpB5sfw25JvsKbirn-eulw=/250x/6aab65a776614b8bba8c8b4e8c1848c9/ccm-encyclopedia/0px-Unofficial_JavaScript_logo_2.svg.png'
             }
             alt=""
           />

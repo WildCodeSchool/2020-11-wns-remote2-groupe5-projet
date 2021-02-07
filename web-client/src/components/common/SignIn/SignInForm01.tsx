@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import { GET_ALL_USERS, SIGN_IN } from '../../../queries/user-queries';
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_ALL_USERS } from '../../../queries/user-queries';
 import InputCustom from '../../common/helpers/InputCustom';
 import ButtonCustom from '../../common/helpers/ButtonCustom';
 import ArrowRight from '../../../assets/icons/icon_arrow_right.svg';
