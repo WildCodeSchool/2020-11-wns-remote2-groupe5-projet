@@ -38,6 +38,12 @@ export default function SignInForm01({
       );
     } else if (data.allUsers.some((item: User) => item.email === user.email)) {
       return alert(`Cet email n'est pas disponible`);
+    } else if (user.email === '') {
+      return alert(
+        `Vous devez renseigner un email pour passer à l'étape suivante`
+      );
+    } else if (!user.email.includes('@')) {
+      return alert(`L'email n'est pas au bon format`);
     } else if (user.password !== user.surePassword) {
       return alert('Les mots de passe ne correspondent pas');
     } else if (user.password.length < 8) {
