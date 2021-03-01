@@ -7,4 +7,7 @@ export default class CreateSessionInput {
 
   @Field()
   password: string;
+
+  @Field()
+  rememberMe: boolean;
 }

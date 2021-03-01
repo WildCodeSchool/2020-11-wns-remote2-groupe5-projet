@@ -38,6 +38,7 @@ export default function SignInForm02({
           setValue={(e: string) => {
             onUserChange('phoneNumber', e);
           }}
+          icon="phone"
         />
         <InputCustom
           type="city"
@@ -46,6 +47,7 @@ export default function SignInForm02({
           setValue={(e: string) => {
             onUserChange('city', e);
           }}
+          icon="city"
         />
         <InputCustom
           type="text"
@@ -54,6 +56,7 @@ export default function SignInForm02({
           setValue={(e: string) => {
             onUserChange('age', e);
           }}
+          icon="user-clock"
         />
         <InputCustom
           type="text"
@@ -62,6 +65,7 @@ export default function SignInForm02({
           setValue={(e: string) => {
             onUserChange('bio', e);
           }}
+          icon="globe-europe"
         />
       </div>
       <div className="flex flex-row justify-between ">

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import SignInForm01 from './SignInForm01';
 import SignInForm02 from './SignInForm02';
 import SignInForm03 from './SignInForm03';
+import renderProgressBar from '../../../utils/ProgressBar';
 
 type User = {
   pseudo: string;
@@ -106,34 +107,6 @@ export default function SignInCard(): JSX.Element {
     }
   };
 
-  const renderProgressBar = (step: number) => {
-    if (step <= 0) {
-      return (
-        <div className="flex items-center mt-6">
-          <div className=" box-content bg-gray-900 h-3 w-20 mx-5 rounded" />
-          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
-          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
-        </div>
-      );
-    } else if (step === 1) {
-      return (
-        <div className="flex items-center mt-6">
-          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
-          <div className=" box-content bg-gray-900 h-3 w-20 mx-5 rounded" />
-          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
-        </div>
-      );
-    } else if (step === 2) {
-      return (
-        <div className="flex items-center mt-6">
-          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
-          <div className=" box-content bg-gray-500 h-2 w-20 mx-5 rounded" />
-          <div className=" box-content bg-gray-900 h-3 w-20 mx-5 rounded" />
-        </div>
-      );
-    }
-  };
-
   return (
     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
       {redirect && <Redirect to="/" />}
@@ -149,7 +122,7 @@ export default function SignInCard(): JSX.Element {
             <small>Or LOG IN with credentials</small>
           </Link>
         </div>
-        <div>
+        <div className="flex flex-col justify-center items-center">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -157,7 +130,6 @@ export default function SignInCard(): JSX.Element {
             }}
           >
             {renderSignInForm()}
-            {renderProgressBar(displaySignInCard)}
             {displaySignInCard === 2 ? (
               <div className="text-center mt-8">
                 <div className="my-6">
@@ -174,7 +146,7 @@ export default function SignInCard(): JSX.Element {
                   </label>
                 </div>
                 <button
-                  className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-full"
+                  className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-32"
                   type="submit"
                   style={{ transition: 'all .15s ease' }}
                 >
@@ -183,6 +155,7 @@ export default function SignInCard(): JSX.Element {
               </div>
             ) : null}
           </form>
+          {renderProgressBar(displaySignInCard)}
         </div>
       </div>
     </div>

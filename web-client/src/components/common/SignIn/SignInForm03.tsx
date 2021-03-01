@@ -36,6 +36,7 @@ export default function SignInForm03({
         setValue={(e: string) => {
           onUserChange('phoneNumber', e);
         }}
+        icon="users"
       />
       <InputCustom
         type="city"
@@ -44,6 +45,7 @@ export default function SignInForm03({
         setValue={(e: string) => {
           onUserChange('city', e);
         }}
+        icon="lightbulb"
       />
       <div className="flex flex-row-reverse">
         <ButtonCustom
