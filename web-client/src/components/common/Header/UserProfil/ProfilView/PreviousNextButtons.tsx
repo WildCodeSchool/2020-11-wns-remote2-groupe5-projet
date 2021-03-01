@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
 
 export interface ActualPageProps {
   actualPage: string;
@@ -11,8 +10,6 @@ export default function PreviousNextButtons({
   setActualPage,
 }: ActualPageProps): JSX.Element {
   console.log(actualPage);
-
-  const { url } = useRouteMatch();
 
   const [backButton, setBackButton] = useState<string>('Diplômes');
   const [nextButton, setNextButton] = useState<string>('Expériences');
@@ -47,12 +44,8 @@ export default function PreviousNextButtons({
 
   return (
     <div className="flex row justify-between">
-      {/* <Link to=""> */}
       <button onClick={() => back()}>{backButton}</button>
-      {/* </Link> */}
-      {/* <Link to=""> */}
       <button onClick={() => next()}>{nextButton}</button>
-      {/* </Link> */}
     </div>
   );
 }

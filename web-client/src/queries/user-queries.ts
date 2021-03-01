@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const AUTH = gql`
-  mutation createSession($input: CreateSessionInput!) {
+  mutation CreateSession($input: CreateSessionInput!) {
     createSession(input: $input) {
       pseudo
       userID
@@ -18,7 +18,7 @@ export const CHECK_AUTH = gql`
 `;
 
 export const SIGN_IN = gql`
-  mutation signIn($data: CreateUserInput!) {
+  mutation SignIn($data: CreateUserInput!) {
     signIn(data: $data) {
       pseudo
       email
@@ -31,7 +31,7 @@ export const SIGN_IN = gql`
 `;
 
 export const LOG_OUT = gql`
-  mutation {
+  mutation DeleteSession {
     deleteSession {
       userID
     }
@@ -39,7 +39,7 @@ export const LOG_OUT = gql`
 `;
 
 export const GET_ALL_USERS = gql`
-  query allUsers {
+  query AllUsers {
     allUsers {
       pseudo
       email

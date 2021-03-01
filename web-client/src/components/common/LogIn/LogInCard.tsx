@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { AUTH } from '../../../queries/user-queries';
-import InputCustom from '../../common/helpers/InputCustom';
+import InputCustom from '../helpers/InputCustom';
 import { Link } from 'react-router-dom';
 
 type LogInCardProps = {

@@ -1,9 +1,9 @@
 import React from 'react';
 import GlobalContext from '../utils/GlobalContext';
 import useAuthentication from '../utils/useAuthentication';
-import LogIn from './pages/LogIn/LogIn';
+import LogIn from './common/LogIn/LogIn';
 import Routes from './Routes';
-import SignIn from './pages/SignIn/SignIn';
+import SignIn from './common/SignIn/SignIn';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -31,7 +31,7 @@ export default function App(): JSX.Element {
                     <LogIn setIsAuthenticated={setIsAuthenticated} />
                   )}
                 />
-                <Route path="/signIn" component={() => <SignIn />} />
+                <Route path="/signIn" component={SignIn} />
               </Switch>
             </Router>
           )}

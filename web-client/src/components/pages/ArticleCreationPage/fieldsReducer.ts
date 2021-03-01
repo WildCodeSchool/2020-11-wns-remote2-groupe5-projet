@@ -37,7 +37,7 @@ const fieldsReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'ADD': {
       const { contentType } = action.payload;
-      return [...state, { contentType, value: 'ça marche' }];
+      return [...state, { contentType, value: '' }];
     }
 
     case 'REMOVE': {
