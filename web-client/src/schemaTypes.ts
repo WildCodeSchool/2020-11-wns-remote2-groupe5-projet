@@ -232,6 +232,7 @@ export interface CreateContentFieldInput {
 export interface CreateSessionInput {
   email: string;
   password: string;
+  rememberMe: boolean;
 }
 
 export interface CreateUserInput {

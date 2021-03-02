@@ -33,8 +33,12 @@ export const theme = {
       128: '32rem',
       144: '36rem',
     },
+    outline: {
+      black: '2px solid #111827',
+    },
     borderRadius: {
       '4xl': '2rem',
     },
   },
+  plugins: [require('@tailwindcss/custom-forms')],
 };

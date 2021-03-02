@@ -22,7 +22,7 @@ export default class UserResolver {
     @Arg('input') input: CreateSessionInput,
     @Ctx() { res }: { res: Response }
   ): Promise<User> {
-    const { email, password } = input;
+    const { email, password, rememberMe } = input;
     const user = await User.findOne({ email });
     const authenticationError = new Error(
       'Incorrect username and/or password.'
@@ -37,9 +37,9 @@ export default class UserResolver {
     const userSession = UserSession.create({ user });
     await userSession.save();
     res.set('set-cookie', [
-      `sessionId=${userSession.uuid}; Max-Age=2592000; HttpOnly;${
-        SECURE_COOKIES ? ' Secure;' : ''
-      } SameSite=Strict`,
+      `sessionId=${userSession.uuid}; Max-Age=${
+        rememberMe ? 3000000 : 61200
+      }; HttpOnly;${SECURE_COOKIES ? ' Secure;' : ''} SameSite=Strict`,
     ]);
     return user;
   }
