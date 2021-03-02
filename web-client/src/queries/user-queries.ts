@@ -5,7 +5,6 @@ export const AUTH = gql`
     createSession(input: $input) {
       pseudo
       userID
-      rememberMe
     }
   }
 `;

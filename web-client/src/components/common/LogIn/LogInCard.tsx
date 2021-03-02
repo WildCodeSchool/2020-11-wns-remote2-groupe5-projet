@@ -32,6 +32,7 @@ export default function LogInCard({
       setIsAuthenticated(true);
     } catch (error) {
       setErrorMessage(error.message);
+      console.log('ERROR', error);
     }
   };
 
