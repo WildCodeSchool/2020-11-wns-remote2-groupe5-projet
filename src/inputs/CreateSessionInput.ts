@@ -9,5 +9,5 @@ export default class CreateSessionInput {
   password: string;
 
   @Field()
-  rememberMe: boolean;
+  rememberMe?: boolean;
 }
