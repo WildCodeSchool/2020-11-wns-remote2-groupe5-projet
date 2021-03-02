@@ -42,7 +42,7 @@ export default function InputCustom(props: InputProps): JSX.Element {
         <input
           type={type}
           required={required}
-          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-72"
+          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm focus:outline-none shadow w-72"
           placeholder={placeholder}
           style={{ transition: 'all .15s ease' }}
           value={value}

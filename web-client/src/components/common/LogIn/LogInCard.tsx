@@ -36,8 +36,8 @@ export default function LogInCard({
   };
 
   return (
-    <div className="relative flex flex-col min-w-0 break-words w-full h-530 mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
-      <div className="rounded-t mb-0 px-6 py-6">
+    <div className="bg-gray-300 flex flex-col w-full h-530 mb-6 shadow-lg rounded-lg border-0">
+      <div className="rounded-t mb-0 px-6 py-6 w-full">
         <div className="text-center mb-3">
           <h4 className="text-gray-600 uppercase font-bold">log in</h4>
         </div>
@@ -56,9 +56,11 @@ export default function LogInCard({
           }}
         >
           {errorMessage ? (
-            <div className="flex items-center justify-around py-4 w-60">
+            <div className="flex items-center justify-start pl-0.5 py-4 w-88">
               <i className="fa fa-info-circle text-red-600" />
-              <p className="text-red-600 text-xs text-center">{errorMessage}</p>
+              <p className="text-red-600 text-xs text-center pl-5">
+                {errorMessage}
+              </p>
             </div>
           ) : (
             <p></p>
@@ -77,16 +79,16 @@ export default function LogInCard({
             value={userPassword}
             icon="lock"
           />
-          <div className="flex justufy-start py-4">
+          <div className="flex justify-start my-6">
             <label className="inline-flex items-center cursor-pointer">
               <input
                 id="customCheckLogin"
                 type="checkbox"
                 onClick={() => setRememberMe(!rememberMe)}
-                className="form-checkbox text-gray-800 ml-1 w-5 h-5"
+                className="form-checkbox text-gray-700 mr-4 w-5 h-5"
                 style={{ transition: 'all .15s ease' }}
               />
-              <span className="ml-2 text-sm font-semibold text-gray-700">
+              <span className="text-sm font-semibold text-gray-700">
                 Remember me
               </span>
             </label>
