@@ -6,12 +6,14 @@ import {
   Unique,
   OneToMany,
   BeforeInsert,
+  OneToOne,
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import Article from './Article';
 import { hash } from 'bcrypt';
 import Experience from './Experience';
 import Diploma from './Diploma';
+import Avatar from './Avatar';
 
 @Entity()
 @ObjectType()
@@ -19,6 +21,10 @@ export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   userID: number;
+
+  @OneToOne(() => Avatar, (avatar) => avatar.user)
+  @Field(() => Avatar)
+  avatar?: Avatar;
 
   @OneToMany(() => Article, (articles) => articles.user)
   @Field(() => [Article])

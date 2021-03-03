@@ -5,10 +5,11 @@ import UserSession from './models/UserSession';
 import UserResolver from './resolvers/UserResolver';
 import ArticleResolver from './resolvers/ArticleResolver';
 import ProfilResolver from './resolvers/ProfilResolver';
+import PictureResolver from './resolvers/PictureResolver';
 
 export const getApolloServer = async (): Promise<ApolloServer> => {
   const schema = await buildSchema({
-    resolvers: [UserResolver, ArticleResolver, ProfilResolver],
+    resolvers: [UserResolver, ArticleResolver, ProfilResolver, PictureResolver],
   });
   const context = async ({ req, res }: { req: Request; res: Response }) => {
     const { sessionId } = req.cookies;

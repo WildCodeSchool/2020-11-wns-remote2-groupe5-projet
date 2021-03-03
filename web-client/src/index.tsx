@@ -1,16 +1,58 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  split,
+} from '@apollo/client';
 
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import './tailwind.output.css';
 
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { createUploadLink } from 'apollo-upload-client';
+
+import './index.css';
+import { getMainDefinition } from '@apollo/client/utilities';
+
+const GRAPHQL_ENDPOINT = '/graphql';
+
+const httpLink = createUploadLink({
+  uri: GRAPHQL_ENDPOINT,
+});
+
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:4000${GRAPHQL_ENDPOINT}`,
+  options: {
+    reconnect: true,
+  },
+});
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink
+);
+
 const client = new ApolloClient({
-  uri: '/graphql',
+  //uri: '/graphql',
+  link: splitLink,
   cache: new InMemoryCache(),
 });
+
+// const client = new ApolloClient({
+//   uri: '/graphql',
+//   cache: new InMemoryCache(),
+// });
 
 ReactDOM.render(
   <React.StrictMode>

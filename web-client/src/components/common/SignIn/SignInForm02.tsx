@@ -3,17 +3,7 @@ import InputCustom from '../../common/helpers/InputCustom';
 import ButtonCustom from '../../common/helpers/ButtonCustom';
 import ArrowRight from '../../../assets/icons/icon_arrow_right.svg';
 import ArrowLeft from '../../../assets/icons/icon_arrow_left.svg';
-
-type User = {
-  pseudo: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
-  surePassword: string;
-  age: string;
-  city: string;
-  bio: string;
-};
+import { User } from './SignInCard';
 
 type SignInForm01Props = {
   user: User;

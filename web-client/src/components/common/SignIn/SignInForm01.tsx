@@ -5,17 +5,7 @@ import InputCustom from '../../common/helpers/InputCustom';
 import ButtonCustom from '../../common/helpers/ButtonCustom';
 import ArrowRight from '../../../assets/icons/icon_arrow_right.svg';
 import conditionsSignIn01 from '../../../utils/ConditionsSignIn';
-
-export type User = {
-  pseudo: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
-  surePassword: string;
-  age: string;
-  city: string;
-  bio: string;
-};
+import { User } from './SignInCard';
 
 type SignInForm01Props = {
   user: User;

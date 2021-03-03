@@ -69,7 +69,7 @@ export default class UserResolver {
     }
 
     return User.findOne(user.userID, {
-      relations: ['articles', 'experiences', 'diplomas'],
+      relations: ['articles', 'experiences', 'diplomas', 'avatar'],
     }) as Promise<User>;
   }
 
@@ -90,6 +90,6 @@ export default class UserResolver {
 
   @Query(() => [User])
   allUsers(): Promise<User[]> {
-    return User.find({ relations: ['articles'] });
+    return User.find({ relations: ['articles', 'avatar'] });
   }
 }
