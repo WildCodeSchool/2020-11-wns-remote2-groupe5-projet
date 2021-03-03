@@ -24,7 +24,7 @@ export default class Avatar extends BaseEntity {
   @Column()
   @Generated('uuid')
   @Field(() => ID)
-  avatarID!: string;
+  id!: string;
 
   @OneToOne(() => User)
   @JoinColumn({ name: 'userID' })
@@ -49,7 +49,7 @@ const saveAndWritePictureToFile = async (
   const avatar = Avatar.create({ extension });
   avatar.user = user;
   await avatar.save();
-  const newFilename = `${avatar.avatarID}${extension}`;
+  const newFilename = `${avatar.id}${extension}`;
   await writeFileToPicturesDirectory(stream, newFilename);
   return avatar;
 };

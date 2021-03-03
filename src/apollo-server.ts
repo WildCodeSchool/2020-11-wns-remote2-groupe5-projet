@@ -6,8 +6,12 @@ import UserResolver from './resolvers/UserResolver';
 import ArticleResolver from './resolvers/ArticleResolver';
 import ProfilResolver from './resolvers/ProfilResolver';
 import PictureResolver from './resolvers/PictureResolver';
+import { GraphQLSchema } from 'graphql';
 
-export const getApolloServer = async (): Promise<ApolloServer> => {
+export const getApolloServer = async (): Promise<{
+  apolloServer: ApolloServer;
+  graphQLSchema: GraphQLSchema;
+}> => {
   const schema = await buildSchema({
     resolvers: [UserResolver, ArticleResolver, ProfilResolver, PictureResolver],
   });
@@ -24,5 +28,8 @@ export const getApolloServer = async (): Promise<ApolloServer> => {
       user,
     };
   };
-  return new ApolloServer({ schema, context });
+  return {
+    apolloServer: new ApolloServer({ schema, context }),
+    graphQLSchema: schema,
+  };
 };

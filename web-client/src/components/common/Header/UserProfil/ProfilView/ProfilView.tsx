@@ -14,17 +14,20 @@ export default function ProfilView(): JSX.Element {
     'Informations générales'
   );
 
-  const uploadPicture = ({
+  const uploadPicture = async ({
     target: {
       validity,
       files: [file],
     },
   }: any) => {
-    validity.valid &&
-      mutate({
-        variables: { file },
-      }),
-      console.log('FILE', file);
+    try {
+      validity.valid &&
+        mutate({
+          variables: { file },
+        });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

@@ -1,16 +1,18 @@
 import { createWriteStream, mkdirSync } from 'fs';
 import path from 'path';
 import { Stream } from 'stream';
+import { ReadStream } from 'fs-capacitor';
 
 const PICTURES_DIRECTORY = path.join(__dirname, '../public/media/pictures');
 
 export function writeFileToPicturesDirectory(
-  stream: Stream,
+  createReadStream: any,
   filename: string
 ): Promise<void> {
   mkdirSync(PICTURES_DIRECTORY, { recursive: true });
+
   return new Promise((res) =>
-    stream
+    createReadStream
       .pipe(createWriteStream(path.join(PICTURES_DIRECTORY, filename)))
       .on('close', res)
   );

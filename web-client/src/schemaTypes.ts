@@ -109,6 +109,28 @@ export interface OneArticleVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UploadPicture
+// ====================================================
+
+export interface UploadPicture_uploadPicture {
+  __typename: "Avatar";
+  extension: string;
+}
+
+export interface UploadPicture {
+  uploadPicture: UploadPicture_uploadPicture;
+}
+
+export interface UploadPictureVariables {
+  file: any;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: CreateSession
 // ====================================================
 
