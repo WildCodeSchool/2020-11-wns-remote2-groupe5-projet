@@ -10,6 +10,7 @@ import {
 import { ObjectType, Field, ID } from 'type-graphql';
 import User from './User';
 import ContentField from './ContentField';
+import CommentaireArticle from './Commentaire_Article';
 
 @Entity()
 @ObjectType()
@@ -22,6 +23,13 @@ export default class Article extends BaseEntity {
   @JoinColumn({ name: 'userID' })
   @Field(() => User)
   user: User;
+
+  @OneToMany(
+    () => CommentaireArticle,
+    (commentaireArticle) => commentaireArticle.article
+  )
+  @Field(() => [CommentaireArticle])
+  commentairesArticle: CommentaireArticle[];
 
   @Column()
   @Field(() => ID)

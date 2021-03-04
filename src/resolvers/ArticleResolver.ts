@@ -1,7 +1,9 @@
 import { Resolver, Query, Mutation, Arg, Ctx } from 'type-graphql';
 import CreateArticleInput from '../inputs/CreateArticleInput';
+import CreateCommentaireArticleInput from '../inputs/CreateCommentaireArticleInput';
 import CreateContentFieldInput from '../inputs/CreateContentFieldInput';
 import Article from '../models/Article';
+import CommentaireArticle from '../models/Commentaire_Article';
 import ContentField from '../models/ContentField';
 import User from '../models/User';
 
@@ -26,7 +28,12 @@ export default class ArticleResolver {
       throw Error('You are not authenticated.');
     }
     return Article.findOne(articleID, {
-      relations: ['user', 'contentFields'],
+      relations: [
+        'user',
+        'contentFields',
+        'commentairesArticle',
+        'commentairesArticle.user',
+      ],
     }) as Promise<Article>;
   }
 
@@ -56,5 +63,30 @@ export default class ArticleResolver {
     await article.save();
 
     return article;
+  }
+
+  @Mutation(() => CommentaireArticle)
+  async createCommentaireArticle(
+    @Ctx() { user }: { user: User | null },
+    @Arg('data') data: CreateCommentaireArticleInput,
+    @Arg('articleID') articleID: string
+  ): Promise<CommentaireArticle> {
+    if (!user) {
+      throw Error('You are not authenticated.');
+    }
+
+    const commentaire = CommentaireArticle.create(data);
+
+    commentaire.user = user;
+
+    const article = await Article.findOne(articleID);
+
+    if (article) {
+      commentaire.article = article;
+    }
+
+    await commentaire.save();
+
+    return commentaire;
   }
 }

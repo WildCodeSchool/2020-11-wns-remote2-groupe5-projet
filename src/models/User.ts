@@ -12,6 +12,7 @@ import Article from './Article';
 import { hash } from 'bcrypt';
 import Experience from './Experience';
 import Diploma from './Diploma';
+import CommentaireArticle from './Commentaire_Article';
 
 @Entity()
 @ObjectType()
@@ -31,6 +32,13 @@ export default class User extends BaseEntity {
   @OneToMany(() => Diploma, (diplomas) => diplomas.user)
   @Field(() => [Diploma])
   diplomas: Diploma[];
+
+  @OneToMany(
+    () => CommentaireArticle,
+    (commentaireArticle) => commentaireArticle.article
+  )
+  @Field(() => [CommentaireArticle])
+  commentairesArticle: CommentaireArticle[];
 
   @Column()
   @Unique(['pseudo'])
