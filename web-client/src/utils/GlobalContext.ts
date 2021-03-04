@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface GlobalContextProps {
-  test?: string;
+  user?: { pseudo: string };
 }
 
 export default React.createContext<GlobalContextProps>({});

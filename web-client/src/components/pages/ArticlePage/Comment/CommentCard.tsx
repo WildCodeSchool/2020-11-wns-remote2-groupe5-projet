@@ -23,11 +23,13 @@ export default function CommentCard({
             src={avatar}
             alt="avatar"
           />
-          <span>{pseudo}</span>
-          <span className="text-gray-400 pl-5">{parseDateComment(date)}</span>
+          <span className="pl-4">{pseudo}</span>
+          <span className="text-gray-400 pl-5 text-xs">
+            {parseDateComment(date)}
+          </span>
         </div>
         <div>
-          3<i className="fas fa-heart text-red-500"></i>
+          3&nbsp;<i className="fas fa-heart text-red-500"></i>
         </div>
       </div>
       <div className="bg-white rounded-b-lg p-3 break-words">{content}</div>

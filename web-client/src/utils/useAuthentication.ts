@@ -6,6 +6,7 @@ type hookReturn = {
   isAuthenticated: boolean;
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
   loading: boolean;
+  data: any;
 };
 
 export default function useAuthentication(): hookReturn {
@@ -19,5 +20,5 @@ export default function useAuthentication(): hookReturn {
     }
   }, [data]);
 
-  return { isAuthenticated, setIsAuthenticated, loading };
+  return { isAuthenticated, setIsAuthenticated, loading, data };
 }
