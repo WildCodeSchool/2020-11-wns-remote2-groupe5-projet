@@ -29,7 +29,7 @@ export const getApolloServer = async (): Promise<{
     };
   };
   return {
-    apolloServer: new ApolloServer({ schema, context }),
+    apolloServer: new ApolloServer({ schema, context, uploads: false }),
     graphQLSchema: schema,
   };
 };

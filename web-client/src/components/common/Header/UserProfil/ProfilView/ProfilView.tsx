@@ -4,17 +4,17 @@ import InformationModification from '../ProfilModification/InformationModificati
 import ExperienceModification from '../ProfilModification/ExperienceModification';
 import DegreeModification from '../ProfilModification/DegreeModification';
 import PreviousNextButtons from './PreviousNextButtons';
-import { useMutation, useQuery } from '@apollo/client';
-import { UPLOAD_PICTURE } from '../../../../../queries/picture-queries';
+import { useMutation } from '@apollo/client';
+import { UPLOAD_AVATAR } from '../../../../../queries/picture-queries';
 
 export default function ProfilView(): JSX.Element {
-  const [mutate] = useMutation(UPLOAD_PICTURE);
+  const [mutate] = useMutation(UPLOAD_AVATAR);
 
   const [actualPage, setActualPage] = useState<string>(
     'Informations générales'
   );
 
-  const uploadPicture = async ({
+  const uploadAvatar = async ({
     target: {
       validity,
       files: [file],
@@ -56,7 +56,7 @@ export default function ProfilView(): JSX.Element {
             type="file"
             accept="image/*"
             className="hidden"
-            onChange={uploadPicture}
+            onChange={uploadAvatar}
           />
           <label
             htmlFor="file"

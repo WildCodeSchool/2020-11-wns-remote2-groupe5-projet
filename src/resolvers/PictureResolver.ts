@@ -1,45 +1,36 @@
-import { GraphQLUpload } from 'graphql-upload';
+import { GraphQLUpload, FileUpload } from 'graphql-upload';
 import path from 'path';
-import { Stream } from 'stream';
-import { Resolver, Query, Mutation, Arg, Ctx } from 'type-graphql';
-import { CreatePictureInput } from './../inputs/CreatePictureInput';
-import Avatar, { saveAndWritePictureToFile } from '../models/Avatar';
+import { Resolver, Mutation, Arg, Ctx } from 'type-graphql';
 import User from '../models/User';
-import { writeFileToPicturesDirectory } from '../utils';
 import { createWriteStream, mkdirSync } from 'fs';
+import Picture from '../models/Picture';
 
-const PICTURES_DIRECTORY = path.join(__dirname, '../public/media/pictures');
+const PICTURES_DIRECTORY = path.join(__dirname, '../../public/media/avatars');
 
 @Resolver()
 export default class PictureResolver {
-  @Mutation(() => Avatar)
-  async uploadPicture(
+  @Mutation(() => Picture)
+  async uploadAvatar(
     @Ctx() { user }: { user: User | null },
     @Arg('file', () => GraphQLUpload)
-    file: any
+    file: FileUpload
   ): Promise<string> {
     if (!user) {
       throw Error('You are not authenticated.');
     }
 
-    return file.then((file: any) => {
-      //Contents of Upload scalar: https://github.com/jaydenseric/graphql-upload#class-graphqlupload
-      file
-        .createReadStream()
-        .pipe(createWriteStream(path.join(PICTURES_DIRECTORY, file.filename)));
-      //node stream api: https://nodejs.org/api/stream.html
-      return file;
-    });
-    // const { filename, createReadStream } = file;
+    mkdirSync(PICTURES_DIRECTORY, { recursive: true });
 
-    // const stream = createReadStream();
+    const { filename, createReadStream } = file;
 
-    // const extension = path.extname(filename);
+    const extension = path.extname(filename);
 
-    // const newFilename = `155555${extension}`;
+    const newFileName = user.userID + extension;
 
-    // await writeFileToPicturesDirectory(stream, newFilename);
+    const stream = createReadStream();
 
-    // return newFilename;
+    stream.pipe(createWriteStream(path.join(PICTURES_DIRECTORY, newFileName)));
+
+    return filename;
   }
 }
