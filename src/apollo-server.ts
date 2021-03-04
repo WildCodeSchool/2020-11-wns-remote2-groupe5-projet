@@ -5,10 +5,15 @@ import UserSession from './models/UserSession';
 import UserResolver from './resolvers/UserResolver';
 import ArticleResolver from './resolvers/ArticleResolver';
 import ProfilResolver from './resolvers/ProfilResolver';
+import PictureResolver from './resolvers/PictureResolver';
+import { GraphQLSchema } from 'graphql';
 
-export const getApolloServer = async (): Promise<ApolloServer> => {
+export const getApolloServer = async (): Promise<{
+  apolloServer: ApolloServer;
+  graphQLSchema: GraphQLSchema;
+}> => {
   const schema = await buildSchema({
-    resolvers: [UserResolver, ArticleResolver, ProfilResolver],
+    resolvers: [UserResolver, ArticleResolver, ProfilResolver, PictureResolver],
   });
   const context = async ({ req, res }: { req: Request; res: Response }) => {
     const { sessionId } = req.cookies;
@@ -23,5 +28,8 @@ export const getApolloServer = async (): Promise<ApolloServer> => {
       user,
     };
   };
-  return new ApolloServer({ schema, context });
+  return {
+    apolloServer: new ApolloServer({ schema, context, uploads: false }),
+    graphQLSchema: schema,
+  };
 };

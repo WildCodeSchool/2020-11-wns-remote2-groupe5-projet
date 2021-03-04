@@ -9,7 +9,7 @@ export default function PreviousNextButtons({
   actualPage,
   setActualPage,
 }: ActualPageProps): JSX.Element {
-  console.log(actualPage);
+  //console.log(actualPage);
 
   const [backButton, setBackButton] = useState<string>('Diplômes');
   const [nextButton, setNextButton] = useState<string>('Expériences');
