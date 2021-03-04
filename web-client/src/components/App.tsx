@@ -12,12 +12,17 @@ import {
 } from 'react-router-dom';
 
 export default function App(): JSX.Element {
-  const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    loading,
+    data,
+  } = useAuthentication();
 
   return (
     <div className="h-screen flex flex-col overflow-y-hidden bg-gray-300">
       {!loading && (
-        <GlobalContext.Provider value={{}}>
+        <GlobalContext.Provider value={{ user: { pseudo: data.me.pseudo } }}>
           {isAuthenticated ? (
             <Routes setIsAuthenticated={setIsAuthenticated} />
           ) : (
