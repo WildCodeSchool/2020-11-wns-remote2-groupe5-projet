@@ -109,19 +109,51 @@ export interface OneArticleVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: UploadPicture
+// GraphQL mutation operation: createComment
 // ====================================================
 
-export interface UploadPicture_uploadPicture {
-  __typename: "Avatar";
-  extension: string;
+export interface createComment_createCommentaireArticle_article {
+  __typename: "Article";
+  articleID: string;
 }
 
-export interface UploadPicture {
-  uploadPicture: UploadPicture_uploadPicture;
+export interface createComment_createCommentaireArticle {
+  __typename: "CommentaireArticle";
+  article: createComment_createCommentaireArticle_article;
+  commentaire: string;
+  date: any;
 }
 
-export interface UploadPictureVariables {
+export interface createComment {
+  createCommentaireArticle: createComment_createCommentaireArticle;
+}
+
+export interface createCommentVariables {
+  articleID: string;
+  date: any;
+  commentaire: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UploadAvatar
+// ====================================================
+
+export interface UploadAvatar_uploadAvatar {
+  __typename: "Picture";
+  id: string | null;
+  extension: string | null;
+}
+
+export interface UploadAvatar {
+  uploadAvatar: UploadAvatar_uploadAvatar;
+}
+
+export interface UploadAvatarVariables {
   file: any;
 }
 

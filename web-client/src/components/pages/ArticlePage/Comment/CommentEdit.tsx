@@ -1,10 +1,36 @@
-import React, { useContext } from 'react';
-import { useQuery } from '@apollo/client';
-import { CHECK_AUTH } from '../../../../queries/user-queries';
+/* eslint-disable react/prop-types */
+import React, { useContext, useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
 import GlobalContext from '../../../../utils/GlobalContext';
+import InputCustom from '../../../common/helpers/InputCustom';
+import { CREATE_COMMENT } from '../../../../queries/article-queries';
 
-export default function CommentEdit(): JSX.Element {
-  const pseudo = useContext(GlobalContext).user?.pseudo;
+type CommentEditProps = {
+  articleID: string;
+};
+
+const CommentEdit: React.FC<CommentEditProps> = ({
+  articleID,
+}): JSX.Element => {
+  const user = useContext(GlobalContext).user;
+  const [comment, setComment] = useState('');
+  const [createComment] = useMutation(CREATE_COMMENT);
+  console.log('CommentEdit', articleID);
+
+  const submit = async () => {
+    try {
+      const res = await createComment({
+        variables: {
+          articleID: articleID,
+          date: new Date().toISOString(),
+          commentaire: comment,
+        },
+      });
+    } catch (error) {
+      console.log('an error occured', error);
+    }
+  };
+
   return (
     <section className=" mx-auto mb-5">
       <div className="flex bg-gray-800 text-white justify-between rounded-tr-lg px-4 py-1 items-center">
@@ -14,12 +40,22 @@ export default function CommentEdit(): JSX.Element {
             src=""
             alt="avatar"
           />
-          <span className="pl-4">{pseudo}</span>
+          <span className="pl-4">{user?.pseudo}</span>
         </div>
       </div>
       <div className="bg-white rounded-b-lg p-5 break-words">
-        Votre Commentaire ...
+        <InputCustom
+          placeholder="Votre commentaire"
+          type="text"
+          value={comment}
+          setValue={(c) => setComment(c)}
+        />
+        <button type="submit" onClick={submit}>
+          Commenter
+        </button>
       </div>
     </section>
   );
-}
+};
+
+export default CommentEdit;

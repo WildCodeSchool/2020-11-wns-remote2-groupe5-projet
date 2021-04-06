@@ -31,7 +31,7 @@ export default function Routes({
               path="/articles/article-creation"
               component={ArticleCreationPage}
             />
-            <Route path="/articles/:article" component={ArticlePage} />
+            <Route path="/articles/:articleID" component={ArticlePage} />
             <Route path="/profil" component={ProfilView} />
             <Route
               path="/profil/profil-modification/general-information"

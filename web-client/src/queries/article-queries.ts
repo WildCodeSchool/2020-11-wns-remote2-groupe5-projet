@@ -53,3 +53,22 @@ export const GET_ONE_BY_ID = gql`
     }
   }
 `;
+
+export const CREATE_COMMENT = gql`
+  mutation createComment(
+    $articleID: String!
+    $date: DateTime!
+    $commentaire: String!
+  ) {
+    createCommentaireArticle(
+      articleID: $articleID
+      data: { date: $date, commentaire: $commentaire }
+    ) {
+      article {
+        articleID
+      }
+      commentaire
+      date
+    }
+  }
+`;

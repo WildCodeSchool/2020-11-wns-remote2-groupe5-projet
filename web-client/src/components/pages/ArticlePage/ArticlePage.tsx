@@ -1,7 +1,7 @@
 import React from 'react';
 import './ArticlePage.css';
 // import ArticleTools from './ArticleTools';
-import CommentPage from './Comment/CommentContainer';
+import CommentContainer from './Comment/CommentContainer';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_ONE_BY_ID } from '../../../queries/article-queries';
@@ -9,13 +9,14 @@ import ContentFields from './ContentFields';
 import { parseDateArticle } from '../../../utils/Date';
 
 export default function ArticlePage(): JSX.Element {
-  const { article } = useParams<{ article: string }>();
+  const { articleID } = useParams<{ articleID: string }>();
   const { data } = useQuery(GET_ONE_BY_ID, {
     variables: {
-      articleID: article,
+      articleID: articleID,
     },
   });
 
+  console.log('articlePage', articleID);
   return (
     <div className="lg:p-10 space-y-5 flex justify-center">
       <section
@@ -77,7 +78,7 @@ export default function ArticlePage(): JSX.Element {
         </article>
       </section>
       {/* <ArticleTools /> */}
-      <CommentPage />
+      <CommentContainer articleID={articleID} />
     </div>
   );
 }

@@ -9,6 +9,7 @@ type ArticleCardProps = {
 export default function ArticleCard({
   article,
 }: ArticleCardProps): JSX.Element {
+  console.log('articleCard', article);
   return (
     <section className="p-1 w-4/5 max-w-screen-lg">
       <div className="flex bg-gray-800 text-white justify-between rounded-tl-md rounded-tr-md p-4">
