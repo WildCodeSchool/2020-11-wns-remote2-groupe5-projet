@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import InputCustom from '../../../helpers/InputCustom';
+import InputCustom from '../../../../helpers/InputCustom';
 
-export default function DegreeModification(): JSX.Element {
-  const [diplomaName, setDiplomaName] = useState('');
-  const [school, setSchool] = useState('');
+export default function ExperienceModification(): JSX.Element {
+  const [jobName, setJobName] = useState('');
+  const [company, setCompany] = useState('');
   const [dateStart, setDateStart] = useState('');
   const [dateEnd, setDateEnd] = useState('');
   const [description, setDescription] = useState('');
@@ -12,21 +12,21 @@ export default function DegreeModification(): JSX.Element {
     <div className=" py-10 md:px-16 sm:px-4">
       <InputCustom
         type="text"
-        placeholder="Intitulé du Diplôme"
+        placeholder="Intitulé du poste"
         textColor="text-white"
-        value={diplomaName}
-        setValue={setDiplomaName}
+        value={jobName}
+        setValue={setJobName}
       />
       <InputCustom
         type="text"
-        placeholder="Ecole"
+        placeholder="Entreprise"
         textColor="text-white"
-        value={school}
-        setValue={setSchool}
+        value={company}
+        setValue={setCompany}
       />
       {/* <InputCustom
-        type="text"
-        placeholder="Niveau d'étude"
+        type="email"
+        placeholder="Email pro"
         textColor="text-white"
       /> */}
       <span className="flex space-x-8">
@@ -45,8 +45,8 @@ export default function DegreeModification(): JSX.Element {
           setValue={setDateEnd}
         />
         <label className="text-white block uppercase text-xs font-bold">
-          Ecole actuelle
-          <input type="checkbox" name="Ecole actuel" />
+          Poste actuel
+          <input type="checkbox" name="Poste actuel" />
         </label>
       </span>
       <label className="text-white block uppercase text-xs font-bold">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import InputCustom from '../../../helpers/InputCustom';
+import InputCustom from '../../../../helpers/InputCustom';
 
 export default function ExperienceModification(): JSX.Element {
   const [pseudo, setPseudo] = useState('');

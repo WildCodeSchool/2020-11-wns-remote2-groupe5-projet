@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GlobalContext from '../utils/GlobalContext';
 import useAuthentication from '../utils/useAuthentication';
 import LogIn from './common/LogIn/LogIn';
@@ -14,10 +14,14 @@ import {
 export default function App(): JSX.Element {
   const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
 
+  const [actualPage, setActualPage] = useState<string>(
+    'Informations générales'
+  );
+
   return (
     <div className="h-screen flex flex-col overflow-y-hidden bg-gray-300">
       {!loading && (
-        <GlobalContext.Provider value={{}}>
+        <GlobalContext.Provider value={{ actualPage, setActualPage }}>
           {isAuthenticated ? (
             <Routes setIsAuthenticated={setIsAuthenticated} />
           ) : (
