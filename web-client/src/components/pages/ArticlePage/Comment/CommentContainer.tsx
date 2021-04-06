@@ -8,22 +8,28 @@ import './Comment.css';
 
 type CommentContainerProps = {
   articleID: string;
+  comments?: any;
 };
 
-const CommentContainer: React.FC<CommentContainerProps> = ({ articleID }) => {
+const CommentContainer: React.FC<CommentContainerProps> = ({
+  articleID,
+  comments,
+}) => {
+  console.log('comments', comments);
   return (
     <div className="w-1/4 mt-0 py-1 ml-3">
-      {data.map((comment) => {
-        return (
-          <CommentCard
-            key={comment.CommentaireArticleID}
-            pseudo={comment.User.Pseudo}
-            date={comment.Date as moment.unitOfTime.StartOf}
-            avatar={comment.User.Avatar}
-            content={comment.Content}
-          />
-        );
-      })}
+      {comments &&
+        comments.map((comment: any) => {
+          return (
+            <CommentCard
+              key={comment.CommentaireArticleID}
+              pseudo={comment.user.pseudo}
+              date={comment.date}
+              //avatar={comment.User.Avatar}
+              content={comment.commentaire}
+            />
+          );
+        })}
       <CommentEdit articleID={articleID} />
     </div>
   );

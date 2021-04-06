@@ -6,7 +6,5 @@ export const parseDateArticle = (date: string): string => {
 };
 
 export const parseDateComment = (period: moment.unitOfTime.StartOf): string => {
-  return moment()
-    .startOf(period as moment.unitOfTime.StartOf)
-    .fromNow();
+  return moment().fromNow();
 };

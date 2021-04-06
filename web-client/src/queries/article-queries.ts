@@ -38,6 +38,7 @@ export const GET_ALL_ARTICLES = gql`
 export const GET_ONE_BY_ID = gql`
   query OneArticle($articleID: String!) {
     oneArticle(articleID: $articleID) {
+      articleID
       title
       description
       date
@@ -49,6 +50,14 @@ export const GET_ONE_BY_ID = gql`
         contentType
         content
         placeNumber
+      }
+      commentairesArticle {
+        commentaire
+        date
+        user {
+          userID
+          pseudo
+        }
       }
     }
   }

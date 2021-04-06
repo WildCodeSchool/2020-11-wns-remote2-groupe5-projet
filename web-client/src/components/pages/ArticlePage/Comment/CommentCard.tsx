@@ -5,7 +5,7 @@ import { parseDateComment } from '../../../../utils/Date';
 type CommentCardProps = {
   pseudo: string;
   date: moment.unitOfTime.StartOf;
-  avatar: string;
+  avatar?: string;
   content: string;
 };
 export default function CommentCard({

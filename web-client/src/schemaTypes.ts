@@ -86,13 +86,28 @@ export interface OneArticle_oneArticle_contentFields {
   placeNumber: number;
 }
 
+export interface OneArticle_oneArticle_commentairesArticle_user {
+  __typename: "User";
+  userID: string;
+  pseudo: string;
+}
+
+export interface OneArticle_oneArticle_commentairesArticle {
+  __typename: "CommentaireArticle";
+  commentaire: string;
+  date: any;
+  user: OneArticle_oneArticle_commentairesArticle_user;
+}
+
 export interface OneArticle_oneArticle {
   __typename: "Article";
+  articleID: string;
   title: string;
   description: string;
   date: any;
   user: OneArticle_oneArticle_user;
   contentFields: OneArticle_oneArticle_contentFields[];
+  commentairesArticle: OneArticle_oneArticle_commentairesArticle[];
 }
 
 export interface OneArticle {

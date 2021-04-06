@@ -7,16 +7,18 @@ import { useQuery } from '@apollo/client';
 import { GET_ONE_BY_ID } from '../../../queries/article-queries';
 import ContentFields from './ContentFields';
 import { parseDateArticle } from '../../../utils/Date';
+import { OneArticle_oneArticle } from '../../../schemaTypes';
 
 export default function ArticlePage(): JSX.Element {
   const { articleID } = useParams<{ articleID: string }>();
+
   const { data } = useQuery(GET_ONE_BY_ID, {
     variables: {
       articleID: articleID,
     },
   });
 
-  console.log('articlePage', articleID);
+  console.log('articlePage', data);
   return (
     <div className="lg:p-10 space-y-5 flex justify-center">
       <section
@@ -78,7 +80,10 @@ export default function ArticlePage(): JSX.Element {
         </article>
       </section>
       {/* <ArticleTools /> */}
-      <CommentContainer articleID={articleID} />
+      <CommentContainer
+        articleID={articleID}
+        comments={data?.oneArticle?.commentairesArticle}
+      />
     </div>
   );
 }
