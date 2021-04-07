@@ -36,12 +36,12 @@ export default function ArticleCard({
         </div>
         <div className="">
           <span>
-            12&nbsp;
+            {article?.likesArticle?.length}&nbsp;
             <i className="fas fa-heart text-red-500"></i>
             &nbsp;
           </span>
           <span>
-            {article.commentairesArticle.length}&nbsp;
+            {article?.commentairesArticle?.length}&nbsp;
             <i className="far fa-comment-dots"></i>
             &nbsp;
           </span>

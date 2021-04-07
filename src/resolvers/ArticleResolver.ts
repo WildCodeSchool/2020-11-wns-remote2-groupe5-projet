@@ -5,6 +5,7 @@ import CreateContentFieldInput from '../inputs/CreateContentFieldInput';
 import Article from '../models/Article';
 import CommentaireArticle from '../models/Commentaire_Article';
 import ContentField from '../models/ContentField';
+import Like_Article from '../models/Like_Article';
 import User from '../models/User';
 
 @Resolver()
@@ -20,6 +21,8 @@ export default class ArticleResolver {
         'contentFields',
         'commentairesArticle',
         'commentairesArticle.user',
+        'likesArticle',
+        'likesArticle.user',
       ],
     });
   }
@@ -35,6 +38,8 @@ export default class ArticleResolver {
     return Article.findOne(articleID, {
       relations: [
         'user',
+        'likesArticle',
+        'likesArticle.user',
         'contentFields',
         'commentairesArticle',
         'commentairesArticle.user',
@@ -93,5 +98,36 @@ export default class ArticleResolver {
     await commentaire.save();
 
     return commentaire;
+  }
+
+  @Mutation(() => User)
+  async likeArticle(
+    @Ctx() { user }: { user: User | null },
+    @Arg('articleID') articleID: string
+  ): Promise<User> {
+    if (!user) {
+      throw Error('You are not authenticated.');
+    }
+
+    const article = await Article.findOne(articleID);
+
+    const like = await Like_Article.findOne({ user, article });
+
+    if (like) {
+      like.remove();
+      return user;
+    }
+
+    const newLike = Like_Article.create();
+
+    newLike.user = user;
+
+    if (article) {
+      newLike.article = article;
+    }
+
+    await newLike.save();
+
+    return user;
   }
 }

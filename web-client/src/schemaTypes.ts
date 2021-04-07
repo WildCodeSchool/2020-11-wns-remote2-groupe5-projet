@@ -38,6 +38,17 @@ export interface CreateArticleVariables {
 // GraphQL query operation: Articles
 // ====================================================
 
+export interface Articles_articles_likesArticle_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface Articles_articles_likesArticle {
+  __typename: "Like_Article";
+  likeID: string;
+  user: Articles_articles_likesArticle_user;
+}
+
 export interface Articles_articles_user {
   __typename: "User";
   pseudo: string;
@@ -63,12 +74,13 @@ export interface Articles_articles_commentairesArticle {
 export interface Articles_articles {
   __typename: "Article";
   articleID: string;
+  likesArticle: Articles_articles_likesArticle[];
   date: any;
   title: string;
   description: string;
   user: Articles_articles_user;
   contentFields: Articles_articles_contentFields[];
-  commentairesArticle: Articles_articles_commentairesArticle[];
+  commentairesArticle: Articles_articles_commentairesArticle[] | null;
 }
 
 export interface Articles {
@@ -83,6 +95,17 @@ export interface Articles {
 // ====================================================
 // GraphQL query operation: OneArticle
 // ====================================================
+
+export interface OneArticle_oneArticle_likesArticle_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface OneArticle_oneArticle_likesArticle {
+  __typename: "Like_Article";
+  likeID: string;
+  user: OneArticle_oneArticle_likesArticle_user;
+}
 
 export interface OneArticle_oneArticle_user {
   __typename: "User";
@@ -113,13 +136,14 @@ export interface OneArticle_oneArticle_commentairesArticle {
 
 export interface OneArticle_oneArticle {
   __typename: "Article";
+  likesArticle: OneArticle_oneArticle_likesArticle[];
   articleID: string;
   title: string;
   description: string;
   date: any;
   user: OneArticle_oneArticle_user;
   contentFields: OneArticle_oneArticle_contentFields[];
-  commentairesArticle: OneArticle_oneArticle_commentairesArticle[];
+  commentairesArticle: OneArticle_oneArticle_commentairesArticle[] | null;
 }
 
 export interface OneArticle {
@@ -159,6 +183,50 @@ export interface createCommentVariables {
   articleID: string;
   date: any;
   commentaire: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: LikeArticle
+// ====================================================
+
+export interface LikeArticle_likeArticle {
+  __typename: "User";
+  userID: string;
+}
+
+export interface LikeArticle {
+  likeArticle: LikeArticle_likeArticle;
+}
+
+export interface LikeArticleVariables {
+  articleID: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: CreateExperiences
+// ====================================================
+
+export interface CreateExperiences_createExperiences {
+  __typename: "Experience";
+  jobName: string | null;
+}
+
+export interface CreateExperiences {
+  createExperiences: CreateExperiences_createExperiences[];
+}
+
+export interface CreateExperiencesVariables {
+  experiences: CreateExperienceInput[];
 }
 
 /* tslint:disable */
@@ -219,6 +287,7 @@ export interface CreateSessionVariables {
 export interface Me_me {
   __typename: "User";
   pseudo: string;
+  userID: string;
 }
 
 export interface Me {
@@ -308,6 +377,15 @@ export interface CreateContentFieldInput {
   contentType: string;
   content: string;
   placeNumber: number;
+}
+
+export interface CreateExperienceInput {
+  jobName?: string | null;
+  company?: string | null;
+  dateStart?: any | null;
+  dateEnd?: any | null;
+  isActualJob?: boolean | null;
+  description?: string | null;
 }
 
 export interface CreateSessionInput {

@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './ArticlePage.css';
-import CommentContainer from './Comment/CommentContainer';
+import CommentPage from './Comment/CommentContainer';
 import { useParams } from 'react-router-dom';
-import { useLazyQuery, useQuery } from '@apollo/client';
-import { GET_ONE_BY_ID } from '../../../queries/article-queries';
+import { useMutation, useLazyQuery } from '@apollo/client';
+import { GET_ONE_BY_ID, LIKE_ARTICLE } from '../../../queries/article-queries';
 import ContentFields from './ContentFields';
 import { parseDateArticle } from '../../../utils/Date';
-import { OneArticle_oneArticle } from '../../../schemaTypes';
+import GlobalContext from '../../../utils/GlobalContext';
+import { Articles_articles_likesArticle } from '../../../schemaTypes';
+import CommentContainer from './Comment/CommentContainer';
 
 export default function ArticlePage(): JSX.Element {
   const { articleID } = useParams<{ articleID: string }>();
   const [needToRefetch, setNeedToRefetch] = useState(false);
+  const contextUserID = useContext(GlobalContext).user?.id;
+  const [isLiked, setIsLiked] = useState<boolean>();
+  const [likeArticle] = useMutation(LIKE_ARTICLE);
   const [getArticleDetails, { data, refetch, called }] = useLazyQuery(
     GET_ONE_BY_ID,
     {
@@ -29,12 +34,32 @@ export default function ArticlePage(): JSX.Element {
     });
   }, [needToRefetch]);
 
+  useEffect(() => {
+    data &&
+      setIsLiked(
+        data.oneArticle.likesArticle.some(
+          (like: Articles_articles_likesArticle) =>
+            like.user.userID === contextUserID
+        )
+      );
+  }, [data]);
+
+  const switchLike = async () => {
+    try {
+      setIsLiked(!isLiked);
+      await likeArticle({
+        variables: {
+          articleID: articleID,
+        },
+      });
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+
   return (
     <div className="lg:p-10 space-y-5 flex justify-center">
-      <section
-        key={data && data.articleID}
-        className="p-1 w-3/4 max-w-screen-lg"
-      >
+      <section className="p-1 w-3/4 max-w-screen-lg">
         <div className="flex bg-gray-800 text-white justify-between rounded-tl-md rounded-tr-md p-4">
           <div className="flex flex-col md:flex-row items-center text-center md:text-left md:self-start">
             <div className="px-4">
@@ -58,9 +83,9 @@ export default function ArticlePage(): JSX.Element {
             </div>
           </div>
           <div className="leading-3 flex flex-col md:flex-row items-center text-xl">
-            <span>
-              16&nbsp;
-              <i className="fas fa-heart text-red-500"></i>
+            <span onClick={() => switchLike()} className="cursor-pointer">
+              {data && data.oneArticle.likesArticle.length}&nbsp;
+              <i className={`fas fa-heart ${isLiked && 'text-red-500'}`}></i>
               &nbsp;
             </span>
             <span>

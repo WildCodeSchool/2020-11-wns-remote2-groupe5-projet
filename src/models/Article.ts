@@ -11,6 +11,7 @@ import { ObjectType, Field, ID } from 'type-graphql';
 import User from './User';
 import ContentField from './ContentField';
 import CommentaireArticle from './Commentaire_Article';
+import Like_Article from './Like_Article';
 
 @Entity()
 @ObjectType()
@@ -24,6 +25,10 @@ export default class Article extends BaseEntity {
   @Field(() => User)
   user: User;
 
+  @Column()
+  @Field(() => ID)
+  userID: string;
+
   @OneToMany(
     () => CommentaireArticle,
     (commentaireArticle) => commentaireArticle.article
@@ -31,9 +36,9 @@ export default class Article extends BaseEntity {
   @Field(() => [CommentaireArticle], { nullable: true })
   commentairesArticle: CommentaireArticle[];
 
-  @Column()
-  @Field(() => ID)
-  userID: string;
+  @OneToMany(() => Like_Article, (likesArticle) => likesArticle.article)
+  @Field(() => [Like_Article])
+  likesArticle: Like_Article[];
 
   @OneToMany(() => ContentField, (contentField) => contentField.article)
   @Field(() => [ContentField])
