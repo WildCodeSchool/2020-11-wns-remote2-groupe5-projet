@@ -17,6 +17,34 @@ export const CHECK_AUTH = gql`
   }
 `;
 
+export const USER_INFO = gql`
+  query Me {
+    me {
+      pseudo
+      age
+      email
+      phoneNumber
+      bio
+      experiences {
+        jobName
+        company
+        dateStart
+        dateEnd
+        isActualJob
+        description
+      }
+      diplomas {
+        diplomaName
+        school
+        dateStart
+        dateEnd
+        isActualSchool
+        description
+      }
+    }
+  }
+`;
+
 export const SIGN_IN = gql`
   mutation SignIn($data: CreateUserInput!) {
     signIn(data: $data) {

@@ -12,7 +12,12 @@ import {
 } from 'react-router-dom';
 
 export default function App(): JSX.Element {
-  const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    loading,
+    data,
+  } = useAuthentication();
 
   const [actualPage, setActualPage] = useState<string>(
     'Informations générales'
@@ -21,7 +26,13 @@ export default function App(): JSX.Element {
   return (
     <div className="h-screen flex flex-col overflow-y-hidden bg-gray-300">
       {!loading && (
-        <GlobalContext.Provider value={{ actualPage, setActualPage }}>
+        <GlobalContext.Provider
+          value={{
+            user: { pseudo: data?.me?.pseudo },
+            actualPage,
+            setActualPage,
+          }}
+        >
           {isAuthenticated ? (
             <Routes setIsAuthenticated={setIsAuthenticated} />
           ) : (

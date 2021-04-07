@@ -1,4 +1,4 @@
-import { User } from '../components/common/SignIn/SignInForm01';
+import { User } from '../components/common/SignIn/SignInCard';
 
 const conditionsSignIn01 = (
   users: User[],

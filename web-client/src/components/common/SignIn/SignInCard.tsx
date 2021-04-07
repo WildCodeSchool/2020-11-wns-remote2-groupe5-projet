@@ -8,7 +8,7 @@ import SignInForm02 from './SignInForm02';
 import SignInForm03 from './SignInForm03';
 import renderProgressBar from '../../../utils/ProgressBar';
 
-type User = {
+export type User = {
   pseudo: string;
   email: string;
   phoneNumber: string;
@@ -60,6 +60,7 @@ export default function SignInCard(): JSX.Element {
           },
         },
       });
+
       alert('vous etes inscrit');
       setRedirect(true);
     } catch (error) {

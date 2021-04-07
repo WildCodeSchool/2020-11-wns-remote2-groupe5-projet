@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import InputCustom from '../../../../helpers/InputCustom';
+import { useMutation } from '@apollo/client';
+import { CREATE_EXPERIENCES } from '../../../../../../queries/editProfil-queries';
 
 export default function ExperienceModification(): JSX.Element {
   const [jobName, setJobName] = useState('');
@@ -7,6 +9,28 @@ export default function ExperienceModification(): JSX.Element {
   const [dateStart, setDateStart] = useState('');
   const [dateEnd, setDateEnd] = useState('');
   const [description, setDescription] = useState('');
+
+  const [createExperiences] = useMutation(CREATE_EXPERIENCES);
+
+  const postExperiences = async () => {
+    try {
+      await createExperiences({
+        variables: {
+          experiences: [
+            {
+              jobName,
+              company,
+              dateStart,
+              dateEnd,
+              description,
+            },
+          ],
+        },
+      });
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
 
   return (
     <div className=" py-10 md:px-16 sm:px-4">
@@ -24,11 +48,6 @@ export default function ExperienceModification(): JSX.Element {
         value={company}
         setValue={setCompany}
       />
-      {/* <InputCustom
-        type="email"
-        placeholder="Email pro"
-        textColor="text-white"
-      /> */}
       <span className="flex space-x-8">
         <InputCustom
           type="date"
@@ -58,6 +77,7 @@ export default function ExperienceModification(): JSX.Element {
           onChange={(e) => setDescription(e.target.value)}
         />
       </label>
+      <button onClick={() => postExperiences()}>Enregistrer</button>
     </div>
   );
 }

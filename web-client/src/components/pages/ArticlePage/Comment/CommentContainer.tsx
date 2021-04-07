@@ -2,6 +2,7 @@ import React from 'react';
 
 import data from '../../../../data-samples/comment.json';
 import CommentCard from './CommentCard';
+import CommentEdit from './CommentEdit';
 import './Comment.css';
 
 export default function CommentContainer(): JSX.Element {
@@ -18,6 +19,7 @@ export default function CommentContainer(): JSX.Element {
           />
         );
       })}
+      <CommentEdit />
     </div>
   );
 }

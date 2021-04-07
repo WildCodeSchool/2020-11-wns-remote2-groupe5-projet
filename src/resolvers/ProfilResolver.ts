@@ -17,15 +17,14 @@ export default class ProfilResolver {
       throw Error('You are not authenticated.');
     }
 
-    user.experiences = await Promise.all(
+    await Promise.all(
       experiences.map(async (experience) => {
         const result = Experience.create(experience);
+        result.user = user;
         await result.save();
         return result;
       })
     );
-
-    await user.save();
 
     return user.experiences;
   }
@@ -40,15 +39,14 @@ export default class ProfilResolver {
       throw Error('You are not authenticated.');
     }
 
-    user.diplomas = await Promise.all(
+    await Promise.all(
       diplomas.map(async (diploma) => {
         const result = Diploma.create(diploma);
+        result.user = user;
         await result.save();
         return result;
       })
     );
-
-    await user.save();
 
     return user.diplomas;
   }

@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import Degrees from './ProfilViewPages/Degrees';
 import Experiences from './ProfilViewPages/Experiences';
-import GlobalContext from '../../../../../utils/GlobalContext';
 import Informations from './ProfilViewPages/Informations';
+import GlobalContext from '../../../../../utils/GlobalContext';
+import './ProfilView.css';
 
 export default function ProfilView(): JSX.Element {
   const context = useContext(GlobalContext);
