@@ -37,6 +37,11 @@ export const GET_ALL_ARTICLES = gql`
         contentType
         placeNumber
       }
+      commentairesArticle {
+        user {
+          userID
+        }
+      }
     }
   }
 `;
@@ -63,6 +68,34 @@ export const GET_ONE_BY_ID = gql`
         content
         placeNumber
       }
+      commentairesArticle {
+        contentFieldID
+        commentaire
+        date
+        user {
+          userID
+          pseudo
+        }
+      }
+    }
+  }
+`;
+
+export const CREATE_COMMENT = gql`
+  mutation createComment(
+    $articleID: String!
+    $date: DateTime!
+    $commentaire: String!
+  ) {
+    createCommentaireArticle(
+      articleID: $articleID
+      data: { date: $date, commentaire: $commentaire }
+    ) {
+      article {
+        articleID
+      }
+      commentaire
+      date
     }
   }
 `;

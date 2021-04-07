@@ -8,22 +8,31 @@ import ContentFields from './ContentFields';
 import { parseDateArticle } from '../../../utils/Date';
 import GlobalContext from '../../../utils/GlobalContext';
 import { Articles_articles_likesArticle } from '../../../schemaTypes';
+import CommentContainer from './Comment/CommentContainer';
 
 export default function ArticlePage(): JSX.Element {
+  const { articleID } = useParams<{ articleID: string }>();
+  const [needToRefetch, setNeedToRefetch] = useState(false);
   const contextUserID = useContext(GlobalContext).user?.id;
-
-  const { article } = useParams<{ article: string }>();
-
-  const [getArticleDetails, { data }] = useLazyQuery(GET_ONE_BY_ID, {
-    variables: { articleID: article },
-    pollInterval: 250,
-  });
-
   const [isLiked, setIsLiked] = useState<boolean>();
+  const [likeArticle] = useMutation(LIKE_ARTICLE);
+  const [getArticleDetails, { data, refetch, called }] = useLazyQuery(
+    GET_ONE_BY_ID,
+    {
+      variables: {
+        articleID: articleID,
+      },
+      pollInterval: 250,
+    }
+  );
 
   useEffect(() => {
-    getArticleDetails({ variables: { articleID: article } });
-  }, [isLiked]);
+    getArticleDetails({
+      variables: {
+        articleID: articleID,
+      },
+    });
+  }, [needToRefetch]);
 
   useEffect(() => {
     data &&
@@ -35,14 +44,12 @@ export default function ArticlePage(): JSX.Element {
       );
   }, [data]);
 
-  const [likeArticle] = useMutation(LIKE_ARTICLE);
-
   const switchLike = async () => {
     try {
       setIsLiked(!isLiked);
       await likeArticle({
         variables: {
-          articleID: article,
+          articleID: articleID,
         },
       });
     } catch (error) {
@@ -82,7 +89,7 @@ export default function ArticlePage(): JSX.Element {
               &nbsp;
             </span>
             <span>
-              12&nbsp;
+              {data?.oneArticle?.commentairesArticle.length}&nbsp;
               <i className="far fa-comment-dots"></i>
               &nbsp;
             </span>
@@ -107,8 +114,12 @@ export default function ArticlePage(): JSX.Element {
           </div>
         </article>
       </section>
-      {/* <ArticleTools /> */}
-      <CommentPage />
+      <CommentContainer
+        articleID={articleID}
+        comments={data?.oneArticle?.commentairesArticle}
+        needToRefetch={needToRefetch}
+        setNeedToRefetch={setNeedToRefetch}
+      />
     </div>
   );
 }

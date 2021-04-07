@@ -61,6 +61,16 @@ export interface Articles_articles_contentFields {
   placeNumber: number;
 }
 
+export interface Articles_articles_commentairesArticle_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface Articles_articles_commentairesArticle {
+  __typename: "CommentaireArticle";
+  user: Articles_articles_commentairesArticle_user;
+}
+
 export interface Articles_articles {
   __typename: "Article";
   articleID: string;
@@ -70,6 +80,7 @@ export interface Articles_articles {
   description: string;
   user: Articles_articles_user;
   contentFields: Articles_articles_contentFields[];
+  commentairesArticle: Articles_articles_commentairesArticle[] | null;
 }
 
 export interface Articles {
@@ -109,6 +120,20 @@ export interface OneArticle_oneArticle_contentFields {
   placeNumber: number;
 }
 
+export interface OneArticle_oneArticle_commentairesArticle_user {
+  __typename: "User";
+  userID: string;
+  pseudo: string;
+}
+
+export interface OneArticle_oneArticle_commentairesArticle {
+  __typename: "CommentaireArticle";
+  contentFieldID: string;
+  commentaire: string;
+  date: any;
+  user: OneArticle_oneArticle_commentairesArticle_user;
+}
+
 export interface OneArticle_oneArticle {
   __typename: "Article";
   likesArticle: OneArticle_oneArticle_likesArticle[];
@@ -118,6 +143,7 @@ export interface OneArticle_oneArticle {
   date: any;
   user: OneArticle_oneArticle_user;
   contentFields: OneArticle_oneArticle_contentFields[];
+  commentairesArticle: OneArticle_oneArticle_commentairesArticle[] | null;
 }
 
 export interface OneArticle {
@@ -126,6 +152,37 @@ export interface OneArticle {
 
 export interface OneArticleVariables {
   articleID: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: createComment
+// ====================================================
+
+export interface createComment_createCommentaireArticle_article {
+  __typename: "Article";
+  articleID: string;
+}
+
+export interface createComment_createCommentaireArticle {
+  __typename: "CommentaireArticle";
+  article: createComment_createCommentaireArticle_article;
+  commentaire: string;
+  date: any;
+}
+
+export interface createComment {
+  createCommentaireArticle: createComment_createCommentaireArticle;
+}
+
+export interface createCommentVariables {
+  articleID: string;
+  date: any;
+  commentaire: string;
 }
 
 /* tslint:disable */

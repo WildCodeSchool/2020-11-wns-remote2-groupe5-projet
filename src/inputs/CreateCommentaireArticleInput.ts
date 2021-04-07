@@ -6,5 +6,5 @@ export default class CreateCommentaireArticleInput {
   commentaire: string;
 
   @Field()
-  date: string;
+  date: Date;
 }
