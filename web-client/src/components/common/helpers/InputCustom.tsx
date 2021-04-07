@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 type InputProps = {
   placeholder?: string;
+  noPlaceholder?: boolean;
+  noPadding?: boolean;
   type: string;
   textColor?: string;
   value: string;
@@ -13,6 +15,8 @@ type InputProps = {
 export default function InputCustom(props: InputProps): JSX.Element {
   const {
     placeholder,
+    noPlaceholder,
+    noPadding,
     type,
     textColor,
     value,
@@ -29,16 +33,18 @@ export default function InputCustom(props: InputProps): JSX.Element {
 
   return (
     <div className="flex justify-around items-center py-2 pb-3 w-full">
-      <div className="w-1 pt-6 pr-9">
+      <div className={`w-1 pt-6 pr-${noPadding ? 0 : 9}`}>
         <i className={`fas fa-${icon}`}></i>
       </div>
       <div>
-        <label
-          className={`block uppercase ${coloringText} text-xs font-bold mb-2 `}
-          htmlFor="grid-password"
-        >
-          {placeholder}
-        </label>
+        {noPlaceholder ? null : (
+          <label
+            className={`block uppercase ${coloringText} text-xs font-bold mb-2 `}
+            htmlFor="grid-password"
+          >
+            {placeholder}
+          </label>
+        )}
         <input
           type={type}
           required={required}

@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ArticlePage.css';
-// import ArticleTools from './ArticleTools';
 import CommentContainer from './Comment/CommentContainer';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import { GET_ONE_BY_ID } from '../../../queries/article-queries';
 import ContentFields from './ContentFields';
 import { parseDateArticle } from '../../../utils/Date';
@@ -11,14 +10,25 @@ import { OneArticle_oneArticle } from '../../../schemaTypes';
 
 export default function ArticlePage(): JSX.Element {
   const { articleID } = useParams<{ articleID: string }>();
+  const [needToRefetch, setNeedToRefetch] = useState(false);
+  const [getArticleDetails, { data, refetch, called }] = useLazyQuery(
+    GET_ONE_BY_ID,
+    {
+      variables: {
+        articleID: articleID,
+      },
+      pollInterval: 250,
+    }
+  );
 
-  const { data } = useQuery(GET_ONE_BY_ID, {
-    variables: {
-      articleID: articleID,
-    },
-  });
+  useEffect(() => {
+    getArticleDetails({
+      variables: {
+        articleID: articleID,
+      },
+    });
+  }, [needToRefetch]);
 
-  console.log('articlePage', data);
   return (
     <div className="lg:p-10 space-y-5 flex justify-center">
       <section
@@ -54,7 +64,7 @@ export default function ArticlePage(): JSX.Element {
               &nbsp;
             </span>
             <span>
-              12&nbsp;
+              {data?.oneArticle?.commentairesArticle.length}&nbsp;
               <i className="far fa-comment-dots"></i>
               &nbsp;
             </span>
@@ -79,10 +89,11 @@ export default function ArticlePage(): JSX.Element {
           </div>
         </article>
       </section>
-      {/* <ArticleTools /> */}
       <CommentContainer
         articleID={articleID}
         comments={data?.oneArticle?.commentairesArticle}
+        needToRefetch={needToRefetch}
+        setNeedToRefetch={setNeedToRefetch}
       />
     </div>
   );

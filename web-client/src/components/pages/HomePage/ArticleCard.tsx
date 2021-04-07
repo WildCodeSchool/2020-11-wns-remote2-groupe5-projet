@@ -34,10 +34,20 @@ export default function ArticleCard({
             </div>
           </div>
         </div>
-        <div className="font-bold text-5xl mx-2 leading-3 flex flex-col md:flex-row items-center">
-          <span>.</span>
-          <span>.</span>
-          <span>.</span>
+        <div className="">
+          <span>
+            12&nbsp;
+            <i className="fas fa-heart text-red-500"></i>
+            &nbsp;
+          </span>
+          <span>
+            {article.commentairesArticle.length}&nbsp;
+            <i className="far fa-comment-dots"></i>
+            &nbsp;
+          </span>
+          <span>
+            7&nbsp;<i className="far fa-bookmark"></i>
+          </span>
         </div>
       </div>
       <article className="bg-white rounded-br-md rounded-bl-md md:flex">

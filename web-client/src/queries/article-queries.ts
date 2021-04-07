@@ -31,6 +31,11 @@ export const GET_ALL_ARTICLES = gql`
         contentType
         placeNumber
       }
+      commentairesArticle {
+        user {
+          userID
+        }
+      }
     }
   }
 `;
@@ -52,6 +57,7 @@ export const GET_ONE_BY_ID = gql`
         placeNumber
       }
       commentairesArticle {
+        contentFieldID
         commentaire
         date
         user {

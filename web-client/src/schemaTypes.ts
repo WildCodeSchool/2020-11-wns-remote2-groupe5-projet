@@ -50,6 +50,16 @@ export interface Articles_articles_contentFields {
   placeNumber: number;
 }
 
+export interface Articles_articles_commentairesArticle_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface Articles_articles_commentairesArticle {
+  __typename: "CommentaireArticle";
+  user: Articles_articles_commentairesArticle_user;
+}
+
 export interface Articles_articles {
   __typename: "Article";
   articleID: string;
@@ -58,6 +68,7 @@ export interface Articles_articles {
   description: string;
   user: Articles_articles_user;
   contentFields: Articles_articles_contentFields[];
+  commentairesArticle: Articles_articles_commentairesArticle[];
 }
 
 export interface Articles {
@@ -94,6 +105,7 @@ export interface OneArticle_oneArticle_commentairesArticle_user {
 
 export interface OneArticle_oneArticle_commentairesArticle {
   __typename: "CommentaireArticle";
+  contentFieldID: string;
   commentaire: string;
   date: any;
   user: OneArticle_oneArticle_commentairesArticle_user;
