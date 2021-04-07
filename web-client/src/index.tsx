@@ -11,6 +11,7 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import './tailwind.output.css';
+import { ChakraProvider } from '@chakra-ui/react';
 
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { createUploadLink } from 'apollo-upload-client';
@@ -58,7 +59,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
