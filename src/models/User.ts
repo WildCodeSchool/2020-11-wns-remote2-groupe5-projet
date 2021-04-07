@@ -13,6 +13,7 @@ import { hash } from 'bcrypt';
 import Experience from './Experience';
 import Diploma from './Diploma';
 import CommentaireArticle from './Commentaire_Article';
+import Like_Article from './Like_Article';
 
 @Entity()
 @ObjectType()
@@ -32,6 +33,10 @@ export default class User extends BaseEntity {
   @OneToMany(() => Diploma, (diplomas) => diplomas.user)
   @Field(() => [Diploma])
   diplomas: Diploma[];
+
+  @OneToMany(() => Like_Article, (likesArticle) => likesArticle.article)
+  @Field(() => [Like_Article])
+  likesArticle: Like_Article[];
 
   @OneToMany(
     () => CommentaireArticle,

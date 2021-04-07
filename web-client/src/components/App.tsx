@@ -22,7 +22,9 @@ export default function App(): JSX.Element {
   return (
     <div className="h-screen flex flex-col overflow-y-hidden bg-gray-300">
       {!loading && (
-        <GlobalContext.Provider value={{ user: { pseudo: data.me.pseudo } }}>
+        <GlobalContext.Provider
+          value={{ user: { pseudo: data?.me?.pseudo, id: data?.me?.userID } }}
+        >
           {isAuthenticated ? (
             <Routes setIsAuthenticated={setIsAuthenticated} />
           ) : (

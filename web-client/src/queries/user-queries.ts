@@ -13,6 +13,7 @@ export const CHECK_AUTH = gql`
   query Me {
     me {
       pseudo
+      userID
     }
   }
 `;

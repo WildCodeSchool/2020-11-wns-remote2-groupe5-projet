@@ -38,6 +38,17 @@ export interface CreateArticleVariables {
 // GraphQL query operation: Articles
 // ====================================================
 
+export interface Articles_articles_likesArticle_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface Articles_articles_likesArticle {
+  __typename: "Like_Article";
+  likeID: string;
+  user: Articles_articles_likesArticle_user;
+}
+
 export interface Articles_articles_user {
   __typename: "User";
   pseudo: string;
@@ -53,6 +64,7 @@ export interface Articles_articles_contentFields {
 export interface Articles_articles {
   __typename: "Article";
   articleID: string;
+  likesArticle: Articles_articles_likesArticle[];
   date: any;
   title: string;
   description: string;
@@ -73,6 +85,17 @@ export interface Articles {
 // GraphQL query operation: OneArticle
 // ====================================================
 
+export interface OneArticle_oneArticle_likesArticle_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface OneArticle_oneArticle_likesArticle {
+  __typename: "Like_Article";
+  likeID: string;
+  user: OneArticle_oneArticle_likesArticle_user;
+}
+
 export interface OneArticle_oneArticle_user {
   __typename: "User";
   pseudo: string;
@@ -88,6 +111,8 @@ export interface OneArticle_oneArticle_contentFields {
 
 export interface OneArticle_oneArticle {
   __typename: "Article";
+  likesArticle: OneArticle_oneArticle_likesArticle[];
+  articleID: string;
   title: string;
   description: string;
   date: any;
@@ -109,19 +134,64 @@ export interface OneArticleVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: UploadPicture
+// GraphQL mutation operation: LikeArticle
 // ====================================================
 
-export interface UploadPicture_uploadPicture {
-  __typename: "Avatar";
-  extension: string;
+export interface LikeArticle_likeArticle {
+  __typename: "User";
+  userID: string;
 }
 
-export interface UploadPicture {
-  uploadPicture: UploadPicture_uploadPicture;
+export interface LikeArticle {
+  likeArticle: LikeArticle_likeArticle;
 }
 
-export interface UploadPictureVariables {
+export interface LikeArticleVariables {
+  articleID: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: CreateExperiences
+// ====================================================
+
+export interface CreateExperiences_createExperiences {
+  __typename: "Experience";
+  jobName: string | null;
+}
+
+export interface CreateExperiences {
+  createExperiences: CreateExperiences_createExperiences[];
+}
+
+export interface CreateExperiencesVariables {
+  experiences: CreateExperienceInput[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UploadAvatar
+// ====================================================
+
+export interface UploadAvatar_uploadAvatar {
+  __typename: "Picture";
+  id: string | null;
+  extension: string | null;
+}
+
+export interface UploadAvatar {
+  uploadAvatar: UploadAvatar_uploadAvatar;
+}
+
+export interface UploadAvatarVariables {
   file: any;
 }
 
@@ -160,6 +230,7 @@ export interface CreateSessionVariables {
 export interface Me_me {
   __typename: "User";
   pseudo: string;
+  userID: string;
 }
 
 export interface Me {
@@ -249,6 +320,15 @@ export interface CreateContentFieldInput {
   contentType: string;
   content: string;
   placeNumber: number;
+}
+
+export interface CreateExperienceInput {
+  jobName?: string | null;
+  company?: string | null;
+  dateStart?: any | null;
+  dateEnd?: any | null;
+  isActualJob?: boolean | null;
+  description?: string | null;
 }
 
 export interface CreateSessionInput {
