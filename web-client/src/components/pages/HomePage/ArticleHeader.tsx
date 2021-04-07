@@ -9,7 +9,7 @@ type ArticleHeaderProps = { article: Articles_articles };
 
 const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
   return (
-    <Flex justify="space-between" bgColor="gray.800" borderTopRadius={'xl'}>
+    <Flex justify="space-between" borderTopRadius={'2xl'} bgColor="gray.800">
       <ArticleUserInfo
         pseudo={article.user?.pseudo}
         avatar={''}
