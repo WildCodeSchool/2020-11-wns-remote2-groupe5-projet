@@ -28,7 +28,7 @@ export default class Article extends BaseEntity {
     () => CommentaireArticle,
     (commentaireArticle) => commentaireArticle.article
   )
-  @Field(() => [CommentaireArticle])
+  @Field(() => [CommentaireArticle], { nullable: true })
   commentairesArticle: CommentaireArticle[];
 
   @Column()

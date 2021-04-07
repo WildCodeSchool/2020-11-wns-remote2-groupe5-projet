@@ -30,6 +30,6 @@ export default class CommentaireArticle extends BaseEntity {
   commentaire: string;
 
   @Column()
-  @Field(() => String)
-  date: string;
+  @Field(() => Date)
+  date: Date;
 }

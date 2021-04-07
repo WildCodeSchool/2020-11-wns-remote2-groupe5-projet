@@ -15,7 +15,12 @@ export default class ArticleResolver {
       throw Error('You are not authenticated.');
     }
     return Article.find({
-      relations: ['user', 'contentFields'],
+      relations: [
+        'user',
+        'contentFields',
+        'commentairesArticle',
+        'commentairesArticle.user',
+      ],
     });
   }
 
