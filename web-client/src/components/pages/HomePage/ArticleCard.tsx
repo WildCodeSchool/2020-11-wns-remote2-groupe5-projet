@@ -1,6 +1,9 @@
+import { Box } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Articles_articles } from '../../../schemaTypes';
+import ArticleActions from './ArticleActions';
+import ArticleHeader from './ArticleHeader';
 
 type ArticleCardProps = {
   article: Articles_articles;
@@ -11,45 +14,8 @@ export default function ArticleCard({
 }: ArticleCardProps): JSX.Element {
   console.log('articleCard', article);
   return (
-    <section className="p-1 w-4/5 max-w-screen-lg">
-      <div className="flex bg-gray-800 text-white justify-between rounded-tl-md rounded-tr-md p-4">
-        <div className="flex flex-col md:flex-row items-center text-center md:text-left w-full md:self-start">
-          <div className="px-4">
-            <img
-              className="rounded-full h-16 w-16 flex items-center justify-center"
-              src={'https://www.w3schools.com/howto/img_avatar.png'}
-              alt="avatar"
-            />
-          </div>
-          <div>
-            <div className="mt-5 text-lg">
-              <span>{article.user.pseudo}</span>&nbsp;&nbsp;
-              <span className="italic underline">S&rsquo;abonner</span>
-            </div>
-            <div>
-              3 nov 2019&nbsp;|&nbsp;
-              <span className="font-bold">#{'dev'}</span>
-              &nbsp;#
-              {'javascript'}
-            </div>
-          </div>
-        </div>
-        <div className="">
-          <span>
-            {article?.likesArticle?.length}&nbsp;
-            <i className="fas fa-heart text-red-500"></i>
-            &nbsp;
-          </span>
-          <span>
-            {article?.commentairesArticle?.length}&nbsp;
-            <i className="far fa-comment-dots"></i>
-            &nbsp;
-          </span>
-          <span>
-            7&nbsp;<i className="far fa-bookmark"></i>
-          </span>
-        </div>
-      </div>
+    <Box>
+      <ArticleHeader article={article} />
       <article className="bg-white rounded-br-md rounded-bl-md md:flex">
         <div className="py-3 w-2/5 md:mx-2 mx-auto flex items-center">
           <img
@@ -76,6 +42,6 @@ export default function ArticleCard({
           </Link>
         </div>
       </article>
-    </section>
+    </Box>
   );
 }
