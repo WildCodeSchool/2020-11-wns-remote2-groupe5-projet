@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import InputCustom from '../../../../helpers/InputCustom';
+import { Button } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { CREATE_EXPERIENCES } from '../../../../../../queries/editProfil-queries';
 
@@ -77,7 +78,9 @@ export default function ExperienceModification(): JSX.Element {
           onChange={(e) => setDescription(e.target.value)}
         />
       </label>
-      <button onClick={() => postExperiences()}>Enregistrer</button>
+      <Button colorScheme="white" onClick={() => postExperiences()}>
+        Enregistrer
+      </Button>
     </div>
   );
 }

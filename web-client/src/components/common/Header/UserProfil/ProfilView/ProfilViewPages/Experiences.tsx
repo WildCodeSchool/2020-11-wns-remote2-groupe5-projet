@@ -1,18 +1,18 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import { USER_INFO } from '../../../../../../queries/user-queries';
 
-export default function Experiences(): JSX.Element {
-  const { data } = useQuery(USER_INFO);
-
+export default function Experiences({ data }: { data: any }): JSX.Element {
   return (
     <div>
-      <div>{data?.me?.experiences.jobName}</div>
-      <div>{data?.me?.experiences.company}</div>
-      <div>{data?.me?.experiences.dateStart}</div>
-      <div>{data?.me?.experiences.dateEnd}</div>
-      <div>{data?.me?.experiences.isActualJob}</div>
-      <div>{data?.me?.experiences.description}</div>
+      {data?.me?.experiences.map((xp: any) => (
+        <div key={xp.jobName}>
+          <div>{xp.jobName}</div>
+          <div>{xp.company}</div>
+          <div>{xp.dateStart}</div>
+          <div>{xp.dateEnd}</div>
+          <div>{xp.isActualJob}</div>
+          <div>{xp.description}</div>
+        </div>
+      ))}
     </div>
   );
 }

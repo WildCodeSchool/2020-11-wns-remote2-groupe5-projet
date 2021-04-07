@@ -17,6 +17,7 @@ import { createUploadLink } from 'apollo-upload-client';
 
 import './index.css';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const GRAPHQL_ENDPOINT = '/graphql';
 
@@ -58,7 +59,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')

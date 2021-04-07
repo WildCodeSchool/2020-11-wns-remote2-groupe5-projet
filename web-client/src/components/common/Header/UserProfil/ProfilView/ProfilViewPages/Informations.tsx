@@ -1,10 +1,6 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import { USER_INFO } from '../../../../../../queries/user-queries';
 
-export default function Informations(): JSX.Element {
-  const { data } = useQuery(USER_INFO);
-
+export default function Informations({ data }: { data: any }): JSX.Element {
   return (
     <div>
       <div>{data?.me?.pseudo}</div>

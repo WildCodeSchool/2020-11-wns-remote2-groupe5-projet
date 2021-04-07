@@ -1,18 +1,18 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import { USER_INFO } from '../../../../../../queries/user-queries';
 
-export default function Degrees(): JSX.Element {
-  const { data } = useQuery(USER_INFO);
-
+export default function Degrees({ data }: { data: any }): JSX.Element {
   return (
     <div>
-      <div>{data?.me?.diplomas.diplomaName}</div>
-      <div>{data?.me?.diplomas.school}</div>
-      <div>{data?.me?.diplomas.dateStart}</div>
-      <div>{data?.me?.diplomas.dateEnd}</div>
-      <div>{data?.me?.diplomas.isActualSchool}</div>
-      <div>{data?.me?.diplomas.description}</div>
+      {data?.me?.diplomas.map((diploma: any) => (
+        <div key={diploma.diplomaName}>
+          <div>{diploma.diplomaName}</div>
+          <div>{diploma.school}</div>
+          <div>{diploma.dateStart}</div>
+          <div>{diploma.dateEnd}</div>
+          <div>{diploma.isActualSchool}</div>
+          <div>{diploma.description}</div>
+        </div>
+      ))}
     </div>
   );
 }
