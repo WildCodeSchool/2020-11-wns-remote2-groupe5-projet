@@ -25,7 +25,7 @@ const ArticleUserInfo: React.FC<ArticleUserInfoProps> = ({
   return (
     <Flex align="center" m={'4px'}>
       <Box m={'4px'}>
-        <Avatar name={pseudo} src="https://bit.ly/dan-abramov" />
+        <Avatar size="lg" name={pseudo} src="https://bit.ly/dan-abramov" />
       </Box>
       <VStack spacing={0.5} m={'4px'}>
         <Flex>

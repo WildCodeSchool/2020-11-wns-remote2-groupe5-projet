@@ -16,10 +16,12 @@ export default function ArticleCard({
   return (
     <Box>
       <ArticleHeader article={article} />
-      <Box borderBottomRadius={'2xl'} bgColor="white" h="100%" w="100%">
-        <Flex>
+      <Box borderBottomRadius={'2xl'} bgColor="white">
+        <Flex justify="space-between">
           <Box p={'8px'}>
             <Image
+              h="212px"
+              w="212px"
               borderRadius={'2xl'}
               src={
                 'https://img-19.ccm2.net/QeOmxQpB5sfw25JvsKbirn-eulw=/250x/6aab65a776614b8bba8c8b4e8c1848c9/ccm-encyclopedia/0px-Unofficial_JavaScript_logo_2.svg.png'
@@ -27,24 +29,37 @@ export default function ArticleCard({
               alt={article?.title}
             />
           </Box>
-          <Flex flexDir="column">
+          <Flex flexDir="column" justifyContent="space-between">
             <Flex flexDir="column" align="center">
-              <Heading>{article.title}</Heading>
-              <Text>{article.description}</Text>
+              <Heading
+                as="h3"
+                size="lg"
+                noOfLines={1}
+                isTruncated
+                paddingTop="4px"
+                paddingBottom="4px"
+              >
+                {article.title}
+              </Heading>
+              <Box padding={'8px'}>
+                <Text align="center" w="lg" noOfLines={4}>
+                  {article.description}
+                </Text>
+              </Box>
+            </Flex>
+            <Flex flexDir="row-reverse">
+              <Link to={'articles/' + article.articleID}>
+                <Button
+                  bgColor="gray.900"
+                  textColor="white"
+                  rightIcon={<FaArrowRight />}
+                >
+                  Lire la suite
+                </Button>
+              </Link>
             </Flex>
           </Flex>
         </Flex>
-        <Box pos="relative" bottom="0px" left="0px">
-          <Link to={'articles/' + article.articleID}>
-            <Button
-              bgColor="gray.900"
-              textColor="white"
-              rightIcon={<FaArrowRight />}
-            >
-              Lire la suite
-            </Button>
-          </Link>
-        </Box>
       </Box>
     </Box>
   );
