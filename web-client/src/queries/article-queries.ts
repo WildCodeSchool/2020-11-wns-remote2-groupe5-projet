@@ -103,7 +103,52 @@ export const CREATE_COMMENT = gql`
 export const LIKE_ARTICLE = gql`
   mutation LikeArticle($articleID: String!) {
     likeArticle(articleID: $articleID) {
-      userID
+      likeID
+      user {
+        userID
+      }
+    }
+  }
+`;
+
+export const DISLIKE_ARTICLE = gql`
+  mutation DislikeArticle($articleID: String!) {
+    dislikeArticle(articleID: $articleID)
+  }
+`;
+
+export const SUBSCRIBE_TO_NEW_COMMENT = gql`
+  subscription NewComment {
+    newComment {
+      contentFieldID
+      commentaire
+      date
+      user {
+        userID
+        pseudo
+      }
+    }
+  }
+`;
+
+export const SUBSCRIBE_TO_NEW_LIKE = gql`
+  subscription NewLike {
+    newLike {
+      likeID
+      user {
+        userID
+      }
+    }
+  }
+`;
+
+export const SUBSCRIBE_TO_REMOVE_LIKE = gql`
+  subscription RemoveLike {
+    removeLike {
+      likeID
+      user {
+        userID
+      }
     }
   }
 `;

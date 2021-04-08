@@ -44,7 +44,7 @@ export interface Articles_articles_likesArticle_user {
 }
 
 export interface Articles_articles_likesArticle {
-  __typename: "Like_Article";
+  __typename: "LikeArticle";
   likeID: string;
   user: Articles_articles_likesArticle_user;
 }
@@ -80,7 +80,7 @@ export interface Articles_articles {
   description: string;
   user: Articles_articles_user;
   contentFields: Articles_articles_contentFields[];
-  commentairesArticle: Articles_articles_commentairesArticle[] | null;
+  commentairesArticle: Articles_articles_commentairesArticle[];
 }
 
 export interface Articles {
@@ -102,7 +102,7 @@ export interface OneArticle_oneArticle_likesArticle_user {
 }
 
 export interface OneArticle_oneArticle_likesArticle {
-  __typename: "Like_Article";
+  __typename: "LikeArticle";
   likeID: string;
   user: OneArticle_oneArticle_likesArticle_user;
 }
@@ -143,7 +143,7 @@ export interface OneArticle_oneArticle {
   date: any;
   user: OneArticle_oneArticle_user;
   contentFields: OneArticle_oneArticle_contentFields[];
-  commentairesArticle: OneArticle_oneArticle_commentairesArticle[] | null;
+  commentairesArticle: OneArticle_oneArticle_commentairesArticle[];
 }
 
 export interface OneArticle {
@@ -194,9 +194,15 @@ export interface createCommentVariables {
 // GraphQL mutation operation: LikeArticle
 // ====================================================
 
-export interface LikeArticle_likeArticle {
+export interface LikeArticle_likeArticle_user {
   __typename: "User";
   userID: string;
+}
+
+export interface LikeArticle_likeArticle {
+  __typename: "LikeArticle";
+  likeID: string;
+  user: LikeArticle_likeArticle_user;
 }
 
 export interface LikeArticle {
@@ -205,6 +211,98 @@ export interface LikeArticle {
 
 export interface LikeArticleVariables {
   articleID: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: DislikeArticle
+// ====================================================
+
+export interface DislikeArticle {
+  dislikeArticle: boolean;
+}
+
+export interface DislikeArticleVariables {
+  articleID: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: NewComment
+// ====================================================
+
+export interface NewComment_newComment_user {
+  __typename: "User";
+  userID: string;
+  pseudo: string;
+}
+
+export interface NewComment_newComment {
+  __typename: "CommentaireArticle";
+  contentFieldID: string;
+  commentaire: string;
+  date: any;
+  user: NewComment_newComment_user;
+}
+
+export interface NewComment {
+  newComment: NewComment_newComment;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: NewLike
+// ====================================================
+
+export interface NewLike_newLike_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface NewLike_newLike {
+  __typename: "LikeArticle";
+  likeID: string;
+  user: NewLike_newLike_user;
+}
+
+export interface NewLike {
+  newLike: NewLike_newLike;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: RemoveLike
+// ====================================================
+
+export interface RemoveLike_removeLike_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface RemoveLike_removeLike {
+  __typename: "LikeArticle";
+  likeID: string;
+  user: RemoveLike_removeLike_user;
+}
+
+export interface RemoveLike {
+  removeLike: RemoveLike_removeLike;
 }
 
 /* tslint:disable */

@@ -5,7 +5,7 @@ import Article from './Article';
 
 @Entity()
 @ObjectType()
-export default class Like_Article extends BaseEntity {
+export default class LikeArticle extends BaseEntity {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   likeID: string;

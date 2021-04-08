@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import GlobalContext from '../../../../utils/GlobalContext';
 import InputCustom from '../../../common/helpers/InputCustom';
@@ -7,14 +7,10 @@ import { CREATE_COMMENT } from '../../../../queries/article-queries';
 
 type CommentEditProps = {
   articleID: string;
-  needToRefetch?: boolean;
-  setNeedToRefetch: Dispatch<SetStateAction<boolean>>;
 };
 
 const CommentEdit: React.FC<CommentEditProps> = ({
   articleID,
-  needToRefetch,
-  setNeedToRefetch,
 }): JSX.Element => {
   const user = useContext(GlobalContext).user;
   const [comment, setComment] = useState('');
@@ -22,14 +18,13 @@ const CommentEdit: React.FC<CommentEditProps> = ({
 
   const submit = async () => {
     try {
-      const res = await createComment({
+      await createComment({
         variables: {
           articleID: articleID,
           date: new Date().toISOString(),
           commentaire: comment,
         },
       });
-      setNeedToRefetch(!needToRefetch);
       setComment('');
     } catch (error) {
       console.log('an error occured', error);

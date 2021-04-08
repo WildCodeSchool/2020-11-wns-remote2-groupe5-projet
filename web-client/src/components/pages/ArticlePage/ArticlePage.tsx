@@ -1,61 +1,140 @@
 import React, { useContext, useEffect, useState } from 'react';
-import './ArticlePage.css';
-import CommentPage from './Comment/CommentContainer';
 import { useParams } from 'react-router-dom';
-import { useMutation, useLazyQuery } from '@apollo/client';
-import { GET_ONE_BY_ID, LIKE_ARTICLE } from '../../../queries/article-queries';
+import { useMutation, useQuery } from '@apollo/client';
 import ContentFields from './ContentFields';
 import { parseDateArticle } from '../../../utils/Date';
-import GlobalContext from '../../../utils/GlobalContext';
-import { Articles_articles_likesArticle } from '../../../schemaTypes';
+import {
+  LikeArticle,
+  NewComment,
+  NewLike,
+  OneArticle,
+  RemoveLike,
+} from '../../../schemaTypes';
 import CommentContainer from './Comment/CommentContainer';
+import {
+  DISLIKE_ARTICLE,
+  GET_ONE_BY_ID,
+  LIKE_ARTICLE,
+  SUBSCRIBE_TO_NEW_COMMENT,
+  SUBSCRIBE_TO_NEW_LIKE,
+  SUBSCRIBE_TO_REMOVE_LIKE,
+} from '../../../queries/article-queries';
+import './ArticlePage.css';
+import GlobalContext from '../../../utils/GlobalContext';
 
-export default function ArticlePage(): JSX.Element {
+const useGetArticleAndSubscribeToChanges = (userID: string | undefined) => {
   const { articleID } = useParams<{ articleID: string }>();
-  const [needToRefetch, setNeedToRefetch] = useState(false);
-  const contextUserID = useContext(GlobalContext).user?.id;
-  const [isLiked, setIsLiked] = useState<boolean>();
-  const [likeArticle] = useMutation(LIKE_ARTICLE);
-  const [getArticleDetails, { data, refetch, called }] = useLazyQuery(
+
+  const { loading, error, data, subscribeToMore } = useQuery<OneArticle>(
     GET_ONE_BY_ID,
     {
       variables: {
-        articleID: articleID,
+        articleID,
       },
-      pollInterval: 250,
     }
   );
 
-  useEffect(() => {
-    getArticleDetails({
-      variables: {
-        articleID: articleID,
-      },
-    });
-  }, [needToRefetch]);
+  const [isSubscribedToNewChanges, setIsSubscribedToNewChanges] = useState(
+    false
+  );
 
   useEffect(() => {
-    data &&
-      setIsLiked(
-        data.oneArticle.likesArticle.some(
-          (like: Articles_articles_likesArticle) =>
-            like.user.userID === contextUserID
-        )
-      );
-  }, [data]);
-
-  const switchLike = async () => {
-    try {
-      setIsLiked(!isLiked);
-      await likeArticle({
-        variables: {
-          articleID: articleID,
+    if (!isSubscribedToNewChanges) {
+      subscribeToMore<NewComment>({
+        document: SUBSCRIBE_TO_NEW_COMMENT,
+        updateQuery: (prev, { subscriptionData }): OneArticle => {
+          console.log('ok1');
+          if (!subscriptionData.data) return prev;
+          return {
+            oneArticle: {
+              ...prev.oneArticle,
+              commentairesArticle: [
+                ...prev.oneArticle.commentairesArticle,
+                subscriptionData.data.newComment,
+              ],
+            },
+          };
         },
       });
-    } catch (error) {
-      console.log('ERROR', error);
+      // subscribeToMore<NewLike>({
+      //   document: SUBSCRIBE_TO_NEW_LIKE,
+      //   updateQuery: (prev, { subscriptionData }): OneArticle => {
+      //     console.log('ok2');
+      //     if (!subscriptionData.data) return prev;
+      //     return {
+      //       oneArticle: {
+      //         ...prev.oneArticle,
+      //         likesArticle: [
+      //           ...prev.oneArticle.likesArticle,
+      //           subscriptionData.data.newLike,
+      //         ],
+      //       },
+      //     };
+      //   },
+      // });
+      // subscribeToMore<RemoveLike>({
+      //   document: SUBSCRIBE_TO_REMOVE_LIKE,
+      //   updateQuery: (prev, { subscriptionData }): OneArticle => {
+      //     console.log('ok3');
+      //     if (!subscriptionData.data) return prev;
+      //     return {
+      //       oneArticle: {
+      //         ...prev.oneArticle,
+      //         likesArticle: prev.oneArticle.likesArticle.filter(
+      //           (like) => like.user.userID !== userID
+      //         ),
+      //       },
+      //     };
+      //   },
+      // });
+
+      setIsSubscribedToNewChanges(true);
+    }
+  }, [data]);
+
+  return { loading, error, data };
+};
+
+export default function ArticlePage(): JSX.Element {
+  const { articleID } = useParams<{ articleID: string }>();
+  const userID = useContext(GlobalContext).user?.id;
+
+  const [isLiked, setIsLiked] = useState<boolean>();
+
+  const [likeArticle] = useMutation(LIKE_ARTICLE);
+  const [dislikeArticle] = useMutation(DISLIKE_ARTICLE);
+
+  const requestParam = {
+    variables: {
+      articleID,
+    },
+  };
+
+  const { data } = useGetArticleAndSubscribeToChanges(userID);
+
+  const switchLike = async () => {
+    if (isLiked) {
+      try {
+        await dislikeArticle(requestParam);
+      } catch (error) {
+        console.log('ERROR', error);
+      }
+    } else {
+      try {
+        await likeArticle(requestParam);
+      } catch (error) {
+        console.log('ERROR', error);
+      }
     }
   };
+
+  useEffect(() => {
+    if (data) {
+      setIsLiked(
+        data.oneArticle.likesArticle.some((like) => like.user.userID === userID)
+      );
+    }
+  }, [data]);
 
   return (
     <div className="lg:p-10 space-y-5 flex justify-center">
@@ -102,7 +181,9 @@ export default function ArticlePage(): JSX.Element {
           <div className="flex flex-col justify-between text-center">
             <div className="py-5 px-2 break-words">
               <img className="rounded-md mx-auto my-5" alt="" />
-              <p className="text-justify px-4">{data && data.text}</p>
+              <p className="text-justify px-4">
+                {data?.oneArticle.description}
+              </p>
               <div>
                 {data && (
                   <ContentFields
@@ -117,8 +198,6 @@ export default function ArticlePage(): JSX.Element {
       <CommentContainer
         articleID={articleID}
         comments={data?.oneArticle?.commentairesArticle}
-        needToRefetch={needToRefetch}
-        setNeedToRefetch={setNeedToRefetch}
       />
     </div>
   );
