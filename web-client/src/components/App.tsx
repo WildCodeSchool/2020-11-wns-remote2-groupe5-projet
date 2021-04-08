@@ -1,4 +1,6 @@
 import React from 'react';
+import { Box, Flex, Container } from '@chakra-ui/react';
+
 import GlobalContext from '../utils/GlobalContext';
 import useAuthentication from '../utils/useAuthentication';
 import LogIn from './common/LogIn/LogIn';
@@ -20,7 +22,14 @@ export default function App(): JSX.Element {
   } = useAuthentication();
 
   return (
-    <div className="h-screen flex flex-col overflow-y-hidden bg-gray-300">
+    <Box
+      w="100%"
+      h="100vh"
+      display="flex"
+      flexDir="column"
+      bgColor="gray.300"
+      overflowY="hidden"
+    >
       {!loading && (
         <GlobalContext.Provider
           value={{ user: { pseudo: data?.me?.pseudo, id: data?.me?.userID } }}
@@ -44,6 +53,6 @@ export default function App(): JSX.Element {
           )}
         </GlobalContext.Provider>
       )}
-    </div>
+    </Box>
   );
 }

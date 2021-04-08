@@ -36,7 +36,7 @@ export default function ArticleCard({
                 size="lg"
                 noOfLines={1}
                 isTruncated
-                paddingTop="4px"
+                paddingTop="8px"
                 paddingBottom="4px"
               >
                 {article.title}

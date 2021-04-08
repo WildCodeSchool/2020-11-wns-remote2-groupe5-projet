@@ -3,8 +3,8 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 import CommentCard from './CommentCard';
 import CommentEdit from './CommentEdit';
-import './Comment.css';
 import { OneArticle_oneArticle_commentairesArticle } from '../../../../schemaTypes';
+import { Flex } from '@chakra-ui/react';
 
 type CommentContainerProps = {
   articleID: string;
@@ -19,9 +19,8 @@ const CommentContainer: React.FC<CommentContainerProps> = ({
   needToRefetch,
   setNeedToRefetch,
 }) => {
-  // console.log('comments', comments);
   return (
-    <div className="w-1/4 mt-0 py-1 ml-3">
+    <Flex flexDir="column" justify="center" w="100%" align="center">
       {comments &&
         comments.map((comment: OneArticle_oneArticle_commentairesArticle) => {
           return (
@@ -39,7 +38,7 @@ const CommentContainer: React.FC<CommentContainerProps> = ({
         setNeedToRefetch={setNeedToRefetch}
         needToRefetch={needToRefetch}
       />
-    </div>
+    </Flex>
   );
 };
 

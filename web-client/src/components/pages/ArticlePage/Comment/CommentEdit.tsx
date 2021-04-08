@@ -4,6 +4,9 @@ import { useMutation, useQuery } from '@apollo/client';
 import GlobalContext from '../../../../utils/GlobalContext';
 import InputCustom from '../../../common/helpers/InputCustom';
 import { CREATE_COMMENT } from '../../../../queries/article-queries';
+import { Box, Flex, Avatar, Text, Textarea, Button } from '@chakra-ui/react';
+import { parseDateComment } from '../../../../utils/Date';
+import { FiSend } from 'react-icons/fi';
 
 type CommentEditProps = {
   articleID: string;
@@ -37,42 +40,52 @@ const CommentEdit: React.FC<CommentEditProps> = ({
   };
 
   return (
-    <section className="mx-auto mb-5">
-      <div className="flex bg-gray-800 text-white justify-between rounded-t-lg px-4 py-1 items-center">
-        <div className="flex flex-col md:flex-row  text-center md:text-left md:self-start items-center">
-          <img
-            className="rounded-full h-10 w-10 flex items-center justify-center"
-            src=""
-            alt="avatar"
-          />
-          <span className="pl-4">{user?.pseudo}</span>
-        </div>
-      </div>
-      <div className="flex items-center justify-between bg-white rounded-bl-lg p-5 break-words">
-        {/* <InputCustom
-          placeholder="Votre commentaire"
-          type="textarea"
-          value={comment}
-          setValue={(c) => setComment(c)}
-          noPlaceholder
-          noPadding
-        /> */}
-        <textarea
+    <Box w="320px" my="12px">
+      <Flex
+        justify="space-between"
+        align="center"
+        borderTopRadius={'xl'}
+        bgColor="gray.800"
+        px={'8px'}
+        py={'4px'}
+      >
+        <Flex>
+          <Avatar size="xs" src={user?.pseudo} alt="avatar" />
+          <Text pl="4px" fontSize="md" fontWeight={600} color="white">
+            {user?.pseudo}
+          </Text>
+        </Flex>
+      </Flex>
+      <Box className="flex items-center justify-between bg-white rounded-bl-lg p-5 break-words">
+        <Textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="Votre commentaire"
         />
         {comment === '' ? (
-          <button type="submit" onClick={submit} disabled>
-            <i className="fas fa-paper-plane text-gray-400"></i>
-          </button>
+          <Button
+            p={0}
+            size="sm"
+            variant="outlined"
+            aria-label="like"
+            onClick={submit}
+            disabled
+          >
+            <FiSend />
+          </Button>
         ) : (
-          <button type="submit" onClick={submit}>
-            <i className="fas fa-paper-plane text-gray-800"></i>
-          </button>
+          <Button
+            p={0}
+            size="md"
+            variant="outlined"
+            aria-label="like"
+            onClick={submit}
+          >
+            <FiSend />
+          </Button>
         )}
-      </div>
-    </section>
+      </Box>
+    </Box>
   );
 };
 

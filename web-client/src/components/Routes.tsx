@@ -1,4 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import { Flex } from '@chakra-ui/layout';
+import { Box } from '@chakra-ui/react';
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -22,9 +24,9 @@ export default function Routes({
   return (
     <Router>
       <Header setIsAuthenticated={setIsAuthenticated} />
-      <div className="flex flex-row flex-grow overflow-y-hidden">
+      <Flex flexGrow={1} overflowY="hidden">
         <MainPanel />
-        <div className="flex-grow overflow-y-auto">
+        <Flex flexGrow={1} overflowY="auto">
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route
@@ -46,8 +48,8 @@ export default function Routes({
               component={ExperienceModification}
             />
           </Switch>
-        </div>
-      </div>
+        </Flex>
+      </Flex>
     </Router>
   );
 }

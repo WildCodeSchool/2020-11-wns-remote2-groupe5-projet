@@ -5,11 +5,20 @@ import { Articles_articles } from '../../../schemaTypes';
 import ArticleActions from './ArticleActions';
 import ArticleUserInfo from './ArticleUserInfo';
 
-type ArticleHeaderProps = { article: Articles_articles };
+type ArticleHeaderProps = {
+  article: Articles_articles;
+  onClick?: () => void;
+};
 
-const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
+const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article, onClick }) => {
+  console.log('Header article', article);
   return (
-    <Flex justify="space-between" borderTopRadius={'2xl'} bgColor="gray.800">
+    <Flex
+      justify="space-between"
+      align="center"
+      borderTopRadius={'2xl'}
+      bgColor="gray.800"
+    >
       <ArticleUserInfo
         pseudo={article.user?.pseudo}
         avatar={''}
@@ -19,6 +28,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article }) => {
         numberLike={article?.likesArticle?.length}
         numberCom={article?.commentairesArticle?.length || 0}
         numberRegister={0}
+        onClick={onClick}
       />
     </Flex>
   );

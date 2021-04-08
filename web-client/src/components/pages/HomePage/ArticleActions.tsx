@@ -1,40 +1,60 @@
 /* eslint-disable react/prop-types */
-import { Box, Text, Flex } from '@chakra-ui/react';
+import { Box, Text, Flex, Button } from '@chakra-ui/react';
 import React from 'react';
 import { FcLike } from 'react-icons/fc';
 import { FaRegCommentDots, FaRegBookmark } from 'react-icons/fa';
+
 type ArticleActionsProps = {
   numberLike: number;
   numberCom: number;
   numberRegister?: number;
+  onClick?: () => void;
 };
 
 const ArticleActions: React.FC<ArticleActionsProps> = ({
   numberLike,
   numberCom,
   numberRegister,
+  onClick,
 }) => {
   return (
-    <Flex flexDir="row" align="center" p={'4px'}>
-      <Flex align="center" px={'4px'}>
-        <Text color="white" pr={'4px'}>
-          {numberLike}
-        </Text>
-        <FcLike />
-      </Flex>
-      <Flex align="center" px={'4px'}>
+    <Box>
+      <Flex flexDir="row" align="center" p={'4px'}>
+        <Flex align="center" px={'4px'}>
+          {onClick ? (
+            <Button
+              p={0}
+              size="sm"
+              variant="outlined"
+              aria-label="like"
+              onClick={onClick}
+            >
+              <Text color="white" pr={'4px'}>
+                {numberLike}
+              </Text>
+              <FcLike />
+            </Button>
+          ) : (
+            <>
+              <Text color="white" pr={'4px'}>
+                {numberLike}
+              </Text>
+              <FcLike />
+            </>
+          )}
+        </Flex>
         <Text color="white" pr={'4px'}>
           {numberCom}
         </Text>
         <FaRegCommentDots color="white" />
+        <Flex align="center" px={'4px'}>
+          <Text color="white" pr={'4px'}>
+            {numberRegister}
+          </Text>
+          <FaRegBookmark color="white" />
+        </Flex>
       </Flex>
-      <Flex align="center" px={'4px'}>
-        <Text color="white" pr={'4px'}>
-          {numberRegister}
-        </Text>
-        <FaRegBookmark color="white" />
-      </Flex>
-    </Flex>
+    </Box>
   );
 };
 

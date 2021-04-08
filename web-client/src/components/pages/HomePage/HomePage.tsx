@@ -9,7 +9,13 @@ export default function HomePage(): JSX.Element {
   const { data } = useQuery(GET_ALL_ARTICLES);
   console.log('HomePage - data', data);
   return (
-    <Flex flexDir="column" align="center" justify="center" width="100%">
+    <Flex
+      flexDir="column"
+      align="center"
+      justify="center"
+      width="100%"
+      mt={'600px'}
+    >
       {data &&
         data.articles.map((article: Articles_articles) => (
           <Box key={article.articleID} m="4">
