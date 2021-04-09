@@ -9,7 +9,6 @@ import Lien from './ContentFields/Lien';
 import SousTitre from './ContentFields/Sous-titre';
 import Titre from './ContentFields/Titre';
 import PublishModal from './PublishModal';
-import { Container } from '@chakra-ui/layout';
 import { Box, Flex } from '@chakra-ui/react';
 
 export default function ArticleCreationPage(): JSX.Element {

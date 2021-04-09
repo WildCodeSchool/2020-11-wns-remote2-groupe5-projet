@@ -20,7 +20,7 @@ const CommentContainer: React.FC<CommentContainerProps> = ({
   setNeedToRefetch,
 }) => {
   return (
-    <Flex flexDir="column" justify="center" w="100%" align="center">
+    <Flex flexDir="column" w="100%">
       {comments &&
         comments.map((comment: OneArticle_oneArticle_commentairesArticle) => {
           return (

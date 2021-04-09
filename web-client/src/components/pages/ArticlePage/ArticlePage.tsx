@@ -56,8 +56,8 @@ export default function ArticlePage(): JSX.Element {
     }
   };
   return (
-    <Flex justify="space-around" w="100%" p={'44px'}>
-      <Box w="300%">
+    <Flex justify="space-around" w="100%" p={'16px'} h="100vh">
+      <Box w="70%">
         {data && (
           <ArticleHeader article={data.oneArticle} onClick={switchLike} />
         )}
@@ -81,12 +81,14 @@ export default function ArticlePage(): JSX.Element {
           )}
         </Flex>
       </Box>
-      <CommentContainer
-        articleID={articleID}
-        comments={data?.oneArticle?.commentairesArticle}
-        needToRefetch={needToRefetch}
-        setNeedToRefetch={setNeedToRefetch}
-      />
+      <Box>
+        <CommentContainer
+          articleID={articleID}
+          comments={data?.oneArticle?.commentairesArticle}
+          needToRefetch={needToRefetch}
+          setNeedToRefetch={setNeedToRefetch}
+        />
+      </Box>
     </Flex>
   );
 }
