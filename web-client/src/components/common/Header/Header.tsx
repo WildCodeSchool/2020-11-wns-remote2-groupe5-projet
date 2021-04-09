@@ -1,6 +1,4 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
-import './Header.css';
-import useOnClickOutside from '../../../utils/CloseOnOutsideClick';
 import { Link as ReachLink } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
@@ -9,15 +7,14 @@ import {
   Flex,
   Box,
   Text,
-  Button,
   Avatar,
-  Modal,
-  ModalContent,
   Link,
-  Icon,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from '@chakra-ui/react';
 import LogoClickable from './LogoClickable';
-import { useDisclosure } from '@chakra-ui/react';
 
 type HeaderProps = {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
@@ -26,11 +23,7 @@ type HeaderProps = {
 export default function Header({
   setIsAuthenticated,
 }: HeaderProps): JSX.Element {
-  const refProfil = useRef(null);
-  const [openSearchbar, setOpenSerachbar] = useState<boolean>(false);
-  const [openProfilDropdown, setOpenProfilDropdown] = useState<boolean>(false);
   const [logout] = useMutation(LOG_OUT);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const clickToLogOut = async () => {
     try {
@@ -38,33 +31,43 @@ export default function Header({
       setIsAuthenticated(false);
     } catch (error) {
       console.log('error');
-      // setErrorMessage(error.message);
     }
   };
 
-  useOnClickOutside(refProfil, () =>
-    setOpenProfilDropdown(!openProfilDropdown)
-  );
-
   return (
-    <Box bgColor="gray.900" h="100px">
-      <Flex align="center">
-        <LogoClickable />
-        <Button variant="unstyled" onClick={onOpen}>
-          <Avatar />
-        </Button>
-        <Modal isOpen={isOpen} onClose={() => onClose()}>
-          <ModalContent>
-            <Link
-              as={ReachLink}
-              to="/profil/profil-modification/general-information"
-              m="8px"
-            >
-              <Text>Profil</Text>
-            </Link>
-          </ModalContent>
-        </Modal>
+    <>
+      <Flex
+        bgColor="gray.900"
+        justify="space-between"
+        align="center"
+        h="100px"
+        w="100%"
+        px={'32px'}
+      >
+        <Box w="88px" h="88px"></Box>
+        <Flex>
+          <LogoClickable />
+        </Flex>
+        <Flex justify="end">
+          <Menu>
+            <MenuButton>
+              <Avatar />
+            </MenuButton>
+            <MenuList>
+              <Link
+                as={ReachLink}
+                to="/profil/profil-modification/general-information"
+                py={0}
+              >
+                <MenuItem>
+                  <Text>Profil</Text>
+                </MenuItem>
+              </Link>
+              <MenuItem onClick={clickToLogOut}>Déconnexion</MenuItem>
+            </MenuList>
+          </Menu>
+        </Flex>
       </Flex>
-    </Box>
+    </>
   );
 }
