@@ -18,15 +18,11 @@ import ContentField from '../models/ContentField';
 import LikeArticle from '../models/LikeArticle';
 import User from '../models/User';
 
-type NewCommentNotificationPayload = {
+type newCommentNotificationPayload = {
   payload: CommentaireArticle;
 };
 
-type NewLikeNotificationPayload = {
-  payload: LikeArticle;
-};
-
-type RemoveLikeNotificationPayload = {
+type likesChangesNotificationPayload = {
   payload: LikeArticle;
 };
 
@@ -35,8 +31,8 @@ export default class ArticleResolver {
   @Subscription({
     topics: 'NEW_COMMENT',
   })
-  newComment(
-    @Root() notificationPayload: NewCommentNotificationPayload
+  subscribeToNewComment(
+    @Root() notificationPayload: newCommentNotificationPayload
   ): CommentaireArticle {
     return notificationPayload.payload;
   }
@@ -44,8 +40,8 @@ export default class ArticleResolver {
   @Subscription({
     topics: 'NEW_LIKE',
   })
-  newLike(
-    @Root() notificationPayload: NewLikeNotificationPayload
+  subscribeToNewLike(
+    @Root() notificationPayload: likesChangesNotificationPayload
   ): LikeArticle {
     return notificationPayload.payload;
   }
@@ -53,8 +49,8 @@ export default class ArticleResolver {
   @Subscription({
     topics: 'REMOVE_LIKE',
   })
-  removeLike(
-    @Root() notificationPayload: RemoveLikeNotificationPayload
+  subscribeToRemoveLike(
+    @Root() notificationPayload: likesChangesNotificationPayload
   ): LikeArticle {
     return notificationPayload.payload;
   }
@@ -130,7 +126,7 @@ export default class ArticleResolver {
     @Arg('data') data: CreateCommentaireArticleInput,
     @Arg('articleID') articleID: string,
     @PubSub('NEW_COMMENT')
-    publishNewComment: Publisher<NewCommentNotificationPayload>
+    publishNewComment: Publisher<newCommentNotificationPayload>
   ): Promise<CommentaireArticle> {
     if (!user) {
       throw Error('You are not authenticated.');
@@ -154,11 +150,13 @@ export default class ArticleResolver {
   }
 
   @Mutation(() => LikeArticle)
-  async likeArticle(
+  async switchLikeArticle(
     @Ctx() { user }: { user: User | null },
     @Arg('articleID') articleID: string,
     @PubSub('NEW_LIKE')
-    publishNewLike: Publisher<NewLikeNotificationPayload>
+    createLike: Publisher<likesChangesNotificationPayload>,
+    @PubSub('REMOVE_LIKE')
+    removeLike: Publisher<likesChangesNotificationPayload>
   ): Promise<LikeArticle> {
     if (!user) {
       throw Error('You are not authenticated.');
@@ -170,37 +168,24 @@ export default class ArticleResolver {
       throw Error('Article inexistant');
     }
 
-    const newLike = LikeArticle.create();
+    const currentLike = await LikeArticle.find({
+      where: { article, user },
+      relations: ['user'],
+    }).then((likes) => likes[0]);
 
-    newLike.article = article;
-    newLike.user = user;
-    await newLike.save();
-    publishNewLike({ payload: newLike });
-    return newLike;
-  }
-
-  @Mutation(() => Boolean)
-  async dislikeArticle(
-    @Ctx() { user }: { user: User | null },
-    @Arg('articleID') articleID: string,
-    @PubSub('REMOVE_LIKE')
-    removeLike: Publisher<NewLikeNotificationPayload>
-  ): Promise<boolean> {
-    if (!user) {
-      throw Error('You are not authenticated.');
+    if (!currentLike) {
+      const newLike = LikeArticle.create();
+      newLike.article = article;
+      newLike.user = user;
+      await newLike.save();
+      createLike({ payload: newLike });
+      return newLike;
     }
-
-    const article = await Article.findOne(articleID);
-    const currentLike = await LikeArticle.findOne({ article, user });
-
-    if (!article || !currentLike) {
-      throw Error('Erreur.');
-    }
-
-    await currentLike.remove();
 
     removeLike({ payload: currentLike });
 
-    return true;
+    await currentLike.remove();
+
+    return currentLike;
   }
 }

@@ -191,25 +191,25 @@ export interface createCommentVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: LikeArticle
+// GraphQL mutation operation: SwitchLikeArticle
 // ====================================================
 
-export interface LikeArticle_likeArticle_user {
+export interface SwitchLikeArticle_switchLikeArticle_user {
   __typename: "User";
   userID: string;
 }
 
-export interface LikeArticle_likeArticle {
+export interface SwitchLikeArticle_switchLikeArticle {
   __typename: "LikeArticle";
   likeID: string;
-  user: LikeArticle_likeArticle_user;
+  user: SwitchLikeArticle_switchLikeArticle_user;
 }
 
-export interface LikeArticle {
-  likeArticle: LikeArticle_likeArticle;
+export interface SwitchLikeArticle {
+  switchLikeArticle: SwitchLikeArticle_switchLikeArticle;
 }
 
-export interface LikeArticleVariables {
+export interface SwitchLikeArticleVariables {
   articleID: string;
 }
 
@@ -219,66 +219,25 @@ export interface LikeArticleVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: DislikeArticle
+// GraphQL subscription operation: SubscribeToNewComment
 // ====================================================
 
-export interface DislikeArticle {
-  dislikeArticle: boolean;
-}
-
-export interface DislikeArticleVariables {
-  articleID: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL subscription operation: NewComment
-// ====================================================
-
-export interface NewComment_newComment_user {
+export interface SubscribeToNewComment_subscribeToNewComment_user {
   __typename: "User";
   userID: string;
   pseudo: string;
 }
 
-export interface NewComment_newComment {
+export interface SubscribeToNewComment_subscribeToNewComment {
   __typename: "CommentaireArticle";
   contentFieldID: string;
   commentaire: string;
   date: any;
-  user: NewComment_newComment_user;
+  user: SubscribeToNewComment_subscribeToNewComment_user;
 }
 
-export interface NewComment {
-  newComment: NewComment_newComment;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL subscription operation: NewLike
-// ====================================================
-
-export interface NewLike_newLike_user {
-  __typename: "User";
-  userID: string;
-}
-
-export interface NewLike_newLike {
-  __typename: "LikeArticle";
-  likeID: string;
-  user: NewLike_newLike_user;
-}
-
-export interface NewLike {
-  newLike: NewLike_newLike;
+export interface SubscribeToNewComment {
+  subscribeToNewComment: SubscribeToNewComment_subscribeToNewComment;
 }
 
 /* tslint:disable */
@@ -287,22 +246,46 @@ export interface NewLike {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL subscription operation: RemoveLike
+// GraphQL subscription operation: SubscribeToNewLike
 // ====================================================
 
-export interface RemoveLike_removeLike_user {
+export interface SubscribeToNewLike_subscribeToNewLike_user {
   __typename: "User";
   userID: string;
 }
 
-export interface RemoveLike_removeLike {
+export interface SubscribeToNewLike_subscribeToNewLike {
   __typename: "LikeArticle";
   likeID: string;
-  user: RemoveLike_removeLike_user;
+  user: SubscribeToNewLike_subscribeToNewLike_user;
 }
 
-export interface RemoveLike {
-  removeLike: RemoveLike_removeLike;
+export interface SubscribeToNewLike {
+  subscribeToNewLike: SubscribeToNewLike_subscribeToNewLike;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: SubscribeToRemoveLike
+// ====================================================
+
+export interface SubscribeToRemoveLike_subscribeToRemoveLike_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface SubscribeToRemoveLike_subscribeToRemoveLike {
+  __typename: "LikeArticle";
+  likeID: string;
+  user: SubscribeToRemoveLike_subscribeToRemoveLike_user;
+}
+
+export interface SubscribeToRemoveLike {
+  subscribeToRemoveLike: SubscribeToRemoveLike_subscribeToRemoveLike;
 }
 
 /* tslint:disable */

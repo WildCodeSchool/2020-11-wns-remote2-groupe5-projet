@@ -100,9 +100,9 @@ export const CREATE_COMMENT = gql`
   }
 `;
 
-export const LIKE_ARTICLE = gql`
-  mutation LikeArticle($articleID: String!) {
-    likeArticle(articleID: $articleID) {
+export const SWITCH_LIKE_ARTICLE = gql`
+  mutation SwitchLikeArticle($articleID: String!) {
+    switchLikeArticle(articleID: $articleID) {
       likeID
       user {
         userID
@@ -111,15 +111,15 @@ export const LIKE_ARTICLE = gql`
   }
 `;
 
-export const DISLIKE_ARTICLE = gql`
-  mutation DislikeArticle($articleID: String!) {
-    dislikeArticle(articleID: $articleID)
-  }
-`;
+// export const DISLIKE_ARTICLE = gql`
+//   mutation DislikeArticle($articleID: String!) {
+//     dislikeArticle(articleID: $articleID)
+//   }
+// `;
 
 export const SUBSCRIBE_TO_NEW_COMMENT = gql`
-  subscription NewComment {
-    newComment {
+  subscription SubscribeToNewComment {
+    subscribeToNewComment {
       contentFieldID
       commentaire
       date
@@ -132,8 +132,8 @@ export const SUBSCRIBE_TO_NEW_COMMENT = gql`
 `;
 
 export const SUBSCRIBE_TO_NEW_LIKE = gql`
-  subscription NewLike {
-    newLike {
+  subscription SubscribeToNewLike {
+    subscribeToNewLike {
       likeID
       user {
         userID
@@ -143,8 +143,8 @@ export const SUBSCRIBE_TO_NEW_LIKE = gql`
 `;
 
 export const SUBSCRIBE_TO_REMOVE_LIKE = gql`
-  subscription RemoveLike {
-    removeLike {
+  subscription SubscribeToRemoveLike {
+    subscribeToRemoveLike {
       likeID
       user {
         userID
