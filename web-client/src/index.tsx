@@ -18,6 +18,7 @@ import { createUploadLink } from 'apollo-upload-client';
 
 import './index.css';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const GRAPHQL_ENDPOINT = '/graphql';
 
