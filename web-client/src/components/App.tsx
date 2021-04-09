@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Flex, Container } from '@chakra-ui/react';
 
 import GlobalContext from '../utils/GlobalContext';
@@ -21,6 +21,9 @@ export default function App(): JSX.Element {
     data,
   } = useAuthentication();
 
+  const [actualPage, setActualPage] = useState<string>(
+    'Informations générales'
+  );
   return (
     <Box
       w="100%"
@@ -32,7 +35,11 @@ export default function App(): JSX.Element {
     >
       {!loading && (
         <GlobalContext.Provider
-          value={{ user: { pseudo: data?.me?.pseudo, id: data?.me?.userID } }}
+          value={{
+            user: { pseudo: data?.me?.pseudo, id: data?.me?.id },
+            actualPage,
+            setActualPage,
+          }}
         >
           {isAuthenticated ? (
             <Routes setIsAuthenticated={setIsAuthenticated} />

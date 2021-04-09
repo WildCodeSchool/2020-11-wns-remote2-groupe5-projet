@@ -7,10 +7,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import ArticleCreationPage from './pages/ArticleCreationPage/ArticleCreationPage';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
-import ProfilView from './common/Header/UserProfil/ProfilView/ProfilView';
-import InformationModification from './common/Header/UserProfil/ProfilModification/InformationModification';
-import DegreeModification from './common/Header/UserProfil/ProfilModification/DegreeModification';
-import ExperienceModification from './common/Header/UserProfil/ProfilModification/ExperienceModification';
+import UserProfil from './common/Header/UserProfil/UserProfil';
+import InformationModification from './common/Header/UserProfil/ProfilModification/ProfilModificationPages/InformationModification';
+import DegreeModification from './common/Header/UserProfil/ProfilModification/ProfilModificationPages/DegreeModification';
+import ExperienceModification from './common/Header/UserProfil/ProfilModification/ProfilModificationPages/ExperienceModification';
 import Header from './common/Header/Header';
 import MainPanel from './common/MainPanel/MainPanel';
 
@@ -33,8 +33,8 @@ export default function Routes({
               path="/articles/article-creation"
               component={ArticleCreationPage}
             />
-            <Route path="/articles/:articleID" component={ArticlePage} />
-            <Route path="/profil" component={ProfilView} />
+            <Route path="/articles/:article" component={ArticlePage} />
+            <Route path="/profil" component={UserProfil} />
             <Route
               path="/profil/profil-modification/general-information"
               component={InformationModification}

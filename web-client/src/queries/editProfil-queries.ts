@@ -7,3 +7,11 @@ export const CREATE_EXPERIENCES = gql`
     }
   }
 `;
+
+export const CREATE_DIPLOMAS = gql`
+  mutation createDiploma($diplomas: [CreateDiplomaInput!]!) {
+    createDiplomas(diplomas: $diplomas) {
+      diplomaID
+    }
+  }
+`;
