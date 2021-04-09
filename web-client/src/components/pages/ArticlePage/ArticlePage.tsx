@@ -55,10 +55,9 @@ export default function ArticlePage(): JSX.Element {
       console.log('ERROR', error);
     }
   };
-  console.log('Article page data', data);
   return (
     <Flex justify="space-around" w="100%" p={'44px'}>
-      <Box w="100%">
+      <Box w="300%">
         {data && (
           <ArticleHeader article={data.oneArticle} onClick={switchLike} />
         )}

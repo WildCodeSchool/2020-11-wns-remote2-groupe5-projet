@@ -37,7 +37,7 @@ export default function Header({
   return (
     <>
       <Flex
-        bgColor="gray.900"
+        bgColor="gray.800"
         justify="space-between"
         align="center"
         h="100px"

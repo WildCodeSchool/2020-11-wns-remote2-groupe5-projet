@@ -9,6 +9,8 @@ import Lien from './ContentFields/Lien';
 import SousTitre from './ContentFields/Sous-titre';
 import Titre from './ContentFields/Titre';
 import PublishModal from './PublishModal';
+import { Container } from '@chakra-ui/layout';
+import { Box, Flex } from '@chakra-ui/react';
 
 export default function ArticleCreationPage(): JSX.Element {
   const [fields, dispatch] = useReducer(fieldsReducer, [
@@ -24,7 +26,7 @@ export default function ArticleCreationPage(): JSX.Element {
   } = useArticlePublication(fields);
 
   return (
-    <div className="flex justify-center">
+    <Flex justify="center" w="100%">
       <PublishModal
         isOpen={publishModal}
         title={fields[0].value}
@@ -45,15 +47,11 @@ export default function ArticleCreationPage(): JSX.Element {
           })
         }
       >
-        <div className="container flex flex-col w-2/3">
+        <Box w="45%">
           <Titre index={0} value={fields[0].value} dispatch={dispatch} />
           <Droppable droppableId={'1'}>
             {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                className="container flex flex-col"
-              >
+              <Box ref={provided.innerRef} {...provided.droppableProps}>
                 {fields.map((field, index) => {
                   const props = {
                     key: index,
@@ -75,11 +73,11 @@ export default function ArticleCreationPage(): JSX.Element {
                   }
                 })}
                 {provided.placeholder}
-              </div>
+              </Box>
             )}
           </Droppable>
-        </div>
+        </Box>
       </DragDropContext>
-    </div>
+    </Flex>
   );
 }

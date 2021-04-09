@@ -2,7 +2,12 @@
 import { Box, Text, Flex, Button } from '@chakra-ui/react';
 import React from 'react';
 import { FcLike } from 'react-icons/fc';
-import { FaRegCommentDots, FaRegBookmark } from 'react-icons/fa';
+import {
+  FaRegCommentDots,
+  FaRegBookmark,
+  FaRegHeart,
+  FaHeart,
+} from 'react-icons/fa';
 
 type ArticleActionsProps = {
   numberLike: number;
@@ -32,14 +37,22 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
               <Text color="white" pr={'4px'}>
                 {numberLike}
               </Text>
-              <FcLike />
+              {numberLike === 0 ? (
+                <FaRegHeart color="white" />
+              ) : (
+                <FaHeart color="white" />
+              )}
             </Button>
           ) : (
             <>
               <Text color="white" pr={'4px'}>
                 {numberLike}
               </Text>
-              <FcLike />
+              {numberLike === 0 ? (
+                <FaRegHeart color="white" />
+              ) : (
+                <FaHeart color="white" />
+              )}
             </>
           )}
         </Flex>

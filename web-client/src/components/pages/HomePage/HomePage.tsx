@@ -14,7 +14,7 @@ export default function HomePage(): JSX.Element {
       align="center"
       justify="center"
       width="100%"
-      mt={'600px'}
+      mt="240px"
     >
       {data &&
         data.articles.map((article: Articles_articles) => (
