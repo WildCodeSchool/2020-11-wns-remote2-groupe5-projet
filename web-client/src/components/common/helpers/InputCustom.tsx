@@ -28,8 +28,8 @@ export default function InputCustom(props: InputProps): JSX.Element {
   }
 
   return (
-    <div className="flex justify-around items-center py-2 pb-3 w-full">
-      <div className="w-1 pt-6 pr-9">
+    <div className="flex items-center py-2 pb-3 w-full">
+      <div className="w-1 pt-6">
         <i className={`fas fa-${icon}`}></i>
       </div>
       <div>

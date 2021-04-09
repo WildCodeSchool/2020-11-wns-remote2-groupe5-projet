@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_AVATAR } from '../../../../../../queries/picture-queries';
-import InputCustom from '../../../../helpers/InputCustom';
+import { EDIT_PROFIL } from '../../../../../../queries/editProfil-queries';
+import { Flex } from '@chakra-ui/layout';
+import { useToast } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/button';
+import { Input } from '@chakra-ui/input';
+import { Textarea } from '@chakra-ui/textarea';
 
 export default function ExperienceModification(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
@@ -10,7 +15,43 @@ export default function ExperienceModification(): JSX.Element {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [bio, setBio] = useState('');
 
+  const toast = useToast();
+
   const [mutate] = useMutation(UPLOAD_AVATAR);
+  const [editProfil] = useMutation(EDIT_PROFIL);
+
+  const postProfil = async () => {
+    try {
+      await editProfil({
+        variables: {
+          experiences: [
+            {
+              pseudo,
+              age,
+              email,
+              bio,
+            },
+          ],
+        },
+      });
+      toast({
+        description: 'Profil mis à jour! :)',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.log('ERROR', error);
+      toast({
+        title: 'Erreur',
+        description:
+          "Une erreur c'est produite lors de la mise à jour de votre profil!",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
 
   const uploadAvatar = async ({
     target: {
@@ -23,17 +64,30 @@ export default function ExperienceModification(): JSX.Element {
         mutate({
           variables: { file },
         });
+      toast({
+        description: 'Image upload! :)',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
     } catch (err) {
       console.error(err);
+      toast({
+        title: 'Erreur',
+        description: "L'image ne c'est pas chargée!",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
 
   return (
-    <div className=" py-10 md:px-16 sm:px-4">
+    <Flex p={4} flexDirection="column" alignContent="flex-start">
       <form>
         <label
           htmlFor="file"
-          className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white"
+          className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-black"
         >
           <svg
             className="w-8 h-8"
@@ -54,44 +108,72 @@ export default function ExperienceModification(): JSX.Element {
         </label>
       </form>
 
-      <InputCustom
+      <Input
         type="text"
         placeholder="Pseudo"
-        textColor="text-white"
-        value={pseudo}
-        setValue={setPseudo}
+        focusBorderColor="#393E46"
+        onChange={(e) => setPseudo(e.target.value)}
+        marginY={5}
+        borderColor="#8b9ab0"
+        _hover={{ borderColor: '#424a57' }}
+        backgroundColor="whiteAlpha.900"
       />
 
-      <InputCustom
+      <Input
         type="number"
-        placeholder="Âge"
-        textColor="text-white"
-        value={age}
-        setValue={setAge}
+        placeholder="Age"
+        focusBorderColor="#393E46"
+        onChange={(e) => setAge(e.target.value)}
+        marginY={5}
+        borderColor="#8b9ab0"
+        _hover={{ borderColor: '#424a57' }}
+        backgroundColor="whiteAlpha.900"
       />
-      <InputCustom
+
+      <Input
         type="email"
-        placeholder="Email"
-        textColor="text-white"
-        value={email}
-        setValue={setEmail}
+        placeholder="Adresse Email"
+        focusBorderColor="#393E46"
+        onChange={(e) => setEmail(e.target.value)}
+        marginY={5}
+        borderColor="#8b9ab0"
+        _hover={{ borderColor: '#424a57' }}
+        backgroundColor="whiteAlpha.900"
       />
-      <InputCustom
+
+      <Input
         type="tel"
         placeholder="Numéro de téléphone"
-        textColor="text-white"
-        value={phoneNumber}
-        setValue={setPhoneNumber}
+        focusBorderColor="#393E46"
+        onChange={(e) => setPhoneNumber(e.target.value)}
+        marginY={5}
+        borderColor="#8b9ab0"
+        _hover={{ borderColor: '#424a57' }}
+        backgroundColor="whiteAlpha.900"
       />
-      <label className="text-white block uppercase text-xs font-bold">
-        Biographie
-        <textarea
+
+      <label color="black">
+        Description
+        <Textarea
+          focusBorderColor="#393E46"
           placeholder="Biographie"
-          className="h-32 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full mt-2"
-          value={bio}
           onChange={(e) => setBio(e.target.value)}
+          borderColor="#8b9ab0"
+          _hover={{ borderColor: '#424a57' }}
+          backgroundColor="whiteAlpha.900"
         />
       </label>
-    </div>
+      <Button
+        marginTop="20px"
+        alignSelf="center"
+        width="100px"
+        colorScheme="black"
+        variant="outline"
+        onClick={() => postProfil()}
+        backgroundColor="whiteAlpha.900"
+      >
+        Enregistrer
+      </Button>
+    </Flex>
   );
 }

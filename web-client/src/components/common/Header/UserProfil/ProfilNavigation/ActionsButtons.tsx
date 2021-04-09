@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
-import SaveButton from './SaveButton';
 
 import GlobalContext from '../../../../../utils/GlobalContext';
-import { Button } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 
 export default function ActionsButtons({
   goToModificationPage,
@@ -45,16 +44,9 @@ export default function ActionsButtons({
   };
 
   return (
-    <div>
-      <div className="flex row justify-between">
-        <Button>TEST</Button>
-        <button onClick={() => back()}>{backButton}</button>
-        <button onClick={() => next()}>{nextButton}</button>
-      </div>
-      <button onClick={() => setGoToModificationPage(!goToModificationPage)}>
-        {!goToModificationPage ? 'Modifier' : 'Annuler'}
-      </button>
-      <SaveButton />
-    </div>
+    <Flex justifyContent="space-between" marginTop="15px">
+      <Button onClick={() => back()}>{backButton}</Button>
+      <Button onClick={() => next()}>{nextButton}</Button>
+    </Flex>
   );
 }
