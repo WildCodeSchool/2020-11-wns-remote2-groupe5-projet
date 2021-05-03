@@ -1,6 +1,6 @@
 import React from 'react';
-import moment from 'moment';
 import { parseDateComment } from '../../../../utils/Date';
+import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
 
 type CommentCardProps = {
   pseudo: string;
@@ -15,24 +15,30 @@ export default function CommentCard({
   content,
 }: CommentCardProps): JSX.Element {
   return (
-    <section className=" mx-auto mb-5">
-      <div className="flex bg-gray-800 text-white justify-between rounded-tr-lg px-4 py-1 items-center">
-        <div className="flex flex-col md:flex-row  text-center md:text-left md:self-start items-center">
-          <img
-            className="rounded-full h-10 w-10 flex items-center justify-center"
-            src={avatar}
-            alt="avatar"
-          />
-          <span className="pl-4">{pseudo}</span>
-          <span className="text-gray-400 pl-5 text-xs">
+    <Box w="320px" mb="12px">
+      <Flex
+        justify="space-between"
+        align="center"
+        borderTopRightRadius={'xl'}
+        bgColor="gray.800"
+        px={'8px'}
+        py={'4px'}
+      >
+        <Flex>
+          <Avatar size="xs" src={avatar} alt="avatar" />
+          <Text pl="4px" fontSize="md" fontWeight={600} color="white">
+            {pseudo}
+          </Text>
+        </Flex>
+        <Flex align="center" justify="space-between">
+          <Text fontSize="xs" color="white">
             {parseDateComment(date)}
-          </span>
-        </div>
-        <div>
-          3&nbsp;<i className="fas fa-heart text-red-500"></i>
-        </div>
-      </div>
-      <div className="bg-white rounded-b-lg p-3 break-words">{content}</div>
-    </section>
+          </Text>
+        </Flex>
+      </Flex>
+      <Box bgColor="white" borderBottomRadius={'xl'} pl="8px" py="6px">
+        <Text>{content}</Text>
+      </Box>
+    </Box>
   );
 }

@@ -4,7 +4,7 @@ import React from 'react';
 interface GlobalContextProps {
   actualPage: string;
   setActualPage: (actualPage: string) => void;
-  user?: { pseudo: string };
+  user?: { pseudo: string; id: string };
 }
 
 export default React.createContext<GlobalContextProps>({

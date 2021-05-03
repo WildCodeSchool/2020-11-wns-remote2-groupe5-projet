@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_AVATAR } from '../../../../../../queries/picture-queries';
-import { EDIT_PROFIL } from '../../../../../../queries/editProfil-queries';
+// import { EDIT_PROFIL } from '../../../../../../queries/editProfil-queries';
 import { Flex } from '@chakra-ui/layout';
 import { useToast } from '@chakra-ui/react';
 import { Button } from '@chakra-ui/button';
@@ -18,40 +18,40 @@ export default function ExperienceModification(): JSX.Element {
   const toast = useToast();
 
   const [mutate] = useMutation(UPLOAD_AVATAR);
-  const [editProfil] = useMutation(EDIT_PROFIL);
+  // const [editProfil] = useMutation(EDIT_PROFIL);
 
-  const postProfil = async () => {
-    try {
-      await editProfil({
-        variables: {
-          experiences: [
-            {
-              pseudo,
-              age,
-              email,
-              bio,
-            },
-          ],
-        },
-      });
-      toast({
-        description: 'Profil mis à jour! :)',
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-      });
-    } catch (error) {
-      console.log('ERROR', error);
-      toast({
-        title: 'Erreur',
-        description:
-          "Une erreur c'est produite lors de la mise à jour de votre profil!",
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    }
-  };
+  // const postProfil = async () => {
+  //   try {
+  //     await editProfil({
+  //       variables: {
+  //         experiences: [
+  //           {
+  //             pseudo,
+  //             age,
+  //             email,
+  //             bio,
+  //           },
+  //         ],
+  //       },
+  //     });
+  //     toast({
+  //       description: 'Profil mis à jour! :)',
+  //       status: 'success',
+  //       duration: 9000,
+  //       isClosable: true,
+  //     });
+  //   } catch (error) {
+  //     console.log('ERROR', error);
+  //     toast({
+  //       title: 'Erreur',
+  //       description:
+  //         "Une erreur c'est produite lors de la mise à jour de votre profil!",
+  //       status: 'error',
+  //       duration: 9000,
+  //       isClosable: true,
+  //     });
+  //   }
+  // };
 
   const uploadAvatar = async ({
     target: {
@@ -169,7 +169,7 @@ export default function ExperienceModification(): JSX.Element {
         width="100px"
         colorScheme="black"
         variant="outline"
-        onClick={() => postProfil()}
+        // onClick={() => postProfil()}
         backgroundColor="whiteAlpha.900"
       >
         Enregistrer

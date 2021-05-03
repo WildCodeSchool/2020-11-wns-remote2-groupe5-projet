@@ -1,34 +1,37 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './MainPanel.css';
+import { Link as ReachLink } from 'react-router-dom';
+import { BsHouseDoorFill } from 'react-icons/bs';
+import { BiEdit } from 'react-icons/bi';
+import { MdNotifications } from 'react-icons/md';
+import { FaRegBookmark } from 'react-icons/fa';
+import { Flex } from '@chakra-ui/layout';
+import { Divider, Link, Icon } from '@chakra-ui/react';
 
 export default function MainPanel(): JSX.Element {
   return (
-    <div className="bg-gray-800 flex flex-col items-center text-4xl text-white">
-      <Link to="/">
-        <i className="fas fa-home m-2 my-3"></i>
+    <Flex
+      flexDir="column"
+      color="white"
+      align="center"
+      bgColor="gray.800"
+      h="100vh"
+    >
+      <Link as={ReachLink} to="/" m="8px">
+        <Icon as={BsHouseDoorFill} w={8} h={8} />
       </Link>
-      <div className="flex justify-center">
-        <hr className="w-3/4" />
-      </div>
-      <Link to="/articles/article-creation">
-        <i className="fas fa-edit m-2 my-3"></i>
+      <Divider orientation="horizontal" />
+      <Link as={ReachLink} to="/articles/article-creation" m="8px">
+        <Icon as={BiEdit} w={8} h={8} />
       </Link>
-      <div className="flex justify-center">
-        <hr className="w-3/4" />
-      </div>
+      <Divider orientation="horizontal" />
+      <Link as={ReachLink} to="/articles/article-creation" m="8px">
+        <Icon as={MdNotifications} w={8} h={8} />
+      </Link>
 
-      <i className="far fa-bell m-2 my-3"></i>
-      <div className="flex justify-center">
-        <hr className="w-3/4" />
-      </div>
-
-      <i className="far fa-bookmark m-2 my-3"></i>
-      <div className="flex justify-center">
-        <hr className="w-3/4" />
-      </div>
-
-      <i className="fas fa-eye m-2 my-3"></i>
-    </div>
+      <Divider orientation="horizontal" />
+      <Link as={ReachLink} to="/articles/article-creation" m="8px">
+        <Icon as={FaRegBookmark} w={8} h={8} />
+      </Link>
+    </Flex>
   );
 }

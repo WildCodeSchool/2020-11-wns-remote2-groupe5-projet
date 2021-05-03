@@ -19,7 +19,7 @@ export const CHECK_AUTH = gql`
 `;
 
 export const USER_INFO = gql`
-  query Me {
+  query UserInfo {
     me {
       pseudo
       age
