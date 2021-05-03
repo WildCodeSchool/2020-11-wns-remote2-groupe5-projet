@@ -1,65 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Box, Flex, Image } from '@chakra-ui/react';
 import GlobalContext from '../../../utils/GlobalContext';
 import { useParams } from 'react-router-dom';
-import { useMutation, useLazyQuery } from '@apollo/client';
-import { GET_ONE_BY_ID, LIKE_ARTICLE } from '../../../queries/article-queries';
-import { Articles_articles_likesArticle } from '../../../schemaTypes';
 import ArticleHeader from '../HomePage/ArticleHeader';
 import ContentFields from './ContentFields';
 import CommentContainer from './Comment/CommentContainer';
+import { useGetArticleAndSubscribeToChanges } from './useGetArticleAndSubscribeToChanges';
+import './ArticlePage.css';
 
 export default function ArticlePage(): JSX.Element {
   const { articleID } = useParams<{ articleID: string }>();
-  const [needToRefetch, setNeedToRefetch] = useState(false);
-  const contextUserID = useContext(GlobalContext).user?.id;
-  const [isLiked, setIsLiked] = useState<boolean>();
-  const [likeArticle] = useMutation(LIKE_ARTICLE);
-  const [getArticleDetails, { data, refetch, called }] = useLazyQuery(
-    GET_ONE_BY_ID,
-    {
-      variables: {
-        articleID: articleID,
-      },
-      pollInterval: 250,
-    }
-  );
+  const userID = useContext(GlobalContext).user?.id;
 
-  useEffect(() => {
-    getArticleDetails({
-      variables: {
-        articleID: articleID,
-      },
-    });
-  }, [needToRefetch]);
+  const {
+    data,
+    isLiked,
+    switchLikeArticle,
+  } = useGetArticleAndSubscribeToChanges(userID, articleID);
 
-  useEffect(() => {
-    data &&
-      setIsLiked(
-        data.oneArticle.likesArticle.some(
-          (like: Articles_articles_likesArticle) =>
-            like.user.userID === contextUserID
-        )
-      );
-  }, [data]);
-
-  const switchLike = async () => {
-    try {
-      setIsLiked(!isLiked);
-      await likeArticle({
-        variables: {
-          articleID: articleID,
-        },
-      });
-    } catch (error) {
-      console.log('ERROR', error);
-    }
-  };
   return (
     <Flex justify="space-around" w="100%" p={'16px'} h="100vh">
       <Box w="70%">
         {data && (
-          <ArticleHeader article={data.oneArticle} onClick={switchLike} />
+          <ArticleHeader
+            article={data.oneArticle}
+            onClick={switchLikeArticle}
+            isLiked={isLiked}
+          />
         )}
         <Flex
           flexDir="column"
@@ -85,8 +52,6 @@ export default function ArticlePage(): JSX.Element {
         <CommentContainer
           articleID={articleID}
           comments={data?.oneArticle?.commentairesArticle}
-          needToRefetch={needToRefetch}
-          setNeedToRefetch={setNeedToRefetch}
         />
       </Box>
     </Flex>

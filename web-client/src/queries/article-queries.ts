@@ -100,10 +100,55 @@ export const CREATE_COMMENT = gql`
   }
 `;
 
-export const LIKE_ARTICLE = gql`
-  mutation LikeArticle($articleID: String!) {
-    likeArticle(articleID: $articleID) {
-      userID
+export const SWITCH_LIKE_ARTICLE = gql`
+  mutation SwitchLikeArticle($articleID: String!) {
+    switchLikeArticle(articleID: $articleID) {
+      likeID
+      user {
+        userID
+      }
+    }
+  }
+`;
+
+// export const DISLIKE_ARTICLE = gql`
+//   mutation DislikeArticle($articleID: String!) {
+//     dislikeArticle(articleID: $articleID)
+//   }
+// `;
+
+export const SUBSCRIBE_TO_NEW_COMMENT = gql`
+  subscription SubscribeToNewComment {
+    subscribeToNewComment {
+      contentFieldID
+      commentaire
+      date
+      user {
+        userID
+        pseudo
+      }
+    }
+  }
+`;
+
+export const SUBSCRIBE_TO_NEW_LIKE = gql`
+  subscription SubscribeToNewLike {
+    subscribeToNewLike {
+      likeID
+      user {
+        userID
+      }
+    }
+  }
+`;
+
+export const SUBSCRIBE_TO_REMOVE_LIKE = gql`
+  subscription SubscribeToRemoveLike {
+    subscribeToRemoveLike {
+      likeID
+      user {
+        userID
+      }
     }
   }
 `;

@@ -24,6 +24,7 @@ export default function App(): JSX.Element {
   const [actualPage, setActualPage] = useState<string>(
     'Informations générales'
   );
+
   return (
     <Box
       w="100%"

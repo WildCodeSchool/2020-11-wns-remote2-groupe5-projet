@@ -6,8 +6,7 @@ import { Articles_articles } from '../../../schemaTypes';
 import { Box, Flex } from '@chakra-ui/react';
 
 export default function HomePage(): JSX.Element {
-  const { data } = useQuery(GET_ALL_ARTICLES);
-  console.log('HomePage - data', data);
+  const { data } = useQuery(GET_ALL_ARTICLES, { fetchPolicy: 'no-cache' });
   return (
     <Flex
       flexDir="column"

@@ -21,40 +21,33 @@ import { getMainDefinition } from '@apollo/client/utilities';
 
 const GRAPHQL_ENDPOINT = '/graphql';
 
-// const httpLink = createUploadLink({
-//   uri: GRAPHQL_ENDPOINT,
-// });
-
-// const wsLink = new WebSocketLink({
-//   uri: `ws://localhost:4000${GRAPHQL_ENDPOINT}`,
-//   options: {
-//     reconnect: true,
-//   },
-// });
-
-// const splitLink = split(
-//   ({ query }) => {
-//     const definition = getMainDefinition(query);
-//     return (
-//       definition.kind === 'OperationDefinition' &&
-//       definition.operation === 'subscription'
-//     );
-//   },
-//   wsLink,
-//   httpLink
-// );
-
-const client = new ApolloClient({
-  link: createUploadLink({
-    uri: GRAPHQL_ENDPOINT,
-  }),
-  cache: new InMemoryCache(),
+const httpLink = createUploadLink({
+  uri: GRAPHQL_ENDPOINT,
 });
 
-// const client = new ApolloClient({
-//   uri: '/graphql',
-//   cache: new InMemoryCache(),
-// });
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:4000${GRAPHQL_ENDPOINT}`,
+  options: {
+    reconnect: true,
+  },
+});
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink
+);
+
+const client = new ApolloClient({
+  link: splitLink,
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
   <React.StrictMode>

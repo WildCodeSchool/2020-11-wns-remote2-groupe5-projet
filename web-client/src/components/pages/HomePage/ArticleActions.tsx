@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Box, Text, Flex, Button } from '@chakra-ui/react';
 import React from 'react';
-import { FcLike } from 'react-icons/fc';
 import {
   FaRegCommentDots,
   FaRegBookmark,
@@ -14,6 +13,7 @@ type ArticleActionsProps = {
   numberCom: number;
   numberRegister?: number;
   onClick?: () => void;
+  isLiked?: boolean;
 };
 
 const ArticleActions: React.FC<ArticleActionsProps> = ({
@@ -21,6 +21,7 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
   numberCom,
   numberRegister,
   onClick,
+  isLiked,
 }) => {
   return (
     <Box>
@@ -48,7 +49,7 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
               <Text color="white" pr={'4px'}>
                 {numberLike}
               </Text>
-              {numberLike === 0 ? (
+              {isLiked ? (
                 <FaRegHeart color="white" />
               ) : (
                 <FaHeart color="white" />

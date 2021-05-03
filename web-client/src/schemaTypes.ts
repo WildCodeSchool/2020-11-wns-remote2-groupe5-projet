@@ -44,7 +44,7 @@ export interface Articles_articles_likesArticle_user {
 }
 
 export interface Articles_articles_likesArticle {
-  __typename: "Like_Article";
+  __typename: "LikeArticle";
   likeID: string;
   user: Articles_articles_likesArticle_user;
 }
@@ -80,7 +80,7 @@ export interface Articles_articles {
   description: string;
   user: Articles_articles_user;
   contentFields: Articles_articles_contentFields[];
-  commentairesArticle: Articles_articles_commentairesArticle[] | null;
+  commentairesArticle: Articles_articles_commentairesArticle[];
 }
 
 export interface Articles {
@@ -102,7 +102,7 @@ export interface OneArticle_oneArticle_likesArticle_user {
 }
 
 export interface OneArticle_oneArticle_likesArticle {
-  __typename: "Like_Article";
+  __typename: "LikeArticle";
   likeID: string;
   user: OneArticle_oneArticle_likesArticle_user;
 }
@@ -143,7 +143,7 @@ export interface OneArticle_oneArticle {
   date: any;
   user: OneArticle_oneArticle_user;
   contentFields: OneArticle_oneArticle_contentFields[];
-  commentairesArticle: OneArticle_oneArticle_commentairesArticle[] | null;
+  commentairesArticle: OneArticle_oneArticle_commentairesArticle[];
 }
 
 export interface OneArticle {
@@ -191,20 +191,101 @@ export interface createCommentVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: LikeArticle
+// GraphQL mutation operation: SwitchLikeArticle
 // ====================================================
 
-export interface LikeArticle_likeArticle {
+export interface SwitchLikeArticle_switchLikeArticle_user {
   __typename: "User";
   userID: string;
 }
 
-export interface LikeArticle {
-  likeArticle: LikeArticle_likeArticle;
+export interface SwitchLikeArticle_switchLikeArticle {
+  __typename: "LikeArticle";
+  likeID: string;
+  user: SwitchLikeArticle_switchLikeArticle_user;
 }
 
-export interface LikeArticleVariables {
+export interface SwitchLikeArticle {
+  switchLikeArticle: SwitchLikeArticle_switchLikeArticle;
+}
+
+export interface SwitchLikeArticleVariables {
   articleID: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: SubscribeToNewComment
+// ====================================================
+
+export interface SubscribeToNewComment_subscribeToNewComment_user {
+  __typename: "User";
+  userID: string;
+  pseudo: string;
+}
+
+export interface SubscribeToNewComment_subscribeToNewComment {
+  __typename: "CommentaireArticle";
+  contentFieldID: string;
+  commentaire: string;
+  date: any;
+  user: SubscribeToNewComment_subscribeToNewComment_user;
+}
+
+export interface SubscribeToNewComment {
+  subscribeToNewComment: SubscribeToNewComment_subscribeToNewComment;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: SubscribeToNewLike
+// ====================================================
+
+export interface SubscribeToNewLike_subscribeToNewLike_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface SubscribeToNewLike_subscribeToNewLike {
+  __typename: "LikeArticle";
+  likeID: string;
+  user: SubscribeToNewLike_subscribeToNewLike_user;
+}
+
+export interface SubscribeToNewLike {
+  subscribeToNewLike: SubscribeToNewLike_subscribeToNewLike;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: SubscribeToRemoveLike
+// ====================================================
+
+export interface SubscribeToRemoveLike_subscribeToRemoveLike_user {
+  __typename: "User";
+  userID: string;
+}
+
+export interface SubscribeToRemoveLike_subscribeToRemoveLike {
+  __typename: "LikeArticle";
+  likeID: string;
+  user: SubscribeToRemoveLike_subscribeToRemoveLike_user;
+}
+
+export interface SubscribeToRemoveLike {
+  subscribeToRemoveLike: SubscribeToRemoveLike_subscribeToRemoveLike;
 }
 
 /* tslint:disable */

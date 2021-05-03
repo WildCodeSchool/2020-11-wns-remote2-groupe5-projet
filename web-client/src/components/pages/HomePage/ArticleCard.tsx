@@ -2,9 +2,9 @@ import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Articles_articles } from '../../../schemaTypes';
-import ArticleActions from './ArticleActions';
 import ArticleHeader from './ArticleHeader';
 import { FaArrowRight } from 'react-icons/fa';
+
 type ArticleCardProps = {
   article: Articles_articles;
 };
@@ -12,7 +12,6 @@ type ArticleCardProps = {
 export default function ArticleCard({
   article,
 }: ArticleCardProps): JSX.Element {
-  console.log('articleCard', article);
   return (
     <Box>
       <ArticleHeader article={article} />
