@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: postgres:13.2
+    environment:
+      - POSTGRES_PASSWORD=password
+  api:
+    build: .
+    depends_on:
+      - db
+    environment:
+      - TYPEORM_CONNECTION=postgres
+      - TYPEORM_HOST=db
+      - TYPEORM_PORT=5432
+      - TYPEORM_DATABASE=postgres
+      - TYPEORM_USERNAME=postgres
+      - TYPEORM_PASSWORD=password
+  web-client:
+    build: ./web-client
