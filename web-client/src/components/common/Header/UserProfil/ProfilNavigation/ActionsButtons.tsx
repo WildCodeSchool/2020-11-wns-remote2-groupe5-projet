@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useContext, useState } from 'react';
 
 import GlobalContext from '../../../../../utils/GlobalContext';
