@@ -16,6 +16,8 @@ export default function ArticleCreationPage(): JSX.Element {
     { contentType: 'Titre', value: '' },
   ]);
 
+  console.log("coucou")
+
   const {
     publishModal,
     setPublishModal,
