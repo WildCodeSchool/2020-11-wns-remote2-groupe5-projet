@@ -13,7 +13,7 @@ export default function ArticlePage(): JSX.Element {
   const userID = useContext(GlobalContext).user?.id;
 
   const {
-    data,
+    article,
     isLiked,
     switchLikeArticle,
   } = useGetArticleAndSubscribeToChanges(userID, articleID);
@@ -21,9 +21,9 @@ export default function ArticlePage(): JSX.Element {
   return (
     <Flex justify="space-around" w="100%" p={'16px'} h="100vh">
       <Box w="70%">
-        {data && (
+        {article && (
           <ArticleHeader
-            article={data.oneArticle}
+            article={article.oneArticle}
             onClick={switchLikeArticle}
             isLiked={isLiked}
           />
@@ -41,17 +41,17 @@ export default function ArticlePage(): JSX.Element {
             src={
               'https://img-19.ccm2.net/QeOmxQpB5sfw25JvsKbirn-eulw=/250x/6aab65a776614b8bba8c8b4e8c1848c9/ccm-encyclopedia/0px-Unofficial_JavaScript_logo_2.svg.png'
             }
-            alt={data?.oneArticle?.title}
+            alt={article?.oneArticle?.title}
           />
-          {data && (
-            <ContentFields contentFields={data.oneArticle.contentFields} />
+          {article && (
+            <ContentFields contentFields={article.oneArticle.contentFields} />
           )}
         </Flex>
       </Box>
       <Box>
         <CommentContainer
           articleID={articleID}
-          comments={data?.oneArticle?.commentairesArticle}
+          comments={article?.oneArticle?.commentairesArticle}
         />
       </Box>
     </Flex>
