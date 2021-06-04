@@ -24,7 +24,7 @@ const httpLink = createUploadLink({
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:${process.env.NODE_ENV === 'development' ? '4000' : '8000'}${GRAPHQL_ENDPOINT}`,
+  uri: `${process.env.NODE_ENV === 'development' ? 'ws://localhost:4000' : document.location.origin.replace('http', 'ws')}${GRAPHQL_ENDPOINT}`,
   options: {
     reconnect: true,
   },
