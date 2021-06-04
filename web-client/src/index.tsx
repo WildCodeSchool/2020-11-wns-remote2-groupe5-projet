@@ -6,18 +6,16 @@ import {
   InMemoryCache,
   split,
 } from '@apollo/client';
-
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import './tailwind.output.css';
 import { ChakraProvider } from '@chakra-ui/react';
-
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { createUploadLink } from 'apollo-upload-client';
-
 import './index.css';
 import { getMainDefinition } from '@apollo/client/utilities';
+require('dotenv').config();
 
 const GRAPHQL_ENDPOINT = '/graphql';
 
@@ -26,7 +24,7 @@ const httpLink = createUploadLink({
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000${GRAPHQL_ENDPOINT}`,
+  uri: `ws://localhost:${process.env.NODE_ENV === 'development' ? '4000' : '8000'}${GRAPHQL_ENDPOINT}`,
   options: {
     reconnect: true,
   },
