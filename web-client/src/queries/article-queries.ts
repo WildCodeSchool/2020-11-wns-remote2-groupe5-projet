@@ -100,22 +100,21 @@ export const CREATE_COMMENT = gql`
   }
 `;
 
+
+export const IS_LIKED_ARTICLE = gql`
+  query isLikedArticle($articleID: String!) {
+    isArticleLiked(articleID: $articleID)
+}
+`;
+
 export const SWITCH_LIKE_ARTICLE = gql`
   mutation SwitchLikeArticle($articleID: String!) {
     switchLikeArticle(articleID: $articleID) {
-      likeID
-      user {
         userID
-      }
     }
   }
 `;
 
-// export const DISLIKE_ARTICLE = gql`
-//   mutation DislikeArticle($articleID: String!) {
-//     dislikeArticle(articleID: $articleID)
-//   }
-// `;
 
 export const SUBSCRIBE_TO_NEW_COMMENT = gql`
   subscription SubscribeToNewComment {
@@ -126,28 +125,6 @@ export const SUBSCRIBE_TO_NEW_COMMENT = gql`
       user {
         userID
         pseudo
-      }
-    }
-  }
-`;
-
-export const SUBSCRIBE_TO_NEW_LIKE = gql`
-  subscription SubscribeToNewLike {
-    subscribeToNewLike {
-      likeID
-      user {
-        userID
-      }
-    }
-  }
-`;
-
-export const SUBSCRIBE_TO_REMOVE_LIKE = gql`
-  subscription SubscribeToRemoveLike {
-    subscribeToRemoveLike {
-      likeID
-      user {
-        userID
       }
     }
   }

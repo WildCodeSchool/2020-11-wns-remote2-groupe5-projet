@@ -10,6 +10,7 @@ services:
     environment:
       - NODE_ENV=development
       - TYPEORM_LOGGING=true
+      - TYPEORM_ENTITIES=dist/models/*.js
   web-client:
     command: npm run start
     stdin_open: true

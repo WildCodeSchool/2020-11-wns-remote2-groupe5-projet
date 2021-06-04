@@ -22,10 +22,6 @@ type newCommentNotificationPayload = {
   payload: CommentaireArticle;
 };
 
-type likesChangesNotificationPayload = {
-  payload: LikeArticle;
-};
-
 @Resolver()
 export default class ArticleResolver {
   @Subscription({
@@ -34,24 +30,6 @@ export default class ArticleResolver {
   subscribeToNewComment(
     @Root() notificationPayload: newCommentNotificationPayload
   ): CommentaireArticle {
-    return notificationPayload.payload;
-  }
-
-  @Subscription({
-    topics: 'NEW_LIKE',
-  })
-  subscribeToNewLike(
-    @Root() notificationPayload: likesChangesNotificationPayload
-  ): LikeArticle {
-    return notificationPayload.payload;
-  }
-
-  @Subscription({
-    topics: 'REMOVE_LIKE',
-  })
-  subscribeToRemoveLike(
-    @Root() notificationPayload: likesChangesNotificationPayload
-  ): LikeArticle {
     return notificationPayload.payload;
   }
 
@@ -149,15 +127,11 @@ export default class ArticleResolver {
     return commentaire;
   }
 
-  @Mutation(() => LikeArticle)
-  async switchLikeArticle(
+  @Query(() => Boolean)
+  async isArticleLiked(
     @Ctx() { user }: { user: User | null },
-    @Arg('articleID') articleID: string,
-    @PubSub('NEW_LIKE')
-    createLike: Publisher<likesChangesNotificationPayload>,
-    @PubSub('REMOVE_LIKE')
-    removeLike: Publisher<likesChangesNotificationPayload>
-  ): Promise<LikeArticle> {
+    @Arg('articleID') articleID: string
+  ): Promise<boolean> {
     if (!user) {
       throw Error('You are not authenticated.');
     }
@@ -168,24 +142,46 @@ export default class ArticleResolver {
       throw Error('Article inexistant');
     }
 
-    const currentLike = await LikeArticle.find({
+    const isLiked = await LikeArticle.findOne({
       where: { article, user },
       relations: ['user'],
-    }).then((likes) => likes[0]);
+    });
+
+    if (isLiked) return true;
+    return false;
+  }
+
+  @Mutation(() => User)
+  async switchLikeArticle(
+    @Ctx() { user }: { user: User | null },
+    @Arg('articleID') articleID: string
+  ): Promise<User> {
+    if (!user) {
+      throw Error('You are not authenticated.');
+    }
+
+    const article = await Article.findOne(articleID);
+
+    if (!article) {
+      throw Error('Article inexistant');
+    }
+
+    const currentLike = await LikeArticle.findOne({
+      where: { article, user },
+      relations: ['user'],
+    });
 
     if (!currentLike) {
       const newLike = LikeArticle.create();
       newLike.article = article;
       newLike.user = user;
       await newLike.save();
-      createLike({ payload: newLike });
-      return newLike;
     }
 
-    removeLike({ payload: currentLike });
+    if (currentLike) {
+      await currentLike.remove();
+    }
 
-    await currentLike.remove();
-
-    return currentLike;
+    return user;
   }
 }

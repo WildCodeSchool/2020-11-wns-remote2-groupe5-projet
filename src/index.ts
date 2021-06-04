@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { createConnection } from 'typeorm';
+import { createConnection, getConnectionOptions } from 'typeorm';
 import { createServer } from 'http';
 import { execute, subscribe } from 'graphql';
 
@@ -7,7 +7,12 @@ import { getExpressServer } from './express-server';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 
 const main = async () => {
-  await createConnection();
+  const connectionOptions = await getConnectionOptions();
+  await createConnection({
+    ...connectionOptions,
+    synchronize: true,
+    entities: ['dist/models/*.js'],
+  });
 
   const {
     expressServer,

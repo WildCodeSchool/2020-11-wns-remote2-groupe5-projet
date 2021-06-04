@@ -3,14 +3,12 @@ import { useMutation, useQuery } from '@apollo/client';
 import {
   OneArticle,
   SubscribeToNewComment,
-  SubscribeToNewLike,
-  SubscribeToRemoveLike,
 } from '../../../schemaTypes';
 import {
   GET_ONE_BY_ID,
+  IS_LIKED_ARTICLE,
   SUBSCRIBE_TO_NEW_COMMENT,
-  SUBSCRIBE_TO_NEW_LIKE,
-  SUBSCRIBE_TO_REMOVE_LIKE,
+
   SWITCH_LIKE_ARTICLE,
 } from '../../../queries/article-queries';
 
@@ -18,7 +16,7 @@ export const useGetArticleAndSubscribeToChanges = (
   userID: string | undefined,
   articleID: string
 ): {
-  data: OneArticle | undefined;
+  article: OneArticle | undefined;
   isLiked: boolean;
   switchLikeArticle: () => void;
 } => {
@@ -28,33 +26,33 @@ export const useGetArticleAndSubscribeToChanges = (
     },
   };
 
-  const { data, subscribeToMore } = useQuery<OneArticle>(
+  const { data: article, subscribeToMore, refetch } = useQuery<OneArticle>(
     GET_ONE_BY_ID,
     requestParam
   );
-
-  const [isSubscribedToNewChanges, setIsSubscribedToNewChanges] = useState(
-    false
-  );
-
-  const [isLiked, setIsLiked] = useState<boolean>(false);
-
+  const {data: isLikedArticle} = useQuery(IS_LIKED_ARTICLE, requestParam)
   const [switchLikeArticleQuery] = useMutation(SWITCH_LIKE_ARTICLE);
+
+  const [isSubscribedToNewChanges, setIsSubscribedToNewChanges] = useState(false);
+  const [isLiked, setIsLiked] = useState<boolean>(isLikedArticle?.isArticleLiked!);
+
 
   const switchLikeArticle = async () => {
     try {
-      await switchLikeArticleQuery(requestParam);
+      const res = await switchLikeArticleQuery(requestParam);
+      if (res) setIsLiked(!isLiked)
+      refetch()
     } catch (error) {
       console.log('ERROR', error);
     }
   };
 
+  useEffect(()=> {
+    if(isLikedArticle) setIsLiked(isLikedArticle?.isArticleLiked!)
+  }, [isLikedArticle])
+
+
   useEffect(() => {
-    if (data) {
-      setIsLiked(
-        data.oneArticle.likesArticle.some((like) => like.user.userID === userID)
-      );
-    }
     if (!isSubscribedToNewChanges) {
       subscribeToMore<SubscribeToNewComment>({
         document: SUBSCRIBE_TO_NEW_COMMENT,
@@ -72,42 +70,9 @@ export const useGetArticleAndSubscribeToChanges = (
         },
       });
 
-      subscribeToMore<SubscribeToNewLike>({
-        document: SUBSCRIBE_TO_NEW_LIKE,
-        updateQuery: (prev, { subscriptionData }): OneArticle => {
-          if (!subscriptionData.data) return prev;
-          return {
-            oneArticle: {
-              ...prev.oneArticle,
-              likesArticle: [
-                ...prev.oneArticle.likesArticle,
-                subscriptionData.data.subscribeToNewLike,
-              ],
-            },
-          };
-        },
-      });
-
-      subscribeToMore<SubscribeToRemoveLike>({
-        document: SUBSCRIBE_TO_REMOVE_LIKE,
-        updateQuery: (prev, { subscriptionData }): OneArticle => {
-          if (!subscriptionData.data) return prev;
-          return {
-            oneArticle: {
-              ...prev.oneArticle,
-              likesArticle: [
-                ...prev.oneArticle.likesArticle.filter(
-                  (like) => like.user.userID !== userID
-                ),
-              ],
-            },
-          };
-        },
-      });
-
       setIsSubscribedToNewChanges(true);
     }
-  }, [data]);
+  }, [article]);
 
-  return { data, isLiked, switchLikeArticle };
+  return { article, isLiked, switchLikeArticle };
 };

@@ -23,6 +23,7 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
   onClick,
   isLiked,
 }) => {
+
   return (
     <Box>
       <Flex flexDir="row" align="center" p={'4px'}>
@@ -41,7 +42,11 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
               {numberLike === 0 ? (
                 <FaRegHeart color="white" />
               ) : (
-                <FaHeart color="white" />
+                !isLiked ? (
+                  <FaRegHeart color="white" />
+                ) : (
+                  <FaHeart color="white" />
+                )
               )}
             </Button>
           ) : (
