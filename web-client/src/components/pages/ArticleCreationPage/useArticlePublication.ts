@@ -16,10 +16,10 @@ export const useArticlePublication = (
 } => {
   const [publishModal, setPublishModal] = useState(false);
 
-  const [usePostArticle] = useMutation(PUBLISH_ARTICLE);
+  const [publishArticle] = useMutation(PUBLISH_ARTICLE);
   const postArticle = async (description: string): Promise<void> => {
     try {
-      await usePostArticle({
+      await publishArticle({
         variables: {
           data: { date: new Date(), title: fields[0].value, description },
           fields: fields.map((field, index) => ({
