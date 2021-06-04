@@ -103,7 +103,7 @@ export const CREATE_COMMENT = gql`
 
 export const IS_LIKED_ARTICLE = gql`
   query isLikedArticle($articleID: String!) {
-    isLikeArticle(articleID: $articleID)
+    isArticleLiked(articleID: $articleID)
 }
 `;
 

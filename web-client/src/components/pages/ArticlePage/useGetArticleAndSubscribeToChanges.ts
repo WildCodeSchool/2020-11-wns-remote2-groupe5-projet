@@ -34,7 +34,7 @@ export const useGetArticleAndSubscribeToChanges = (
   const [switchLikeArticleQuery] = useMutation(SWITCH_LIKE_ARTICLE);
 
   const [isSubscribedToNewChanges, setIsSubscribedToNewChanges] = useState(false);
-  const [isLiked, setIsLiked] = useState<boolean>(isLikedArticle?.isLikeArticle!);
+  const [isLiked, setIsLiked] = useState<boolean>(isLikedArticle?.isArticleLiked!);
 
 
   const switchLikeArticle = async () => {
@@ -48,7 +48,7 @@ export const useGetArticleAndSubscribeToChanges = (
   };
 
   useEffect(()=> {
-    if(isLikedArticle) setIsLiked(isLikedArticle?.isLikeArticle!)
+    if(isLikedArticle) setIsLiked(isLikedArticle?.isArticleLiked!)
   }, [isLikedArticle])
 
 

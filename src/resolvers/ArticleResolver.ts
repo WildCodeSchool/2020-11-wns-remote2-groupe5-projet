@@ -128,7 +128,7 @@ export default class ArticleResolver {
   }
 
   @Query(() => Boolean)
-  async isLikeArticle(
+  async isArticleLiked(
     @Ctx() { user }: { user: User | null },
     @Arg('articleID') articleID: string
   ): Promise<boolean> {
@@ -145,7 +145,7 @@ export default class ArticleResolver {
     const isLiked = await LikeArticle.findOne({
       where: { article, user },
       relations: ['user'],
-    }).then((likes) => likes);
+    });
 
     if (isLiked) return true;
     return false;
@@ -169,7 +169,7 @@ export default class ArticleResolver {
     const currentLike = await LikeArticle.findOne({
       where: { article, user },
       relations: ['user'],
-    }).then((likes) => likes);
+    });
 
     if (!currentLike) {
       const newLike = LikeArticle.create();
