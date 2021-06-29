@@ -27,6 +27,7 @@ export default function ArticleCard({
               }
               alt={article?.title}
             />
+            <Text>Salut</Text>
           </Box>
           <Flex flexDir="column" justifyContent="space-between">
             <Flex flexDir="column" align="center">
