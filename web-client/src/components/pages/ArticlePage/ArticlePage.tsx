@@ -43,7 +43,7 @@ export default function ArticlePage(): JSX.Element {
             }
             alt={article?.oneArticle?.title}
           />
-          <p>wesh LE WEBHOOK.V3</p>
+          <p>wesh LE WEBHOOK.V4</p>
           {article && (
             <ContentFields contentFields={article.oneArticle.contentFields} />
           )}
