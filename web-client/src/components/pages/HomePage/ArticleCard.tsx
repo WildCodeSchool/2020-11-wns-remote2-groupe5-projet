@@ -17,7 +17,7 @@ export default function ArticleCard({
       <ArticleHeader article={article} />
       <Box borderBottomRadius={'2xl'} bgColor="white">
         <Flex justify="space-between">
-          {/* <Box p={'8px'}>
+          <Box p={'8px'}>
             <Image
               h="212px"
               w="212px"
@@ -27,7 +27,7 @@ export default function ArticleCard({
               }
               alt={article?.title}
             />
-          </Box> */}
+          </Box>
           <Flex flexDir="column" justifyContent="space-between">
             <Flex flexDir="column" align="center">
               <Heading
