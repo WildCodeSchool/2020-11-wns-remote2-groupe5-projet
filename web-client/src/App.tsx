@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Flex, Container } from '@chakra-ui/react';
 
-import GlobalContext from './contexts/GlobalContext';
+import GlobalContext from './contexts/CurrentUserContext';
 import useAuthentication from './customhooks/useAuthentication';
 import LogIn from './pages/loggedOut/LogInPage';
 import Routes from './router/Routes';
@@ -12,18 +12,14 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import CurrentUserProvider from './contexts/CurrentUserContext';
 
 export default function App(): JSX.Element {
   const {
     isAuthenticated,
     setIsAuthenticated,
     loading,
-    data,
   } = useAuthentication();
-
-  const [actualPage, setActualPage] = useState<string>(
-    'Informations générales'
-  );
 
   return (
     <Box
@@ -35,13 +31,7 @@ export default function App(): JSX.Element {
       overflowY="hidden"
     >
       {!loading && (
-        <GlobalContext.Provider
-          value={{
-            user: { pseudo: data?.me?.pseudo, id: data?.me?.id },
-            actualPage,
-            setActualPage,
-          }}
-        >
+        <CurrentUserProvider>
           {isAuthenticated ? (
             <Routes setIsAuthenticated={setIsAuthenticated} />
           ) : (
@@ -59,7 +49,7 @@ export default function App(): JSX.Element {
               </Switch>
             </Router>
           )}
-        </GlobalContext.Provider>
+        </CurrentUserProvider>
       )}
     </Box>
   );

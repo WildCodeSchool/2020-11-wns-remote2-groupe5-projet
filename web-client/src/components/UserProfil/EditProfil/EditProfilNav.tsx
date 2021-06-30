@@ -1,21 +1,21 @@
 import React, { useContext } from 'react';
 
 
-import GlobalContext from '../../../contexts/GlobalContext';
+import GlobalContext, { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 import EditDegree from './EditDegree';
 import EditExperience from './EditExperience';
 import EditInformations from './EditInformations';
 
 export default function EditProfilNav(): JSX.Element {
-  const context = useContext(GlobalContext);
+  const {actualPage, setActualPage} = useContext(CurrentUserContext);
 
   return (
     <div>
-      {context.actualPage == 'Informations générales' && (
+      {actualPage == 'Informations générales' && (
         <EditInformations />
       )}
-      {context.actualPage == 'Expériences' && <EditExperience />}
-      {context.actualPage == 'Diplômes' && <EditDegree />}
+      {actualPage == 'Expériences' && <EditExperience />}
+      {actualPage == 'Diplômes' && <EditDegree />}
     </div>
   );
 }

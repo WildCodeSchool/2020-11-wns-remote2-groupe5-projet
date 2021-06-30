@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import ActionsButtons from '../../components/helpers/ActionsButtons';
 import ProfilModification from '../../components/UserProfil/EditProfil/EditProfilNav';
 import ProfilView from '../../components/UserProfil/ReadProfil/ProfilReadNav';
-import GlobalContext from '../../contexts/GlobalContext';
+import GlobalContext, { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useQuery } from '@apollo/client';
 import { USER_INFO } from '../../queries/user-queries';
 import { Box, Container, Flex, Text } from '@chakra-ui/layout';
@@ -12,7 +12,7 @@ import { Avatar } from '@chakra-ui/avatar';
 import { CloseIcon, EditIcon } from '@chakra-ui/icons';
 
 export default function UserProfilPage(): JSX.Element {
-  const context = useContext(GlobalContext);
+  const {actualPage, setActualPage} = useContext(CurrentUserContext);
   const { data } = useQuery(USER_INFO);
 
   const [goToModificationPage, setGoToModificationPage] = useState<boolean>(
@@ -55,7 +55,7 @@ export default function UserProfilPage(): JSX.Element {
             <Box>
               <Flex justifyContent="space-between" paddingY="15px">
                 <Text color="White" fontSize="3xl">
-                  {context.actualPage}
+                  {actualPage}
                 </Text>
                 <Button
                   borderRadius="100px"

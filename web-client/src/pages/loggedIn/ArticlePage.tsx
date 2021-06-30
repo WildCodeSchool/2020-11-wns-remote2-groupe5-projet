@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Box, Flex, Image } from '@chakra-ui/react';
-import GlobalContext from '../../contexts/GlobalContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useParams } from 'react-router-dom';
 import ArticleHeader from '../../components/Articles/Read/ArticleHeader';
 import ContentFields from '../../components/Articles/Read/ContentFields';
@@ -10,13 +10,13 @@ import { useGetArticleAndSubscribeToChanges } from '../../customhooks/useGetArti
 
 export default function ArticlePage(): JSX.Element {
   const { articleID } = useParams<{ articleID: string }>();
-  const userID = useContext(GlobalContext).user?.id;
+  const {currentUser} = useContext(CurrentUserContext);
 
   const {
     article,
     isLiked,
     switchLikeArticle,
-  } = useGetArticleAndSubscribeToChanges(userID, articleID);
+  } = useGetArticleAndSubscribeToChanges(currentUser?.id, articleID);
 
   return (
     <Flex justify="space-around" w="100%" p={'16px'} h="100vh">

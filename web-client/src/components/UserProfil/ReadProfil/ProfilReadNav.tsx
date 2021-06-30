@@ -2,19 +2,19 @@ import React, { useContext } from 'react';
 import Degrees from './Degrees';
 import Experiences from './Experiences';
 import Informations from './Informations';
-import GlobalContext from '../../../contexts/GlobalContext';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
 
 export default function ProfilReadNav({ data }: { data: any }): JSX.Element {
-  const context = useContext(GlobalContext);
+  const {actualPage} = useContext(CurrentUserContext);
 
   return (
     <div>
-      {context.actualPage == 'Informations générales' && (
+      {actualPage == 'Informations générales' && (
         <Informations data={data} />
       )}
-      {context.actualPage == 'Expériences' && <Experiences data={data} />}
-      {context.actualPage == 'Diplômes' && <Degrees data={data} />}
+      {actualPage == 'Expériences' && <Experiences data={data} />}
+      {actualPage == 'Diplômes' && <Degrees data={data} />}
     </div>
   );
 }

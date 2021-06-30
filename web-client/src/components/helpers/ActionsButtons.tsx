@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useContext, useState } from 'react';
 
-import GlobalContext from '../../contexts/GlobalContext';
+import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 import { Button, Flex } from '@chakra-ui/react';
 
 export default function ActionsButtons({
@@ -11,35 +11,35 @@ export default function ActionsButtons({
   goToModificationPage: boolean;
   setGoToModificationPage(goToModificationPage: boolean): void;
 }): JSX.Element {
-  const context = useContext(GlobalContext);
+  const {actualPage, setActualPage} = useContext(CurrentUserContext);
 
   const [backButton, setBackButton] = useState<string>('Diplômes');
   const [nextButton, setNextButton] = useState<string>('Expériences');
 
   const back = () => {
-    context.actualPage == 'Informations générales'
-      ? (context.setActualPage('Diplômes'),
+    actualPage == 'Informations générales'
+      ? (setActualPage && setActualPage('Diplômes'),
         setBackButton('Expériences'),
         setNextButton('Informations générales'))
-      : context.actualPage == 'Expériences'
-      ? (context.setActualPage('Informations générales'),
+      : actualPage == 'Expériences'
+      ? (setActualPage && setActualPage('Informations générales'),
         setBackButton('Diplômes'),
         setNextButton('Expériences'))
-      : (context.setActualPage('Expériences'),
+      : (setActualPage && setActualPage('Expériences'),
         setBackButton('Informations générales'),
         setNextButton('Diplômes'));
   };
 
   const next = () => {
-    context.actualPage == 'Informations générales'
-      ? (context.setActualPage('Expériences'),
+    actualPage == 'Informations générales'
+      ? (setActualPage && setActualPage('Expériences'),
         setBackButton('Informations générales'),
         setNextButton('Diplômes'))
-      : context.actualPage == 'Expériences'
-      ? (context.setActualPage('Diplômes'),
+      : actualPage == 'Expériences'
+      ? (setActualPage && setActualPage('Diplômes'),
         setBackButton('Expériences'),
         setNextButton('Informations générales'))
-      : (context.setActualPage('Informations générales'),
+      : (setActualPage && setActualPage('Informations générales'),
         setBackButton('Diplômes'),
         setNextButton('Expériences'));
   };
