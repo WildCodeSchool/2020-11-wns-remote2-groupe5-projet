@@ -1,14 +1,13 @@
+import { Box, Flex, Text, Image } from '@chakra-ui/react';
 import React from 'react';
-import { ReactComponent as ReactLogo } from '../../assets/icons/logo_SkillShare.svg';
+import logo from '../../assets/icons/logo_SkillShare.svg';
 
 export default function LogoCustom(): JSX.Element {
   return (
-    <div className="flex flex-row items-center">
-      <p className="text-white text-6xl"> Skillz</p>
-      <div>
-        <ReactLogo className="w-30" />
-      </div>
-      <p className="text-white text-6xl">Share</p>
-    </div>
+    <Flex alignItems="center">
+      <Text color="#FFF" fontSize={{ base: "3xl", sm: "3xl", md: "3xl", lg: "4xl", xl:"7xl" }}> Skillz</Text>
+        <Image src={logo} w={{  base: "130px", sm:"130px", md: "200px", lg: "220px", xl: '250px' }}  />
+      <Text color="#FFF" fontSize={{ base: "3xl", sm: "3xl", md: "3xl", lg: "4xl", xl:"7xl" }}>Share</Text>
+    </Flex>
   );
 }

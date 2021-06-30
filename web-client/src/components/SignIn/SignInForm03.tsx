@@ -3,6 +3,8 @@ import InputCustom from '../helpers/InputCustom';
 import ButtonCustom from '../helpers/ButtonCustom';
 // import ArrowLeft from '../../../assets/icons/icon_arrow_left.svg';
 import { User } from './SignInCard';
+import { Box, VStack, InputGroup, InputLeftElement, Input, Button } from '@chakra-ui/react';
+import { FaPhone, FaCity, FaBirthdayCake, FaGlobe, FaArrowLeft } from 'react-icons/fa';
 
 type SignInForm01Props = {
   user: User;
@@ -16,44 +18,58 @@ export default function SignInForm03({
   onMinusSignInForm,
 }: SignInForm01Props): JSX.Element {
   return (
-    <div>
-      <InputCustom
-        type="text"
-        placeholder="Communauté"
-        value={user.community}
-        setValue={(e: string) => {
-          onUserChange('phoneNumber', e);
-        }}
-        icon="users"
+    <Box marginTop="24px">
+    <VStack spacing='24px'>
+      <InputGroup>
+      <InputLeftElement
+        pointerEvents="none"
+        children={<FaPhone color="gray.800" />}
       />
-      <InputCustom
-        type="city"
-        placeholder="Skillz"
-        value={user.skillz}
-        setValue={(e: string) => {
-          onUserChange('city', e);
-        }}
-        icon="lightbulb"
-      />
-      {/* <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white">
-        <svg
-          className="w-8 h-8"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-        </svg>
-        <span className="mt-2 text-base leading-normal">Select a file</span>
-        <input type="file" className="hidden" onChange={uploadPicture} />
-      </label> */}
-      <div className="flex flex-row-reverse">
-        <ButtonCustom
-          label="Prev"
-          onClick={onMinusSignInForm}
-          // avatarPath={ArrowLeft}
+        <Input 
+          type="text" 
+          placeholder="Community"
+          backgroundColor="gray.100"
+          borderColor='gray.500'
+          focusBorderColor="gray.800"
+          errorBorderColor="red.300"
+          value={user.community}
+          onChange={(e) => {
+            onUserChange('community', e.target.value);
+          }}
+          isRequired
         />
-      </div>
-    </div>
-  );
+      </InputGroup>
+      <InputGroup>
+        <InputLeftElement
+          pointerEvents="none"
+          children={<FaCity color="gray.800" />}
+        />
+          <Input 
+            type="text" 
+            placeholder="Skillz"
+            backgroundColor="gray.100"
+            borderColor='gray.500'
+            focusBorderColor="gray.800"
+            errorBorderColor="red.300"
+            value={user.skillz}
+            onChange={(e) => {
+              onUserChange('skillz', e.target.value);
+            }}
+            isRequired
+          />
+        </InputGroup>
+          <Box>
+          <Button
+            variant="ghost"
+             leftIcon={<FaArrowLeft />}
+             onClick={onMinusSignInForm}
+            colorScheme="gray.100"
+            _hover={{borderColor:"gray.800"}}
+            _checked={{borderColor:"gray.800"}}
+          >Prev
+        </Button>
+    </Box>
+    </VStack>
+  </Box>
+);
 }
