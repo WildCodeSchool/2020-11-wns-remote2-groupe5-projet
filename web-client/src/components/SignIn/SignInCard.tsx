@@ -144,14 +144,14 @@ export default function SignInCard(): JSX.Element {
             {renderSignInForm()}
             {displaySignInCard === 2 ? (
               <>
-                    <Flex w="100%" justifyContent="start" alignItems="center">
+                    <Flex w="100%" justifyContent="start" alignItems="center" marginBottom="16px">
                     <Checkbox
                       id="customCheckLogin"
                       type="checkbox"
                       colorScheme="blackAlpha"
                       onClick={() => setIsPolicyAccepted(!isPolicyAccepted)}
                     />
-                    <Text color="gray.500" pl="16px"> 
+                    <Text fontSize="small" color="gray.500" pl="16px"> 
                       Accepter la politique de confidentialité
                     </Text>
                 </Flex>

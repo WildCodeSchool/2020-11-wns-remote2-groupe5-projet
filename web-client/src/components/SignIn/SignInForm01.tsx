@@ -63,7 +63,7 @@ export default function SignInForm01({
               isRequired
             />
           </InputGroup>
-          <InputGroup size="md">
+          <InputGroup>
             <InputLeftElement
               pointerEvents="none"
               children={<FaKey color="gray.800" />}
@@ -94,7 +94,7 @@ export default function SignInForm01({
                 </Button>
             </InputRightElement>
           </InputGroup>
-          <InputGroup size="md">
+          <InputGroup>
             <InputLeftElement
               pointerEvents="none"
               children={<LockIcon color="gray.800" />}
