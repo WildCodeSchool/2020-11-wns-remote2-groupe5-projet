@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { AUTH } from '../queries/user-queries';
 import InputCustom from './helpers/InputCustom';
 import { Link } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
 
 type LogInCardProps = {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
@@ -18,7 +19,6 @@ export default function LogInCard({
   const [authenticate] = useMutation(AUTH);
 
   const authenticateAndHandleError = async () => {
-    console.log('remember me', rememberMe);
     try {
       await authenticate({
         variables: {
@@ -37,7 +37,7 @@ export default function LogInCard({
   };
 
   return (
-    <div className="bg-gray-300 flex flex-col w-full h-530 mb-6 shadow-lg rounded-lg border-0">
+    <Box w="300px">
       <div className="rounded-t mb-0 px-6 py-6 w-full">
         <div className="text-center mb-3">
           <h4 className="text-gray-600 uppercase font-bold">log in</h4>
@@ -105,6 +105,6 @@ export default function LogInCard({
           </div>
         </form>
       </div>
-    </div>
+    </Box>
   );
 }
