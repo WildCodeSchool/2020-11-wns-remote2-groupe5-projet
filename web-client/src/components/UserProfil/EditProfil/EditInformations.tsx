@@ -18,15 +18,12 @@ export default function EditInformations(): JSX.Element {
   const [phoneNumber, setPhoneNumber] = useState(currentUser?.phoneNumber!);
   const [bio, setBio] = useState<string>(currentUser?.bio!);
 
- //console.log("user from context", currentUser)
-
   const toast = useToast();
 
   const [mutate] = useMutation(UPLOAD_AVATAR);
   const [editProfil] = useMutation(EDIT_PROFIL);
 
   const postProfil = async () => {
-    console.log("before send", pseudo, age, email, bio, phoneNumber)
     try {
       await editProfil({
         variables: {

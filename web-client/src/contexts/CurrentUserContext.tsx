@@ -43,20 +43,11 @@ const CurrentUserProvider: React.FC<IProps> = (props: IProps) => {
 
 
   const {data} = useQuery(USER_INFO);
-
-  // getRes()
   
   useEffect(() => {
       if(isAuthenticated && data)
       setCurrentUser(data?.me)
   },[data])
-
-  console.log("is auth in context", isAuthenticated)
-  
-  console.log("data in context", data)
-
-  console.log("currentUser in context", currentUser)
-
 
 	return (
 		<CurrentUserContext.Provider value={{ isAuthenticated, setIsAuthenticated, currentUser, actualPage, setActualPage, loading }}>
