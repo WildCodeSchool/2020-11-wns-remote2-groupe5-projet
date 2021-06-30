@@ -46,6 +46,18 @@ export const USER_INFO = gql`
   }
 `;
 
+export const EDIT_PROFIL = gql`
+  mutation ProfilUpdate($data: CreateUserInput!) {
+    updateUserInfos(data: $data) {
+      pseudo
+      age
+      email
+      phoneNumber
+      bio
+    }
+  }
+`;
+
 export const SIGN_IN = gql`
   mutation SignIn($data: CreateUserInput!) {
     signIn(data: $data) {

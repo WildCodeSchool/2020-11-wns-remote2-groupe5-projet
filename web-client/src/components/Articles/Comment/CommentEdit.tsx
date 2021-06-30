@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import GlobalContext from '../../../contexts/GlobalContext';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 import InputCustom from '../../helpers/InputCustom';
 import { CREATE_COMMENT } from '../../../queries/article-queries';
 import { Box, Flex, Avatar, Text, Textarea, Button } from '@chakra-ui/react';
@@ -15,7 +15,8 @@ type CommentEditProps = {
 const CommentEdit: React.FC<CommentEditProps> = ({
   articleID,
 }): JSX.Element => {
-  const user = useContext(GlobalContext).user;
+  const {currentUser} = useContext(CurrentUserContext);
+
   const [comment, setComment] = useState('');
   const [createComment] = useMutation(CREATE_COMMENT);
 
@@ -45,9 +46,9 @@ const CommentEdit: React.FC<CommentEditProps> = ({
         py={'4px'}
       >
         <Flex>
-          <Avatar size="xs" src={user?.pseudo} alt="avatar" />
+          <Avatar size="xs" src={currentUser?.pseudo} alt="avatar" />
           <Text pl="4px" fontSize="md" fontWeight={600} color="white">
-            {user?.pseudo}
+            {currentUser?.pseudo}
           </Text>
         </Flex>
       </Flex>
