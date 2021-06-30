@@ -125,9 +125,9 @@ export default function SignInCard(): JSX.Element {
           e.preventDefault();
           submitForm();
         }}>
-      <VStack className="flex-auto px-4 lg: px-8 py-10 pt-0">
+      <VStack>
       <Box>
-          <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">LOG IN</Text>
+          <Text color="gray.700" fontSize="3xl" fontWeight="bold" textAlign="center">SIGN IN</Text>
         </Box>
         <Box width="100%" borderBottom="2px" borderBottomColor="gray.400" paddingBottom="24px">
           <Link to="/">
@@ -140,7 +140,7 @@ export default function SignInCard(): JSX.Element {
           </Text>
           </Link>
         </Box>
-        <Box>
+        <Box width="100%">
             {renderSignInForm()}
             {displaySignInCard === 2 ? (
               <>
