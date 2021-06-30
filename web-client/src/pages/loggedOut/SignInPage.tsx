@@ -17,7 +17,9 @@ export default function SignInPage(): JSX.Element {
             px={{base:"16px", md:"0px"}}
             >
               <LogoCustom />
-              <SignInCard />
+              <Box>
+                <SignInCard />
+              </Box>
               <Box>
                 <Text 
                   fontSize={{base: "small"}} 

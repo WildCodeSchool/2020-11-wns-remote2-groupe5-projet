@@ -118,7 +118,7 @@ export default function SignInCard(): JSX.Element {
   };
 
   return (
-    <Box backgroundColor="gray.300" borderRadius="xl" p="24px">
+    <Box backgroundColor="gray.300" borderRadius="xl" p="24px" minWidth="343px">
       {redirect && <Redirect to="/" />}
       <form
         onSubmit={(e) => {
