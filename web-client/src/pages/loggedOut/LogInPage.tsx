@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import React, { Dispatch, SetStateAction } from 'react';
 
 import LogoCustom from '../../components/helpers/LogoCustom';
@@ -16,11 +16,15 @@ export default function LogInPage({ setIsAuthenticated }: LogInPageProps): JSX.E
             height="100%" 
             backgroundColor="#111827" 
             flexDir={{base: "column", sm: "column", md: "row"}} 
-            alignItems="center" 
-            justify="space-around"
+            alignItems="center"
+            justify={{base:"space-around", sm:"space-around", md:"space-around"}}
+            px={{base:"16px", md:"0px"}}
           >
               <LogoCustom />
               <LogInCard setIsAuthenticated={setIsAuthenticated} />
+              <Box>
+                <Text fontSize={{base: "small"}} color='gray.200'>@copyrights Fatima, Sam, Paul, Guillaume</Text>
+              </Box>
           </Flex>
   );
 }
