@@ -73,6 +73,8 @@ export default function LogInCard({
                 borderColor='gray.500'
                 focusBorderColor="gray.800"
                 errorBorderColor="red.300"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
                 isRequired
               />
           </InputGroup>
@@ -89,6 +91,8 @@ export default function LogInCard({
               borderColor='gray.500'
               focusBorderColor="gray.800"
               errorBorderColor="red.300"
+              value={userPassword}
+              onChange={(e) => setUserPassword(e.target.value)}
               isRequired
             />
             <InputRightElement width="4.5rem">
