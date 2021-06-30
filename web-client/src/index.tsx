@@ -6,7 +6,7 @@ import {
   InMemoryCache,
   split,
 } from '@apollo/client';
-import App from './components/App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import './tailwind.output.css';
