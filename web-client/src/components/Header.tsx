@@ -15,6 +15,7 @@ import {
   MenuItem,
 } from '@chakra-ui/react';
 import LogoClickable from './helpers/LogoClickable';
+import LogoCustom from './helpers/LogoCustom';
 
 type HeaderProps = {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
@@ -35,23 +36,24 @@ export default function Header({
   };
 
   return (
-    <>
       <Flex
         bgColor="gray.800"
-        justify="space-between"
+        justify={{base: "space-between", sm: "space-between"}}
         align="center"
         h="100px"
         w="100%"
-        px={'32px'}
+				px="16px"
       >
-        <Box w="88px" h="88px"></Box>
         <Flex>
-          <LogoClickable />
+          <LogoCustom isNavLink />
         </Flex>
-        <Flex justify="end">
+        <Flex>
           <Menu>
             <MenuButton>
-              <Avatar />
+              <Avatar 
+								w={{ base: "50px", sm:"60px", md: "70px", lg: "74px", xl: "74px" }} 
+								h={{ base: "50px", sm:"60px", md: "70px", lg: "74px", xl: "74px" }} 
+							/>
             </MenuButton>
             <MenuList>
               <Link
@@ -68,6 +70,5 @@ export default function Header({
           </Menu>
         </Flex>
       </Flex>
-    </>
   );
 }
