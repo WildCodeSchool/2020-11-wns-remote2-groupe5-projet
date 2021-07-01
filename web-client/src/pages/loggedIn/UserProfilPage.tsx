@@ -34,11 +34,11 @@ export default function UserProfilPage(): JSX.Element {
         centerContent
         padding="0"
       >
-        <Box width="100%">
+        <Box width="95%">
           <Box
             backgroundColor="#393E46"
             width="100%"
-            padding={{ lg: '0 80px 50px 80px', base: '0' }}
+            // padding={{ lg: '0 80px 50px 80px', base: '0' }}
             borderRadius="13px"
           >
             <Flex flexDirection="column" alignItems="center">
@@ -47,12 +47,13 @@ export default function UserProfilPage(): JSX.Element {
                 alt="profil picture"
                 boxSize="3xs"
                 marginTop="-90px"
+                w={{base:"100px",sm:"150px",md:"200px",lg:"200px"}} h={{base:"100px",sm:"150px",md:"200px",lg:"200px"}}
               />
               <Text fontSize="2xl" color="white">
                 {data?.me?.pseudo}
               </Text>
             </Flex>
-            <Box>
+            <Box padding={{base:"10px",sm:"20px",md:"30px",lg:"40px"}}>
               <Flex justifyContent="space-between" paddingY="15px">
                 <Text color="White" fontSize="3xl">
                   {actualPage}

@@ -55,7 +55,7 @@ export default function ArticleCreationPage(): JSX.Element {
           })
         }
       >
-        <Box w="45%">
+        <Box w={["90%","90%","45%","45%"]}>
           <Titre index={0} value={fields[0].value} dispatch={dispatch} />
           <Droppable droppableId={'1'}>
             {(provided) => (
