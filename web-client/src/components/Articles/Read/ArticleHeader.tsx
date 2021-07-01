@@ -18,6 +18,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
 }) => {
   return (
     <Flex
+      flexDir={["column","column","column","row"]}
       justify="space-between"
       align="center"
       borderTopRadius={'2xl'}
