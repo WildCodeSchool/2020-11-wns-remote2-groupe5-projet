@@ -1,29 +1,93 @@
+import { Box, Flex } from '@chakra-ui/react';
 import React from 'react';
 
 const renderProgressBar = (step: number) => {
   if (step <= 0) {
     return (
-      <div className="flex items-center mt-6">
-        <div className=" box-content bg-gray-900 h-3 w-9 mx-5 rounded" />
-        <div className=" box-content bg-gray-500 h-2 w-9 mx-5 rounded" />
-        <div className=" box-content bg-gray-500 h-2 w-9 mx-5 rounded" />
-      </div>
+      <Flex 
+        alignItems='center'
+        mt='32px'
+      >
+        <Box 
+          backgroundColor="gray.800"
+          h={3}
+          w={9}
+          mx={5}
+          borderRadius="xl"
+        />
+        <Box 
+          backgroundColor="gray.800"
+          h={2}
+          w={9}
+          mx={5}
+          borderRadius="xl"
+        />
+        <Box 
+          backgroundColor="gray.800"
+          h={2}
+          w={9}
+          mx={5}
+          borderRadius="xl"
+        />
+      </Flex>
     );
   } else if (step === 1) {
-    return (
-      <div className="flex items-center mt-6">
-        <div className=" box-content bg-gray-500 h-2 w-9 mx-5 rounded" />
-        <div className=" box-content bg-gray-900 h-3 w-9 mx-5 rounded" />
-        <div className=" box-content bg-gray-500 h-2 w-9 mx-5 rounded" />
-      </div>
+    return(
+    <Flex 
+    alignItems='center'
+    mt='32px'
+     >
+    <Box 
+      backgroundColor="gray.800"
+      h={2}
+      w={9}
+      mx={5}
+      borderRadius="xl"
+    />
+    <Box 
+      backgroundColor="gray.800"
+      h={3}
+      w={9}
+      mx={5}
+      borderRadius="xl"
+    />
+    <Box 
+      backgroundColor="gray.800"
+      h={2}
+      w={9}
+      mx={5}
+      borderRadius="xl"
+    />
+  </Flex>
     );
   } else if (step === 2) {
     return (
-      <div className="flex items-center mt-6">
-        <div className=" box-content bg-gray-500 h-2 w-9 mx-5 rounded" />
-        <div className=" box-content bg-gray-500 h-2 w-9 mx-5 rounded" />
-        <div className=" box-content bg-gray-900 h-3 w-9 mx-5 rounded" />
-      </div>
+      <Flex 
+        alignItems='center'
+        mt='32px'
+      >
+        <Box 
+          backgroundColor="gray.800"
+          h={2}
+          w={9}
+          mx={5}
+          borderRadius="xl"
+        />
+        <Box 
+          backgroundColor="gray.800"
+          h={2}
+          w={9}
+          mx={5}
+          borderRadius="xl"
+        />
+        <Box 
+          backgroundColor="gray.800"
+          h={3}
+          w={9}
+          mx={5}
+          borderRadius="xl"
+        />
+      </Flex>
     );
   }
 };

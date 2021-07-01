@@ -24,7 +24,7 @@ export default function UserProfilPage(): JSX.Element {
     <Box
       height="100vh"
       width="100%"
-      backgroundColor="whiteAlpha.900"
+      backgroundColor="gray.200"
     >
       <Container
         display="flex"
@@ -37,7 +37,7 @@ export default function UserProfilPage(): JSX.Element {
       >
         <Box width="95%">
           <Box
-            backgroundColor="#393E46"
+            backgroundColor="gray.800"
             width="100%"
             // padding={{ lg: '0 80px 50px 80px', base: '0' }}
             borderRadius="13px"

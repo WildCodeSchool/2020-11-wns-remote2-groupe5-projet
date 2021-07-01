@@ -8,13 +8,11 @@ import {
 } from '@apollo/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './index.css';
-import './tailwind.output.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { createUploadLink } from 'apollo-upload-client';
-import './index.css';
 import { getMainDefinition } from '@apollo/client/utilities';
+import './index.css';
 require('dotenv').config();
 
 const GRAPHQL_ENDPOINT = '/graphql';
