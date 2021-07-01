@@ -1,10 +1,9 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { AUTH } from '../queries/user-queries';
-import InputCustom from './helpers/InputCustom';
 import { Link } from 'react-router-dom';
-import { Box, Text, Divider, VStack, HStack, Flex, Button, Checkbox, Input, InputGroup, InputLeftElement, InputRightElement, Stack } from '@chakra-ui/react';
-import { AtSignIcon, CheckIcon, LockIcon, PhoneIcon, WarningIcon } from '@chakra-ui/icons';
+import { Box, Text, VStack, Flex, Button, Checkbox, Input, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react';
+import { AtSignIcon, LockIcon, WarningIcon } from '@chakra-ui/icons';
 
 type LogInCardProps = {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;

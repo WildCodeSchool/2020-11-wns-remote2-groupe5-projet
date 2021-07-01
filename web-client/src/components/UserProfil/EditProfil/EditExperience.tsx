@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import InputCustom from '../../helpers/InputCustom';
 import { Button, Checkbox, Flex, Input, Textarea } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';

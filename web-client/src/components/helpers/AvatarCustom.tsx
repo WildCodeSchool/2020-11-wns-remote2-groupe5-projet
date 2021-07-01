@@ -16,7 +16,7 @@ const AvatarCustom = (props: AvatarCustomProps) => {
 
   return (
     <Avatar
-      src={avatar === null ? undefined : ("public/media/avatars/" + avatar)}
+      src={avatar === null ? undefined : (document.location.origin + "/public/media/avatars/" + avatar)}
       w={variant === "big" ? 
       { base: "45px", sm:"60px", md: "70px", lg: "74px", xl: "74px" } : 
       {base: "26px", sm:"30px", md: "30px", lg: "40px", xl: "50px"}} 

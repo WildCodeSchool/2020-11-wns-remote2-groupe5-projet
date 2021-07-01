@@ -34,8 +34,6 @@ const CommentEdit: React.FC<CommentEditProps> = ({
     }
   };
 
-  console.log("currentUser", currentUser)
-
   return (
     <Box w="320px" my="12px">
       <Flex
