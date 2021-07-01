@@ -15,7 +15,7 @@ export default function CommentCard({
   content,
 }: CommentCardProps): JSX.Element {
   return (
-    <Box w="320px" mb="12px">
+    <Box w={["100%","100%","100%","320px"]} mb="12px">
       <Flex
         justify="space-between"
         align="center"
