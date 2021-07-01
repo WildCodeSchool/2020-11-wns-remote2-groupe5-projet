@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, useDisclosure } from '@chakra-ui/react';
 import Lien from '../../components/Articles/Creation/ContentFields/Lien';
 import Paragraphe from '../../components/Articles/Creation/ContentFields/Paragraphe';
 import SousTitre from '../../components/Articles/Creation/ContentFields/Sous-titre';
@@ -11,10 +11,18 @@ import PublishModal from '../../components/Articles/Creation/PublishModal';
 import { useArticlePublication } from '../../customhooks/useArticlePublication';
 import fieldsReducer from '../../reducers/fieldsReducer';
 import Image from '../.././components/Articles/Creation/ContentFields/Image';
+
 export default function ArticleCreationPage(): JSX.Element {
   const [fields, dispatch] = useReducer(fieldsReducer, [
     { contentType: 'Titre', value: '' },
   ]);
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const handleModal = () => {
+    console.log("coucou")
+    onOpen()
+  }
 
   const {
     publishModal,
@@ -27,14 +35,15 @@ export default function ArticleCreationPage(): JSX.Element {
   return (
     <Flex justify="center" w="100%">
       <PublishModal
-        isOpen={publishModal}
+        isOpen={isOpen}
+        onClose={onClose}
         title={fields[0].value}
         description={defaultDescription()}
-        setPublishModal={setPublishModal}
+        setPublishModal={onOpen}
         postArticle={postArticle}
       />
 
-      <EditionTools dispatch={dispatch} openPublishModal={openPublishModal} />
+      <EditionTools dispatch={dispatch} openPublishModal={handleModal} />
       <DragDropContext
         onDragEnd={(e) =>
           dispatch({
