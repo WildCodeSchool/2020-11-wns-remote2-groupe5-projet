@@ -10,25 +10,25 @@ import { Divider, Link, Icon } from '@chakra-ui/react';
 export default function MainPanel(): JSX.Element {
   return (
     <Flex
-      flexDir="column"
+      flexDir="row"
       color="white"
+      justifyContent="space-around"
       align="center"
       bgColor="gray.800"
-      h="100vh"
     >
       <Link as={ReachLink} to="/" m="8px">
         <Icon as={BsHouseDoorFill} w={8} h={8} />
       </Link>
-      <Divider orientation="horizontal" />
+      {/* <Divider orientation="horizontal" /> */}
       <Link as={ReachLink} to="/articles/article-creation" m="8px">
         <Icon as={BiEdit} w={8} h={8} />
       </Link>
-      <Divider orientation="horizontal" />
+      {/* <Divider orientation="horizontal" /> */}
       <Link as={ReachLink} to="/articles/article-creation" m="8px">
         <Icon as={MdNotifications} w={8} h={8} />
       </Link>
 
-      <Divider orientation="horizontal" />
+      {/* <Divider orientation="horizontal" /> */}
       <Link as={ReachLink} to="/articles/article-creation" m="8px">
         <Icon as={FaRegBookmark} w={8} h={8} />
       </Link>

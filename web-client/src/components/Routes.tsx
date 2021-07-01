@@ -24,8 +24,8 @@ export default function Routes({
   return (
     <Router>
       <Header setIsAuthenticated={setIsAuthenticated} />
-      <Flex flexGrow={1} overflowY="hidden">
-        <MainPanel />
+      <Flex flexGrow={1} flexDir="column" overflowY="hidden">
+        
         <Flex flexGrow={1} overflowY="auto">
           <Switch>
             <Route exact path="/" component={HomePage} />
@@ -49,6 +49,7 @@ export default function Routes({
             />
           </Switch>
         </Flex>
+        <MainPanel />
       </Flex>
     </Router>
   );

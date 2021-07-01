@@ -13,7 +13,7 @@ export default function HomePage(): JSX.Element {
       align="center"
       justify="center"
       width="100%"
-      mt="240px"
+      pt={["550px","550px","400px","400px"]}
     >
       {data &&
         data.articles.map((article: Articles_articles) => (

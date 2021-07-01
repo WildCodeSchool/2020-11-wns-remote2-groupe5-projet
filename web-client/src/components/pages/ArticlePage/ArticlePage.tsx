@@ -19,8 +19,8 @@ export default function ArticlePage(): JSX.Element {
   } = useGetArticleAndSubscribeToChanges(userID, articleID);
 
   return (
-    <Flex justify="space-around" w="100%" p={'16px'} h="100vh">
-      <Box w="70%">
+    <Flex justify="space-around" w="100%" p={'16px'} h="100vh"  flexDir={["column","column","column","row"]}>
+      <Box w={["90%","90%","70%","70%"]} mx="auto" mb="20px">
         {article && (
           <ArticleHeader
             article={article.oneArticle}
@@ -48,7 +48,7 @@ export default function ArticlePage(): JSX.Element {
           )}
         </Flex>
       </Box>
-      <Box>
+      <Box mx="auto">
         <CommentContainer
           articleID={articleID}
           comments={article?.oneArticle?.commentairesArticle}
