@@ -1,6 +1,8 @@
 import React from 'react';
 import { Action } from '../../../../reducers/fieldsReducer';
 import { Draggable } from 'react-beautiful-dnd';
+import { Box, VStack, InputGroup, InputLeftElement, Input, Button } from '@chakra-ui/react';
+import {  FaPhone, FaCity, FaGlobe, FaBirthdayCake, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 type ParagrapheProps = {
   index: number;
@@ -9,6 +11,7 @@ type ParagrapheProps = {
   value: string;
   dispatch: React.Dispatch<Action>;
 };
+
 
 export default function Paragraphe({
   index,
