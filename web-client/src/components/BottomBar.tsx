@@ -7,7 +7,7 @@ import { FaRegBookmark } from 'react-icons/fa';
 import { Flex } from '@chakra-ui/layout';
 import { Divider, Link, Icon } from '@chakra-ui/react';
 
-export default function Navbar(): JSX.Element {
+export default function BottomBar(): JSX.Element {
   return (
     <Flex
       flexDir="row"

@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   Flex,
@@ -8,6 +7,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { parseDateArticle } from '../../../utils/Date';
+import AvatarCustom from '../../helpers/AvatarCustom';
 
 type ArticleUserInfoProps = {
   pseudo: string;
@@ -23,10 +23,15 @@ const ArticleUserInfo: React.FC<ArticleUserInfoProps> = ({
   date,
 }) => {
 
+  console.log("article", avatarFileName)
+
   return (
     <Flex align="center" m={'4px'}>
       <Box m={'4px'}>
-        <Avatar w={{base:"30px",sm:"34px",md:"45px",lg:"70px"}}  h={{base:"30px",sm:"34px",md:"45px",lg:"70px"}} name={pseudo} src={"public/media/avatars/" + avatarFileName} />
+        <AvatarCustom
+          variant="big"
+          avatar={avatarFileName} 
+        />
       </Box>
       <VStack spacing={0.5} m={'4px'}>
         <Flex>
