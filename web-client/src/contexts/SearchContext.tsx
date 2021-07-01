@@ -19,6 +19,7 @@ interface IProps {
 }
 
 const UserSearchProvider: React.FC<IProps> = (props: IProps) => {
+	
 	const { setDebouncer, cancelDebouncer } = useDebouncer()
 	const [searchValue, setSearchValue] = useState<string>('')
 	const [searchedUsers, setSearchedUsers] = useState<User[]>([])
@@ -38,7 +39,7 @@ const UserSearchProvider: React.FC<IProps> = (props: IProps) => {
 				setLoading(false)
 			}
 	}
-
+	
 	useEffect(() => {
 		if (searchValue && searchValue?.trim().length > 0) {
 			setDebouncer(500, () => getUsersBySearch())
@@ -50,6 +51,7 @@ const UserSearchProvider: React.FC<IProps> = (props: IProps) => {
 
 	// Render
 	// ----------------------------------------------------------------------------
+
 	return (
 		<UserSearchContext.Provider value={{ searchValue, setSearchValue, searchedUsers, loading }}>
 			{props.children}
