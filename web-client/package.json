@@ -63,5 +63,5 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://api:4000"
 }
