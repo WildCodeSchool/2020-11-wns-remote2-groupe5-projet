@@ -24,6 +24,7 @@ const CommentContainer: React.FC<CommentContainerProps> = ({
               pseudo={comment.user.pseudo}
               date={comment.date}
               content={comment.commentaire}
+              avatarFileName={comment.user.avatarFileName}
             />
           );
         })}

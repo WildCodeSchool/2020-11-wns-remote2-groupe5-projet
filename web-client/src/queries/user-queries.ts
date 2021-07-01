@@ -26,6 +26,7 @@ export const USER_INFO = gql`
       email
       phoneNumber
       bio
+      avatarFileName
       experiences {
         jobName
         company
@@ -84,6 +85,7 @@ export const GET_ALL_USERS = gql`
   query AllUsers {
     allUsers {
       pseudo
+      avatarFileName
       email
     }
   }

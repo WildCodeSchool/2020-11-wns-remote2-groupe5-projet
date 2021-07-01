@@ -5,13 +5,13 @@ import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
 type CommentCardProps = {
   pseudo: string;
   date: string;
-  avatar?: string;
+  avatarFileName: string | null;
   content: string;
 };
 export default function CommentCard({
   pseudo,
   date,
-  avatar,
+  avatarFileName,
   content,
 }: CommentCardProps): JSX.Element {
   return (
@@ -25,7 +25,7 @@ export default function CommentCard({
         py={'4px'}
       >
         <Flex>
-          <Avatar size="xs" src={avatar} alt="avatar" />
+          <Avatar name={pseudo} size="xs" src={"public/media/avatars/" + avatarFileName} alt="avatar" />
           <Text pl="4px" fontSize="md" fontWeight={600} color="white">
             {pseudo}
           </Text>

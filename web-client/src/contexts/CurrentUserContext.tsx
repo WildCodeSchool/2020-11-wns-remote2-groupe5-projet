@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { useLazyQuery, useQuery } from '@apollo/client';
+import {  useQuery } from '@apollo/client';
 import React, { ReactChild, useState } from 'react';
 import { useEffect } from 'react';
 import useAuthentication from '../customhooks/useAuthentication';
@@ -16,6 +15,7 @@ type CurrentUser = {
   age?: number
   phoneNumber?: string
   bio?: string
+  avatarFileName?: string
   __typename: string
 }
 

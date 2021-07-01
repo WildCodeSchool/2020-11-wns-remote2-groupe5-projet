@@ -52,6 +52,7 @@ export interface Articles_articles_likesArticle {
 export interface Articles_articles_user {
   __typename: "User";
   pseudo: string;
+  avatarFileName: string | null;
 }
 
 export interface Articles_articles_contentFields {
@@ -63,6 +64,7 @@ export interface Articles_articles_contentFields {
 
 export interface Articles_articles_commentairesArticle_user {
   __typename: "User";
+  avatarFileName: string | null;
   userID: string;
 }
 
@@ -110,6 +112,7 @@ export interface OneArticle_oneArticle_likesArticle {
 export interface OneArticle_oneArticle_user {
   __typename: "User";
   pseudo: string;
+  avatarFileName: string | null;
 }
 
 export interface OneArticle_oneArticle_contentFields {
@@ -124,6 +127,7 @@ export interface OneArticle_oneArticle_commentairesArticle_user {
   __typename: "User";
   userID: string;
   pseudo: string;
+  avatarFileName: string | null;
 }
 
 export interface OneArticle_oneArticle_commentairesArticle {
@@ -191,18 +195,29 @@ export interface createCommentVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: isLikedArticle
+// ====================================================
+
+export interface isLikedArticle {
+  isArticleLiked: boolean;
+}
+
+export interface isLikedArticleVariables {
+  articleID: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SwitchLikeArticle
 // ====================================================
 
-export interface SwitchLikeArticle_switchLikeArticle_user {
+export interface SwitchLikeArticle_switchLikeArticle {
   __typename: "User";
   userID: string;
-}
-
-export interface SwitchLikeArticle_switchLikeArticle {
-  __typename: "LikeArticle";
-  likeID: string;
-  user: SwitchLikeArticle_switchLikeArticle_user;
 }
 
 export interface SwitchLikeArticle {
@@ -226,6 +241,7 @@ export interface SubscribeToNewComment_subscribeToNewComment_user {
   __typename: "User";
   userID: string;
   pseudo: string;
+  avatarFileName: string | null;
 }
 
 export interface SubscribeToNewComment_subscribeToNewComment {
@@ -238,54 +254,6 @@ export interface SubscribeToNewComment_subscribeToNewComment {
 
 export interface SubscribeToNewComment {
   subscribeToNewComment: SubscribeToNewComment_subscribeToNewComment;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL subscription operation: SubscribeToNewLike
-// ====================================================
-
-export interface SubscribeToNewLike_subscribeToNewLike_user {
-  __typename: "User";
-  userID: string;
-}
-
-export interface SubscribeToNewLike_subscribeToNewLike {
-  __typename: "LikeArticle";
-  likeID: string;
-  user: SubscribeToNewLike_subscribeToNewLike_user;
-}
-
-export interface SubscribeToNewLike {
-  subscribeToNewLike: SubscribeToNewLike_subscribeToNewLike;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL subscription operation: SubscribeToRemoveLike
-// ====================================================
-
-export interface SubscribeToRemoveLike_subscribeToRemoveLike_user {
-  __typename: "User";
-  userID: string;
-}
-
-export interface SubscribeToRemoveLike_subscribeToRemoveLike {
-  __typename: "LikeArticle";
-  likeID: string;
-  user: SubscribeToRemoveLike_subscribeToRemoveLike_user;
-}
-
-export interface SubscribeToRemoveLike {
-  subscribeToRemoveLike: SubscribeToRemoveLike_subscribeToRemoveLike;
 }
 
 /* tslint:disable */
@@ -308,6 +276,28 @@ export interface CreateExperiences {
 
 export interface CreateExperiencesVariables {
   experiences: CreateExperienceInput[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: createDiploma
+// ====================================================
+
+export interface createDiploma_createDiplomas {
+  __typename: "Diploma";
+  diplomaID: string;
+}
+
+export interface createDiploma {
+  createDiplomas: createDiploma_createDiplomas[];
+}
+
+export interface createDiplomaVariables {
+  diplomas: CreateDiplomaInput[];
 }
 
 /* tslint:disable */
@@ -381,6 +371,77 @@ export interface Me {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: UserInfo
+// ====================================================
+
+export interface UserInfo_me_experiences {
+  __typename: "Experience";
+  jobName: string | null;
+  company: string | null;
+  dateStart: any | null;
+  dateEnd: any | null;
+  isActualJob: boolean | null;
+  description: string | null;
+}
+
+export interface UserInfo_me_diplomas {
+  __typename: "Diploma";
+  diplomaName: string | null;
+  school: string | null;
+  dateStart: any | null;
+  dateEnd: any | null;
+  isActualSchool: boolean | null;
+  description: string | null;
+}
+
+export interface UserInfo_me {
+  __typename: "User";
+  pseudo: string;
+  age: number | null;
+  email: string;
+  phoneNumber: string | null;
+  bio: string | null;
+  avatarFileName: string | null;
+  experiences: UserInfo_me_experiences[];
+  diplomas: UserInfo_me_diplomas[];
+}
+
+export interface UserInfo {
+  me: UserInfo_me;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: ProfilUpdate
+// ====================================================
+
+export interface ProfilUpdate_updateUserInfos {
+  __typename: "User";
+  pseudo: string;
+  age: number | null;
+  email: string;
+  phoneNumber: string | null;
+  bio: string | null;
+}
+
+export interface ProfilUpdate {
+  updateUserInfos: ProfilUpdate_updateUserInfos;
+}
+
+export interface ProfilUpdateVariables {
+  data: CreateUserInput;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SignIn
 // ====================================================
 
@@ -432,6 +493,7 @@ export interface DeleteSession {
 export interface AllUsers_allUsers {
   __typename: "User";
   pseudo: string;
+  avatarFileName: string | null;
   email: string;
 }
 
@@ -460,6 +522,15 @@ export interface CreateContentFieldInput {
   placeNumber: number;
 }
 
+export interface CreateDiplomaInput {
+  diplomaName?: string | null;
+  school?: string | null;
+  dateStart?: any | null;
+  dateEnd?: any | null;
+  isActualSchool?: boolean | null;
+  description?: string | null;
+}
+
 export interface CreateExperienceInput {
   jobName?: string | null;
   company?: string | null;
@@ -483,6 +554,7 @@ export interface CreateUserInput {
   city?: string | null;
   phoneNumber?: string | null;
   bio?: string | null;
+  avatarFileName?: string | null;
 }
 
 //==============================================================
