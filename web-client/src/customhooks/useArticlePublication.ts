@@ -22,7 +22,8 @@ export const useArticlePublication = (
       await publishArticle({
         variables: {
           data: { date: new Date(), title: fields[0].value, description },
-          fields: fields.map((field, index) => ({
+          fields: fields.map((field, index) => (
+            {
             contentType: field.contentType,
             content: field.value,
             placeNumber: index,

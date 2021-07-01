@@ -24,7 +24,7 @@ export default function Image({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          className="flex flex-col m-4"
+          className="flex flex-col m-4 bg-white rounded"
         >
           <div className="bg-gray-800 rounded-t-md">
             <div className="flex items-center justify-between text-white py-2 px-4">
@@ -57,14 +57,10 @@ export default function Image({
             </div>
           </div>
           <input
-            onChange={(e) =>
-              dispatch({
-                type: 'SET_VALUE',
-                payload: { index, value: e.target.value },
-              })
-            }
-            value={value}
             placeholder="Selectionnez une image"
+            id="file"
+            type="file"
+            accept="image/*"
             className="rounded-b-md h-10 py-2 px-4"
           />
         </section>
