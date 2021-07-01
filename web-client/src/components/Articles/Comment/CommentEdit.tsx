@@ -54,7 +54,14 @@ const CommentEdit: React.FC<CommentEditProps> = ({
           </Text>
         </Flex>
       </Flex>
-      <Box className="flex items-center justify-between bg-white rounded-bl-lg p-5 break-words">
+      <Flex 
+        backgroundColor="gray.100"
+        alignItems="center"
+        justify="center"
+        borderBottomLeftRadius="2xl"
+        wordBreak='break-word'
+        p="8px"
+      >
         <Textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
@@ -82,7 +89,7 @@ const CommentEdit: React.FC<CommentEditProps> = ({
             <FiSend />
           </Button>
         )}
-      </Box>
+      </Flex>
     </Box>
   );
 };

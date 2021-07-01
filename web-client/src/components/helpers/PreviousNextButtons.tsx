@@ -43,7 +43,7 @@ export default function PreviousNextButtons({
   };
 
   return (
-    <div className="flex row justify-between">
+    <div>
       <button onClick={() => back()}>{backButton}</button>
       <button onClick={() => next()}>{nextButton}</button>
     </div>

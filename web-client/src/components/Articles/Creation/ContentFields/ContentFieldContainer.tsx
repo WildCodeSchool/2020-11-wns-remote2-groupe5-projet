@@ -58,7 +58,6 @@ export default function ContentFieldContainer({
                   ></BiDownArrow>
                 )}
                 <BiTrash
-                  className="far fa-trash-alt cursor-pointer ml-3"
                   onClick={() => {
                     dispatch({ type: 'REMOVE', payload: { index } });
                   }}

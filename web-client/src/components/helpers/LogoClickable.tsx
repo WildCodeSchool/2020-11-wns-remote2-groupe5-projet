@@ -11,7 +11,7 @@ const LogoClickable = () => {
           <Text color="white" fontSize="5xl">
             Skillz
           </Text>
-          <Logo className="h-24 w-24" />
+          <Logo />
           <Text color="white" fontSize="5xl">
             Share
           </Text>
