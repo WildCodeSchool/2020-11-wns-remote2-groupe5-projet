@@ -75,6 +75,10 @@ export default class User extends BaseEntity {
   @Field(() => String, { nullable: true })
   bio: string;
 
+  @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
+  avatarFileName: string;
+
   @BeforeInsert()
   async hashPassword(): Promise<void> {
     this.password = await hash(this.password, 10);

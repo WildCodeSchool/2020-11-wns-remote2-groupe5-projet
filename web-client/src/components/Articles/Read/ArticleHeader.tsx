@@ -26,7 +26,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
     >
       <ArticleUserInfo
         pseudo={article.user?.pseudo}
-        avatar={''}
+        avatarFileName={article.user?.avatarFileName}
         date={article?.date}
       />
       <ArticleActions

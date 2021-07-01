@@ -20,7 +20,7 @@ export default function EditInformations(): JSX.Element {
 
   const toast = useToast();
 
-  const [mutate] = useMutation(UPLOAD_AVATAR);
+  const [postAvatar] = useMutation(UPLOAD_AVATAR);
   const [editProfil] = useMutation(EDIT_PROFIL);
 
   const postProfil = async () => {
@@ -64,7 +64,7 @@ export default function EditInformations(): JSX.Element {
   }: any) => {
     try {
       validity.valid &&
-        mutate({
+        postAvatar({
           variables: { file },
         });
       toast({
@@ -77,7 +77,7 @@ export default function EditInformations(): JSX.Element {
       console.error(err);
       toast({
         title: 'Erreur',
-        description: "L'image ne c'est pas chargée!",
+        description: "L'image ne s'est pas chargée!",
         status: 'error',
         duration: 9000,
         isClosable: true,

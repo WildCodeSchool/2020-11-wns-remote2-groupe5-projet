@@ -1,10 +1,8 @@
-/* eslint-disable react/prop-types */
 import {
   Avatar,
   Box,
   Button,
   Flex,
-  Image,
   Text,
   VStack,
 } from '@chakra-ui/react';
@@ -13,19 +11,22 @@ import { parseDateArticle } from '../../../utils/Date';
 
 type ArticleUserInfoProps = {
   pseudo: string;
-  avatar?: string;
+  avatarFileName: string | null;
   date: string;
 };
 
+
+
 const ArticleUserInfo: React.FC<ArticleUserInfoProps> = ({
   pseudo,
-  avatar,
+  avatarFileName,
   date,
 }) => {
+
   return (
     <Flex align="center" m={'4px'}>
       <Box m={'4px'}>
-        <Avatar w={{base:"30px",sm:"34px",md:"45px",lg:"70px"}}  h={{base:"30px",sm:"34px",md:"45px",lg:"70px"}} name={pseudo} src="https://bit.ly/dan-abramov" />
+        <Avatar w={{base:"30px",sm:"34px",md:"45px",lg:"70px"}}  h={{base:"30px",sm:"34px",md:"45px",lg:"70px"}} name={pseudo} src={"public/media/avatars/" + avatarFileName} />
       </Box>
       <VStack spacing={0.5} m={'4px'}>
         <Flex>

@@ -31,6 +31,7 @@ export const GET_ALL_ARTICLES = gql`
       description
       user {
         pseudo
+        avatarFileName
       }
       contentFields {
         content
@@ -39,6 +40,7 @@ export const GET_ALL_ARTICLES = gql`
       }
       commentairesArticle {
         user {
+          avatarFileName
           userID
         }
       }
@@ -61,6 +63,7 @@ export const GET_ONE_BY_ID = gql`
       date
       user {
         pseudo
+        avatarFileName
       }
       contentFields {
         contentFieldID
@@ -75,6 +78,7 @@ export const GET_ONE_BY_ID = gql`
         user {
           userID
           pseudo
+          avatarFileName
         }
       }
     }
@@ -125,6 +129,7 @@ export const SUBSCRIBE_TO_NEW_COMMENT = gql`
       user {
         userID
         pseudo
+        avatarFileName
       }
     }
   }

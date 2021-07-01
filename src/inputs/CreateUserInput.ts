@@ -26,4 +26,7 @@ export default class CreateUserInput {
 
   @Field({ nullable: true })
   bio: string;
+
+  @Field({ nullable: true })
+  avatarFileName: string;
 }
