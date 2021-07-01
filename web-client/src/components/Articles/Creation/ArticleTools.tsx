@@ -5,6 +5,11 @@ import { ReactComponent as IconRegister } from '../../../assets/icons/icon_regis
 import { ReactComponent as IconShare } from '../../../assets/icons/icon_share.svg';
 import { ReactComponent as IconSearch } from '../../../assets/icons/icon_search.svg';
 import { ReactComponent as IconWarning } from '../../../assets/icons/icon_warning.svg';
+
+
+//import { FiPlusCircle } from "react-icons/fi";
+
+
 export default function ArticleTools(): JSX.Element {
   return (
     <section className="fixed right-0 h-full flex">

@@ -1,10 +1,7 @@
 import React from 'react';
-import InputCustom from '../helpers/InputCustom';
-import ButtonCustom from '../helpers/ButtonCustom';
-// import ArrowLeft from '../../../assets/icons/icon_arrow_left.svg';
 import { User } from './SignInCard';
 import { Box, VStack, InputGroup, InputLeftElement, Input, Button } from '@chakra-ui/react';
-import { FaPhone, FaCity, FaBirthdayCake, FaGlobe, FaArrowLeft } from 'react-icons/fa';
+import { FaUsers, FaLightbulb, FaArrowLeft } from 'react-icons/fa';
 
 type SignInForm01Props = {
   user: User;
@@ -23,7 +20,7 @@ export default function SignInForm03({
       <InputGroup>
       <InputLeftElement
         pointerEvents="none"
-        children={<FaPhone color="gray.800" />}
+        children={<FaUsers color="gray.800" />}
       />
         <Input 
           type="text" 
@@ -42,7 +39,7 @@ export default function SignInForm03({
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
-          children={<FaCity color="gray.800" />}
+          children={<FaLightbulb color="gray.800" />}
         />
           <Input 
             type="text" 
