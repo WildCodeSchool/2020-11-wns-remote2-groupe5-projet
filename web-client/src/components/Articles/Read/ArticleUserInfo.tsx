@@ -15,15 +15,11 @@ type ArticleUserInfoProps = {
   date: string;
 };
 
-
-
 const ArticleUserInfo: React.FC<ArticleUserInfoProps> = ({
   pseudo,
   avatarFileName,
   date,
 }) => {
-
-  console.log("article", avatarFileName)
 
   return (
     <Flex align="center" m={'4px'} w={['100%']} justifyContent={["space-around","space-around","space-around","flex-start"]} >
