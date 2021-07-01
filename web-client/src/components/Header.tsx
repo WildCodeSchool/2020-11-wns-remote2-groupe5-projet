@@ -1,11 +1,10 @@
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Link as ReachLink } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
 import { LOG_OUT } from '../queries/user-queries';
 import {
   Flex,
-  Box,
   Text,
   Avatar,
   Link,
@@ -14,7 +13,6 @@ import {
   MenuList,
   MenuItem,
 } from '@chakra-ui/react';
-import LogoClickable from './helpers/LogoClickable';
 import LogoCustom from './helpers/LogoCustom';
 
 type HeaderProps = {
@@ -51,8 +49,8 @@ export default function Header({
           <Menu>
             <MenuButton>
               <Avatar 
-								w={{ base: "50px", sm:"60px", md: "70px", lg: "74px", xl: "74px" }} 
-								h={{ base: "50px", sm:"60px", md: "70px", lg: "74px", xl: "74px" }} 
+								w={{ base: "45px", sm:"60px", md: "70px", lg: "74px", xl: "74px" }} 
+								h={{ base: "45px", sm:"60px", md: "70px", lg: "74px", xl: "74px" }} 
 							/>
             </MenuButton>
             <MenuList>

@@ -10,7 +10,7 @@ import InformationModification from '../components/UserProfil/EditProfil/EditInf
 import DegreeModification from '../components/UserProfil/EditProfil/EditDegree';
 import ExperienceModification from '../components/UserProfil/EditProfil/EditExperience';
 import Header from '../components/Header';
-import MainPanel from '../components/Navbar';
+import BottomBar from '../components/BottomBar';
 import ArticleCreationPage from '../pages/loggedIn/ArticleCreationPage';
 
 type RoutesProps = {
@@ -24,7 +24,6 @@ export default function Routes({
     <Router>
       <Header setIsAuthenticated={setIsAuthenticated} />
       <Flex flexGrow={1} flexDir="column" overflowY="hidden">
-        
         <Flex flexGrow={1} overflowY="auto">
           <Switch>
             <Route exact path="/" component={HomePage} />
@@ -48,7 +47,7 @@ export default function Routes({
             />
           </Switch>
         </Flex>
-        <MainPanel />
+        <BottomBar />
       </Flex>
     </Router>
   );
