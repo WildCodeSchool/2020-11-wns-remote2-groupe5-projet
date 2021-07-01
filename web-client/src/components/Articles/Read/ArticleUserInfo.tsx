@@ -23,9 +23,9 @@ const ArticleUserInfo: React.FC<ArticleUserInfoProps> = ({
   date,
 }) => {
   return (
-    <Flex align="center" m={'4px'}>
+    <Flex align="center" m={'4px'} w={['100%']} justifyContent={["space-around","space-around","space-around","flex-start"]} >
       <Box m={'4px'}>
-        <Avatar w={{base:"30px",sm:"34px",md:"45px",lg:"70px"}}  h={{base:"30px",sm:"34px",md:"45px",lg:"70px"}} name={pseudo} src="https://bit.ly/dan-abramov" />
+        <Avatar w={{base:"30px",sm:"34px",md:"45px",lg:"70px"}} h={{base:"30px",sm:"34px",md:"45px",lg:"70px"}} name={pseudo} src="https://bit.ly/dan-abramov" />
       </Box>
       <VStack spacing={0.5} m={'4px'}>
         <Flex>
