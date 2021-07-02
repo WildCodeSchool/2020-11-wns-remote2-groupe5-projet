@@ -1,6 +1,5 @@
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Textarea } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
-import { useDisclosure } from "@chakra-ui/react"
 
 type PublishModalProps = {
   isOpen: boolean;
@@ -25,15 +24,21 @@ export default function PublishModal({
     setDescriptionValue(description);
   }, [description]);
 
+  const onSubmit = () => {
+    postArticle(descriptionValue)
+    onClose()
+  }
+
  
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
+      isCentered
     >
       <ModalOverlay />
-      <ModalContent w="100%">
-          <ModalHeader>Aperçu de {title}</ModalHeader>
+      <ModalContent w="90%" backgroundColor='800.gray'>
+          <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
           <Textarea
@@ -43,10 +48,10 @@ export default function PublishModal({
           />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={() => setPublishModal}>
-              Close
+            <Button color='gray.100' backgroundColor="gray.800" mr={3} onClick={onClose}>
+              Annuler
             </Button>
-            <Button variant="ghost" onClick={() => postArticle(descriptionValue)}>Published</Button>
+            <Button variant="ghost" onClick={onSubmit}>Publier</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

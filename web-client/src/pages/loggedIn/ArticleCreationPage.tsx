@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { Box, Button, Drawer, DrawerContent, DrawerOverlay, Flex, IconButton, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, IconButton, useDisclosure } from '@chakra-ui/react';
 import Lien from '../../components/Articles/Creation/ContentFields/Lien';
 import Paragraphe from '../../components/Articles/Creation/ContentFields/Paragraphe';
 import SousTitre from '../../components/Articles/Creation/ContentFields/Sous-titre';
@@ -22,16 +22,8 @@ export default function ArticleCreationPage(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: isOpenDrawer, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDisclosure()
   const {width} = useGetCurrentWindowWidth()
-  const btnRef = React.useRef()
-  const handleModal = () => {
-    console.log("coucou")
-    onOpen()
-  }
 
   const {
-    publishModal,
-    setPublishModal,
-    openPublishModal,
     postArticle,
     defaultDescription,
   } = useArticlePublication(fields);
