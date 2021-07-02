@@ -29,6 +29,7 @@ export default function ContentFieldContainer({
         <Flex
           flexDir="column"
           m="8px"
+          my="16px"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}

@@ -18,11 +18,13 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
 }) => {
   return (
     <Flex
-      flexDir={["row","row","row","row"]}
+      flexDir="row"
       justify="space-between"
       align="center"
       borderTopRadius={'2xl'}
       bgColor="gray.800"
+      py="8px"
+      px="4px"
     >
       <ArticleUserInfo
         pseudo={article.user?.pseudo}

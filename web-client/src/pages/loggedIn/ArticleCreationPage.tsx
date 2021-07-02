@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { Box, Flex, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Drawer, DrawerContent, DrawerOverlay, Flex, IconButton, useDisclosure } from '@chakra-ui/react';
 import Lien from '../../components/Articles/Creation/ContentFields/Lien';
 import Paragraphe from '../../components/Articles/Creation/ContentFields/Paragraphe';
 import SousTitre from '../../components/Articles/Creation/ContentFields/Sous-titre';
@@ -11,6 +11,8 @@ import PublishModal from '../../components/Articles/Creation/PublishModal';
 import { useArticlePublication } from '../../customhooks/useArticlePublication';
 import fieldsReducer from '../../reducers/fieldsReducer';
 import Image from '../.././components/Articles/Creation/ContentFields/Image';
+import { useGetCurrentWindowWidth } from '../../customhooks/useGetCurrentWindowWidth';
+import { HiMenu } from "react-icons/hi";
 
 export default function ArticleCreationPage(): JSX.Element {
   const [fields, dispatch] = useReducer(fieldsReducer, [
@@ -18,7 +20,9 @@ export default function ArticleCreationPage(): JSX.Element {
   ]);
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-
+  const { isOpen: isOpenDrawer, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDisclosure()
+  const {width} = useGetCurrentWindowWidth()
+  const btnRef = React.useRef()
   const handleModal = () => {
     console.log("coucou")
     onOpen()
@@ -32,6 +36,8 @@ export default function ArticleCreationPage(): JSX.Element {
     defaultDescription,
   } = useArticlePublication(fields);
 
+  console.log("width", width)
+
   return (
     <Flex justify="center" w="100%">
       <PublishModal
@@ -42,8 +48,6 @@ export default function ArticleCreationPage(): JSX.Element {
         setPublishModal={onOpen}
         postArticle={postArticle}
       />
-
-      <EditionTools dispatch={dispatch} openPublishModal={handleModal} />
       <DragDropContext
         onDragEnd={(e) =>
           dispatch({
@@ -59,7 +63,7 @@ export default function ArticleCreationPage(): JSX.Element {
           <Titre index={0} value={fields[0].value} dispatch={dispatch} />
           <Droppable droppableId={'1'}>
             {(provided) => (
-              <Box ref={provided.innerRef} {...provided.droppableProps}>
+              <Box ref={provided.innerRef} {...provided.droppableProps} my='16px'>
                 {fields.map((field, index) => {
                   const props = {
                     key: index,
@@ -86,6 +90,30 @@ export default function ArticleCreationPage(): JSX.Element {
           </Droppable>
         </Box>
       </DragDropContext>
+      <Flex flexDir='column' alignItems="flex-end">
+      {
+        width < 700 ?
+        <IconButton 
+          aria-label="menu" 
+          icon={<HiMenu />}
+          width='20px'
+          onClick={isOpenDrawer ? onCloseDrawer : onOpenDrawer}
+          backgroundColor="gray.800"
+          color="gray.100"
+          _hover={{backgroundColor: "gray.700"}}
+          _focus={{backgroundColor: "gray.800"}}
+          _checked={{backgroundColor: "gray.800"}}
+          _focusVisible={{backgroundColor: "gray.800"}}
+          _pressed={{backgroundColor: "gray.800"}}
+          fontSize="2xl"
+          mt="8px"
+          mb="48px"
+        /> :
+        <EditionTools dispatch={dispatch} openPublishModal={onOpen} />
+      }
+
+            {isOpenDrawer ? <EditionTools dispatch={dispatch} openPublishModal={onOpen} /> : null}
+      </Flex>
     </Flex>
   );
 }
