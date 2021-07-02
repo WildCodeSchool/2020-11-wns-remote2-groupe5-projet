@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Action } from '../../../../reducers/fieldsReducer';
 import { Draggable } from 'react-beautiful-dnd';
 
@@ -6,7 +6,7 @@ type ImageProps = {
   index: number;
   isFirst: boolean;
   isLast: boolean;
-  value: string;
+  file: File | null | undefined;
   dispatch: React.Dispatch<Action>;
 };
 
@@ -14,9 +14,25 @@ export default function Image({
   index,
   isFirst,
   isLast,
-  value,
+  file,
   dispatch,
 }: ImageProps): JSX.Element {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (file && inputRef.current) {
+      let list = new DataTransfer();
+      let fileCopy = new File([file], file.name);
+
+      list.items.add(fileCopy);
+      let fileList = list.files;
+
+      inputRef.current.files = fileList;
+    } else if (inputRef.current) {
+      inputRef.current.files = new DataTransfer().files;
+    }
+  }, [file]);
+
   return (
     <Draggable draggableId={index.toString()} index={index}>
       {(provided) => (
@@ -57,9 +73,21 @@ export default function Image({
             </div>
           </div>
           <input
+            onChange={() =>
+              dispatch({
+                type: 'SET_FILE',
+                payload: {
+                  index,
+                  file: inputRef.current?.files
+                    ? inputRef.current.files[0]
+                    : null,
+                },
+              })
+            }
             placeholder="Selectionnez une image"
             id="file"
             type="file"
+            ref={inputRef}
             accept="image/*"
             className="rounded-b-md h-10 py-2 px-4"
           />

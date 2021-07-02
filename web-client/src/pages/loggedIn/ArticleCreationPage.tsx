@@ -1,4 +1,5 @@
-import React, { useReducer } from 'react';
+/* eslint-disable array-callback-return */
+import React, { useEffect, useReducer } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import { Box, Flex, useDisclosure } from '@chakra-ui/react';
@@ -17,12 +18,12 @@ export default function ArticleCreationPage(): JSX.Element {
     { contentType: 'Titre', value: '' },
   ]);
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleModal = () => {
-    console.log("coucou")
-    onOpen()
-  }
+    console.log('coucou');
+    onOpen();
+  };
 
   const {
     publishModal,
@@ -73,7 +74,7 @@ export default function ArticleCreationPage(): JSX.Element {
                     case 'Paragraphe':
                       return <Paragraphe {...props} />;
                     case 'Image':
-                      return <Image {...props} />;
+                      return <Image {...props} file={field.file} />;
                     case 'Lien':
                       return <Lien {...props} />;
                     case 'Sous-titre':

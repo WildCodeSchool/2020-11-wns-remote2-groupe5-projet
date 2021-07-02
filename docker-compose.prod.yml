@@ -9,6 +9,8 @@ services:
     expose:
       - 4000
     restart: always
+    volumes:
+      - ./public:/app/public
     environment:
       - NODE_ENV=production
 

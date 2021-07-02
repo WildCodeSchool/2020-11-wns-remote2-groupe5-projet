@@ -1,11 +1,12 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 import { useMutation } from '@apollo/client';
 import { PUBLISH_ARTICLE } from '../queries/article-queries';
-
+import path from 'path';
 export const useArticlePublication = (
   fields: {
     contentType: string;
     value: string;
+    file?: File | null | undefined;
   }[]
 ): {
   postArticle: (description: string) => Promise<void>;
@@ -22,12 +23,28 @@ export const useArticlePublication = (
       await publishArticle({
         variables: {
           data: { date: new Date(), title: fields[0].value, description },
-          fields: fields.map((field, index) => (
-            {
-            contentType: field.contentType,
-            content: field.value,
-            placeNumber: index,
-          })),
+          fields: fields.map((field, index) => {
+            if (field.contentType === 'Image') {
+              if (field.file?.name) {
+                return {
+                  contentType: field.contentType,
+                  content: index.toString() + path.extname(field.file?.name),
+                  placeNumber: index,
+                };
+              } else {
+                return {
+                  contentType: field.contentType,
+                  content: 'EMPTY',
+                  placeNumber: index,
+                };
+              }
+            }
+            return {
+              contentType: field.contentType,
+              content: field.value,
+              placeNumber: index,
+            };
+          }),
         },
       });
       setPublishModal(false);

@@ -2,10 +2,10 @@ import { GraphQLUpload, FileUpload } from 'graphql-upload';
 import path from 'path';
 import { Resolver, Mutation, Arg, Ctx } from 'type-graphql';
 import User from '../models/User';
-import { createWriteStream, mkdirSync, unlinkSync } from 'fs';
+import { createWriteStream, mkdirSync, stat, unlink } from 'fs';
 import Picture from '../models/Picture';
 
-const PICTURES_DIRECTORY = path.join(__dirname, '../../public/media/avatars');
+const AVATAR_DIRECTORY = path.join(__dirname, '../../public/media/avatars');
 
 @Resolver()
 export default class PictureResolver {
@@ -19,13 +19,7 @@ export default class PictureResolver {
       throw Error('You are not authenticated.');
     }
 
-    mkdirSync(PICTURES_DIRECTORY, { recursive: true });
-
-    // if an avatar exists, delete it
-
-    if (user.avatarFileName) {
-      unlinkSync(path.join(PICTURES_DIRECTORY, user.avatarFileName));
-    }
+    mkdirSync(AVATAR_DIRECTORY, { recursive: true });
 
     const { filename, createReadStream } = file;
 
@@ -35,15 +29,40 @@ export default class PictureResolver {
 
     const stream = createReadStream();
 
-    // write file
+    const writeFile = () => {
+      stream.pipe(
+        createWriteStream(path.join(AVATAR_DIRECTORY, newFileName)).on(
+          'close',
+          async () => {
+            user.avatarFileName = newFileName;
+            await user.save();
+          }
+        )
+      );
+    };
 
-    stream.pipe(createWriteStream(path.join(PICTURES_DIRECTORY, newFileName)));
+    // if an avatar exists, delete it and then create new, else create new
 
-    // Save fileName in database
-
-    user.avatarFileName = newFileName;
-
-    await user.save();
+    if (!user.avatarFileName) {
+      writeFile();
+    } else {
+      stat(path.join(AVATAR_DIRECTORY, user.avatarFileName), function (err) {
+        if (err) {
+          writeFile();
+        } else {
+          unlink(path.join(AVATAR_DIRECTORY, user.avatarFileName), function (
+            err
+          ) {
+            if (err) {
+              console.log(err);
+              throw Error('ERROR writing file');
+            } else {
+              writeFile();
+            }
+          });
+        }
+      });
+    }
 
     return filename;
   }

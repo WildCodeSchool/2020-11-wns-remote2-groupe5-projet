@@ -1,4 +1,4 @@
-type State = { contentType: ContentType; value: string }[];
+type State = { contentType: ContentType; value: string, file?: File | null | undefined }[];
 
 export type ContentType =
   | 'Titre'
@@ -27,6 +27,10 @@ export type Action =
   | {
       type: 'SET_VALUE';
       payload: { index: number; value: string };
+    }
+  | {
+      type: 'SET_FILE';
+      payload: { index: number; file: File | null | undefined};
     }
   | {
       type: 'DRAG_DROP';
@@ -63,6 +67,14 @@ const fieldsReducer = (state: State, action: Action): State => {
       const { index, value } = action.payload;
       const fields = [...state];
       fields[index].value = value;
+      return fields;
+    }
+
+    case 'SET_FILE': {
+      const {index, file} = action.payload;
+      console.log(file)
+      const fields = [...state];
+      fields[index].file = file;
       return fields;
     }
 
