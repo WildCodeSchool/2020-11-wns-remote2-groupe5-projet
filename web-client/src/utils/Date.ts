@@ -5,6 +5,7 @@ export const parseDateArticle = (date: string): string => {
   return moment(date).format('DD/MM/YYYY');
 };
 
-export const parseDateComment = (date: string): string => {
+export const parseRelativeTime = (date: string): string => {
   return moment(date).fromNow();
 };
+
