@@ -1,21 +1,24 @@
+import { Box } from '@chakra-ui/react';
 import React, { useContext } from 'react';
 
 
-import GlobalContext, { CurrentUserContext } from '../../../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 import EditDegree from './EditDegree';
 import EditExperience from './EditExperience';
 import EditInformations from './EditInformations';
 
 export default function EditProfilNav(): JSX.Element {
-  const {actualPage, setActualPage} = useContext(CurrentUserContext);
+  const {actualPage} = useContext(CurrentUserContext);
+
+  console.log("actualPage", actualPage)
 
   return (
-    <div>
-      {actualPage == 'Informations générales' && (
+    <Box>
+      {actualPage === 'informations' && (
         <EditInformations />
       )}
-      {actualPage == 'Expériences' && <EditExperience />}
-      {actualPage == 'Diplômes' && <EditDegree />}
-    </div>
+      {actualPage === 'experiences' && <EditExperience />}
+      {actualPage === 'diplomas' && <EditDegree />}
+    </Box>
   );
 }

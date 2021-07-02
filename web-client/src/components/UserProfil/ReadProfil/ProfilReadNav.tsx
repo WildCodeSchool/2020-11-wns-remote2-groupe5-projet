@@ -10,11 +10,11 @@ export default function ProfilReadNav({ data }: { data: any }): JSX.Element {
 
   return (
     <div>
-      {actualPage == 'Informations générales' && (
+      {actualPage === 'informations' && (
         <Informations data={data} />
       )}
-      {actualPage == 'Expériences' && <Experiences data={data} />}
-      {actualPage == 'Diplômes' && <Degrees data={data} />}
+      {actualPage === 'experiences' && <Experiences data={data} />}
+      {actualPage === 'diplomas' && <Degrees data={data} />}
     </div>
   );
 }

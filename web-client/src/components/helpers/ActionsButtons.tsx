@@ -13,35 +13,35 @@ export default function ActionsButtons({
 }): JSX.Element {
   const {actualPage, setActualPage} = useContext(CurrentUserContext);
 
-  const [backButton, setBackButton] = useState<string>('Diplômes');
-  const [nextButton, setNextButton] = useState<string>('Expériences');
+  const [backButton, setBackButton] = useState<string>('diplomas');
+  const [nextButton, setNextButton] = useState<string>('experiences');
 
   const back = () => {
-    actualPage == 'Informations générales'
-      ? (setActualPage && setActualPage('Diplômes'),
-        setBackButton('Expériences'),
-        setNextButton('Informations générales'))
-      : actualPage == 'Expériences'
-      ? (setActualPage && setActualPage('Informations générales'),
-        setBackButton('Diplômes'),
-        setNextButton('Expériences'))
-      : (setActualPage && setActualPage('Expériences'),
-        setBackButton('Informations générales'),
-        setNextButton('Diplômes'));
+    actualPage === 'informations'
+      ? (setActualPage && setActualPage('diplomas'),
+        setBackButton('experiences'),
+        setNextButton('informations'))
+      : actualPage === 'experiences'
+      ? (setActualPage && setActualPage('informations'),
+        setBackButton('diplomas'),
+        setNextButton('experiences'))
+      : (setActualPage && setActualPage('experiences'),
+        setBackButton('informations'),
+        setNextButton('diplomas'));
   };
 
   const next = () => {
-    actualPage == 'Informations générales'
-      ? (setActualPage && setActualPage('Expériences'),
-        setBackButton('Informations générales'),
-        setNextButton('Diplômes'))
-      : actualPage == 'Expériences'
-      ? (setActualPage && setActualPage('Diplômes'),
-        setBackButton('Expériences'),
-        setNextButton('Informations générales'))
-      : (setActualPage && setActualPage('Informations générales'),
-        setBackButton('Diplômes'),
-        setNextButton('Expériences'));
+    actualPage === 'informations'
+      ? (setActualPage && setActualPage('experiences'),
+        setBackButton('informations'),
+        setNextButton('diplomas'))
+      : actualPage === 'experiences'
+      ? (setActualPage && setActualPage('diplomas'),
+        setBackButton('experiences'),
+        setNextButton('informations'))
+      : (setActualPage && setActualPage('informations'),
+        setBackButton('diplomas'),
+        setNextButton('experiences'));
   };
 
   return (
