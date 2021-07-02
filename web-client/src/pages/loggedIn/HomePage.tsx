@@ -13,10 +13,11 @@ export default function HomePage(): JSX.Element {
       align="center"
       justify="center"
       width="100%"
+      mt={{base:"830px", sm:"830px", md:"830px", lg:"320px", xl: "320px" }}
     >
       {data &&
         data.articles.map((article: Articles_articles) => (
-          <Box key={article.articleID} m="4">
+          <Box key={article.articleID} my="12px">
             <ArticleCard article={article} />
           </Box>
         ))}
