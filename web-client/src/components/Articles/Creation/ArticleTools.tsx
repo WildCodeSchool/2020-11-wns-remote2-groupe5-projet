@@ -12,28 +12,28 @@ import { ReactComponent as IconWarning } from '../../../assets/icons/icon_warnin
 
 export default function ArticleTools(): JSX.Element {
   return (
-    <section className="fixed right-0 h-full flex">
-      <ul className="self-center bg-gray-800 rounded-l-xl text-white p-2">
-        <li className="mr-4 ml-2">
-          <IconTools className="w-9 h-9" />
+    <section>
+      <ul>
+        <li>
+          <IconTools  />
         </li>
-        <li className="flex items-center mr-4 ml-2">
-          <IconLike className="w-9 h-9" />
+        <li >
+          <IconLike  />
         </li>
-        <li className="flex items-center mr-4 ml-2">
-          <IconRegister className="w-9 h-9" />
+        <li>
+          <IconRegister  />
         </li>
-        <li className="flex items-center mr-4 ml-2">
-          <IconShare className="w-9 h-9" />
+        <li>
+          <IconShare  />
         </li>
-        <li className="flex items-center mr-4 ml-2">
-          <IconLike className="w-9 h-9" />
+        <li>
+          <IconLike  />
         </li>
-        <li className="flex items-center mr-4 ml-2">
-          <IconSearch className="w-9 h-9" />
+        <li>
+          <IconSearch  />
         </li>
-        <li className="flex items-center mr-4 ml-2">
-          <IconWarning className="w-9 h-9" />
+        <li>
+          <IconWarning  />
         </li>
       </ul>
     </section>

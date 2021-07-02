@@ -32,14 +32,13 @@ export default function InputCustom(props: InputProps): JSX.Element {
   }
 
   return (
-    <div className="flex justify-around items-center py-2 pb-3 w-full">
-      <div className={`w-1 pt-6 pr-${noPadding ? 0 : 9}`}>
-        <i className={`fas fa-${icon}`}></i>
+    <div>
+      <div>
+        <i></i>
       </div>
       <div>
         {noPlaceholder ? null : (
           <label
-            className={`block uppercase ${coloringText} text-xs font-bold mb-2 `}
             htmlFor="grid-password"
           >
             {placeholder}
@@ -48,7 +47,6 @@ export default function InputCustom(props: InputProps): JSX.Element {
         <input
           type={type}
           required={required}
-          className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm focus:outline-none shadow w-72"
           placeholder={placeholder}
           style={{ transition: 'all .15s ease' }}
           value={value}

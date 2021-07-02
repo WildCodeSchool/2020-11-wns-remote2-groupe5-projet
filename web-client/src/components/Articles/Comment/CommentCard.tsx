@@ -1,6 +1,7 @@
 import React from 'react';
-import { parseDateComment } from '../../../utils/Date';
-import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
+import { parseRelativeTime } from '../../../utils/Date';
+import { Box, Flex, Text } from '@chakra-ui/react';
+import AvatarCustom from '../../helpers/AvatarCustom';
 
 type CommentCardProps = {
   pseudo: string;
@@ -25,14 +26,17 @@ export default function CommentCard({
         py={'4px'}
       >
         <Flex>
-          <Avatar name={pseudo} size="xs" src={"public/media/avatars/" + avatarFileName} alt="avatar" />
+        <AvatarCustom
+            variant="small"
+						avatar={avatarFileName}
+					/> 
           <Text pl="4px" fontSize="md" fontWeight={600} color="white">
             {pseudo}
           </Text>
         </Flex>
         <Flex align="center" justify="space-between">
           <Text fontSize="xs" color="white">
-            {parseDateComment(date)}
+            {parseRelativeTime(date)}
           </Text>
         </Flex>
       </Flex>

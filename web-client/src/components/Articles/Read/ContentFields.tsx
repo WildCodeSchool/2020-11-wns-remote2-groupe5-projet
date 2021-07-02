@@ -10,7 +10,7 @@ export default function ContentFields({
   contentFields,
 }: ContentFieldsProps): JSX.Element {
   return (
-    <Box className="bg-red">
+    <Box>
       {contentFields.map(
         (contentField: OneArticle_oneArticle_contentFields) => {
           switch (contentField.contentType) {

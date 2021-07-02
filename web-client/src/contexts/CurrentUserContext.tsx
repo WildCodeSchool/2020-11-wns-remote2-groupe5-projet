@@ -33,7 +33,7 @@ export const CurrentUserContext = React.createContext<Partial<CurrentUserContext
 
 const CurrentUserProvider: React.FC<IProps> = (props: IProps) => {
   const [currentUser, setCurrentUser] = useState<CurrentUser>()
-  const [actualPage, setActualPage] = useState<string>('Informations générales')
+  const [actualPage, setActualPage] = useState<string>('informations')
 
   const {
     isAuthenticated,

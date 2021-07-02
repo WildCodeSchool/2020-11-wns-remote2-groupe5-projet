@@ -1,20 +1,20 @@
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext } from 'react';
 import { Link as ReachLink } from 'react-router-dom';
 
 import { useMutation } from '@apollo/client';
 import { LOG_OUT } from '../queries/user-queries';
 import {
   Flex,
-  Box,
   Text,
-  Avatar,
   Link,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
 } from '@chakra-ui/react';
-import LogoClickable from './helpers/LogoClickable';
+import LogoCustom from './helpers/LogoCustom';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import AvatarCustom from './helpers/AvatarCustom';
 
 type HeaderProps = {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
@@ -24,6 +24,9 @@ export default function Header({
   setIsAuthenticated,
 }: HeaderProps): JSX.Element {
   const [logout] = useMutation(LOG_OUT);
+
+  const {currentUser} = useContext(CurrentUserContext);
+
 
   const clickToLogOut = async () => {
     try {
@@ -35,23 +38,24 @@ export default function Header({
   };
 
   return (
-    <>
       <Flex
         bgColor="gray.800"
-        justify="space-between"
+        justify={{base: "space-between", sm: "space-between"}}
         align="center"
         h="100px"
         w="100%"
-        px={'32px'}
+				px="16px"
       >
-        <Box w="88px" h="88px"></Box>
         <Flex>
-          <LogoClickable />
+          <LogoCustom isNavLink />
         </Flex>
-        <Flex justify="end">
+        <Flex>
           <Menu>
             <MenuButton>
-              <Avatar />
+              <AvatarCustom
+                variant="big"
+								avatar={currentUser?.avatarFileName!}
+							/>
             </MenuButton>
             <MenuList>
               <Link
@@ -68,6 +72,5 @@ export default function Header({
           </Menu>
         </Flex>
       </Flex>
-    </>
   );
 }

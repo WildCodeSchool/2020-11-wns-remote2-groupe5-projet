@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
-import InputCustom from '../../helpers/InputCustom';
 import { CREATE_COMMENT } from '../../../queries/article-queries';
-import { Box, Flex, Avatar, Text, Textarea, Button } from '@chakra-ui/react';
-import { parseDateComment } from '../../../utils/Date';
+import { Box, Flex, Text, Textarea, Button } from '@chakra-ui/react';
 import { FiSend } from 'react-icons/fi';
+import AvatarCustom from '../../helpers/AvatarCustom';
 
 type CommentEditProps = {
   articleID: string;
@@ -46,13 +45,23 @@ const CommentEdit: React.FC<CommentEditProps> = ({
         py={'4px'}
       >
         <Flex>
-          <Avatar size="xs" src={currentUser?.pseudo} alt="avatar" />
+          <AvatarCustom
+            variant="small"
+						avatar={currentUser?.avatarFileName!}
+					/> 
           <Text pl="4px" fontSize="md" fontWeight={600} color="white">
             {currentUser?.pseudo}
           </Text>
         </Flex>
       </Flex>
-      <Box className="flex items-center justify-between bg-white rounded-bl-lg p-5 break-words">
+      <Flex 
+        backgroundColor="gray.100"
+        alignItems="center"
+        justify="center"
+        borderBottomLeftRadius="2xl"
+        wordBreak='break-word'
+        p="8px"
+      >
         <Textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
@@ -80,7 +89,7 @@ const CommentEdit: React.FC<CommentEditProps> = ({
             <FiSend />
           </Button>
         )}
-      </Box>
+      </Flex>
     </Box>
   );
 };

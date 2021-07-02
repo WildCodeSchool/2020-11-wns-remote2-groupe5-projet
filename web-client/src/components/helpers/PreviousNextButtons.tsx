@@ -11,39 +11,39 @@ export default function PreviousNextButtons({
 }: ActualPageProps): JSX.Element {
   //console.log(actualPage);
 
-  const [backButton, setBackButton] = useState<string>('Diplômes');
-  const [nextButton, setNextButton] = useState<string>('Expériences');
+  const [backButton, setBackButton] = useState<string>(' diplomas');
+  const [nextButton, setNextButton] = useState<string>('experiences');
 
   const back = () => {
-    actualPage == 'Informations générales'
-      ? (setActualPage('Diplômes'),
-        setBackButton('Expériences'),
-        setNextButton('Informations générales'))
-      : actualPage == 'Expériences'
-      ? (setActualPage('Informations générales'),
-        setBackButton('Diplômes'),
-        setNextButton('Expériences'))
-      : (setActualPage('Expériences'),
-        setBackButton('Informations générales'),
-        setNextButton('Diplômes'));
+    actualPage === 'informations'
+      ? (setActualPage(' diplomas'),
+        setBackButton('experiences'),
+        setNextButton('informations'))
+      : actualPage === 'experiences'
+      ? (setActualPage('informations'),
+        setBackButton('diplomas'),
+        setNextButton('experiences'))
+      : (setActualPage('experiences'),
+        setBackButton('informations'),
+        setNextButton('diplomas'));
   };
 
   const next = () => {
-    actualPage == 'Informations générales'
-      ? (setActualPage('Expériences'),
-        setBackButton('Informations générales'),
-        setNextButton('Diplômes'))
-      : actualPage == 'Expériences'
-      ? (setActualPage('Diplômes'),
-        setBackButton('Expériences'),
-        setNextButton('Informations générales'))
-      : (setActualPage('Informations générales'),
-        setBackButton('Diplômes'),
-        setNextButton('Expériences'));
+    actualPage === 'informations'
+      ? (setActualPage('experiences'),
+        setBackButton('informations'),
+        setNextButton('diplomas'))
+      : actualPage === 'experiences'
+      ? (setActualPage(' diplomas'),
+        setBackButton('experiences'),
+        setNextButton('informations'))
+      : (setActualPage('informations'),
+        setBackButton('diplomas'),
+        setNextButton('experiences'));
   };
 
   return (
-    <div className="flex row justify-between">
+    <div>
       <button onClick={() => back()}>{backButton}</button>
       <button onClick={() => next()}>{nextButton}</button>
     </div>

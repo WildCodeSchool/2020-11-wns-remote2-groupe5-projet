@@ -1,13 +1,7 @@
 import React from 'react';
-import InputCustom from '../helpers/InputCustom';
-import ButtonCustom from '../helpers/ButtonCustom';
-// import ArrowRight from '../../../assets/icons/icon_arrow_right.svg';
-// import ArrowLeft from '../../../assets/icons/icon_arrow_left.svg';
 import { User } from './SignInCard';
-import { AtSignIcon, LockIcon, ArrowForwardIcon } from '@chakra-ui/icons';
-import { Box, VStack, InputGroup, InputLeftElement, Input, InputRightElement, Button } from '@chakra-ui/react';
-import { FaUser, FaKey, FaPhone, FaCity, FaCalendarAlt, FaGlobe, FaBirthdayCake, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import conditionsSignIn01 from '../../utils/ConditionsSignIn';
+import { Box, VStack, InputGroup, InputLeftElement, Input, Button } from '@chakra-ui/react';
+import {  FaPhone, FaCity, FaGlobe, FaBirthdayCake, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 type SignInForm01Props = {
   user: User;

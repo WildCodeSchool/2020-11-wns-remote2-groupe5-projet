@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Box, Flex, Container } from '@chakra-ui/react';
+import React from 'react';
+import { Box } from '@chakra-ui/react';
 
-import GlobalContext from './contexts/CurrentUserContext';
 import useAuthentication from './customhooks/useAuthentication';
 import LogIn from './pages/loggedOut/LogInPage';
 import Routes from './router/Routes';
