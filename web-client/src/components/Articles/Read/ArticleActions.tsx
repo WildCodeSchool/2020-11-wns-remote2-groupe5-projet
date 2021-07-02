@@ -7,11 +7,13 @@ import {
   FaRegHeart,
   FaHeart,
 } from 'react-icons/fa';
+import { parseRelativeTime } from '../../../utils/Date';
 
 type ArticleActionsProps = {
   numberLike: number;
   numberCom: number;
   numberRegister?: number;
+  date: string
   onClick?: () => void;
   isLiked?: boolean;
 };
@@ -22,12 +24,13 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
   numberRegister,
   onClick,
   isLiked,
+  date
 }) => {
 
   return (
     <Box>
-      <Flex flexDir="row" align="center" p={'4px'}>
-        <Flex align="center" px={'4px'}>
+      <Flex flexDir="row" align="center" fontsize="16px">
+        <Flex align="center">
           {onClick ? (
             <Button
               p={0}
@@ -73,6 +76,9 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
           <FaRegBookmark color="white" />
         </Flex>
       </Flex>
+      <Text fontSize="sm" color="white">
+          {parseRelativeTime(date)}
+      </Text>
     </Box>
   );
 };

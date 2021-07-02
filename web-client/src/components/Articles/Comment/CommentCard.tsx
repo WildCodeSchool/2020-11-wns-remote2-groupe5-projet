@@ -1,5 +1,5 @@
 import React from 'react';
-import { parseDateComment } from '../../../utils/Date';
+import { parseRelativeTime } from '../../../utils/Date';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import AvatarCustom from '../../helpers/AvatarCustom';
 
@@ -36,7 +36,7 @@ export default function CommentCard({
         </Flex>
         <Flex align="center" justify="space-between">
           <Text fontSize="xs" color="white">
-            {parseDateComment(date)}
+            {parseRelativeTime(date)}
           </Text>
         </Flex>
       </Flex>

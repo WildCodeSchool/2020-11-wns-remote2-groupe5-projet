@@ -18,7 +18,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
 }) => {
   return (
     <Flex
-      flexDir={["column","column","column","row"]}
+      flexDir={["row","row","row","row"]}
       justify="space-between"
       align="center"
       borderTopRadius={'2xl'}
@@ -27,7 +27,6 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
       <ArticleUserInfo
         pseudo={article.user?.pseudo}
         avatarFileName={article.user?.avatarFileName}
-        date={article?.date}
       />
       <ArticleActions
         numberLike={article?.likesArticle?.length || 0}
@@ -35,6 +34,7 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
         numberRegister={0}
         onClick={onClick}
         isLiked={isLiked}
+        date={article?.date}
       />
     </Flex>
   );
