@@ -112,7 +112,7 @@ export default function EditInformations(): JSX.Element {
         _hover={{ borderColor: '#424a57' }}
         backgroundColor="whiteAlpha.900"
       />
-      <NumberInput value={age} defaultValue={15} min={8} max={99}>
+      <NumberInput value={age} defaultValue={age} min={8} max={99}>
         <NumberInputField onChange={() => setAge(age)} />
         <NumberInputStepper>
           {age && <NumberIncrementStepper onClick={() => setAge(age + 1)} />}
@@ -142,9 +142,6 @@ export default function EditInformations(): JSX.Element {
         _hover={{ borderColor: '#424a57' }}
         backgroundColor="whiteAlpha.900"
       />
-
-      <label>
-        Description
         <Textarea
           focusBorderColor="#393E46"
           value={bio}
@@ -154,7 +151,6 @@ export default function EditInformations(): JSX.Element {
           _hover={{ borderColor: '#424a57' }}
           backgroundColor="whiteAlpha.900"
         />
-      </label>
       <Button
         marginTop="20px"
         alignSelf="center"
