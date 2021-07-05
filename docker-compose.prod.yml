@@ -10,7 +10,7 @@ services:
       - 4000
     restart: always
     volumes:
-      - ./public:/app/public
+      - public:/app/public
     environment:
       - NODE_ENV=production
 
@@ -30,6 +30,8 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - web-client-build:/web-client-build
+      - public:/public
 
 volumes:
   web-client-build:
+  public:
