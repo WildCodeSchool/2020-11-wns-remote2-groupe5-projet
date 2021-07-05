@@ -50,16 +50,17 @@ export default class PictureResolver {
         if (err) {
           writeFile();
         } else {
-          unlink(path.join(AVATAR_DIRECTORY, user.avatarFileName), function (
-            err
-          ) {
-            if (err) {
-              console.log(err);
-              throw Error('ERROR writing file');
-            } else {
-              writeFile();
+          unlink(
+            path.join(AVATAR_DIRECTORY, user.avatarFileName),
+            function (err) {
+              if (err) {
+                console.log(err);
+                throw Error('ERROR writing file');
+              } else {
+                writeFile();
+              }
             }
-          });
+          );
         }
       });
     }

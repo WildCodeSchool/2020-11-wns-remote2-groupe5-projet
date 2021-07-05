@@ -13,7 +13,7 @@ export default function HomePage(): JSX.Element {
       align="center"
       justify="center"
       width="100%"
-      mt={{base:"530px", sm:"630px", md:"830px", lg:"420px", xl: "440px" }}
+      mt={{ base: '530px', sm: '630px', md: '830px', lg: '420px', xl: '440px' }}
     >
       {data &&
         data.articles.map((article: Articles_articles) => (
