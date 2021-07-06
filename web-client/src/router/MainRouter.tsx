@@ -23,10 +23,11 @@ type MainRouterProps = {
 export default function MainRouter({
   isAuthenticated,
 }: MainRouterProps): JSX.Element {
+  console.log('isAuthenticated main router', isAuthenticated);
+
   return (
     <Router>
       <MainLayout>
-        {!isAuthenticated && <Redirect to="/" />}
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route

@@ -1,4 +1,4 @@
-import { useState, useMemo, SetStateAction, Dispatch } from 'react';
+import { useState, useMemo, SetStateAction, Dispatch, useEffect } from 'react';
 import { CHECK_AUTH } from '../queries/user-queries';
 import { useQuery } from '@apollo/client';
 
@@ -18,11 +18,13 @@ export default function useAuthentication(): hookReturn {
   const { data, loading } = useQuery(CHECK_AUTH);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useMemo(() => {
+  console.log("isAuthenticated", isAuthenticated)
+
+  useEffect(() => {
     if (data) {
       setIsAuthenticated(true);
     }
-  }, [data]);
+  }, [data, isAuthenticated]);
 
   return { isAuthenticated, setIsAuthenticated, loading, data };
 }

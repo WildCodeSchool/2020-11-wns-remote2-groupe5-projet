@@ -4,9 +4,14 @@ import React, { useContext } from 'react';
 import LogoCustom from '../../components/helpers/LogoCustom';
 import LogInCard from '../../components/LogInCard';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import useAuthentication from '../../customhooks/useAuthentication';
 
-export default function LogInPage(): JSX.Element {
-  const { setIsAuthenticated } = useContext(CurrentUserContext);
+type LoginProps = {
+  //isAuthenticated: boolean;
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function LogInPage(props: LoginProps): JSX.Element {
   return (
     <Flex
       width={{
@@ -26,7 +31,7 @@ export default function LogInPage(): JSX.Element {
       px={{ base: '16px', md: '0px' }}
     >
       <LogoCustom />
-      <LogInCard setIsAuthenticated={setIsAuthenticated!} />
+      <LogInCard setIsAuthenticated={props.setIsAuthenticated!} />
       <Box>
         <Text fontSize={{ base: 'small' }} color="gray.200">
           @copyrights Fatima, Sam, Paul, Guillaume

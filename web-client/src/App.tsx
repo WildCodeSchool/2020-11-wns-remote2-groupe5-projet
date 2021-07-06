@@ -1,13 +1,23 @@
 import React from 'react';
 
-import CurrentUserProvider from './contexts/CurrentUserContext';
+import CurrentUserContext from './contexts/CurrentUserContext';
+import useAuthentication from './customhooks/useAuthentication';
 
 import RootRouter from './router/RootRouter';
 
 export default function App(): JSX.Element {
+  const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
+
   return (
-    <CurrentUserProvider>
-      <RootRouter />
-    </CurrentUserProvider>
+    <>
+      {!loading && (
+        <CurrentUserContext>
+          <RootRouter
+            isAuthenticated={isAuthenticated}
+            setIsAuthenticated={setIsAuthenticated}
+          />
+        </CurrentUserContext>
+      )}
+    </>
   );
 }
