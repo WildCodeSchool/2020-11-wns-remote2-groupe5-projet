@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function Informations({ data }: { data: any }): JSX.Element {
   return (
-    <List spacing={6} fontSize="xl">
+    <List spacing={6} color="#FFF" fontSize="xl">
       <ListItem>Age: {data?.me?.age}</ListItem>
       <ListItem>Email: {data?.me?.email}</ListItem>
       <ListItem>Numéro de téléphone: {data?.me?.phoneNumber}</ListItem>

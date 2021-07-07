@@ -12,6 +12,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { createUploadLink } from 'apollo-upload-client';
 import { getMainDefinition } from '@apollo/client/utilities';
+import theme from './theme';
 import './index.css';
 require('dotenv').config();
 
@@ -22,7 +23,11 @@ const httpLink = createUploadLink({
 });
 
 const wsLink = new WebSocketLink({
-  uri: `${process.env.NODE_ENV === 'development' ? 'ws://localhost:4000' : document.location.origin.replace('http', 'ws')}${GRAPHQL_ENDPOINT}`,
+  uri: `${
+    process.env.NODE_ENV === 'development'
+      ? 'ws://localhost:4000'
+      : document.location.origin.replace('http', 'ws')
+  }${GRAPHQL_ENDPOINT}`,
   options: {
     reconnect: true,
   },
@@ -48,7 +53,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <App />
       </ChakraProvider>
     </ApolloProvider>

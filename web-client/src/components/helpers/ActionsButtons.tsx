@@ -1,8 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useContext, useState } from 'react';
 
-import {CurrentUserContext} from '../../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { Button, Flex } from '@chakra-ui/react';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { FaArrowLeft } from 'react-icons/fa';
+import {
+  ActualPageEnum,
+  actualPageMap,
+} from '../../pages/loggedIn/UserProfilPage';
 
 export default function ActionsButtons({
   goToModificationPage,
@@ -11,7 +17,7 @@ export default function ActionsButtons({
   goToModificationPage: boolean;
   setGoToModificationPage(goToModificationPage: boolean): void;
 }): JSX.Element {
-  const {actualPage, setActualPage} = useContext(CurrentUserContext);
+  const { actualPage, setActualPage } = useContext(CurrentUserContext);
 
   const [backButton, setBackButton] = useState<string>('diplomas');
   const [nextButton, setNextButton] = useState<string>('experiences');
@@ -46,8 +52,29 @@ export default function ActionsButtons({
 
   return (
     <Flex justifyContent="space-between" marginTop="15px">
-      <Button onClick={() => back()}>{backButton}</Button>
-      <Button onClick={() => next()}>{nextButton}</Button>
+      <Button
+        variant="ghost"
+        leftIcon={<FaArrowLeft />}
+        onClick={() => back()}
+        colorScheme="gray.100"
+        color="#FFF"
+        _hover={{ borderColor: 'gray.800' }}
+        _checked={{ borderColor: 'gray.800' }}
+      >
+        {actualPageMap[backButton as ActualPageEnum]}
+      </Button>
+      <Button
+        variant="ghost"
+        rightIcon={<ArrowForwardIcon />}
+        onClick={() => next()}
+        colorScheme="gray.100"
+        color="#FFF"
+        _hover={{ borderColor: 'gray.800' }}
+        _checked={{ borderColor: 'gray.800' }}
+        //backgroundColor="gray.900"
+      >
+        {actualPageMap[nextButton as ActualPageEnum]}
+      </Button>
     </Flex>
   );
 }
