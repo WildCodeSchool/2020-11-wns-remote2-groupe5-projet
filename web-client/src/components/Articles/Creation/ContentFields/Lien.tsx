@@ -1,3 +1,4 @@
+import { Input } from '@chakra-ui/react';
 import React from 'react';
 import { Action } from '../../../../reducers/fieldsReducer';
 import ContentFieldContainer from './ContentFieldContainer';
@@ -24,8 +25,13 @@ export default function Lien({
       isFirst={isFirst}
       isLast={isLast}
       dispatch={dispatch}
-      children={<>
-          <input
+      children={
+        <>
+          <Input
+            placeholder="Indiquez votre url"
+            backgroundColor="#FFF"
+            borderBottomRadius="lg"
+            borderTopRadius="0"
             onChange={(e) =>
               dispatch({
                 type: 'SET_VALUE',
@@ -33,8 +39,9 @@ export default function Lien({
               })
             }
             value={value}
-            placeholder="Indiquez votre url"
           />
-      </>} />
+        </>
+      }
+    />
   );
 }

@@ -1,3 +1,4 @@
+import { Input } from '@chakra-ui/react';
 import React from 'react';
 import { Action } from '../../../../reducers/fieldsReducer';
 import ContentFieldContainer from './ContentFieldContainer';
@@ -24,17 +25,23 @@ export default function SousTitre({
       isFirst={isFirst}
       isLast={isLast}
       dispatch={dispatch}
-      children={<>
-      <input
-        onChange={(e) =>
-          dispatch({
-            type: 'SET_VALUE',
-            payload: { index, value: e.target.value },
-          })
-        }
-        value={value}
-        placeholder="Ecrivez un sous-titre"
-      />
-      </>} />
+      children={
+        <>
+          <Input
+            placeholder="Ecrivez un sous-titre"
+            backgroundColor="#FFF"
+            borderBottomRadius="lg"
+            borderTopRadius="0"
+            onChange={(e) =>
+              dispatch({
+                type: 'SET_VALUE',
+                payload: { index, value: e.target.value },
+              })
+            }
+            value={value}
+          />
+        </>
+      }
+    />
   );
 }

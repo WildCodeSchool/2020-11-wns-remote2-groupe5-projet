@@ -5,6 +5,9 @@ services:
     restart: always
 
   api:
+    depends_on:
+      db:
+        condition: service_started
     command: sh -c "npm run build && npm run start"
     expose:
       - 4000
@@ -15,6 +18,9 @@ services:
       - NODE_ENV=production
 
   web-client:
+    depends_on:
+      api:
+        condition: service_started
     command: sh -c "npm run build"
     volumes:
       - web-client-build:/app/build
@@ -23,6 +29,11 @@ services:
       - REACT_APP_API_BASE_URL=/api
 
   nginx:
+    depends_on:
+      api:
+        condition: service_started
+      web-client:
+        condition: service_started
     image: nginx:1.19.10
     restart: always
     ports:

@@ -1,7 +1,6 @@
 /* eslint-disable array-callback-return */
-import React, { useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-
 import { Box, Flex, IconButton, useDisclosure } from '@chakra-ui/react';
 import Lien from '../../components/Articles/Creation/ContentFields/Lien';
 import Paragraphe from '../../components/Articles/Creation/ContentFields/Paragraphe';
@@ -13,26 +12,25 @@ import { useArticlePublication } from '../../customhooks/useArticlePublication';
 import fieldsReducer from '../../reducers/fieldsReducer';
 import Image from '../.././components/Articles/Creation/ContentFields/Image';
 import { useGetCurrentWindowWidth } from '../../customhooks/useGetCurrentWindowWidth';
-import { HiMenu } from "react-icons/hi";
+import { HiMenu } from 'react-icons/hi';
 
 export default function ArticleCreationPage(): JSX.Element {
   const [fields, dispatch] = useReducer(fieldsReducer, [
     { contentType: 'Titre', value: '' },
   ]);
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { isOpen: isOpenDrawer, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDisclosure()
-  const {width} = useGetCurrentWindowWidth()
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const {
-    postArticle,
-    defaultDescription,
-  } = useArticlePublication(fields);
+    isOpen: isOpenDrawer,
+    onOpen: onOpenDrawer,
+    onClose: onCloseDrawer,
+  } = useDisclosure();
+  const { width } = useGetCurrentWindowWidth();
 
-  console.log("width", width)
+  const { postArticle, defaultDescription } = useArticlePublication(fields);
 
   return (
-    <Flex justify="center" w="100%">
+    <Flex w="100%">
       <PublishModal
         isOpen={isOpen}
         onClose={onClose}
@@ -52,11 +50,15 @@ export default function ArticleCreationPage(): JSX.Element {
           })
         }
       >
-        <Box w={["90%","90%","45%","45%"]}>
+        <Box w={['90%', '90%', '45%', '45%']}>
           <Titre index={0} value={fields[0].value} dispatch={dispatch} />
           <Droppable droppableId={'1'}>
             {(provided) => (
-              <Box ref={provided.innerRef} {...provided.droppableProps} my='16px'>
+              <Box
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                my="16px"
+              >
                 {fields.map((field, index) => {
                   const props = {
                     key: index,
@@ -83,29 +85,31 @@ export default function ArticleCreationPage(): JSX.Element {
           </Droppable>
         </Box>
       </DragDropContext>
-      <Flex flexDir='column' alignItems="flex-end">
-      {
-        width < 700 ?
-        <IconButton 
-          aria-label="menu" 
-          icon={<HiMenu />}
-          width='20px'
-          onClick={isOpenDrawer ? onCloseDrawer : onOpenDrawer}
-          backgroundColor="gray.800"
-          color="gray.100"
-          _hover={{backgroundColor: "gray.700"}}
-          _focus={{backgroundColor: "gray.800"}}
-          _checked={{backgroundColor: "gray.800"}}
-          _focusVisible={{backgroundColor: "gray.800"}}
-          _pressed={{backgroundColor: "gray.800"}}
-          fontSize="2xl"
-          mt="8px"
-          mb="48px"
-        /> :
-        <EditionTools dispatch={dispatch} openPublishModal={onOpen} />
-      }
+      <Flex flexDir="column" alignItems="flex-end">
+        {width < 700 ? (
+          <IconButton
+            aria-label="menu"
+            icon={<HiMenu />}
+            width="20px"
+            onClick={isOpenDrawer ? onCloseDrawer : onOpenDrawer}
+            backgroundColor="gray.800"
+            color="gray.100"
+            _hover={{ backgroundColor: 'gray.700' }}
+            _focus={{ backgroundColor: 'gray.800' }}
+            _checked={{ backgroundColor: 'gray.800' }}
+            _focusVisible={{ backgroundColor: 'gray.800' }}
+            _pressed={{ backgroundColor: 'gray.800' }}
+            fontSize="2xl"
+            mt="8px"
+            mb="48px"
+          />
+        ) : (
+          <EditionTools dispatch={dispatch} openPublishModal={onOpen} />
+        )}
 
-            {isOpenDrawer ? <EditionTools dispatch={dispatch} openPublishModal={onOpen} /> : null}
+        {isOpenDrawer ? (
+          <EditionTools dispatch={dispatch} openPublishModal={onOpen} />
+        ) : null}
       </Flex>
     </Flex>
   );

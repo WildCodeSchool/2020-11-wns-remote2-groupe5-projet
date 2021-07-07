@@ -1,3 +1,4 @@
+import { Textarea } from '@chakra-ui/react';
 import React from 'react';
 import { Action } from '../../../../reducers/fieldsReducer';
 import ContentFieldContainer from './ContentFieldContainer';
@@ -9,7 +10,6 @@ type ParagrapheProps = {
   value: string;
   dispatch: React.Dispatch<Action>;
 };
-
 
 export default function Paragraphe({
   index,
@@ -25,8 +25,13 @@ export default function Paragraphe({
       isFirst={isFirst}
       isLast={isLast}
       dispatch={dispatch}
-      children={<>
-      <textarea
+      children={
+        <>
+          <Textarea
+            backgroundColor="#FFF"
+            borderTopRadius="inherit"
+            borderBottomRadius="lg"
+            mb="8px"
             onChange={(e) =>
               dispatch({
                 type: 'SET_VALUE',
@@ -36,6 +41,8 @@ export default function Paragraphe({
             value={value}
             placeholder="Ecrivez un paragraphe"
           />
-      </>} />
+        </>
+      }
+    />
   );
 }
