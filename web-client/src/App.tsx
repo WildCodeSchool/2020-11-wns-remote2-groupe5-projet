@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client';
 import React from 'react';
-// import '@fontsource/quicksand.css';
 import CurrentUserContext from './contexts/CurrentUserContext';
 import { CHECK_AUTH } from './queries/user-queries';
 import '@fontsource/quicksand/600.css';

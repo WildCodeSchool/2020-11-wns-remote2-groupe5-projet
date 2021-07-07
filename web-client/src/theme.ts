@@ -6,4 +6,5 @@ const theme = extendTheme({
     body: "Quicksand",
   },
 })
+
 export default theme

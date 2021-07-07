@@ -1,7 +1,6 @@
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import React, { ReactChild, useEffect, useState } from 'react';
-import { useMemo } from 'react';
-import { CHECK_AUTH, USER_INFO } from '../queries/user-queries';
+import { USER_INFO } from '../queries/user-queries';
 
 interface IProps {
   children: ReactChild | ReactChild[];
@@ -48,7 +47,6 @@ const CurrentUserProvider: React.FC<IProps> = (props: IProps) => {
   };
 
   useEffect(() => {
-    console.log('111', loading);
     conditionLog();
   }, [isAuthenticated, user]);
 
