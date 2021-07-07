@@ -1,10 +1,8 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import LogoCustom from '../../components/helpers/LogoCustom';
 import LogInCard from '../../components/LogInCard';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import useAuthentication from '../../customhooks/useAuthentication';
 
 export default function LogInPage(): JSX.Element {
   return (

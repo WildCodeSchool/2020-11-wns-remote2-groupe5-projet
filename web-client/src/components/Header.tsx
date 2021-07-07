@@ -15,11 +15,9 @@ import {
 import LogoCustom from './helpers/LogoCustom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import AvatarCustom from './helpers/AvatarCustom';
-import useAuthentication from '../customhooks/useAuthentication';
 
 export default function Header(): JSX.Element {
   const [logout] = useMutation(LOG_OUT);
-  // const { setIsAuthenticated } = useAuthentication();
 
   const { currentUser, setIsAuthenticated } = useContext(CurrentUserContext);
 

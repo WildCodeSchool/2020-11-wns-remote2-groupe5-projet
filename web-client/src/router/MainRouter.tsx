@@ -1,9 +1,6 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-import BottomBar from '../components/BottomBar';
-import Header from '../components/Header';
 
 import UserProfilPage from '../pages/loggedIn/UserProfilPage';
 import InformationModification from '../components/UserProfil/EditProfil/EditInformations';
@@ -16,15 +13,7 @@ import ArticlePage from '../pages/loggedIn/ArticlePage';
 import HomePage from '../pages/loggedIn/HomePage';
 import MainLayout from '../layouts/MainLayout';
 
-type MainRouterProps = {
-  isAuthenticated: boolean;
-};
-
-export default function MainRouter({
-  isAuthenticated,
-}: MainRouterProps): JSX.Element {
-  console.log('isAuthenticated main router', isAuthenticated);
-
+export default function MainRouter(): JSX.Element {
   return (
     <Router>
       <MainLayout>

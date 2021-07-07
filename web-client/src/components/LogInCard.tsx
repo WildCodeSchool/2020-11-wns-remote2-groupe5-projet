@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { AUTH } from '../queries/user-queries';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Box,
   Text,
@@ -18,7 +18,6 @@ import { AtSignIcon, LockIcon, WarningIcon } from '@chakra-ui/icons';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function LogInCard(): JSX.Element {
-  const history = useHistory();
   const { setIsAuthenticated } = useContext(CurrentUserContext);
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
@@ -39,7 +38,6 @@ export default function LogInCard(): JSX.Element {
         },
       });
       setIsAuthenticated && setIsAuthenticated(true);
-      //history.push('/');
     } catch (error) {
       setErrorMessage(error.message);
       console.log('ERROR', error);

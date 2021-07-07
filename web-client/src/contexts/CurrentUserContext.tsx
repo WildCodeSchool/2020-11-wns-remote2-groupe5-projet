@@ -1,7 +1,6 @@
 import { useLazyQuery, useQuery } from '@apollo/client';
 import React, { ReactChild, useState } from 'react';
 import { useMemo } from 'react';
-import { useEffect } from 'react';
 import { CHECK_AUTH, USER_INFO } from '../queries/user-queries';
 
 interface IProps {
@@ -47,9 +46,11 @@ const CurrentUserProvider: React.FC<IProps> = (props: IProps) => {
     }
     if (isAuthenticated) {
       getUser();
-      if (user) setCurrentUser(user?.me);
+      if (user) {
+        setCurrentUser(user?.me);
+      }
     }
-  }, [data, getUser, isAuthenticated, user]);
+  }, [data]);
 
   return (
     <CurrentUserContext.Provider
