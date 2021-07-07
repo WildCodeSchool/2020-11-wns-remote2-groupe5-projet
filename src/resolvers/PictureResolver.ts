@@ -66,4 +66,52 @@ export default class PictureResolver {
 
     return filename;
   }
+
+  @Mutation(() => Picture)
+  async uploadArticlePicture(
+    @Ctx() { user }: { user: User | null },
+    @Arg('file', () => GraphQLUpload) file: FileUpload,
+    @Arg('articleId') articleId: string,
+    @Arg('fileName') fileName: string
+  ): Promise<string> {
+    if (!user) {
+      throw Error('You are not authenticated.');
+    }
+
+    const ARTICLE_DIRECTORY = path.join(
+      __dirname,
+      '../../public/media/articles/' + articleId
+    );
+
+    mkdirSync(ARTICLE_DIRECTORY, { recursive: true });
+
+    const { createReadStream } = file;
+
+    const stream = createReadStream();
+
+    const writeFile = () => {
+      stream.pipe(createWriteStream(path.join(ARTICLE_DIRECTORY, fileName)));
+    };
+
+    // if an image exists, delete it and then create new, else create new
+
+    stat(path.join(ARTICLE_DIRECTORY, user.avatarFileName), function (err) {
+      if (err) {
+        writeFile();
+      } else {
+        unlink(path.join(ARTICLE_DIRECTORY, user.avatarFileName), function (
+          err
+        ) {
+          if (err) {
+            console.log(err);
+            throw Error('ERROR writing file');
+          } else {
+            writeFile();
+          }
+        });
+      }
+    });
+
+    return fileName;
+  }
 }
