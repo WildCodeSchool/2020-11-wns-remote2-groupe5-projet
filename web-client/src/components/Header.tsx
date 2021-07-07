@@ -30,6 +30,8 @@ export default function Header(): JSX.Element {
     }
   };
 
+  console.log('HEADER', currentUser);
+
   return (
     <Flex
       bgColor="gray.800"
