@@ -16,22 +16,24 @@ export default function BottomBar(): JSX.Element {
       justifyContent="space-around"
       align="center"
       bgColor="gray.800"
+      boxShadow="1px 2px 15px -1px rgba(0,0,0,0.66)"
+      zIndex="1"
     >
       <Link as={ReachLink} to="/" m="8px">
-        <Icon as={BsHouseDoorFill} w={8} h={8} />
+        <Icon as={BsHouseDoorFill} w={8} h={8} _hover={{ color: 'gray.400' }} />
       </Link>
       {/* <Divider orientation="horizontal" /> */}
       <Link as={ReachLink} to="/articles/article-creation" m="8px">
-        <Icon as={BiEdit} w={8} h={8} />
+        <Icon as={BiEdit} w={8} h={8} _hover={{ color: 'gray.400' }} />
       </Link>
       {/* <Divider orientation="horizontal" /> */}
       <Link as={ReachLink} to="/articles/article-creation" m="8px">
-        <Icon as={MdNotifications} w={8} h={8} />
+        <Icon as={MdNotifications} w={8} h={8} _hover={{ color: 'gray.400' }} />
       </Link>
 
       {/* <Divider orientation="horizontal" /> */}
       <Link as={ReachLink} to="/articles/article-creation" m="8px">
-        <Icon as={FaRegBookmark} w={8} h={8} />
+        <Icon as={FaRegBookmark} w={8} h={8} _hover={{ color: 'gray.400' }} />
       </Link>
     </Flex>
   );

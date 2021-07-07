@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Box, Text, Flex, Button } from '@chakra-ui/react';
 import React from 'react';
 import {
@@ -13,7 +12,7 @@ type ArticleActionsProps = {
   numberLike: number;
   numberCom: number;
   numberRegister?: number;
-  date: string
+  date: string;
   onClick?: () => void;
   isLiked?: boolean;
 };
@@ -24,12 +23,11 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
   numberRegister,
   onClick,
   isLiked,
-  date
+  date,
 }) => {
-
   return (
     <Box>
-      <Flex flexDir="row" align="center" fontsize="16px">
+      <Flex flexDir="row" align="center" fontSize="16px">
         <Flex align="center">
           {onClick ? (
             <Button
@@ -44,12 +42,10 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
               </Text>
               {numberLike === 0 ? (
                 <FaRegHeart color="white" />
+              ) : !isLiked ? (
+                <FaRegHeart color="white" />
               ) : (
-                !isLiked ? (
-                  <FaRegHeart color="white" />
-                ) : (
-                  <FaHeart color="white" />
-                )
+                <FaHeart color="white" />
               )}
             </Button>
           ) : (
@@ -77,7 +73,7 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
         </Flex>
       </Flex>
       <Text fontSize="sm" color="white">
-          {parseRelativeTime(date)}
+        {parseRelativeTime(date)}
       </Text>
     </Box>
   );

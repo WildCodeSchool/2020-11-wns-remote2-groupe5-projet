@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, Flex, Image } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useParams } from 'react-router-dom';
 import ArticleHeader from '../../components/Articles/Read/ArticleHeader';
@@ -39,14 +39,6 @@ export default function ArticlePage(): JSX.Element {
           borderBottomRadius={'2xl'}
           bgColor="white"
         >
-          {/* <Image
-            w={{base:"160px",sm:"200px",md:"260px",lg:"300px"}}
-            borderRadius={'2xl'}
-            src={
-              'https://img-19.ccm2.net/QeOmxQpB5sfw25JvsKbirn-eulw=/250x/6aab65a776614b8bba8c8b4e8c1848c9/ccm-encyclopedia/0px-Unofficial_JavaScript_logo_2.svg.png'
-            }
-            alt={article?.oneArticle?.title}
-          /> */}
           {article && (
             <ContentFields
               contentFields={article.oneArticle.contentFields}

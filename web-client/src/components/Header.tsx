@@ -38,6 +38,8 @@ export default function Header(): JSX.Element {
       h="100px"
       w="100%"
       px="16px"
+      boxShadow="1px 2px 15px -1px rgba(0,0,0,0.66)"
+      zIndex="1"
     >
       <Flex>
         <LogoCustom isNavLink />
