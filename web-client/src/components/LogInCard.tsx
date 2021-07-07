@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { AUTH } from '../queries/user-queries';
 import { Link, useHistory } from 'react-router-dom';
@@ -15,15 +15,11 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 import { AtSignIcon, LockIcon, WarningIcon } from '@chakra-ui/icons';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-type LogInCardProps = {
-  setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
-};
-
-export default function LogInCard({
-  setIsAuthenticated,
-}: LogInCardProps): JSX.Element {
+export default function LogInCard(): JSX.Element {
   const history = useHistory();
+  const { setIsAuthenticated } = useContext(CurrentUserContext);
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -42,8 +38,8 @@ export default function LogInCard({
           },
         },
       });
-      setIsAuthenticated(true);
-      history.push('/');
+      setIsAuthenticated && setIsAuthenticated(true);
+      //history.push('/');
     } catch (error) {
       setErrorMessage(error.message);
       console.log('ERROR', error);

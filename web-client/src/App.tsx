@@ -6,18 +6,21 @@ import useAuthentication from './customhooks/useAuthentication';
 import RootRouter from './router/RootRouter';
 
 export default function App(): JSX.Element {
-  const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
+  //const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
 
   return (
     <>
-      {!loading && (
-        <CurrentUserContext>
-          <RootRouter
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-          />
-        </CurrentUserContext>
-      )}
+      {/* {!loading && ( */}
+      <CurrentUserContext
+      // isAuthenticated={isAuthenticated}
+      // setIsAuthenticated={setIsAuthenticated}
+      >
+        <RootRouter
+        // isAuthenticated={isAuthenticated}
+        // setIsAuthenticated={setIsAuthenticated}
+        />
+      </CurrentUserContext>
+      {/* )} */}
     </>
   );
 }

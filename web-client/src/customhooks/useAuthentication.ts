@@ -19,12 +19,13 @@ export default function useAuthentication(): hookReturn {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   console.log("isAuthenticated", isAuthenticated)
-
-  useEffect(() => {
+  console.log("data in hook", data)
+  
+  useMemo(() => {
     if (data) {
       setIsAuthenticated(true);
     }
-  }, [data, isAuthenticated]);
+  }, [data]);
 
   return { isAuthenticated, setIsAuthenticated, loading, data };
 }

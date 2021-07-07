@@ -1,8 +1,8 @@
-import { useQuery } from '@apollo/client';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import React, { ReactChild, useState } from 'react';
+import { useMemo } from 'react';
 import { useEffect } from 'react';
-import useAuthentication from '../customhooks/useAuthentication';
-import { USER_INFO } from '../queries/user-queries';
+import { CHECK_AUTH, USER_INFO } from '../queries/user-queries';
 
 interface IProps {
   children: ReactChild | ReactChild[];
@@ -33,18 +33,23 @@ export const CurrentUserContext = React.createContext<
 >({});
 
 const CurrentUserProvider: React.FC<IProps> = (props: IProps) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState<CurrentUser>();
   const [actualPage, setActualPage] = useState<string>('informations');
 
-  const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
+  const { data, loading } = useQuery(CHECK_AUTH);
 
-  const { data } = useQuery(USER_INFO);
+  const [getUser, { data: user }] = useLazyQuery(USER_INFO);
 
-  console.log('inCOntext', isAuthenticated);
-
-  useEffect(() => {
-    if (isAuthenticated && data) setCurrentUser(data?.me);
-  }, [data]);
+  useMemo(() => {
+    if (data) {
+      setIsAuthenticated(true);
+    }
+    if (isAuthenticated) {
+      getUser();
+      if (user) setCurrentUser(user?.me);
+    }
+  }, [data, getUser, isAuthenticated, user]);
 
   return (
     <CurrentUserContext.Provider

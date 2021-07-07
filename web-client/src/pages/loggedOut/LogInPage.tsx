@@ -6,12 +6,7 @@ import LogInCard from '../../components/LogInCard';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import useAuthentication from '../../customhooks/useAuthentication';
 
-type LoginProps = {
-  //isAuthenticated: boolean;
-  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export default function LogInPage(props: LoginProps): JSX.Element {
+export default function LogInPage(): JSX.Element {
   return (
     <Flex
       width={{
@@ -31,7 +26,7 @@ export default function LogInPage(props: LoginProps): JSX.Element {
       px={{ base: '16px', md: '0px' }}
     >
       <LogoCustom />
-      <LogInCard setIsAuthenticated={props.setIsAuthenticated!} />
+      <LogInCard />
       <Box>
         <Text fontSize={{ base: 'small' }} color="gray.200">
           @copyrights Fatima, Sam, Paul, Guillaume

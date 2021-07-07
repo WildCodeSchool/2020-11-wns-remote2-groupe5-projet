@@ -19,14 +19,14 @@ import useAuthentication from '../customhooks/useAuthentication';
 
 export default function Header(): JSX.Element {
   const [logout] = useMutation(LOG_OUT);
-  const { setIsAuthenticated } = useAuthentication();
+  // const { setIsAuthenticated } = useAuthentication();
 
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, setIsAuthenticated } = useContext(CurrentUserContext);
 
   const clickToLogOut = async () => {
     try {
       await logout();
-      setIsAuthenticated(false);
+      setIsAuthenticated && setIsAuthenticated(false);
     } catch (error) {
       console.log('error');
     }
