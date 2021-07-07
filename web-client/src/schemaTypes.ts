@@ -329,6 +329,31 @@ export interface UploadAvatarVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UploadArticlePicture
+// ====================================================
+
+export interface UploadArticlePicture_uploadArticlePicture {
+  __typename: "Picture";
+  id: string | null;
+  extension: string | null;
+}
+
+export interface UploadArticlePicture {
+  uploadArticlePicture: UploadArticlePicture_uploadArticlePicture;
+}
+
+export interface UploadArticlePictureVariables {
+  file: any;
+  articleId: string;
+  fileName: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: CreateSession
 // ====================================================
 

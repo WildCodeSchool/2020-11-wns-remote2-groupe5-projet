@@ -14,11 +14,7 @@ import {
 import CurrentUserProvider from './contexts/CurrentUserContext';
 
 export default function App(): JSX.Element {
-  const {
-    isAuthenticated,
-    setIsAuthenticated,
-    loading,
-  } = useAuthentication();
+  const { isAuthenticated, setIsAuthenticated, loading } = useAuthentication();
 
   return (
     <Box

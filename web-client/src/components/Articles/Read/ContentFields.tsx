@@ -4,10 +4,12 @@ import { OneArticle_oneArticle_contentFields } from '../../../schemaTypes';
 
 type ContentFieldsProps = {
   contentFields: OneArticle_oneArticle_contentFields[];
+  articleId: string;
 };
 
 export default function ContentFields({
   contentFields,
+  articleId,
 }: ContentFieldsProps): JSX.Element {
   return (
     <Box>
@@ -41,7 +43,15 @@ export default function ContentFields({
             case 'Image':
               return (
                 <Image
-                  src="https://img-19.ccm2.net/QeOmxQpB5sfw25JvsKbirn-eulw=/250x/6aab65a776614b8bba8c8b4e8c1848c9/ccm-encyclopedia/0px-Unofficial_JavaScript_logo_2.svg.png"
+                  src={
+                    contentField.content === null
+                      ? undefined
+                      : document.location.origin +
+                        '/public/media/articles/' +
+                        articleId +
+                        '/' +
+                        contentField.content
+                  }
                   alt=""
                 />
               );
