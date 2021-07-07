@@ -31,7 +31,7 @@ export default function ArticleCreationPage(): JSX.Element {
   const { postArticle, defaultDescription } = useArticlePublication(fields);
 
   return (
-    <Flex justify="center" w="100%">
+    <Flex w="100%">
       <PublishModal
         isOpen={isOpen}
         onClose={onClose}

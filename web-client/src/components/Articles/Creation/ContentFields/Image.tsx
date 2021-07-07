@@ -1,3 +1,4 @@
+import { Input } from '@chakra-ui/react';
 import React, { useEffect, useRef } from 'react';
 import { Action } from '../../../../reducers/fieldsReducer';
 import ContentFieldContainer from './ContentFieldContainer';
@@ -42,10 +43,14 @@ export default function Image({
       dispatch={dispatch}
       children={
         <>
-          <input
+          <Input
+            placeholder="Selectionnez une image"
             type="file"
             accept="image/*"
             ref={inputRef}
+            backgroundColor="#FFF"
+            borderBottomRadius="lg"
+            borderTopRadius="0"
             onChange={() =>
               dispatch({
                 type: 'SET_FILE',
@@ -57,7 +62,6 @@ export default function Image({
                 },
               })
             }
-            placeholder="Selectionnez une image"
           />
         </>
       }

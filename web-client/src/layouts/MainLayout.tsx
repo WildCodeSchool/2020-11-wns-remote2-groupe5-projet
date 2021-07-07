@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import Header from '../components/Header';
 import BottomBar from '../components/BottomBar';
 
@@ -10,11 +10,19 @@ interface ILayoutProps {
 
 const MainLayout: React.FC<ILayoutProps> = (props: ILayoutProps) => {
   return (
-    <Box w="100%" h="100vh" display="flex" flexDir="column" bgColor="gray.300">
+    <Flex
+      w="100%"
+      h="100vh"
+      flexDir="column"
+      bgColor="gray.300"
+      overflow="hidden"
+    >
       <Header />
-      {props.children}
+      <Box overflowY="auto" flexGrow={1}>
+        {props.children}
+      </Box>
       <BottomBar />
-    </Box>
+    </Flex>
   );
 };
 

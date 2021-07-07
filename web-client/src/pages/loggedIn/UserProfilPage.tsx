@@ -17,7 +17,6 @@ export default function UserProfilPage(): JSX.Element {
 
   const [editProfil, setEditProfil] = useState<boolean>(false);
 
-  console.log('currentUser,', currentUser?.avatarFileName!);
   return (
     <Box height="100vh" width="100%" backgroundColor="gray.300">
       <Container

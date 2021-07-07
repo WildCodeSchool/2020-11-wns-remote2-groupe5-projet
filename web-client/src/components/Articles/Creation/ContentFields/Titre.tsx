@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Input, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Action } from '../../../../reducers/fieldsReducer';
 
@@ -14,31 +14,30 @@ export default function Titre({
   dispatch,
 }: TitreProps): JSX.Element {
   return (
-
-  <Flex 
-    m="8px" 
-    flexDir="column"
-    borderRadius="lg"
-    >
-      <Flex     
+    <Flex m="8px" flexDir="column" borderRadius="lg">
+      <Flex
         p="8px"
         backgroundColor="gray.800"
-        alignItems="center" 
-        justify="space-between" 
+        alignItems="center"
+        justify="space-between"
         borderTopRadius="lg"
-        >
-      <Text color="#FFF">Titre</Text>
+      >
+        <Text color="#FFF">Titre</Text>
       </Flex>
-      <input
+      <Input
+        placeholder="Ecrivez un titre"
+        backgroundColor="#FFF"
+        borderBottomRadius="lg"
+        borderTopRadius="0"
+        mb="8px"
+        value={value}
         onChange={(e) =>
           dispatch({
             type: 'SET_VALUE',
             payload: { index, value: e.target.value },
           })
         }
-        value={value}
-        placeholder="Ecrivez un titre"
-        />
+      />
     </Flex>
   );
 }
