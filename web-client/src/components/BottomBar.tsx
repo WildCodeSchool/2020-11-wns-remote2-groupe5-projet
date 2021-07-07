@@ -5,11 +5,12 @@ import { BiEdit } from 'react-icons/bi';
 import { MdNotifications } from 'react-icons/md';
 import { FaRegBookmark } from 'react-icons/fa';
 import { Flex } from '@chakra-ui/layout';
-import { Divider, Link, Icon } from '@chakra-ui/react';
+import { Link, Icon } from '@chakra-ui/react';
 
 export default function BottomBar(): JSX.Element {
   return (
     <Flex
+      width="100%"
       flexDir="row"
       color="white"
       justifyContent="space-around"

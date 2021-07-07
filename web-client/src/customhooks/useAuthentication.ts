@@ -18,6 +18,7 @@ export default function useAuthentication(): hookReturn {
   const { data, loading } = useQuery(CHECK_AUTH);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  
   useMemo(() => {
     if (data) {
       setIsAuthenticated(true);

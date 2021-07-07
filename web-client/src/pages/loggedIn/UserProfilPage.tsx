@@ -11,19 +11,14 @@ import { CloseIcon, EditIcon } from '@chakra-ui/icons';
 import AvatarCustom from '../../components/helpers/AvatarCustom';
 
 export default function UserProfilPage(): JSX.Element {
-  const {actualPage, setActualPage, currentUser} = useContext(CurrentUserContext);
+  const { actualPage, setActualPage, currentUser } =
+    useContext(CurrentUserContext);
   const { data } = useQuery(USER_INFO);
 
-  const [editProfil, setEditProfil] = useState<boolean>(
-    false
-  );
+  const [editProfil, setEditProfil] = useState<boolean>(false);
 
   return (
-    <Box
-      height="100vh"
-      width="100%"
-      backgroundColor="gray.300"
-    >
+    <Box height="100vh" width="100%" backgroundColor="gray.300">
       <Container
         display="flex"
         flexDirection="column"
@@ -49,7 +44,7 @@ export default function UserProfilPage(): JSX.Element {
                 {data?.me?.pseudo}
               </Text>
             </Flex>
-            <Box  padding={{base:"10px",sm:"20px",md:"30px",lg:"40px"}}>
+            <Box padding={{ base: '10px', sm: '20px', md: '30px', lg: '40px' }}>
               <Flex justifyContent="space-between" paddingY="15px">
                 <Text color="White" fontSize="3xl">
                   {actualPage}
