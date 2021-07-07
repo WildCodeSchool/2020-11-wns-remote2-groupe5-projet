@@ -3,21 +3,24 @@ import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import Header from '../components/Header';
 import BottomBar from '../components/BottomBar';
+import { useContext } from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 interface ILayoutProps {
   children: any;
 }
 
 const MainLayout: React.FC<ILayoutProps> = (props: ILayoutProps) => {
+  const { loading } = useContext(CurrentUserContext);
   return (
     <Flex
       w="100%"
       h="100vh"
       flexDir="column"
-      bgColor="gray.300"
+      bgColor="gray.700"
       overflow="hidden"
     >
-      <Header />
+      {!loading && <Header />}
       <Box overflowY="auto" flexGrow={1}>
         {props.children}
       </Box>

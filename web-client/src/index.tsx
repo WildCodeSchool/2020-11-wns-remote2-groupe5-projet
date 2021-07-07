@@ -12,6 +12,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { createUploadLink } from 'apollo-upload-client';
 import { getMainDefinition } from '@apollo/client/utilities';
+import theme from './theme';
 import './index.css';
 require('dotenv').config();
 
@@ -52,7 +53,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <App />
       </ChakraProvider>
     </ApolloProvider>

@@ -10,15 +10,26 @@ import { Button } from '@chakra-ui/button';
 import { CloseIcon, EditIcon } from '@chakra-ui/icons';
 import AvatarCustom from '../../components/helpers/AvatarCustom';
 
+export enum ActualPageEnum {
+  Informations = 'informations',
+  Experiences = 'experiences',
+  Diplomes = 'diplomas',
+}
+
+export const actualPageMap: Record<ActualPageEnum, string | undefined> = {
+  [ActualPageEnum.Informations]: 'Informations',
+  [ActualPageEnum.Experiences]: 'Expériences',
+  [ActualPageEnum.Diplomes]: 'Diplômes',
+};
+
 export default function UserProfilPage(): JSX.Element {
-  const { actualPage, setActualPage, currentUser } =
-    useContext(CurrentUserContext);
+  const { actualPage, currentUser } = useContext(CurrentUserContext);
   const { data } = useQuery(USER_INFO);
 
   const [editProfil, setEditProfil] = useState<boolean>(false);
 
   return (
-    <Box height="100vh" width="100%" backgroundColor="gray.300">
+    <Box width="100%">
       <Container
         display="flex"
         flexDirection="column"
@@ -32,8 +43,9 @@ export default function UserProfilPage(): JSX.Element {
           <Box
             backgroundColor="gray.800"
             width="100%"
-            // padding={{ lg: '0 80px 50px 80px', base: '0' }}
-            borderRadius="13px"
+            borderWidth={2}
+            borderColor="#FFF"
+            borderRadius="lg"
           >
             <Flex flexDirection="column" alignItems="center" pt="24px">
               <AvatarCustom
@@ -46,13 +58,17 @@ export default function UserProfilPage(): JSX.Element {
             </Flex>
             <Box padding={{ base: '10px', sm: '20px', md: '30px', lg: '40px' }}>
               <Flex justifyContent="space-between" paddingY="15px">
-                <Text color="White" fontSize="3xl">
-                  {actualPage}
+                <Text color="#FFF" fontSize="3xl">
+                  {actualPageMap[actualPage as ActualPageEnum]}
                 </Text>
                 <Button
-                  borderRadius="100px"
                   width={50}
                   height={50}
+                  borderRadius="100px"
+                  backgroundColor="gray.800"
+                  borderWidth={2}
+                  borderColor="#FFF"
+                  color="#FFF"
                   onClick={() => setEditProfil(!editProfil)}
                   as={!editProfil ? EditIcon : CloseIcon}
                 >
@@ -61,9 +77,10 @@ export default function UserProfilPage(): JSX.Element {
               </Flex>
               <Flex flexDirection="column">
                 <Box
-                  backgroundColor="gray.300"
+                  borderWidth={2}
+                  borderColor="#FFF"
+                  borderRadius="lg"
                   padding="20px"
-                  borderRadius="13px"
                 >
                   {!editProfil ? (
                     <ProfilView data={data} />
