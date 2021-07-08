@@ -14,6 +14,7 @@ import Experience from './Experience';
 import Diploma from './Diploma';
 import CommentaireArticle from './Commentaire_Article';
 import LikeArticle from './LikeArticle';
+import Community from './Community';
 
 @Entity()
 @ObjectType()
@@ -44,6 +45,10 @@ export default class User extends BaseEntity {
   )
   @Field(() => [CommentaireArticle])
   commentairesArticle: CommentaireArticle[];
+
+  @OneToMany(() => Community, (community) => community.user)
+  @Field(() => [Community], { nullable: true })
+  communities: Community[];
 
   @Column()
   @Unique(['pseudo'])
