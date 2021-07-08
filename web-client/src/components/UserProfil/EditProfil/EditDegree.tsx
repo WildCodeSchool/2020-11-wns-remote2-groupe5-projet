@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_DIPLOMAS } from '../../../queries/editProfil-queries';
-import { useToast } from '@chakra-ui/react';
+import { Box, useToast } from '@chakra-ui/react';
 import { Flex } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
-import { Checkbox, Input, Textarea } from '@chakra-ui/react';
+import { Checkbox, Text } from '@chakra-ui/react';
+import InputCustom from '../../helpers/InputCustom';
 
 export default function EditDegree(): JSX.Element {
   const [diplomaName, setDiplomaName] = useState('');
@@ -55,83 +56,71 @@ export default function EditDegree(): JSX.Element {
 
   return (
     <Flex p={4} flexDirection="column" alignContent="flex-start">
-      <Input
+      <InputCustom
         type="text"
         placeholder="Intitulé du Diplôme"
-        focusBorderColor="#393E46"
-        onChange={(e) => setDiplomaName(e.target.value)}
-        marginY={5}
-        borderColor="#8b9ab0"
-        _hover={{ borderColor: '#424a57' }}
-        backgroundColor="whiteAlpha.900"
+        value={diplomaName}
+        setValue={(e) => setDiplomaName(e.target.value)}
       />
-      <Input
+      <InputCustom
         type="text"
         placeholder="Ecole"
-        focusBorderColor="#393E46"
-        onChange={(e) => setSchool(e.target.value)}
-        marginY={5}
-        borderColor="#8b9ab0"
-        _hover={{ borderColor: '#424a57' }}
-        backgroundColor="whiteAlpha.900"
+        value={school}
+        setValue={(e) => setSchool(e.target.value)}
       />
-      <Flex
-        flexDirection={{ lg: 'row', md: 'column', base: 'column' }}
-        justifyContent="space-between"
-        marginY={5}
-      >
-        <Input
+      <Flex w="100%" alignItems="center">
+        <Text color="#FFF" pr="16px">
+          De
+        </Text>
+        <InputCustom
           type="date"
           placeholder="Date de début"
-          focusBorderColor="#393E46"
-          onChange={(e) => setDateStart(e.target.value)}
-          width={{ lg: '35%', md: '100%', base: '100%' }}
-          borderColor="#8b9ab0"
-          _hover={{ borderColor: '#424a57' }}
-          backgroundColor="whiteAlpha.900"
+          value={dateStart}
+          setValue={(e) => setDateStart(e.target.value)}
+          textColor="#FFF"
         />
-        <Input
+      </Flex>
+      <Flex w="100%" alignItems="center">
+        <Text color="#FFF" pr="16px">
+          À
+        </Text>
+        <InputCustom
           type="date"
-          placeholder="Date de fin"
-          focusBorderColor="#393E46"
-          onChange={(e) => setDateEnd(e.target.value)}
-          width={{ lg: '35%', md: '100%', base: '100%' }}
-          borderColor="#8b9ab0"
-          _hover={{ borderColor: '#424a57' }}
-          backgroundColor="whiteAlpha.900"
+          placeholder="Date de début"
+          value={dateStart}
+          setValue={(e) => setDateEnd(e.target.value)}
+          textColor="#FFF"
         />
+      </Flex>
+      <Box my="16px">
         <Checkbox
-          colorScheme="blackAlpha"
+          colorScheme="#fff"
           name="Ecole actuel"
           onClick={() => setIsActualSchool(!isActualSchool)}
-          width="20%"
           display="flex"
-          flexDirection="column-reverse"
-          borderColor="#8b9ab0"
-          _hover={{ borderColor: '#424a57' }}
+          color="#fff"
         >
-          Ecole actuelle
+          École actuelle
         </Checkbox>
-      </Flex>
-      <label color="black">
-        Description
-        <Textarea
-          focusBorderColor="#393E46"
-          placeholder="Description"
-          onChange={(e) => setDescription(e.target.value)}
-          borderColor="#8b9ab0"
-          _hover={{ borderColor: '#424a57' }}
-          backgroundColor="whiteAlpha.900"
-        />
-      </label>
+      </Box>
+      <InputCustom
+        type="text"
+        placeholder="Description"
+        value={description}
+        setValue={(e) => setDescription(e.target.value)}
+        textColor="#FFF"
+      />
       <Button
         marginTop="20px"
         alignSelf="center"
         width="100px"
-        colorScheme="black"
+        color="#FFF"
         variant="outline"
         onClick={() => postDiplomas()}
-        backgroundColor="whiteAlpha.900"
+        backgroundColor="gray.800"
+        _checked={{ backgroundColor: 'gray.800' }}
+        _focus={{ backgroundColor: 'gray.800' }}
+        _hover={{ backgroundColor: 'gray.800' }}
       >
         Enregistrer
       </Button>

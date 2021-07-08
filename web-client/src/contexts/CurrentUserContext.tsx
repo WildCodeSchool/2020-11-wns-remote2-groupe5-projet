@@ -1,4 +1,8 @@
-import { useQuery } from '@apollo/client';
+import {
+  ApolloQueryResult,
+  OperationVariables,
+  useQuery,
+} from '@apollo/client';
 import React, { ReactChild, useEffect, useState } from 'react';
 import { USER_INFO } from '../queries/user-queries';
 
@@ -11,7 +15,7 @@ type CurrentUser = {
   id: string;
   pseudo: string;
   email?: string;
-  age?: number;
+  age?: string;
   phoneNumber?: string;
   bio?: string;
   avatarFileName?: string;
@@ -25,6 +29,9 @@ type CurrentUserContextProps = {
   actualPage: string;
   setActualPage: (actualPage: string) => void;
   loading: boolean;
+  refetch: (
+    variables?: Partial<OperationVariables> | undefined
+  ) => Promise<ApolloQueryResult<any>>;
 };
 
 export const CurrentUserContext = React.createContext<
@@ -36,7 +43,7 @@ const CurrentUserProvider: React.FC<IProps> = (props: IProps) => {
   const [currentUser, setCurrentUser] = useState<CurrentUser>();
   const [actualPage, setActualPage] = useState<string>('informations');
 
-  const { data: user, loading } = useQuery(USER_INFO);
+  const { data: user, loading, refetch } = useQuery(USER_INFO);
 
   const conditionLog = () => {
     if (isAuthenticated) {
@@ -59,6 +66,7 @@ const CurrentUserProvider: React.FC<IProps> = (props: IProps) => {
         actualPage,
         setActualPage,
         loading,
+        refetch,
       }}
     >
       {props.children}

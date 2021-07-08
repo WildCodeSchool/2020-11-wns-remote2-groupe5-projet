@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Checkbox, Flex, Input, Textarea } from '@chakra-ui/react';
+import { Box, Button, Checkbox, Flex, Text } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { CREATE_EXPERIENCES } from '../../../queries/editProfil-queries';
+import InputCustom from '../../helpers/InputCustom';
 
 export default function EditExperience(): JSX.Element {
   const [jobName, setJobName] = useState('');
@@ -53,83 +54,71 @@ export default function EditExperience(): JSX.Element {
 
   return (
     <Flex p={4} flexDirection="column" alignContent="flex-start">
-      <Input
+      <InputCustom
         type="text"
-        placeholder="Intitulé du poste"
-        focusBorderColor="#393E46"
-        onChange={(e) => setJobName(e.target.value)}
-        marginY={5}
-        borderColor="#8b9ab0"
-        _hover={{ borderColor: '#424a57' }}
-        backgroundColor="whiteAlpha.900"
+        placeholder="Intitulé du Poste"
+        value={jobName}
+        setValue={(e) => setJobName(e.target.value)}
       />
-      <Input
+      <InputCustom
         type="text"
         placeholder="Entreprise"
-        focusBorderColor="#393E46"
-        onChange={(e) => setCompany(e.target.value)}
-        marginY={5}
-        borderColor="#8b9ab0"
-        _hover={{ borderColor: '#424a57' }}
-        backgroundColor="whiteAlpha.900"
+        value={company}
+        setValue={(e) => setCompany(e.target.value)}
       />
-      <Flex
-        flexDirection={{ lg: 'row', md: 'column', base: 'column' }}
-        justifyContent="space-between"
-        marginY={5}
-      >
-        <Input
+      <Flex w="100%" alignItems="center">
+        <Text color="#FFF" pr="16px">
+          De
+        </Text>
+        <InputCustom
           type="date"
           placeholder="Date de début"
-          focusBorderColor="#393E46"
-          onChange={(e) => setDateStart(e.target.value)}
-          width={{ lg: '35%', md: '100%', base: '100%' }}
-          borderColor="#8b9ab0"
-          _hover={{ borderColor: '#424a57' }}
-          backgroundColor="whiteAlpha.900"
+          value={dateStart}
+          setValue={(e) => setDateStart(e.target.value)}
+          textColor="#FFF"
         />
-        <Input
-          type="date"
-          placeholder="Date de fin"
-          focusBorderColor="#393E46"
-          onChange={(e) => setDateEnd(e.target.value)}
-          width={{ lg: '35%', md: '100%', base: '100%' }}
-          borderColor="#8b9ab0"
-          _hover={{ borderColor: '#424a57' }}
-          backgroundColor="whiteAlpha.900"
-        />
-        <Checkbox
-          colorScheme="blackAlpha"
-          name="Post actuel"
-          onClick={() => setIsActualJob(!isActualJob)}
-          width="20%"
-          display="flex"
-          flexDirection="column-reverse"
-          borderColor="#8b9ab0"
-          _hover={{ borderColor: '#424a57' }}
-        >
-          Ecole actuelle
-        </Checkbox>
       </Flex>
-      <label color="black">
-        Description
-        <Textarea
-          focusBorderColor="#393E46"
-          placeholder="Description"
-          onChange={(e) => setDescription(e.target.value)}
-          borderColor="#8b9ab0"
-          _hover={{ borderColor: '#424a57' }}
-          backgroundColor="whiteAlpha.900"
+      <Flex w="100%" alignItems="center">
+        <Text color="#FFF" pr="16px">
+          À
+        </Text>
+        <InputCustom
+          type="date"
+          placeholder="Date de début"
+          value={dateStart}
+          setValue={(e) => setDateEnd(e.target.value)}
+          textColor="#FFF"
         />
-      </label>
+      </Flex>
+      <Box my="16px">
+        <Checkbox
+          colorScheme="#fff"
+          name="Ecole actuel"
+          onClick={() => setIsActualJob(!setIsActualJob)}
+          display="flex"
+          color="#fff"
+        >
+          Poste actuel
+        </Checkbox>
+      </Box>
+      <InputCustom
+        type="text"
+        placeholder="Description"
+        value={description}
+        setValue={(e) => setDescription(e.target.value)}
+        textColor="#FFF"
+      />
       <Button
         marginTop="20px"
         alignSelf="center"
         width="100px"
-        colorScheme="black"
+        color="#FFF"
         variant="outline"
         onClick={() => postExperiences()}
-        backgroundColor="whiteAlpha.900"
+        backgroundColor="gray.800"
+        _checked={{ backgroundColor: 'gray.800' }}
+        _focus={{ backgroundColor: 'gray.800' }}
+        _hover={{ backgroundColor: 'gray.800' }}
       >
         Enregistrer
       </Button>
