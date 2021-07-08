@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { InputGroup, InputLeftElement, Input } from '@chakra-ui/react';
+import React from 'react';
 
 type InputProps = {
   placeholder?: string;
@@ -7,9 +8,10 @@ type InputProps = {
   type: string;
   textColor?: string;
   value: string;
-  setValue: (value: string) => void;
+  setValue: (value: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
-  icon?: string;
+  icon?: React.ReactNode;
+  width?: string;
 };
 
 export default function InputCustom(props: InputProps): JSX.Element {
@@ -23,36 +25,32 @@ export default function InputCustom(props: InputProps): JSX.Element {
     setValue,
     required,
     icon,
+    width,
   } = props;
 
-  const [coloringText, setColoringText] = useState(textColor);
+  // const [coloringText, setColoringText] = useState(textColor);
 
-  if (!coloringText) {
-    setColoringText('text-gray-700');
-  }
+  // if (!coloringText) {
+  //   setColoringText('text-gray-700');
+  // }
 
   return (
-    <div>
-      <div>
-        <i></i>
-      </div>
-      <div>
-        {noPlaceholder ? null : (
-          <label
-            htmlFor="grid-password"
-          >
-            {placeholder}
-          </label>
-        )}
-        <input
-          type={type}
-          required={required}
-          placeholder={placeholder}
-          style={{ transition: 'all .15s ease' }}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
-      </div>
-    </div>
+    <InputGroup my="16px">
+      {icon && <InputLeftElement pointerEvents="none" children={icon} />}
+      <Input
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={setValue}
+        isRequired={required}
+        borderColor="#FFF"
+        w={width}
+        //textColor="#FFF"
+        backgroundColor="gray.800"
+        color="#FFF"
+        focusBorderColor="#FFF"
+        errorBorderColor="red.300"
+      />
+    </InputGroup>
   );
 }
