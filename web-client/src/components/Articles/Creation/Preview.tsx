@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, Fragment, SetStateAction } from 'react';
 import { Heading, Text, Image, Link, Flex, Box } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { ArrowRightIcon } from '@chakra-ui/icons';
@@ -86,7 +86,11 @@ export default function Preview({
             case 'Image':
               return (
                 contentField.file && (
-                  <Box marginBottom="20px" width="65%" alignSelf="center">
+                  <Box
+                    marginBottom="20px"
+                    width={['100%', '100%', '70%', '70%']}
+                    alignSelf="center"
+                  >
                     <Image
                       src={URL.createObjectURL(contentField.file)}
                       alt=""
@@ -96,7 +100,7 @@ export default function Preview({
                 )
               );
             default:
-              return <></>;
+              return <Fragment key={index}></Fragment>;
           }
         })}
       </Flex>

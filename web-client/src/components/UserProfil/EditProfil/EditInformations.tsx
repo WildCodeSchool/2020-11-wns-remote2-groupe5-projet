@@ -3,14 +3,22 @@ import { useMutation } from '@apollo/client';
 import { UPLOAD_AVATAR } from '../../../queries/picture-queries';
 import { EDIT_PROFIL } from '../../../queries/user-queries';
 import { Flex } from '@chakra-ui/layout';
-import { NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, useToast, Text, Box } from '@chakra-ui/react';
+import {
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  useToast,
+  Text,
+} from '@chakra-ui/react';
 import { Button } from '@chakra-ui/button';
 import { Input } from '@chakra-ui/input';
 import { Textarea } from '@chakra-ui/textarea';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
 export default function EditInformations(): JSX.Element {
-  const {currentUser} = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const [pseudo, setPseudo] = useState<string>(currentUser?.pseudo!);
   const [age, setAge] = useState<number>(currentUser?.age!);
@@ -27,14 +35,13 @@ export default function EditInformations(): JSX.Element {
     try {
       await editProfil({
         variables: {
-          data:
-            {
-              pseudo,
-              age,
-              email,
-              bio,
-              phoneNumber
-            },
+          data: {
+            pseudo,
+            age,
+            email,
+            bio,
+            phoneNumber,
+          },
         },
       });
       toast({
@@ -88,9 +95,7 @@ export default function EditInformations(): JSX.Element {
   return (
     <Flex p={4} flexDirection="column" alignContent="flex-start">
       <form>
-        <label
-          htmlFor="file"
-        >
+        <label htmlFor="file">
           <Text>Select a file</Text>
           <input
             id="file"
@@ -142,15 +147,15 @@ export default function EditInformations(): JSX.Element {
         _hover={{ borderColor: '#424a57' }}
         backgroundColor="whiteAlpha.900"
       />
-        <Textarea
-          focusBorderColor="#393E46"
-          value={bio}
-          placeholder="Biographie"
-          onChange={(e) => setBio(e.target.value)}
-          borderColor="#8b9ab0"
-          _hover={{ borderColor: '#424a57' }}
-          backgroundColor="whiteAlpha.900"
-        />
+      <Textarea
+        focusBorderColor="#393E46"
+        value={bio}
+        placeholder="Biographie"
+        onChange={(e) => setBio(e.target.value)}
+        borderColor="#8b9ab0"
+        _hover={{ borderColor: '#424a57' }}
+        backgroundColor="whiteAlpha.900"
+      />
       <Button
         marginTop="20px"
         alignSelf="center"

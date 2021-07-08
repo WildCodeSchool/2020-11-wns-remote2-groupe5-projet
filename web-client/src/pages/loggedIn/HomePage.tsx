@@ -12,7 +12,14 @@ export default function HomePage(): JSX.Element {
       {data &&
         data.articles.map((article: Articles_articles) => (
           <Box key={article.articleID} my="16px">
-            <ArticleCard article={article} />
+            <ArticleCard
+              article={{
+                ...article,
+                contentFields: article.contentFields.sort(
+                  (a, b) => a.placeNumber - b.placeNumber
+                ),
+              }}
+            />
           </Box>
         ))}
     </Flex>

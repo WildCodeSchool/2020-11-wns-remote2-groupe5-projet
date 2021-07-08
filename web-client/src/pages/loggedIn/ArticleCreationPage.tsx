@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState, Fragment } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Box, Flex, useDisclosure, Text } from '@chakra-ui/react';
 import Lien from '../../components/Articles/Creation/ContentFields/Lien';
@@ -89,15 +89,19 @@ export default function ArticleCreationPage(): JSX.Element {
                     };
                     switch (field.contentType) {
                       case 'Paragraphe':
-                        return <Paragraphe {...props} />;
+                        return <Paragraphe {...props} key={index} />;
                       case 'Image':
-                        return <Image {...props} file={field.file} />;
+                        return (
+                          <Fragment key={index}>
+                            <Image {...props} file={field.file} />
+                          </Fragment>
+                        );
                       case 'Lien':
-                        return <Lien {...props} />;
+                        return <Lien {...props} key={index} />;
                       case 'Sous-titre':
-                        return <SousTitre {...props} />;
+                        return <SousTitre {...props} key={index} />;
                       default:
-                        return <></>;
+                        return <Fragment key={index}></Fragment>;
                     }
                   })}
                   {provided.placeholder}

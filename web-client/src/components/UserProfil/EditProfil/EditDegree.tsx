@@ -4,7 +4,7 @@ import { CREATE_DIPLOMAS } from '../../../queries/editProfil-queries';
 import { useToast } from '@chakra-ui/react';
 import { Flex } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
-import { Checkbox, Input, Radio, Textarea } from '@chakra-ui/react';
+import { Checkbox, Input, Textarea } from '@chakra-ui/react';
 
 export default function EditDegree(): JSX.Element {
   const [diplomaName, setDiplomaName] = useState('');
