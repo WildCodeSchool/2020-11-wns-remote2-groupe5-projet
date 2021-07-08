@@ -3,14 +3,13 @@ import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_AVATAR } from '../../../queries/picture-queries';
 import { EDIT_PROFIL } from '../../../queries/user-queries';
-
-import { Flex, useToast, Button } from '@chakra-ui/react';
-
+import { Flex, useToast, Button, Box } from '@chakra-ui/react';
 import { AtSignIcon } from '@chakra-ui/icons';
 import { FaBirthdayCake, FaGlobeEurope, FaPhone } from 'react-icons/fa';
 import { AiOutlineUser } from 'react-icons/ai';
 import InputCustom from '../../helpers/InputCustom';
 import UploadCustom from '../../helpers/UploadCustom';
+import AvatarCustom from '../../helpers/AvatarCustom';
 
 export default function EditInformations(): JSX.Element {
   const { currentUser, refetch } = useContext(CurrentUserContext);
@@ -69,7 +68,7 @@ export default function EditInformations(): JSX.Element {
         (await postAvatar({
           variables: { file },
         }));
-      refetch && refetch();
+      refetch && (await refetch());
       toast({
         description: 'Image upload! :)',
         status: 'success',
@@ -91,7 +90,12 @@ export default function EditInformations(): JSX.Element {
   return (
     <form>
       <Flex p={4} flexDirection="column" alignItems="center">
-        <UploadCustom onChange={uploadAvatar} />
+        <Flex alignItems="center" pt="24px">
+          <Box mr="16px">
+            <AvatarCustom variant="big" avatar={currentUser?.avatarFileName!} />
+          </Box>
+          <UploadCustom onChange={uploadAvatar} />
+        </Flex>
         <InputCustom
           type="text"
           placeholder="Pseudo"

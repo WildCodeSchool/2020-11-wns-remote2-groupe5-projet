@@ -23,7 +23,7 @@ export const actualPageMap: Record<ActualPageEnum, string | undefined> = {
 };
 
 export default function UserProfilPage(): JSX.Element {
-  const { actualPage, currentUser } = useContext(CurrentUserContext);
+  const { actualPage } = useContext(CurrentUserContext);
   const { data } = useQuery(USER_INFO);
 
   const [editProfil, setEditProfil] = useState<boolean>(false);
@@ -47,12 +47,6 @@ export default function UserProfilPage(): JSX.Element {
             borderColor="#FFF"
             borderRadius="lg"
           >
-            <Flex flexDirection="column" alignItems="center" pt="24px">
-              <AvatarCustom
-                variant="big"
-                avatar={currentUser?.avatarFileName!}
-              />
-            </Flex>
             <Box padding={{ base: '10px', sm: '20px', md: '30px', lg: '40px' }}>
               <Flex justifyContent="space-between" paddingY="15px">
                 <Text color="#FFF" fontSize="3xl">

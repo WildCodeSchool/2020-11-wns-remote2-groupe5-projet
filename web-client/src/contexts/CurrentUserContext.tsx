@@ -43,7 +43,11 @@ const CurrentUserProvider: React.FC<IProps> = (props: IProps) => {
   const [currentUser, setCurrentUser] = useState<CurrentUser>();
   const [actualPage, setActualPage] = useState<string>('informations');
 
-  const { data: user, loading, refetch } = useQuery(USER_INFO);
+  const {
+    data: user,
+    loading,
+    refetch,
+  } = useQuery(USER_INFO, { fetchPolicy: 'no-cache' });
 
   const conditionLog = () => {
     if (isAuthenticated) {

@@ -25,6 +25,7 @@ export default function UploadCustom(props: UploadProps): JSX.Element {
         borderRadius="md"
         borderWidth={1}
         borderColor="#FFF"
+        cursor="pointer"
       >
         <Input
           id="file"

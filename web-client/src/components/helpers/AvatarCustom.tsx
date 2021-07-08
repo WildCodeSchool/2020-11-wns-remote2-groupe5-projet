@@ -18,12 +18,12 @@ const AvatarCustom = (props: AvatarCustomProps) => {
       }
       w={
         variant === 'big'
-          ? { base: '60px', sm: '70px', md: '70px', lg: '74px', xl: '74px' }
+          ? { base: '50px', sm: '70px', md: '70px', lg: '74px', xl: '74px' }
           : { base: '26px', sm: '30px', md: '30px', lg: '40px', xl: '50px' }
       }
       h={
         variant === 'big'
-          ? { base: '60px', sm: '60px', md: '70px', lg: '74px', xl: '74px' }
+          ? { base: '50px', sm: '60px', md: '70px', lg: '74px', xl: '74px' }
           : { base: '26px', sm: '30px', md: '30px', lg: '40px', xl: '50px' }
       }
     />
