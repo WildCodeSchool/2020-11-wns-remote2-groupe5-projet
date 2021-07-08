@@ -52,9 +52,6 @@ export default function UserProfilPage(): JSX.Element {
                 variant="big"
                 avatar={currentUser?.avatarFileName!}
               />
-              <Text fontSize="2xl" color="white">
-                {data?.me?.pseudo}
-              </Text>
             </Flex>
             <Box padding={{ base: '10px', sm: '20px', md: '30px', lg: '40px' }}>
               <Flex justifyContent="space-between" paddingY="15px">

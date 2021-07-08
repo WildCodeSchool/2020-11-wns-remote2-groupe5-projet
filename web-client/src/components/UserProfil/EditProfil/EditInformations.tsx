@@ -1,19 +1,29 @@
 import React, { useContext, useState } from 'react';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_AVATAR } from '../../../queries/picture-queries';
 import { EDIT_PROFIL } from '../../../queries/user-queries';
-import { Flex } from '@chakra-ui/layout';
-import { NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, useToast, Text, Box } from '@chakra-ui/react';
-import { Button } from '@chakra-ui/button';
-import { Input } from '@chakra-ui/input';
-import { Textarea } from '@chakra-ui/textarea';
-import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
+
+import {
+  Flex,
+  useToast,
+  Text,
+  Button,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  FormLabel,
+} from '@chakra-ui/react';
+
+import { AtSignIcon } from '@chakra-ui/icons';
+import { FaBirthdayCake, FaGlobe, FaPhone } from 'react-icons/fa';
+import { AiOutlineUser } from 'react-icons/ai';
+import { FiUpload } from 'react-icons/fi';
 
 export default function EditInformations(): JSX.Element {
-  const {currentUser} = useContext(CurrentUserContext);
-
+  const { currentUser, refetch } = useContext(CurrentUserContext);
   const [pseudo, setPseudo] = useState<string>(currentUser?.pseudo!);
-  const [age, setAge] = useState<number>(currentUser?.age!);
+  const [age, setAge] = useState<string>(currentUser?.age!);
   const [email, setEmail] = useState<string>(currentUser?.email!);
   const [phoneNumber, setPhoneNumber] = useState(currentUser?.phoneNumber!);
   const [bio, setBio] = useState<string>(currentUser?.bio!);
@@ -24,17 +34,17 @@ export default function EditInformations(): JSX.Element {
   const [editProfil] = useMutation(EDIT_PROFIL);
 
   const postProfil = async () => {
+    let ageToNumber = parseInt(age);
     try {
       await editProfil({
         variables: {
-          data:
-            {
-              pseudo,
-              age,
-              email,
-              bio,
-              phoneNumber
-            },
+          data: {
+            pseudo,
+            age: ageToNumber,
+            email,
+            bio,
+            phoneNumber,
+          },
         },
       });
       toast({
@@ -64,9 +74,10 @@ export default function EditInformations(): JSX.Element {
   }: any) => {
     try {
       validity.valid &&
-        postAvatar({
+        (await postAvatar({
           variables: { file },
-        });
+        }));
+      refetch && refetch();
       toast({
         description: 'Image upload! :)',
         status: 'success',
@@ -86,82 +97,133 @@ export default function EditInformations(): JSX.Element {
   };
 
   return (
-    <Flex p={4} flexDirection="column" alignContent="flex-start">
-      <form>
-        <label
-          htmlFor="file"
-        >
-          <Text>Select a file</Text>
-          <input
-            id="file"
-            type="file"
-            accept="image/*"
-            onChange={uploadAvatar}
+    <form>
+      <Flex p={4} flexDirection="column" alignItems="center">
+        <FormLabel htmlFor="file">
+          <Flex
+            minWidth="204"
+            w="100%"
+            h="40px"
+            alignItems="center"
+            justify="space-evenly"
+            borderRadius="md"
+            borderWidth={1}
+            borderColor="#FFF"
+          >
+            <Input
+              id="file"
+              type="file"
+              accept="image/*"
+              onChange={uploadAvatar}
+              hidden
+            />
+            <FiUpload size="17px" color="#FFF" />
+            <Text color="#FFF">Importe un avatar</Text>
+          </Flex>
+        </FormLabel>
+        <InputGroup my="16px">
+          <InputLeftElement
+            pointerEvents="none"
+            children={<AiOutlineUser color="#FFF" />}
           />
-        </label>
-      </form>
-
-      <Input
-        type="text"
-        placeholder="Pseudo"
-        value={pseudo}
-        focusBorderColor="#393E46"
-        onChange={(e) => setPseudo(e.target.value)}
-        marginY={5}
-        borderColor="#8b9ab0"
-        _hover={{ borderColor: '#424a57' }}
-        backgroundColor="whiteAlpha.900"
-      />
-      <NumberInput value={age} defaultValue={age} min={8} max={99}>
-        <NumberInputField onChange={() => setAge(age)} />
-        <NumberInputStepper>
-          {age && <NumberIncrementStepper onClick={() => setAge(age + 1)} />}
-          {age && <NumberDecrementStepper onClick={() => setAge(age - 1)} />}
-        </NumberInputStepper>
-      </NumberInput>
-      <Input
-        type="email"
-        placeholder="Adresse Email"
-        value={email}
-        focusBorderColor="#393E46"
-        onChange={(e) => setEmail(e.target.value)}
-        marginY={5}
-        borderColor="#8b9ab0"
-        _hover={{ borderColor: '#424a57' }}
-        backgroundColor="whiteAlpha.900"
-      />
-
-      <Input
-        type="tel"
-        value={phoneNumber}
-        placeholder="Numéro de téléphone"
-        focusBorderColor="#393E46"
-        onChange={(e) => setPhoneNumber(e.target.value)}
-        marginY={5}
-        borderColor="#8b9ab0"
-        _hover={{ borderColor: '#424a57' }}
-        backgroundColor="whiteAlpha.900"
-      />
-        <Textarea
-          focusBorderColor="#393E46"
-          value={bio}
-          placeholder="Biographie"
-          onChange={(e) => setBio(e.target.value)}
-          borderColor="#8b9ab0"
-          _hover={{ borderColor: '#424a57' }}
-          backgroundColor="whiteAlpha.900"
-        />
-      <Button
-        marginTop="20px"
-        alignSelf="center"
-        width="100px"
-        colorScheme="black"
-        variant="outline"
-        onClick={() => postProfil()}
-        backgroundColor="whiteAlpha.900"
-      >
-        Enregistrer
-      </Button>
-    </Flex>
+          <Input
+            type="text"
+            placeholder="Pseudo"
+            borderColor="#FFF"
+            backgroundColor="gray.800"
+            color="#FFF"
+            focusBorderColor="#FFF"
+            errorBorderColor="red.300"
+            value={pseudo}
+            onChange={(e) => setPseudo(e.target.value)}
+            isRequired
+          />
+        </InputGroup>
+        <InputGroup my="16px">
+          <InputLeftElement
+            p="8px"
+            pointerEvents="none"
+            children={<FaBirthdayCake color="#FFF" />}
+          />
+          <Input
+            type="text"
+            placeholder="Age"
+            borderColor="#FFF"
+            backgroundColor="gray.800"
+            color="#FFF"
+            focusBorderColor="#FFF"
+            errorBorderColor="red.300"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            isRequired
+          />
+        </InputGroup>
+        <InputGroup marginY="16px">
+          <InputLeftElement
+            pointerEvents="none"
+            children={<AtSignIcon color="#FFF" />}
+          />
+          <Input
+            type="email"
+            placeholder="Email"
+            borderColor="#FFF"
+            backgroundColor="gray.800"
+            color="#FFF"
+            focusBorderColor="#FFF"
+            errorBorderColor="red.300"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </InputGroup>
+        <InputGroup my="16px">
+          <InputLeftElement
+            pointerEvents="none"
+            children={<FaPhone color="#FFF" />}
+          />
+          <Input
+            type="tel"
+            placeholder="Phone number"
+            borderColor="#FFF"
+            backgroundColor="gray.800"
+            color="#FFF"
+            focusBorderColor="#FFF"
+            errorBorderColor="red.300"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+        </InputGroup>
+        <InputGroup my="16px">
+          <InputLeftElement
+            pointerEvents="none"
+            children={<FaGlobe color="#FFF" />}
+          />
+          <Input
+            type="text"
+            placeholder="Bio"
+            borderColor="#FFF"
+            backgroundColor="gray.800"
+            color="#FFF"
+            focusBorderColor="#FFF"
+            errorBorderColor="red.300"
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+          />
+        </InputGroup>
+        <Button
+          marginTop="20px"
+          alignSelf="center"
+          width="100px"
+          color="#FFF"
+          variant="outline"
+          onClick={() => postProfil()}
+          backgroundColor="gray.800"
+          _checked={{ backgroundColor: 'gray.800' }}
+          _focus={{ backgroundColor: 'gray.800' }}
+          _hover={{ backgroundColor: 'gray.800' }}
+        >
+          Enregistrer
+        </Button>
+      </Flex>
+    </form>
   );
 }
