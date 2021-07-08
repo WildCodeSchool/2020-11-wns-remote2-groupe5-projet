@@ -13,13 +13,13 @@ export default function LogoCustom(props: LogoCustomProps): JSX.Element {
   const logo = () => {
     return (
       <Flex alignItems="center">
-        <Heading
+        <Text
           color="#FFF"
           fontSize={{ base: '3xl', sm: '3xl', md: '3xl', lg: '4xl', xl: '7xl' }}
         >
           {' '}
           Skillz
-        </Heading>
+        </Text>
         <Image
           src={logoImage}
           w={{
