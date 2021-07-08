@@ -1,11 +1,9 @@
 import React from 'react';
+import { Link, Flex } from '@chakra-ui/react';
 import { Link as ReachLink } from 'react-router-dom';
-import { BsHouseDoorFill } from 'react-icons/bs';
-import { BiEdit } from 'react-icons/bi';
-import { MdNotifications } from 'react-icons/md';
-import { FaRegBookmark } from 'react-icons/fa';
-import { Flex } from '@chakra-ui/layout';
-import { Link, Icon } from '@chakra-ui/react';
+import { RiHomeLine } from 'react-icons/ri';
+import { FiUsers } from 'react-icons/fi';
+import { IoCreateOutline, IoNotificationsOutline } from 'react-icons/io5';
 
 export default function BottomBar(): JSX.Element {
   return (
@@ -20,20 +18,17 @@ export default function BottomBar(): JSX.Element {
       zIndex="1"
     >
       <Link as={ReachLink} to="/" m="8px">
-        <Icon as={BsHouseDoorFill} w={8} h={8} _hover={{ color: 'gray.400' }} />
+        <RiHomeLine size="34px" />
       </Link>
-      {/* <Divider orientation="horizontal" /> */}
       <Link as={ReachLink} to="/articles/article-creation" m="8px">
-        <Icon as={BiEdit} w={8} h={8} _hover={{ color: 'gray.400' }} />
+        <IoCreateOutline size="34px" />
       </Link>
-      {/* <Divider orientation="horizontal" /> */}
       <Link as={ReachLink} to="/articles/article-creation" m="8px">
-        <Icon as={MdNotifications} w={8} h={8} _hover={{ color: 'gray.400' }} />
+        <IoNotificationsOutline size="34px" />
       </Link>
 
-      {/* <Divider orientation="horizontal" /> */}
       <Link as={ReachLink} to="/articles/article-creation" m="8px">
-        <Icon as={FaRegBookmark} w={8} h={8} _hover={{ color: 'gray.400' }} />
+        <FiUsers size="34px" />
       </Link>
     </Flex>
   );
