@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Link as ReachLink } from 'react-router-dom';
-
 import { useMutation } from '@apollo/client';
 import { LOG_OUT } from '../queries/user-queries';
 import {

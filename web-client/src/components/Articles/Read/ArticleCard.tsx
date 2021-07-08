@@ -1,10 +1,17 @@
-import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
-import React from 'react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  Grid,
+} from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Articles_articles } from '../../../schemaTypes';
 import ArticleHeader from './ArticleHeader';
 import { FaArrowRight } from 'react-icons/fa';
-import ImageCustom from '../../helpers/ImageCustom';
 
 type ArticleCardProps = {
   article: Articles_articles;
@@ -13,46 +20,95 @@ type ArticleCardProps = {
 export default function ArticleCard({
   article,
 }: ArticleCardProps): JSX.Element {
+  const [image, setImage] = useState<String | null>(null);
+
+  useEffect(() => {
+    const firstImage = article.contentFields.find(
+      (item) => item.contentType === 'Image'
+    );
+    if (firstImage) {
+      setImage(firstImage.content);
+    }
+  }, [article]);
+
   return (
-    <Box w={{base: "302px", sm:"440px", md:"600px", lg:"700px", xl:"860px"}}>
+    <Box
+      w={{ base: '302px', sm: '440px', md: '600px', lg: '700px', xl: '860px' }}
+    >
       <ArticleHeader article={article} />
       <Box borderBottomRadius={'2xl'} bgColor="white">
-        <Flex justify="space-between" flexDir={["column","column","column","row"]}>
-          <Box p={'8px'}>
-            <ImageCustom
-              src='https://img-19.ccm2.net/QeOmxQpB5sfw25JvsKbirn-eulw=/250x/6aab65a776614b8bba8c8b4e8c1848c9/ccm-encyclopedia/0px-Unofficial_JavaScript_logo_2.svg.png'
-              alt={article?.title}
-            />
-          </Box>
-          <Flex flexDir="column" justifyContent="space-between">
-            <Flex flexDir="column" align="center">
-              <Heading
-                as="h3"
-                size="lg"
-                noOfLines={1}
-                isTruncated
-                paddingTop="8px"
-                paddingBottom="4px"
-              >
-                {article.title}
-              </Heading>
+        <Flex direction="column">
+          <Heading
+            as="h3"
+            size="lg"
+            marginBottom="25px"
+            marginTop="20px"
+            textAlign="center"
+            width="75%"
+            alignSelf="center"
+          >
+            {article.title}
+          </Heading>
+          <Grid
+            templateColumns={
+              image
+                ? [
+                    'repeat(1, 1fr)',
+                    'repeat(1, 1fr)',
+                    'repeat(2, 1fr)',
+                    'repeat(2, 1fr)',
+                  ]
+                : ['repeat(1, 1fr)']
+            }
+          >
+            {image && (
+              <Flex justifyContent="center" p={'8px'} width="100%">
+                <Image
+                  width={['100%', '100%', '80%', '80%']}
+                  rounded="lg"
+                  src={
+                    image === null
+                      ? undefined
+                      : document.location.origin +
+                        '/public/media/articles/' +
+                        article.articleID +
+                        '/' +
+                        image
+                  }
+                  alt={article?.title}
+                />
+              </Flex>
+            )}
+
+            <Flex
+              flexDir="column"
+              align="flex-start"
+              marginBottom="30px"
+              marginRight={['0', '0', '40px', '40px']}
+              marginLeft={image ? ['0'] : ['0', '0', '40px', '40px']}
+            >
               <Box padding={'8px'}>
-                <Text align="center" noOfLines={4}>
+                <Text align="justify" noOfLines={12}>
                   {article.description}
                 </Text>
               </Box>
             </Flex>
-            <Flex flexDir="row-reverse">
-              <Link to={'articles/' + article.articleID}>
-                <Button
-                  bgColor="gray.900"
-                  textColor="white"
-                  rightIcon={<FaArrowRight />}
-                >
-                  Lire la suite
-                </Button>
-              </Link>
-            </Flex>
+          </Grid>
+
+          <Flex justify="flex-end">
+            <Link to={'articles/' + article.articleID}>
+              <Button
+                bgColor="gray.800"
+                textColor="white"
+                rightIcon={<FaArrowRight />}
+                letterSpacing="2px"
+                borderBottomLeftRadius="0"
+                borderTopRightRadius="0"
+                fontSize="sm"
+              >
+                Lire la suite
+              </Button>
+            </Link>
           </Flex>
         </Flex>
       </Box>

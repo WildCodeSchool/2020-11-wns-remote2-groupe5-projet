@@ -1,5 +1,6 @@
-import React from 'react';
-import { Box, Text, Image, Link } from '@chakra-ui/react';
+import React, { Fragment } from 'react';
+import { Flex, Text, Image, Link, Heading, Box } from '@chakra-ui/react';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { OneArticle_oneArticle_contentFields } from '../../../schemaTypes';
 
 type ContentFieldsProps = {
@@ -12,61 +13,84 @@ export default function ContentFields({
   articleId,
 }: ContentFieldsProps): JSX.Element {
   return (
-    <Box>
+    <Flex
+      direction="column"
+      p={[
+        '25px 15px 40px 15px',
+        '25px 15px 40px 15px',
+        '45px 100px 60px 100px',
+        '45px 100px 60px 100px',
+      ]}
+    >
       {contentFields.map(
-        (contentField: OneArticle_oneArticle_contentFields, i) => {
+        (contentField: OneArticle_oneArticle_contentFields, index) => {
           switch (contentField.contentType) {
             case 'Titre':
               return (
-                <Text
-                  key={i}
+                <Heading
+                  size="xl"
                   textAlign="center"
-                  fontSize="4xl"
-                  fontWeight="900"
+                  marginBottom="40px"
+                  key={index}
                 >
                   {contentField.content}
-                </Text>
+                </Heading>
               );
 
             case 'Sous-titre':
               return (
-                <Text key={i} textAlign="center" fontSize="xl" fontWeight="600">
+                <Heading size="md" marginBottom="20px" key={index}>
                   {contentField.content}
-                </Text>
+                </Heading>
               );
 
             case 'Paragraphe':
               return (
-                <Text key={i} textAlign="center">
+                <Text textAlign="justify" marginBottom="20px" key={index}>
                   {contentField.content}
                 </Text>
               );
 
             case 'Lien':
               return (
-                <Link key={i} href={contentField.content} isExternal>
-                  Lien
+                <Link
+                  marginBottom="20px"
+                  href={contentField.content}
+                  isExternal
+                  key={index}
+                >
+                  {contentField.content}
+                  <ExternalLinkIcon mx="2px" />
                 </Link>
               );
 
             case 'Image':
               return (
-                <Image
-                  src={
-                    contentField.content === null
-                      ? undefined
-                      : document.location.origin +
-                        '/public/media/articles/' +
-                        articleId +
-                        '/' +
-                        contentField.content
-                  }
-                  alt=""
-                />
+                <Box
+                  marginBottom="20px"
+                  width={['100%', '100%', '70%', '70%']}
+                  alignSelf="center"
+                  key={index}
+                >
+                  <Image
+                    src={
+                      contentField.content === null
+                        ? undefined
+                        : document.location.origin +
+                          '/public/media/articles/' +
+                          articleId +
+                          '/' +
+                          contentField.content
+                    }
+                    alt=""
+                  />
+                </Box>
               );
+            default:
+              return <Fragment key={index}></Fragment>;
           }
         }
       )}
-    </Box>
+    </Flex>
   );
 }

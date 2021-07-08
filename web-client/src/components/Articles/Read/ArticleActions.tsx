@@ -1,4 +1,4 @@
-import { Box, Text, Flex, Button } from '@chakra-ui/react';
+import { Text, Flex, Button } from '@chakra-ui/react';
 import React from 'react';
 import {
   FaRegCommentDots,
@@ -26,8 +26,8 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
   date,
 }) => {
   return (
-    <Box>
-      <Flex flexDir="row" align="center" fontSize="16px">
+    <Flex direction="column" alignItems="flex-end" marginRight="5px">
+      <Flex flexDir="row" align="center" fontSize="16px" marginBottom="5px">
         <Flex align="center">
           {onClick ? (
             <Button
@@ -61,21 +61,21 @@ const ArticleActions: React.FC<ArticleActionsProps> = ({
             </>
           )}
         </Flex>
-        <Text color="white" pr={'4px'}>
+        <Text color="white" pr={'4px'} marginLeft="7px">
           {numberCom}
         </Text>
         <FaRegCommentDots color="white" />
-        <Flex align="center" px={'4px'}>
+        <Flex align="center" marginLeft="7px">
           <Text color="white" pr={'4px'}>
             {numberRegister}
           </Text>
           <FaRegBookmark color="white" />
         </Flex>
       </Flex>
-      <Text fontSize="sm" color="white">
+      <Text fontSize="sm" color="white" fontStyle="italic">
         {parseRelativeTime(date)}
       </Text>
-    </Box>
+    </Flex>
   );
 };
 
