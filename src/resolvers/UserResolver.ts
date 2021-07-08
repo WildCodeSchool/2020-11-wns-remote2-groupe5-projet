@@ -7,14 +7,35 @@ import CreateUserInput from '../inputs/CreateUserInput';
 import User from '../models/User';
 import UserSession from '../models/UserSession';
 import { SECURE_COOKIES } from '../config';
+import CreateCommunityInput from '../inputs/CreateCommunityInput';
+import Community from '../models/Community';
 
 @Resolver()
 export default class UserResolver {
   @Mutation(() => User)
-  async signIn(@Arg('data') data: CreateUserInput): Promise<User> {
+  async signIn(
+    @Arg('data') data: CreateUserInput,
+    @Arg('communities', () => [CreateCommunityInput], { nullable: true })
+    communities: CreateCommunityInput[] | null
+  ): Promise<User> {
     const user = User.create(data);
+
     await user.save();
-    return user;
+
+    if (communities) {
+      await Promise.all(
+        communities.map(async (community) => {
+          const result = Community.create(community);
+          result.user = user;
+          await result.save();
+          return result;
+        })
+      );
+    }
+
+    return User.findOne(user.userID, {
+      relations: ['communities'],
+    }) as Promise<User>;
   }
 
   @Mutation(() => User)
@@ -47,7 +68,9 @@ export default class UserResolver {
   @Mutation(() => User)
   async updateUserInfos(
     @Ctx() { user }: { user: User | null },
-    @Arg('data') data: CreateUserInput
+    @Arg('data') data: CreateUserInput,
+    @Arg('communities', () => [CreateCommunityInput], { nullable: true })
+    communities: CreateCommunityInput[] | null
   ): Promise<User> {
     if (!user) {
       throw Error('You are not authenticated.');
@@ -59,7 +82,22 @@ export default class UserResolver {
       .where('userID = :id', { id: user.userID })
       .execute();
 
-    return User.findOne(user.userID) as Promise<User>;
+    if (communities && communities.length) {
+      const savedCommunities = await Promise.all(
+        communities.map(async (community) => {
+          const result = Community.create(community);
+          await result.save();
+          return result;
+        })
+      );
+
+      user.communities = savedCommunities;
+      await user.save();
+    }
+
+    return User.findOne(user.userID, {
+      relations: ['communities'],
+    }) as Promise<User>;
   }
 
   @Query(() => User)
@@ -69,7 +107,7 @@ export default class UserResolver {
     }
 
     return User.findOne(user.userID, {
-      relations: ['articles', 'experiences', 'diplomas'],
+      relations: ['articles', 'experiences', 'diplomas', 'communities'],
     }) as Promise<User>;
   }
 
