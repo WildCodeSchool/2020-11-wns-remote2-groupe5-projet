@@ -12,12 +12,18 @@ export interface CreateArticle_createArticle_contentFields {
   content: string;
 }
 
+export interface CreateArticle_createArticle_community {
+  __typename: "Community";
+  community: string | null;
+}
+
 export interface CreateArticle_createArticle {
   __typename: "Article";
   articleID: string;
   userID: string;
   date: any;
   contentFields: CreateArticle_createArticle_contentFields[];
+  community: CreateArticle_createArticle_community | null;
 }
 
 export interface CreateArticle {
@@ -27,6 +33,7 @@ export interface CreateArticle {
 export interface CreateArticleVariables {
   data: CreateArticleInput;
   fields: CreateContentFieldInput[];
+  community?: CreateCommunityInput | null;
 }
 
 /* tslint:disable */
@@ -399,6 +406,12 @@ export interface Me {
 // GraphQL query operation: UserInfo
 // ====================================================
 
+export interface UserInfo_me_communities {
+  __typename: "Community";
+  communityID: string;
+  community: string | null;
+}
+
 export interface UserInfo_me_experiences {
   __typename: "Experience";
   jobName: string | null;
@@ -427,6 +440,7 @@ export interface UserInfo_me {
   phoneNumber: string | null;
   bio: string | null;
   avatarFileName: string | null;
+  communities: UserInfo_me_communities[] | null;
   experiences: UserInfo_me_experiences[];
   diplomas: UserInfo_me_diplomas[];
 }
@@ -459,6 +473,7 @@ export interface ProfilUpdate {
 
 export interface ProfilUpdateVariables {
   data: CreateUserInput;
+  communities?: CreateCommunityInput[] | null;
 }
 
 /* tslint:disable */
@@ -467,25 +482,28 @@ export interface ProfilUpdateVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: SignIn
+// GraphQL mutation operation: signIn
 // ====================================================
 
-export interface SignIn_signIn {
+export interface signIn_signIn_communities {
+  __typename: "Community";
+  communityID: string;
+  community: string | null;
+}
+
+export interface signIn_signIn {
   __typename: "User";
   pseudo: string;
-  email: string;
-  phoneNumber: string | null;
-  age: number | null;
-  city: string | null;
-  bio: string | null;
+  communities: signIn_signIn_communities[] | null;
 }
 
-export interface SignIn {
-  signIn: SignIn_signIn;
+export interface signIn {
+  signIn: signIn_signIn;
 }
 
-export interface SignInVariables {
+export interface signInVariables {
   data: CreateUserInput;
+  communities?: CreateCommunityInput[] | null;
 }
 
 /* tslint:disable */
@@ -539,6 +557,10 @@ export interface CreateArticleInput {
   title: string;
   date: any;
   description: string;
+}
+
+export interface CreateCommunityInput {
+  community?: string | null;
 }
 
 export interface CreateContentFieldInput {

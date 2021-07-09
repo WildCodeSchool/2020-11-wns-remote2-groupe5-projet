@@ -7,30 +7,17 @@ import {
   InputLeftElement,
   Input,
   Button,
-  Select,
   Text,
   Flex,
   Tag,
   TagCloseButton,
   TagLabel,
 } from '@chakra-ui/react';
-import { FaUsers, FaLightbulb, FaArrowLeft } from 'react-icons/fa';
-
-export enum CommunitiesEnum {
-  Devlopment = 'development',
-  History = 'history',
-  Photography = 'photography',
-  Design = 'design',
-}
-
-export const communitiesMap: Record<CommunitiesEnum, string | undefined> = {
-  [CommunitiesEnum.Devlopment]: 'Développement web',
-  [CommunitiesEnum.History]: 'Histoire',
-  [CommunitiesEnum.Photography]: 'Photographie',
-  [CommunitiesEnum.Design]: 'Design',
-};
-
-export const comu = ['development', 'history', 'photography', 'design'];
+import { FaLightbulb, FaArrowLeft } from 'react-icons/fa';
+import SelectCommunity, {
+  CommunitiesEnum,
+  communitiesMap,
+} from '../helpers/SelectCommunity';
 
 type SignInForm01Props = {
   user: User;
@@ -54,24 +41,7 @@ export default function SignInForm03({
       <VStack spacing="24px">
         <Flex w="100%" direction="column" justify="space-between">
           <Text>Communautés</Text>
-          <Select
-            backgroundColor="#FFF"
-            borderColor="gray.800"
-            focusBorderColor="gray.800"
-            errorBorderColor="red.300"
-            onChange={(e) => handleCommunities(e.target.value)}
-          >
-            <option selected disabled>
-              Communauté
-            </option>
-            {comu.map((com) => {
-              return (
-                <option value={com}>
-                  {communitiesMap[com as CommunitiesEnum]}
-                </option>
-              );
-            })}
-          </Select>
+          <SelectCommunity onChange={handleCommunities} background={'white'} />
           <Flex w="100%" wrap="wrap" mt="8px">
             {user.communities.map((com, i) => {
               return (

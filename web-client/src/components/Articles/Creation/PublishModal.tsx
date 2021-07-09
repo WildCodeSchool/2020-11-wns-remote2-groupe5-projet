@@ -11,6 +11,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
+import SelectCommunity from '../../helpers/SelectCommunity';
 
 type PublishModalProps = {
   isOpen: boolean;
@@ -18,7 +19,7 @@ type PublishModalProps = {
   title: string;
   description: string;
   setPublishModal: (value: boolean) => void;
-  postArticle: (description: string) => Promise<void>;
+  postArticle: (description: string, community: string) => Promise<void>;
 };
 
 export default function PublishModal({
@@ -28,13 +29,13 @@ export default function PublishModal({
   postArticle,
 }: PublishModalProps): JSX.Element {
   const [descriptionValue, setDescriptionValue] = useState('');
-
+  const [communityValue, setCommunityValue] = useState('');
   useEffect(() => {
     setDescriptionValue(description);
   }, [description]);
 
   const onSubmit = () => {
-    postArticle(descriptionValue);
+    postArticle(descriptionValue, communityValue);
   };
 
   return (
@@ -50,7 +51,9 @@ export default function PublishModal({
           <Textarea
             value={descriptionValue}
             onChange={(e) => setDescriptionValue(e.target.value)}
+            marginBottom="16px"
           />
+          <SelectCommunity onChange={setCommunityValue} background="white" />
         </ModalBody>
         <ModalFooter>
           <Button variant="ghost" mr={3} onClick={onClose}>

@@ -12,7 +12,7 @@ export const useArticlePublication = (
     file?: File | null | undefined;
   }[]
 ): {
-  postArticle: (description: string) => Promise<void>;
+  postArticle: (description: string, community: string) => Promise<void>;
   defaultDescription: () => string;
   openPublishModal: () => void;
   modalIsOpen: boolean;
@@ -53,7 +53,10 @@ export const useArticlePublication = (
     }
   };
 
-  const postArticle = async (description: string): Promise<void> => {
+  const postArticle = async (
+    description: string,
+    community: string
+  ): Promise<void> => {
     if (description.length < 50) {
       toast({
         description: "Veuillez écrire une description d'au moins 50 caractères",
@@ -90,6 +93,7 @@ export const useArticlePublication = (
               placeNumber: index,
             };
           }),
+          community: { community } || null,
         },
       });
 
@@ -114,7 +118,13 @@ export const useArticlePublication = (
       history.push('/');
     } catch (error) {
       console.log(error);
-      alert('Erreur => go voir la console');
+      toast({
+        description: "Erreur lors de la création de l'article",
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
     }
   };
 

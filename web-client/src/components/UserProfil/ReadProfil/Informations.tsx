@@ -1,7 +1,7 @@
 import { List, ListItem } from '@chakra-ui/layout';
 import React from 'react';
 import { Community } from '../../../contexts/CurrentUserContext';
-import { communitiesMap, CommunitiesEnum } from '../../SignIn/SignInForm03';
+import { CommunitiesEnum, communitiesMap } from '../../helpers/SelectCommunity';
 
 type InformationsProps = {
   pseudo: string;
