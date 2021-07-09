@@ -52,8 +52,11 @@ export const USER_INFO = gql`
 `;
 
 export const EDIT_PROFIL = gql`
-  mutation ProfilUpdate($data: CreateUserInput!) {
-    updateUserInfos(data: $data) {
+  mutation ProfilUpdate(
+    $data: CreateUserInput!
+    $communities: [CreateCommunityInput!]
+  ) {
+    updateUserInfos(data: $data, communities: $communities) {
       pseudo
       age
       email

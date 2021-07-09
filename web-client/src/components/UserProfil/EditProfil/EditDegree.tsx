@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_DIPLOMAS } from '../../../queries/editProfil-queries';
 import { Box, useToast } from '@chakra-ui/react';
@@ -7,8 +7,11 @@ import { Button } from '@chakra-ui/button';
 import { Checkbox, Text } from '@chakra-ui/react';
 import InputCustom from '../../helpers/InputCustom';
 import { parseDateToUtc } from '../../../utils/Date';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
 export default function EditDegree(): JSX.Element {
+  const { refetch } = useContext(CurrentUserContext);
+
   const [diplomaName, setDiplomaName] = useState('');
   const [school, setSchool] = useState('');
   const [dateStart, setDateStart] = useState('');
@@ -39,6 +42,7 @@ export default function EditDegree(): JSX.Element {
           ],
         },
       });
+      refetch && (await refetch());
       toast({
         description: 'Profil mis à jour! :)',
         status: 'success',

@@ -1,15 +1,33 @@
 import React, { useContext, useState } from 'react';
-import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
+import {
+  Community,
+  CurrentUserContext,
+} from '../../../contexts/CurrentUserContext';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_AVATAR } from '../../../queries/picture-queries';
 import { EDIT_PROFIL } from '../../../queries/user-queries';
-import { Flex, useToast, Button, Box } from '@chakra-ui/react';
+import {
+  Flex,
+  useToast,
+  Text,
+  Button,
+  Box,
+  Select,
+  Tag,
+  TagCloseButton,
+  TagLabel,
+} from '@chakra-ui/react';
 import { AtSignIcon } from '@chakra-ui/icons';
 import { FaBirthdayCake, FaGlobeEurope, FaPhone } from 'react-icons/fa';
 import { AiOutlineUser } from 'react-icons/ai';
 import InputCustom from '../../helpers/InputCustom';
 import UploadCustom from '../../helpers/UploadCustom';
 import AvatarCustom from '../../helpers/AvatarCustom';
+import {
+  communitiesMap,
+  CommunitiesEnum,
+  comu,
+} from '../../SignIn/SignInForm03';
 
 export default function EditInformations(): JSX.Element {
   const { currentUser, refetch } = useContext(CurrentUserContext);
@@ -18,7 +36,9 @@ export default function EditInformations(): JSX.Element {
   const [email, setEmail] = useState<string>(currentUser?.email!);
   const [phoneNumber, setPhoneNumber] = useState(currentUser?.phoneNumber!);
   const [bio, setBio] = useState<string>(currentUser?.bio!);
-
+  const [communities, setCommunities] = useState<string[]>(
+    currentUser?.communities!.map((com) => com.community)!
+  );
   const toast = useToast();
 
   const [postAvatar] = useMutation(UPLOAD_AVATAR);
@@ -26,6 +46,7 @@ export default function EditInformations(): JSX.Element {
 
   const postProfil = async () => {
     let ageToNumber = parseInt(age);
+    console.log('communities', communities);
     try {
       await editProfil({
         variables: {
@@ -36,8 +57,16 @@ export default function EditInformations(): JSX.Element {
             bio,
             phoneNumber,
           },
+          communities: [
+            ...communities.map((com) => {
+              return {
+                community: com,
+              };
+            }),
+          ],
         },
       });
+      refetch && (await refetch());
       toast({
         description: 'Profil mis à jour! :)',
         status: 'success',
@@ -56,6 +85,8 @@ export default function EditInformations(): JSX.Element {
       });
     }
   };
+
+  console.log('state', communities);
 
   const uploadAvatar = async ({
     target: {
@@ -85,6 +116,14 @@ export default function EditInformations(): JSX.Element {
         isClosable: true,
       });
     }
+  };
+
+  const handleCommunities = (value: string) => {
+    if (!communities.includes(value)) setCommunities([...communities!, value]);
+  };
+
+  const deleteCommunity = (value: string) => {
+    setCommunities([...communities.filter((com) => com !== value)]);
   };
 
   return (
@@ -131,6 +170,49 @@ export default function EditInformations(): JSX.Element {
           setValue={(e) => setBio(e.target.value)}
           icon={<FaGlobeEurope color="#FFF" />}
         />
+        <Flex w="100%" direction="column" justify="space-between">
+          <Text>Communautés</Text>
+          <Select
+            backgroundColor="gray.800"
+            borderColor="#FFF"
+            focusBorderColor="#FFF"
+            errorBorderColor="red.300"
+            onChange={(e) => handleCommunities(e.target.value)}
+            textColor="gray.600"
+          >
+            <option color="gray.800" selected disabled>
+              Communauté
+            </option>
+            {comu.map((com, i) => {
+              return (
+                <option value={com} key={i}>
+                  {communitiesMap[com as CommunitiesEnum]}
+                </option>
+              );
+            })}
+          </Select>
+          <Flex w="100%" wrap="wrap" mt="8px">
+            {communities.map((com, i) => {
+              return (
+                <Tag
+                  key={i}
+                  borderRadius="full"
+                  variant="solid"
+                  bgColor="gray.800"
+                  borderWidth={1}
+                  borderColor="#FFF"
+                  colorScheme="#FFF"
+                  onClick={() => deleteCommunity(com)}
+                  mx="4px"
+                  my="2px"
+                >
+                  <TagLabel>{communitiesMap[com as CommunitiesEnum]}</TagLabel>
+                  <TagCloseButton />
+                </Tag>
+              );
+            })}
+          </Flex>
+        </Flex>
         <Button
           marginTop="20px"
           alignSelf="center"
