@@ -17,16 +17,19 @@ export default class ProfilResolver {
       throw Error('You are not authenticated.');
     }
 
-    await Promise.all(
+    const savedExperiences = await Promise.all(
       experiences.map(async (experience) => {
         const result = Experience.create(experience);
-        result.user = user;
         await result.save();
         return result;
       })
     );
 
-    return user.experiences;
+    user.experiences = savedExperiences;
+
+    user.save();
+
+    return savedExperiences;
   }
 
   @Mutation(() => [Diploma])
@@ -39,15 +42,18 @@ export default class ProfilResolver {
       throw Error('You are not authenticated.');
     }
 
-    await Promise.all(
+    const savedDiplomas = await Promise.all(
       diplomas.map(async (diploma) => {
         const result = Diploma.create(diploma);
-        result.user = user;
         await result.save();
         return result;
       })
     );
 
-    return user.diplomas;
+    user.diplomas = savedDiplomas;
+
+    user.save();
+
+    return savedDiplomas;
   }
 }

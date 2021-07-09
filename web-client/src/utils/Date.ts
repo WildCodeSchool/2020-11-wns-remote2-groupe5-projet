@@ -9,3 +9,6 @@ export const parseRelativeTime = (date: string): string => {
   return moment(date).fromNow();
 };
 
+export const parseDateToUtc = (date: string) => {
+  return new Date(date);
+};

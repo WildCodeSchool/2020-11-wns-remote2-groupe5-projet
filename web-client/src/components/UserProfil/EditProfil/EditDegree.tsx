@@ -6,6 +6,7 @@ import { Flex } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
 import { Checkbox, Text } from '@chakra-ui/react';
 import InputCustom from '../../helpers/InputCustom';
+import { parseDateToUtc } from '../../../utils/Date';
 
 export default function EditDegree(): JSX.Element {
   const [diplomaName, setDiplomaName] = useState('');
@@ -20,15 +21,18 @@ export default function EditDegree(): JSX.Element {
   const [createDiplomas] = useMutation(CREATE_DIPLOMAS);
 
   const postDiplomas = async () => {
+    let newDateStart = parseDateToUtc(dateStart);
+    let newDateEnd = parseDateToUtc(dateEnd);
+
     try {
       await createDiplomas({
         variables: {
-          experiences: [
+          diplomas: [
             {
               diplomaName,
               school,
-              dateStart,
-              dateEnd,
+              dateStart: newDateStart,
+              dateEnd: newDateEnd,
               isActualSchool,
               description,
             },
@@ -87,7 +91,7 @@ export default function EditDegree(): JSX.Element {
         <InputCustom
           type="date"
           placeholder="Date de début"
-          value={dateStart}
+          value={dateEnd}
           setValue={(e) => setDateEnd(e.target.value)}
           textColor="#FFF"
         />

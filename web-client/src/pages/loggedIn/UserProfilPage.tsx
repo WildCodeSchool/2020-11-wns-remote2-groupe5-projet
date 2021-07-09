@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import ActionsButtons from '../../components/helpers/ActionsButtons';
 import ProfilModification from '../../components/UserProfil/EditProfil/EditProfilNav';
-import ProfilView from '../../components/UserProfil/ReadProfil/ProfilReadNav';
+import ProfilReadNav from '../../components/UserProfil/ReadProfil/ProfilReadNav';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useQuery } from '@apollo/client';
 import { USER_INFO } from '../../queries/user-queries';
@@ -24,7 +24,7 @@ export const actualPageMap: Record<ActualPageEnum, string | undefined> = {
 
 export default function UserProfilPage(): JSX.Element {
   const { actualPage } = useContext(CurrentUserContext);
-  const { data } = useQuery(USER_INFO);
+  //const { data } = useQuery(USER_INFO);
 
   const [editProfil, setEditProfil] = useState<boolean>(false);
 
@@ -73,11 +73,7 @@ export default function UserProfilPage(): JSX.Element {
                   borderRadius="lg"
                   padding="20px"
                 >
-                  {!editProfil ? (
-                    <ProfilView data={data} />
-                  ) : (
-                    <ProfilModification />
-                  )}
+                  {!editProfil ? <ProfilReadNav /> : <ProfilModification />}
                 </Box>
                 <ActionsButtons
                   goToModificationPage={editProfil}

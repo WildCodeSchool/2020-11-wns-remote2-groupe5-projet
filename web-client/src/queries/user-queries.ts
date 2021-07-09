@@ -27,6 +27,10 @@ export const USER_INFO = gql`
       phoneNumber
       bio
       avatarFileName
+      communities {
+        communityID
+        community
+      }
       experiences {
         jobName
         company
@@ -60,18 +64,19 @@ export const EDIT_PROFIL = gql`
 `;
 
 export const SIGN_IN = gql`
-  mutation SignIn($data: CreateUserInput!) {
-    signIn(data: $data) {
+  mutation signIn(
+    $data: CreateUserInput!
+    $communities: [CreateCommunityInput!]
+  ) {
+    signIn(data: $data, communities: $communities) {
       pseudo
-      email
-      phoneNumber
-      age
-      city
-      bio
+      communities {
+        communityID
+        community
+      }
     }
   }
 `;
-
 
 export const LOG_OUT = gql`
   mutation DeleteSession {

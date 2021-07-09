@@ -4,6 +4,7 @@ import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { CREATE_EXPERIENCES } from '../../../queries/editProfil-queries';
 import InputCustom from '../../helpers/InputCustom';
+import { parseDateToUtc } from '../../../utils/Date';
 
 export default function EditExperience(): JSX.Element {
   const [jobName, setJobName] = useState('');
@@ -18,6 +19,9 @@ export default function EditExperience(): JSX.Element {
   const [createExperiences] = useMutation(CREATE_EXPERIENCES);
 
   const postExperiences = async () => {
+    let newDateStart = parseDateToUtc(dateStart);
+    let newDateEnd = parseDateToUtc(dateEnd);
+
     try {
       await createExperiences({
         variables: {
@@ -25,8 +29,8 @@ export default function EditExperience(): JSX.Element {
             {
               jobName,
               company,
-              dateStart,
-              dateEnd,
+              dateStart: newDateStart,
+              dateEnd: newDateEnd,
               isActualJob,
               description,
             },
@@ -85,7 +89,7 @@ export default function EditExperience(): JSX.Element {
         <InputCustom
           type="date"
           placeholder="Date de début"
-          value={dateStart}
+          value={dateEnd}
           setValue={(e) => setDateEnd(e.target.value)}
           textColor="#FFF"
         />
