@@ -5,6 +5,7 @@ import {
   ManyToOne,
   Column,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import User from './User';
@@ -22,6 +23,7 @@ export default class Community extends BaseEntity {
   user: User;
 
   @OneToMany(() => Article, (article) => article.community)
+  // @JoinColumn({ name: 'articleID' })
   @Field(() => Article)
   article: Article;
 
