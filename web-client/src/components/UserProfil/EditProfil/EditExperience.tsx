@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, Button, Checkbox, Flex, Text } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@apollo/client';
 import { CREATE_EXPERIENCES } from '../../../queries/editProfil-queries';
 import InputCustom from '../../helpers/InputCustom';
+import { parseDateToUtc } from '../../../utils/Date';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
 export default function EditExperience(): JSX.Element {
+  const { refetch } = useContext(CurrentUserContext);
   const [jobName, setJobName] = useState('');
   const [company, setCompany] = useState('');
   const [dateStart, setDateStart] = useState('');
@@ -18,6 +21,9 @@ export default function EditExperience(): JSX.Element {
   const [createExperiences] = useMutation(CREATE_EXPERIENCES);
 
   const postExperiences = async () => {
+    let newDateStart = parseDateToUtc(dateStart);
+    let newDateEnd = parseDateToUtc(dateEnd);
+
     try {
       await createExperiences({
         variables: {
@@ -25,14 +31,15 @@ export default function EditExperience(): JSX.Element {
             {
               jobName,
               company,
-              dateStart,
-              dateEnd,
+              dateStart: newDateStart,
+              dateEnd: newDateEnd,
               isActualJob,
               description,
             },
           ],
         },
       });
+      refetch && (await refetch());
       toast({
         description: 'Profil mis à jour! :)',
         status: 'success',
@@ -85,7 +92,7 @@ export default function EditExperience(): JSX.Element {
         <InputCustom
           type="date"
           placeholder="Date de début"
-          value={dateStart}
+          value={dateEnd}
           setValue={(e) => setDateEnd(e.target.value)}
           textColor="#FFF"
         />

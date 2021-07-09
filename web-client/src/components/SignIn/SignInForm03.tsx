@@ -30,7 +30,7 @@ export const communitiesMap: Record<CommunitiesEnum, string | undefined> = {
   [CommunitiesEnum.Design]: 'Design',
 };
 
-const comu = ['development', 'history', 'photography', 'design'];
+export const comu = ['development', 'history', 'photography', 'design'];
 
 type SignInForm01Props = {
   user: User;
