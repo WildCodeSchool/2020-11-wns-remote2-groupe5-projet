@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState, Fragment } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { Box, Flex, useDisclosure, Text } from '@chakra-ui/react';
+import { Box, Flex, useDisclosure } from '@chakra-ui/react';
 import Lien from '../../components/Articles/Creation/ContentFields/Lien';
 import Paragraphe from '../../components/Articles/Creation/ContentFields/Paragraphe';
 import SousTitre from '../../components/Articles/Creation/ContentFields/Sous-titre';
@@ -28,8 +28,6 @@ export default function ArticleCreationPage(): JSX.Element {
     setHiddenFieldsOnMobileAndPreviewOpen,
   ] = useState(false);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const { windowSize } = useGetCurrentWindowWidth();
 
   useEffect(() => {
@@ -40,16 +38,23 @@ export default function ArticleCreationPage(): JSX.Element {
     }
   }, [windowSize, previewIsOpen]);
 
-  const { postArticle, defaultDescription } = useArticlePublication(fields);
+  const {
+    postArticle,
+    defaultDescription,
+    modalIsOpen,
+    modalOnClose,
+    modalOnOpen,
+    openPublishModal,
+  } = useArticlePublication(fields);
 
   return (
     <Flex height="100%">
       <PublishModal
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={modalIsOpen}
+        onClose={modalOnClose}
         title={fields[0].value}
         description={defaultDescription()}
-        setPublishModal={onOpen}
+        setPublishModal={modalOnOpen}
         postArticle={postArticle}
       />
       {!hiddenFieldsOnMobileAndPreviewOpen && (
@@ -113,11 +118,10 @@ export default function ArticleCreationPage(): JSX.Element {
       )}
       {!hiddenFieldsOnMobileAndPreviewOpen && (
         <>
-          {' '}
           {toolsIsOpen ? (
             <EditionTools
               dispatch={dispatch}
-              openPublishModal={onOpen}
+              openPublishModal={openPublishModal}
               setIsOpen={setToolsIsOpen}
             />
           ) : (

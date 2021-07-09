@@ -1,8 +1,5 @@
 import React, { useContext, useState } from 'react';
-import {
-  Community,
-  CurrentUserContext,
-} from '../../../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_AVATAR } from '../../../queries/picture-queries';
 import { EDIT_PROFIL } from '../../../queries/user-queries';
@@ -12,7 +9,6 @@ import {
   Text,
   Button,
   Box,
-  Select,
   Tag,
   TagCloseButton,
   TagLabel,
@@ -23,11 +19,8 @@ import { AiOutlineUser } from 'react-icons/ai';
 import InputCustom from '../../helpers/InputCustom';
 import UploadCustom from '../../helpers/UploadCustom';
 import AvatarCustom from '../../helpers/AvatarCustom';
-import {
-  communitiesMap,
-  CommunitiesEnum,
-  comu,
-} from '../../SignIn/SignInForm03';
+import { communitiesMap, CommunitiesEnum } from '../../helpers/SelectCommunity';
+import SelectCommunity from '../../helpers/SelectCommunity';
 
 export default function EditInformations(): JSX.Element {
   const { currentUser, refetch } = useContext(CurrentUserContext);
@@ -172,25 +165,7 @@ export default function EditInformations(): JSX.Element {
         />
         <Flex w="100%" direction="column" justify="space-between">
           <Text>Communautés</Text>
-          <Select
-            backgroundColor="gray.800"
-            borderColor="#FFF"
-            focusBorderColor="#FFF"
-            errorBorderColor="red.300"
-            onChange={(e) => handleCommunities(e.target.value)}
-            textColor="gray.600"
-          >
-            <option color="gray.800" selected disabled>
-              Communauté
-            </option>
-            {comu.map((com, i) => {
-              return (
-                <option value={com} key={i}>
-                  {communitiesMap[com as CommunitiesEnum]}
-                </option>
-              );
-            })}
-          </Select>
+          <SelectCommunity onChange={handleCommunities} background="black" />
           <Flex w="100%" wrap="wrap" mt="8px">
             {communities.map((com, i) => {
               return (

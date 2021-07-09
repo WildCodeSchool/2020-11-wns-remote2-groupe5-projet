@@ -4,13 +4,17 @@ export const PUBLISH_ARTICLE = gql`
   mutation CreateArticle(
     $data: CreateArticleInput!
     $fields: [CreateContentFieldInput!]!
+    $community: CreateCommunityInput
   ) {
-    createArticle(data: $data, fields: $fields) {
+    createArticle(data: $data, fields: $fields, community: $community) {
       articleID
       userID
       date
       contentFields {
         content
+      }
+      community {
+        community
       }
     }
   }
