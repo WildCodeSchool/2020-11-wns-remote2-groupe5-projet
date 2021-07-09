@@ -1,9 +1,10 @@
-import { useState, Dispatch, SetStateAction } from 'react';
 import { useMutation } from '@apollo/client';
 import { PUBLISH_ARTICLE } from '../queries/article-queries';
 import path from 'path';
 import { UPLOAD_ARTICLE_PICTURE } from '../queries/picture-queries';
-import { useToast } from '@chakra-ui/react';
+import { useDisclosure, useToast } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
+
 export const useArticlePublication = (
   fields: {
     contentType: string;
@@ -13,13 +14,19 @@ export const useArticlePublication = (
 ): {
   postArticle: (description: string) => Promise<void>;
   defaultDescription: () => string;
-  publishModal: boolean;
-  setPublishModal: Dispatch<SetStateAction<boolean>>;
   openPublishModal: () => void;
+  modalIsOpen: boolean;
+  modalOnOpen: () => void;
+  modalOnClose: () => void;
 } => {
   const toast = useToast();
+  const {
+    isOpen: modalIsOpen,
+    onOpen: modalOnOpen,
+    onClose: modalOnClose,
+  } = useDisclosure();
 
-  const [publishModal, setPublishModal] = useState(false);
+  const history = useHistory();
 
   const [publishArticle] = useMutation(PUBLISH_ARTICLE);
 
@@ -34,18 +41,29 @@ export const useArticlePublication = (
       await uploadPicture({
         variables: { file, articleId, fileName },
       });
-      toast({
-        description: 'Image upload! :)',
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-      });
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      toast({
+        description: "Erreur durant l'upload d'une image",
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
     }
   };
 
   const postArticle = async (description: string): Promise<void> => {
+    if (description.length < 50) {
+      toast({
+        description: "Veuillez écrire une description d'au moins 50 caractères",
+        status: 'warning',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
+      return;
+    }
     try {
       const result = await publishArticle({
         variables: {
@@ -85,13 +103,15 @@ export const useArticlePublication = (
         }
       });
 
-      setPublishModal(false);
+      modalOnClose();
       toast({
         description: 'Article posté !',
         status: 'success',
-        duration: 9000,
+        duration: 4000,
         isClosable: true,
+        position: 'top',
       });
+      history.push('/');
     } catch (error) {
       console.log(error);
       alert('Erreur => go voir la console');
@@ -110,19 +130,50 @@ export const useArticlePublication = (
 
   const openPublishModal = () => {
     if (fields[0].value.length < 3) {
-      alert("Veuillez ajouter un titre d'au moins 3 caractères");
+      toast({
+        description: "Veuillez ajouter un titre d'au moins 3 caractères",
+        status: 'warning',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
     } else if (fields.length < 2) {
-      alert('Veuillez ajouter au moins un champs');
+      toast({
+        description: 'Veuillez ajouter au moins un champs',
+        status: 'warning',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
+    } else if (
+      fields.filter((field) => {
+        if (field.contentType === 'Image' && !field.file) {
+          return true;
+        } else if (field.contentType !== 'Image' && !field.value.length) {
+          return true;
+        } else {
+          return false;
+        }
+      }).length
+    ) {
+      toast({
+        description: 'Veuillez remplir tout les champs',
+        status: 'warning',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
     } else {
-      setPublishModal(true);
+      modalOnOpen();
     }
   };
 
   return {
     postArticle,
     defaultDescription,
-    publishModal,
-    setPublishModal,
     openPublishModal,
+    modalIsOpen,
+    modalOnOpen,
+    modalOnClose,
   };
 };

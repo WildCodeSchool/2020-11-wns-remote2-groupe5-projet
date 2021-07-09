@@ -1,9 +1,20 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Textarea } from '@chakra-ui/react';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Textarea,
+  Text,
+} from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 
 type PublishModalProps = {
   isOpen: boolean;
-  onClose: () => void
+  onClose: () => void;
   title: string;
   description: string;
   setPublishModal: (value: boolean) => void;
@@ -13,9 +24,7 @@ type PublishModalProps = {
 export default function PublishModal({
   isOpen,
   onClose,
-  title,
   description,
-  setPublishModal,
   postArticle,
 }: PublishModalProps): JSX.Element {
   const [descriptionValue, setDescriptionValue] = useState('');
@@ -25,35 +34,37 @@ export default function PublishModal({
   }, [description]);
 
   const onSubmit = () => {
-    postArticle(descriptionValue)
-    onClose()
-  }
+    postArticle(descriptionValue);
+  };
 
- 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      isCentered
-    >
+    <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
       <ModalOverlay />
-      <ModalContent w="90%" backgroundColor='800.gray'>
-          <ModalHeader>{title}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+      <ModalContent w="90%" backgroundColor="800.gray">
+        <ModalHeader>Confirmation</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Text>
+            <i>Description</i> :
+          </Text>
           <Textarea
             value={descriptionValue}
             onChange={(e) => setDescriptionValue(e.target.value)}
-            size="sm"
           />
-          </ModalBody>
-          <ModalFooter>
-            <Button color='gray.100' backgroundColor="gray.800" mr={3} onClick={onClose}>
-              Annuler
-            </Button>
-            <Button variant="ghost" onClick={onSubmit}>Publier</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+        </ModalBody>
+        <ModalFooter>
+          <Button variant="ghost" mr={3} onClick={onClose}>
+            Annuler
+          </Button>
+          <Button
+            color="gray.100"
+            backgroundColor="gray.800"
+            onClick={onSubmit}
+          >
+            Publier
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 }
