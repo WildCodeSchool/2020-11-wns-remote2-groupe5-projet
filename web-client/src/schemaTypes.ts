@@ -69,6 +69,12 @@ export interface Articles_articles_contentFields {
   placeNumber: number;
 }
 
+export interface Articles_articles_community {
+  __typename: "Community";
+  communityID: string;
+  community: string | null;
+}
+
 export interface Articles_articles_commentairesArticle_user {
   __typename: "User";
   avatarFileName: string | null;
@@ -89,6 +95,7 @@ export interface Articles_articles {
   description: string;
   user: Articles_articles_user;
   contentFields: Articles_articles_contentFields[];
+  community: Articles_articles_community | null;
   commentairesArticle: Articles_articles_commentairesArticle[];
 }
 
@@ -145,6 +152,12 @@ export interface OneArticle_oneArticle_commentairesArticle {
   user: OneArticle_oneArticle_commentairesArticle_user;
 }
 
+export interface OneArticle_oneArticle_community {
+  __typename: "Community";
+  communityID: string;
+  community: string | null;
+}
+
 export interface OneArticle_oneArticle {
   __typename: "Article";
   likesArticle: OneArticle_oneArticle_likesArticle[];
@@ -155,6 +168,7 @@ export interface OneArticle_oneArticle {
   user: OneArticle_oneArticle_user;
   contentFields: OneArticle_oneArticle_contentFields[];
   commentairesArticle: OneArticle_oneArticle_commentairesArticle[];
+  community: OneArticle_oneArticle_community | null;
 }
 
 export interface OneArticle {
@@ -162,6 +176,28 @@ export interface OneArticle {
 }
 
 export interface OneArticleVariables {
+  articleID: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: DeleteArticleById
+// ====================================================
+
+export interface DeleteArticleById_deleteArticle {
+  __typename: "Article";
+  articleID: string;
+}
+
+export interface DeleteArticleById {
+  deleteArticle: DeleteArticleById_deleteArticle;
+}
+
+export interface DeleteArticleByIdVariables {
   articleID: string;
 }
 

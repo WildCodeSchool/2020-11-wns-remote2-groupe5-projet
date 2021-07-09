@@ -34,7 +34,9 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
           avatarFileName={article.user?.avatarFileName}
         />
         <Box marginLeft={['7px', '7px', '30px', '30px']}>
-          <ArticleCommunities communities={['DEV', 'javascript']} />
+          {article.community && (
+            <ArticleCommunities community={article.community?.community!} />
+          )}
         </Box>
       </Flex>
       <ArticleActions
