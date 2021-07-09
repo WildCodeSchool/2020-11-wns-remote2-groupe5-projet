@@ -12,6 +12,7 @@ import User from './User';
 import ContentField from './ContentField';
 import CommentaireArticle from './Commentaire_Article';
 import LikeArticle from './LikeArticle';
+import Community from './Community';
 
 @Entity()
 @ObjectType()
@@ -35,6 +36,10 @@ export default class Article extends BaseEntity {
   )
   @Field(() => [CommentaireArticle])
   commentairesArticle: CommentaireArticle[];
+
+  @ManyToOne(() => Community)
+  @Field(() => Community, { nullable: true })
+  community: Community;
 
   @OneToMany(() => LikeArticle, (likesArticle) => likesArticle.article)
   @Field(() => [LikeArticle])
