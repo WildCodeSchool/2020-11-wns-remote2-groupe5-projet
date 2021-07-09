@@ -11,7 +11,18 @@ export default function HomePage(): JSX.Element {
     <Flex flexDir="column" align="center" justify="center" width="100%">
       {data &&
         data.articles.map((article: Articles_articles) => (
-          <Box key={article.articleID} my="16px">
+          <Box
+            key={article.articleID}
+            my="16px"
+            px="12px"
+            w={{
+              base: '100%',
+              sm: '100%',
+              md: '80%',
+              lg: '70%',
+              xl: '60%',
+            }}
+          >
             <ArticleCard
               article={{
                 ...article,
