@@ -42,6 +42,10 @@ export const GET_ALL_ARTICLES = gql`
         contentType
         placeNumber
       }
+      community {
+        communityID
+        community
+      }
       commentairesArticle {
         user {
           avatarFileName
@@ -85,6 +89,18 @@ export const GET_ONE_BY_ID = gql`
           avatarFileName
         }
       }
+      community {
+        communityID
+        community
+      }
+    }
+  }
+`;
+
+export const DELETE_ARTICLE = gql`
+  mutation DeleteArticleById($articleID: String!) {
+    deleteArticle(articleID: $articleID) {
+      articleID
     }
   }
 `;

@@ -8,12 +8,14 @@ import ArticleUserInfo from './ArticleUserInfo';
 type ArticleHeaderProps = {
   article: Articles_articles;
   onClick?: () => void;
+  onDeleteArticle?: () => void;
   isLiked?: boolean;
 };
 
 const ArticleHeader: React.FC<ArticleHeaderProps> = ({
   article,
   onClick,
+  onDeleteArticle,
   isLiked,
 }) => {
   return (
@@ -36,10 +38,12 @@ const ArticleHeader: React.FC<ArticleHeaderProps> = ({
         </Box>
       </Flex>
       <ArticleActions
+        createdBy={article?.user?.pseudo}
         numberLike={article?.likesArticle?.length || 0}
         numberCom={article?.commentairesArticle?.length || 0}
         numberRegister={0}
         onClick={onClick}
+        onDeleteArticle={onDeleteArticle}
         isLiked={isLiked}
         date={article?.date}
       />

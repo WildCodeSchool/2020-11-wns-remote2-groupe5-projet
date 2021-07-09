@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom';
 import { Articles_articles } from '../../../schemaTypes';
 import ArticleHeader from './ArticleHeader';
 import { FaArrowRight } from 'react-icons/fa';
+import { useMutation } from '@apollo/client';
+import { DELETE_ARTICLE } from '../../../queries/article-queries';
 
 type ArticleCardProps = {
   article: Articles_articles;
@@ -21,7 +23,21 @@ export default function ArticleCard({
   article,
 }: ArticleCardProps): JSX.Element {
   const [image, setImage] = useState<String | null>(null);
+  console.log('article', article.user);
 
+  const [deleteArticle] = useMutation(DELETE_ARTICLE, {
+    variables: {
+      articleID: article.articleID,
+    },
+  });
+
+  const onDeleteArticle = async () => {
+    try {
+      await deleteArticle();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     const firstImage = article.contentFields.find(
       (item) => item.contentType === 'Image'

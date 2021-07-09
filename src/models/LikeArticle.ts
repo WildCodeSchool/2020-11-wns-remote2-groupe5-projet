@@ -1,4 +1,10 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import User from './User';
 import Article from './Article';
@@ -10,7 +16,8 @@ export default class LikeArticle extends BaseEntity {
   @Field(() => ID)
   likeID: string;
 
-  @ManyToOne(() => Article, (article) => article.likesArticle)
+  @ManyToOne(() => Article)
+  @JoinColumn({ name: 'articleID' })
   @Field(() => Article)
   article: Article;
 

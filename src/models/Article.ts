@@ -38,6 +38,7 @@ export default class Article extends BaseEntity {
   commentairesArticle: CommentaireArticle[];
 
   @ManyToOne(() => Community)
+  // @JoinColumn({ name: 'articleID' })
   @Field(() => Community, { nullable: true })
   community: Community;
 

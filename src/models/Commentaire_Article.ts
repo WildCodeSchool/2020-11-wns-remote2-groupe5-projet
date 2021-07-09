@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   Column,
+  JoinColumn,
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 
@@ -19,6 +20,7 @@ export default class CommentaireArticle extends BaseEntity {
 
   @ManyToOne(() => Article)
   @Field(() => Article)
+  @JoinColumn({ name: 'articleID' })
   article: Article;
 
   @ManyToOne(() => User, (user) => user.commentairesArticle)

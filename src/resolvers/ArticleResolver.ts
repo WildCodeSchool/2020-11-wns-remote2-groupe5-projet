@@ -9,6 +9,7 @@ import {
   PubSub,
   Publisher,
 } from 'type-graphql';
+import { getConnection } from 'typeorm';
 import CreateArticleInput from '../inputs/CreateArticleInput';
 import CreateCommentaireArticleInput from '../inputs/CreateCommentaireArticleInput';
 import CreateCommunityInput from '../inputs/CreateCommunityInput';
@@ -108,6 +109,47 @@ export default class ArticleResolver {
     await article.save();
 
     return article;
+  }
+
+  @Mutation(() => Article)
+  async deleteArticle(
+    @Ctx() { user }: { user: User | null },
+    @Arg('articleID') articleID: string
+  ): Promise<string> {
+    if (!user) {
+      throw Error('You are not authenticated.');
+    }
+
+    await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(CommentaireArticle)
+      .where('articleID = :id', { id: articleID })
+      .execute();
+
+    await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(LikeArticle)
+      .where('articleID = :id', { id: articleID })
+      .execute();
+
+    await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(ContentField)
+      .where('articleID = :id', { id: articleID })
+      .execute();
+
+    await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(Article)
+      .where('articleID = :id', { id: articleID })
+      .execute();
+
+    return articleID;
+    // return Article.findOne(articleID) as Promise<Article>;
   }
 
   @Mutation(() => CommentaireArticle)
