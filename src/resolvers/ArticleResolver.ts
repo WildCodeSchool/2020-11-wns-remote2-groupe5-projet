@@ -11,9 +11,11 @@ import {
 } from 'type-graphql';
 import CreateArticleInput from '../inputs/CreateArticleInput';
 import CreateCommentaireArticleInput from '../inputs/CreateCommentaireArticleInput';
+import CreateCommunityInput from '../inputs/CreateCommunityInput';
 import CreateContentFieldInput from '../inputs/CreateContentFieldInput';
 import Article from '../models/Article';
 import CommentaireArticle from '../models/Commentaire_Article';
+import Community from '../models/Community';
 import ContentField from '../models/ContentField';
 import LikeArticle from '../models/LikeArticle';
 import User from '../models/User';
@@ -46,6 +48,7 @@ export default class ArticleResolver {
         'commentairesArticle.user',
         'likesArticle',
         'likesArticle.user',
+        'community',
       ],
     });
   }
@@ -66,6 +69,7 @@ export default class ArticleResolver {
         'contentFields',
         'commentairesArticle',
         'commentairesArticle.user',
+        'community',
       ],
     }) as Promise<Article>;
   }
@@ -75,13 +79,21 @@ export default class ArticleResolver {
     @Ctx() { user }: { user: User | null },
     @Arg('data') data: CreateArticleInput,
     @Arg('fields', () => [CreateContentFieldInput])
-    fields: CreateContentFieldInput[]
+    fields: CreateContentFieldInput[],
+    @Arg('community', () => CreateCommunityInput, { nullable: true })
+    community: CreateCommunityInput | null
   ): Promise<Article> {
     if (!user) {
       throw Error('You are not authenticated.');
     }
 
     const article = Article.create(data);
+
+    if (community) {
+      const savedCommunity = Community.create(community);
+      await savedCommunity.save();
+      article.community = savedCommunity;
+    }
 
     article.user = user;
 
