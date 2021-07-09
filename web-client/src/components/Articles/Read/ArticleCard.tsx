@@ -33,7 +33,14 @@ export default function ArticleCard({
 
   return (
     <Box
-      w={{ base: '302px', sm: '440px', md: '600px', lg: '700px', xl: '860px' }}
+    // minWidth="302px"
+    // w={{
+    //   base: '320px',
+    //   sm: '440px',
+    //   md: '600px',
+    //   lg: '700px',
+    //   xl: '700px',
+    // }}
     >
       <ArticleHeader article={article} />
       <Box borderBottomRadius={'2xl'} bgColor="white">

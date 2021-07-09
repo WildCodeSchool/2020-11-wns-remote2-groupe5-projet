@@ -11,6 +11,29 @@ interface IProps {
   isAuthenticate: boolean;
 }
 
+export type Experience = {
+  jobName: string;
+  company: string;
+  dateStart: string;
+  dateEnd: string;
+  isActualJob: string;
+  description: string;
+};
+
+export type Diploma = {
+  jobName: string;
+  company: string;
+  dateStart: string;
+  dateEnd: string;
+  isActualJob: string;
+  description: string;
+};
+
+export type Community = {
+  communityID: string;
+  community: string;
+};
+
 type CurrentUser = {
   id: string;
   pseudo: string;
@@ -19,6 +42,9 @@ type CurrentUser = {
   phoneNumber?: string;
   bio?: string;
   avatarFileName?: string;
+  communities: Community[];
+  diplomas: Diploma[];
+  experiences: Experience[];
   __typename: string;
 };
 
@@ -48,6 +74,8 @@ const CurrentUserProvider: React.FC<IProps> = (props: IProps) => {
     loading,
     refetch,
   } = useQuery(USER_INFO, { fetchPolicy: 'no-cache' });
+
+  console.log('user in context', user);
 
   const conditionLog = () => {
     if (isAuthenticated) {
