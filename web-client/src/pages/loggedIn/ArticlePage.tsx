@@ -3,9 +3,7 @@ import {
   Box,
   Button,
   Flex,
-  Text,
   Modal,
-  ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
@@ -73,7 +71,7 @@ export default function ArticlePage(): JSX.Element {
           )}
         </Flex>
       </Box>
-      <Box mx="auto">
+      <Box mx="16px">
         <CommentContainer
           articleID={articleID}
           comments={article?.oneArticle?.commentairesArticle}

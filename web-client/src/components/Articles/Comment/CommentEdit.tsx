@@ -1,16 +1,8 @@
-/* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 import { CREATE_COMMENT } from '../../../queries/article-queries';
-import {
-  Box,
-  Flex,
-  Text,
-  Textarea,
-  Button,
-  IconButton,
-} from '@chakra-ui/react';
+import { Flex, Textarea, IconButton } from '@chakra-ui/react';
 import { FiSend } from 'react-icons/fi';
 import AvatarCustom from '../../helpers/AvatarCustom';
 
@@ -42,36 +34,43 @@ const CommentEdit: React.FC<CommentEditProps> = ({
   };
 
   return (
-    <Box w="320px" my="12px">
+    <Flex
+      minWidth="220px"
+      w="100%"
+      my="12px"
+      alignSelf="flex-end"
+      justifyContent="flex-end"
+    >
+      <AvatarCustom variant="medium" avatar={currentUser?.avatarFileName!} />
       <Flex
         justify="space-between"
-        align="center"
-        borderTopRadius={'xl'}
-        bgColor="gray.800"
-        px={'8px'}
-        py={'8px'}
-      >
-        <Flex>
-          <AvatarCustom variant="small" avatar={currentUser?.avatarFileName!} />
-          <Text pl="4px" fontSize="md" fontWeight={600} color="white">
-            {currentUser?.pseudo}
-          </Text>
-        </Flex>
-      </Flex>
-      <Flex
-        backgroundColor="#FFF"
         alignItems="center"
-        justify="center"
-        borderBottomLeftRadius="2xl"
-        wordBreak="break-word"
-        p="8px"
+        borderWidth={1}
+        borderColor="#FFF"
+        borderTopRadius="lg"
+        borderBottomLeftRadius="lg"
+        bgColor="gray.800"
+        ml="8px"
       >
         <Textarea
+          color="#FFF"
+          w={{
+            base: '270px',
+            sm: '300px',
+            md: '350px',
+            lg: '380px',
+            xl: '380px',
+          }}
+          borderWidth={0}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="Votre commentaire"
+          placeholder="Votre commentaire..."
+          _focus={{ borderColor: '#FFF' }}
+          isFullWidth
         />
         <IconButton
+          color="#FFF"
+          type="submit"
           p={0}
           size="md"
           variant="outlined"
@@ -81,7 +80,7 @@ const CommentEdit: React.FC<CommentEditProps> = ({
           disabled={comment === '' ? true : false}
         />
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 
