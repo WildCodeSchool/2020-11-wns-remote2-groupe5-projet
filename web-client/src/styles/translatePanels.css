@@ -1,0 +1,94 @@
+.tools-slidein {
+  animation-duration: 0.2s;
+  animation-name: toolslidein;
+}
+
+@keyframes toolslidein {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.tools-slideout {
+  transform: translateX(150px);
+  transition: all 0.2s;
+}
+
+.tools-fadeout {
+  animation-duration: 0.15s;
+  animation-name: toolsfadeout;
+}
+
+@keyframes toolsfadeout {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/* Preview */
+
+.preview-slidein {
+  animation-duration: 0.3s;
+  animation-name: previewslidein;
+}
+
+@keyframes previewslidein {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.preview-slideout {
+  animation-duration: 0.3s;
+  animation-name: previewslideout;
+}
+
+@keyframes previewslideout {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Shake on hover  */
+
+.shake-on-hover:hover .shake-on-hover-child {
+  animation-duration: 0.8s;
+  animation-name: shake;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}

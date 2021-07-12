@@ -1,4 +1,4 @@
-import React, { Dispatch, Fragment, SetStateAction } from 'react';
+import React, { Fragment } from 'react';
 import { Heading, Text, Image, Link, Flex, Box } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { ArrowRightIcon } from '@chakra-ui/icons';
@@ -9,16 +9,16 @@ type ContentFieldsProps = {
     value: string;
     file?: File | null | undefined;
   }[];
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  close: () => void;
 };
 
 export default function Preview({
   contentFields,
-  setIsOpen,
+  close,
 }: ContentFieldsProps): JSX.Element {
   return (
     <Box
-      w={['100%', '100%', '45%', '45%']}
+      w={['363px', '500px', '720px', '700px']}
       p={[
         '25px 15px 40px 15px',
         '25px 20px 40px 20px',
@@ -27,18 +27,25 @@ export default function Preview({
       ]}
       borderTopRightRadius="20px"
       borderBottomRightRadius="20px"
-      backgroundColor="#fff"
+      backgroundColor="rgb(226 232 240);"
       marginRight="10px"
       overflowY="auto"
       boxShadow="1px 2px 22px -1px rgba(0,0,0,0.53)"
+      zIndex="3"
     >
-      <Box width="100%" textAlign="right" marginBottom="20px">
+      <Box
+        width="100%"
+        textAlign="right"
+        marginBottom="20px"
+        className="shake-on-hover"
+      >
         <ArrowRightIcon
           fontSize="35px"
           color="gray.600"
           cursor="pointer"
           _hover={{ color: 'gray.400' }}
-          onClick={() => setIsOpen(false)}
+          onClick={() => close()}
+          className="shake-on-hover-child"
         />
       </Box>
       <Flex direction="column">
