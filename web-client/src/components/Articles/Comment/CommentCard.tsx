@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { parseRelativeTime } from '../../../utils/Date';
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import AvatarCustom from '../../helpers/AvatarCustom';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 

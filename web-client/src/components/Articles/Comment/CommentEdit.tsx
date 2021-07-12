@@ -1,16 +1,8 @@
-/* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 import { CREATE_COMMENT } from '../../../queries/article-queries';
-import {
-  Box,
-  Flex,
-  Text,
-  Textarea,
-  Button,
-  IconButton,
-} from '@chakra-ui/react';
+import { Flex, Textarea, IconButton } from '@chakra-ui/react';
 import { FiSend } from 'react-icons/fi';
 import AvatarCustom from '../../helpers/AvatarCustom';
 
@@ -44,18 +36,10 @@ const CommentEdit: React.FC<CommentEditProps> = ({
   return (
     <Flex
       minWidth="220px"
-      // w={{
-      //   base: '298px',
-      //   sm: '300px',
-      //   md: '350px',
-      //   lg: '380px',
-      //   xl: '380px',
-      // }}
       w="100%"
       my="12px"
       alignSelf="flex-end"
       justifyContent="flex-end"
-      //alignItems="flex-start"
     >
       <AvatarCustom variant="medium" avatar={currentUser?.avatarFileName!} />
       <Flex
@@ -96,7 +80,6 @@ const CommentEdit: React.FC<CommentEditProps> = ({
           disabled={comment === '' ? true : false}
         />
       </Flex>
-      {/* </Flex> */}
     </Flex>
   );
 };
