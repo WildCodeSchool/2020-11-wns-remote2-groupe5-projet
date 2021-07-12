@@ -18,7 +18,7 @@ export default function Preview({
 }: ContentFieldsProps): JSX.Element {
   return (
     <Box
-      w={['363px', '500px', '720px', '700px']}
+      w={['98vw', '98vw', '98vw', '40vw']}
       p={[
         '25px 15px 40px 15px',
         '25px 20px 40px 20px',

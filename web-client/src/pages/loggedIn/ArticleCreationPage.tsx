@@ -51,7 +51,7 @@ export default function ArticleCreationPage(): JSX.Element {
   const { windowSize } = useGetCurrentWindowWidth();
 
   useEffect(() => {
-    if (windowSize.width < 900 && previewIsOpen) {
+    if (windowSize.width <= 990 && previewIsOpen) {
       setHiddenFieldsOnMobileAndPreviewOpen(true);
     } else {
       setHiddenFieldsOnMobileAndPreviewOpen(false);
@@ -89,51 +89,47 @@ export default function ArticleCreationPage(): JSX.Element {
             })
           }
         >
-          <Box
-            overflowY="auto"
-            width="50%"
-            paddingLeft={['0%', '2%', '8%', '9%']}
-            paddingRight={['0%', '2%', '8%', '9%']}
-            flexGrow={1}
-          >
-            <Titre index={0} value={fields[0].value} dispatch={dispatch} />
-            <Droppable droppableId={'1'}>
-              {(provided) => (
-                <Box
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  my="16px"
-                >
-                  {fields.map((field, index) => {
-                    const props = {
-                      key: index,
-                      index,
-                      isFirst: index === 1,
-                      isLast: index === fields.length - 1,
-                      value: field.value,
-                      dispatch,
-                    };
-                    switch (field.contentType) {
-                      case 'Paragraphe':
-                        return <Paragraphe {...props} key={index} />;
-                      case 'Image':
-                        return (
-                          <Fragment key={index}>
-                            <Image {...props} file={field.file} />
-                          </Fragment>
-                        );
-                      case 'Lien':
-                        return <Lien {...props} key={index} />;
-                      case 'Sous-titre':
-                        return <SousTitre {...props} key={index} />;
-                      default:
-                        return <Fragment key={index}></Fragment>;
-                    }
-                  })}
-                  {provided.placeholder}
-                </Box>
-              )}
-            </Droppable>
+          <Box overflowY="auto" flexGrow={1}>
+            <Box width={['100%', '100%', '100%', '40vw']} ml="auto" mr="auto">
+              <Titre index={0} value={fields[0].value} dispatch={dispatch} />
+              <Droppable droppableId={'1'}>
+                {(provided) => (
+                  <Box
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    my="16px"
+                  >
+                    {fields.map((field, index) => {
+                      const props = {
+                        key: index,
+                        index,
+                        isFirst: index === 1,
+                        isLast: index === fields.length - 1,
+                        value: field.value,
+                        dispatch,
+                      };
+                      switch (field.contentType) {
+                        case 'Paragraphe':
+                          return <Paragraphe {...props} key={index} />;
+                        case 'Image':
+                          return (
+                            <Fragment key={index}>
+                              <Image {...props} file={field.file} />
+                            </Fragment>
+                          );
+                        case 'Lien':
+                          return <Lien {...props} key={index} />;
+                        case 'Sous-titre':
+                          return <SousTitre {...props} key={index} />;
+                        default:
+                          return <Fragment key={index}></Fragment>;
+                      }
+                    })}
+                    {provided.placeholder}
+                  </Box>
+                )}
+              </Droppable>
+            </Box>
           </Box>
         </DragDropContext>
       )}
