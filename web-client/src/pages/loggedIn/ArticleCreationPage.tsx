@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState, Fragment } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { Box, Flex, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import Lien from '../../components/Articles/Creation/ContentFields/Lien';
 import Paragraphe from '../../components/Articles/Creation/ContentFields/Paragraphe';
 import SousTitre from '../../components/Articles/Creation/ContentFields/Sous-titre';
@@ -22,6 +22,26 @@ export default function ArticleCreationPage(): JSX.Element {
 
   const [previewIsOpen, setPreviewIsOpen] = useState(false);
   const [toolsIsOpen, setToolsIsOpen] = useState(true);
+  const [previewFadeInClass, setPreviewFadeInClass] = useState('');
+
+  const openToolsWithTranslate = () => {
+    setToolsIsOpen(true);
+  };
+
+  const openPreviewWithTranslate = () => {
+    setPreviewFadeInClass('preview-slidein');
+    setPreviewIsOpen(true);
+    setTimeout(() => {
+      setPreviewFadeInClass('');
+    }, 500);
+  };
+
+  const closePreviewWithTranslate = () => {
+    setPreviewFadeInClass('preview-slideout');
+    setTimeout(() => {
+      setPreviewIsOpen(false);
+    }, 300);
+  };
 
   const [
     hiddenFieldsOnMobileAndPreviewOpen,
@@ -31,7 +51,7 @@ export default function ArticleCreationPage(): JSX.Element {
   const { windowSize } = useGetCurrentWindowWidth();
 
   useEffect(() => {
-    if (windowSize.width < 700 && previewIsOpen) {
+    if (windowSize.width <= 990 && previewIsOpen) {
       setHiddenFieldsOnMobileAndPreviewOpen(true);
     } else {
       setHiddenFieldsOnMobileAndPreviewOpen(false);
@@ -48,7 +68,7 @@ export default function ArticleCreationPage(): JSX.Element {
   } = useArticlePublication(fields);
 
   return (
-    <Flex height="100%">
+    <Flex height="100%" width="100%">
       <PublishModal
         isOpen={modalIsOpen}
         onClose={modalOnClose}
@@ -69,82 +89,81 @@ export default function ArticleCreationPage(): JSX.Element {
             })
           }
         >
-          <Box
-            w={['90%', '90%', '45%', '45%']}
-            overflowY="auto"
-            marginLeft="auto"
-            marginRight="auto"
-          >
-            <Titre index={0} value={fields[0].value} dispatch={dispatch} />
-            <Droppable droppableId={'1'}>
-              {(provided) => (
-                <Box
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  my="16px"
-                >
-                  {fields.map((field, index) => {
-                    const props = {
-                      key: index,
-                      index,
-                      isFirst: index === 1,
-                      isLast: index === fields.length - 1,
-                      value: field.value,
-                      dispatch,
-                    };
-                    switch (field.contentType) {
-                      case 'Paragraphe':
-                        return <Paragraphe {...props} key={index} />;
-                      case 'Image':
-                        return (
-                          <Fragment key={index}>
-                            <Image {...props} file={field.file} />
-                          </Fragment>
-                        );
-                      case 'Lien':
-                        return <Lien {...props} key={index} />;
-                      case 'Sous-titre':
-                        return <SousTitre {...props} key={index} />;
-                      default:
-                        return <Fragment key={index}></Fragment>;
-                    }
-                  })}
-                  {provided.placeholder}
-                </Box>
-              )}
-            </Droppable>
+          <Box overflowY="auto" flexGrow={1}>
+            <Box width={['100%', '100%', '100%', '40vw']} ml="auto" mr="auto">
+              <Titre index={0} value={fields[0].value} dispatch={dispatch} />
+              <Droppable droppableId={'1'}>
+                {(provided) => (
+                  <Box
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    my="16px"
+                  >
+                    {fields.map((field, index) => {
+                      const props = {
+                        key: index,
+                        index,
+                        isFirst: index === 1,
+                        isLast: index === fields.length - 1,
+                        value: field.value,
+                        dispatch,
+                      };
+                      switch (field.contentType) {
+                        case 'Paragraphe':
+                          return <Paragraphe {...props} key={index} />;
+                        case 'Image':
+                          return (
+                            <Fragment key={index}>
+                              <Image {...props} file={field.file} />
+                            </Fragment>
+                          );
+                        case 'Lien':
+                          return <Lien {...props} key={index} />;
+                        case 'Sous-titre':
+                          return <SousTitre {...props} key={index} />;
+                        default:
+                          return <Fragment key={index}></Fragment>;
+                      }
+                    })}
+                    {provided.placeholder}
+                  </Box>
+                )}
+              </Droppable>
+            </Box>
           </Box>
         </DragDropContext>
       )}
-      {!hiddenFieldsOnMobileAndPreviewOpen && (
-        <>
-          {toolsIsOpen ? (
-            <EditionTools
-              dispatch={dispatch}
-              openPublishModal={openPublishModal}
-              setIsOpen={setToolsIsOpen}
-            />
-          ) : (
-            <ToggleSection
-              setIsOpen={setToolsIsOpen}
-              isOpen={toolsIsOpen}
-              title={'Outils'}
-              Icon={FaTools}
-            />
-          )}
-        </>
-      )}
+      <Flex className={previewFadeInClass}>
+        {!hiddenFieldsOnMobileAndPreviewOpen && (
+          <>
+            {toolsIsOpen ? (
+              <EditionTools
+                dispatch={dispatch}
+                openPublishModal={openPublishModal}
+                setIsOpen={setToolsIsOpen}
+              />
+            ) : (
+              <ToggleSection
+                setIsOpen={openToolsWithTranslate}
+                isOpen={toolsIsOpen}
+                title={'Outils'}
+                Icon={FaTools}
+              />
+            )}
+          </>
+        )}
 
-      {previewIsOpen ? (
-        <Preview contentFields={fields} setIsOpen={setPreviewIsOpen} />
-      ) : (
-        <ToggleSection
-          setIsOpen={setPreviewIsOpen}
-          isOpen={previewIsOpen}
-          title={'Aperçu'}
-          Icon={FaEye}
-        />
-      )}
+        {previewIsOpen ? (
+          <Preview contentFields={fields} close={closePreviewWithTranslate} />
+        ) : (
+          <ToggleSection
+            setIsOpen={openPreviewWithTranslate}
+            isOpen={previewIsOpen}
+            title={'Aperçu'}
+            Icon={FaEye}
+          />
+        )}
+      </Flex>
     </Flex>
   );
 }

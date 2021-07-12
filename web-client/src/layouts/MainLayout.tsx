@@ -21,7 +21,7 @@ const MainLayout: React.FC<ILayoutProps> = (props: ILayoutProps) => {
       overflow="hidden"
     >
       {!loading && <Header />}
-      <Box overflowY="auto" flexGrow={1}>
+      <Box overflowY="auto" flexGrow={1} overflowX="hidden">
         {props.children}
       </Box>
       <BottomBar />

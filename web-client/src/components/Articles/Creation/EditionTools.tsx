@@ -1,8 +1,9 @@
 import { Box, Divider, Flex, Text } from '@chakra-ui/react';
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { FiPlusCircle, FiSend } from 'react-icons/fi';
 import { Action, ContentType } from '../../../reducers/fieldsReducer';
 import { ArrowRightIcon } from '@chakra-ui/icons';
+import '../../../styles/translatePanels.css';
 
 type EdtitionToolsProps = {
   dispatch: React.Dispatch<Action>;
@@ -22,6 +23,17 @@ export default function EditionTools({
     'Image',
   ];
 
+  const [slideOutClass, setSlideOutClass] = useState('tools-slidein');
+  const [fadeOutClass, setFadeoutClass] = useState('tools-slidein');
+
+  const waitTranslateToClose = () => {
+    setSlideOutClass('tools-slideout');
+    setFadeoutClass('tools-fadeout');
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 150);
+  };
+
   return (
     <Flex
       height="100%"
@@ -29,12 +41,13 @@ export default function EditionTools({
       backgroundColor="gray.800"
       textColor="gray.200"
       fontSize={{ base: 'md', sm: 'l', md: 'xl', lg: '2xl', xl: '2xl' }}
-      borderRight="solid 1px #B6B6B6"
       boxShadow="1px 2px 15px -1px rgba(0,0,0,0.66)"
+      className={slideOutClass}
+      alignSelf="flex-end"
     >
       {contentTypes.map((contentType, index) => {
         return (
-          <Box key={index}>
+          <Box key={index} className={fadeOutClass}>
             <Flex
               alignItems="center"
               justify="start"
@@ -54,7 +67,7 @@ export default function EditionTools({
         );
       })}
 
-      <Box>
+      <Box className={fadeOutClass}>
         <Flex
           alignItems="center"
           justify="start"
@@ -69,14 +82,13 @@ export default function EditionTools({
         </Flex>
         <Divider />
       </Box>
-      <ArrowRightIcon
-        marginTop="auto"
-        marginBottom="20%"
-        alignSelf="center"
-        cursor="pointer"
-        _hover={{ color: 'gray.400' }}
-        onClick={() => setIsOpen(false)}
-      />
+      <Box marginTop="auto" marginBottom="20%" alignSelf="center">
+        <ArrowRightIcon
+          cursor="pointer"
+          _hover={{ color: 'gray.400' }}
+          onClick={waitTranslateToClose}
+        />
+      </Box>
     </Flex>
   );
 }
