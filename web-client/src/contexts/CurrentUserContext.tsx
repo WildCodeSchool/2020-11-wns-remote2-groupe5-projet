@@ -1,6 +1,7 @@
 import {
   ApolloQueryResult,
   OperationVariables,
+  useLazyQuery,
   useQuery,
 } from '@apollo/client';
 import React, { ReactChild, useEffect, useState } from 'react';
@@ -74,8 +75,6 @@ const CurrentUserProvider: React.FC<IProps> = (props: IProps) => {
     loading,
     refetch,
   } = useQuery(USER_INFO, { fetchPolicy: 'no-cache' });
-
-  console.log('user in context', user);
 
   const conditionLog = () => {
     if (isAuthenticated) {
