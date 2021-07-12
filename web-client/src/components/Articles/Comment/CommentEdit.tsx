@@ -42,36 +42,51 @@ const CommentEdit: React.FC<CommentEditProps> = ({
   };
 
   return (
-    <Box w="320px" my="12px">
+    <Flex
+      minWidth="220px"
+      // w={{
+      //   base: '298px',
+      //   sm: '300px',
+      //   md: '350px',
+      //   lg: '380px',
+      //   xl: '380px',
+      // }}
+      w="100%"
+      my="12px"
+      alignSelf="flex-end"
+      justifyContent="flex-end"
+      //alignItems="flex-start"
+    >
+      <AvatarCustom variant="medium" avatar={currentUser?.avatarFileName!} />
       <Flex
         justify="space-between"
-        align="center"
-        borderTopRadius={'xl'}
-        bgColor="gray.800"
-        px={'8px'}
-        py={'8px'}
-      >
-        <Flex>
-          <AvatarCustom variant="small" avatar={currentUser?.avatarFileName!} />
-          <Text pl="4px" fontSize="md" fontWeight={600} color="white">
-            {currentUser?.pseudo}
-          </Text>
-        </Flex>
-      </Flex>
-      <Flex
-        backgroundColor="#FFF"
         alignItems="center"
-        justify="center"
-        borderBottomLeftRadius="2xl"
-        wordBreak="break-word"
-        p="8px"
+        borderWidth={1}
+        borderColor="#FFF"
+        borderTopRadius="lg"
+        borderBottomLeftRadius="lg"
+        bgColor="gray.800"
+        ml="8px"
       >
         <Textarea
+          color="#FFF"
+          w={{
+            base: '270px',
+            sm: '300px',
+            md: '350px',
+            lg: '380px',
+            xl: '380px',
+          }}
+          borderWidth={0}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="Votre commentaire"
+          placeholder="Votre commentaire..."
+          _focus={{ borderColor: '#FFF' }}
+          isFullWidth
         />
         <IconButton
+          color="#FFF"
+          type="submit"
           p={0}
           size="md"
           variant="outlined"
@@ -81,7 +96,8 @@ const CommentEdit: React.FC<CommentEditProps> = ({
           disabled={comment === '' ? true : false}
         />
       </Flex>
-    </Box>
+      {/* </Flex> */}
+    </Flex>
   );
 };
 
