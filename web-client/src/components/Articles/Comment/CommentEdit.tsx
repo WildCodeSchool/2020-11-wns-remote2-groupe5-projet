@@ -66,7 +66,6 @@ const CommentEdit: React.FC<CommentEditProps> = ({
           onChange={(e) => setComment(e.target.value)}
           placeholder="Votre commentaire..."
           _focus={{ borderColor: '#FFF' }}
-          isFullWidth
         />
         <IconButton
           color="#FFF"

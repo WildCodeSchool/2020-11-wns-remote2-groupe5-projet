@@ -45,9 +45,7 @@ export default class UserResolver {
   ): Promise<User> {
     const { email, password, rememberMe } = input;
     const user = await User.findOne({ email });
-    const authenticationError = new Error(
-      'Incorrect username and/or password.'
-    );
+    const authenticationError = new Error('Incorrect email and/or password.');
     if (!user) {
       throw authenticationError;
     }

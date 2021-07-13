@@ -7,12 +7,21 @@ import { GET_ALL_ARTICLES } from '../../queries/article-queries';
 
 export default function HomePage(): JSX.Element {
   const { data } = useQuery(GET_ALL_ARTICLES, { fetchPolicy: 'no-cache' });
+
+  console.log('articles', data);
   return (
-    <Flex flexDir="column" align="center" justify="center" width="100%">
+    <Flex
+      role="articlesList"
+      flexDir="column"
+      align="center"
+      justify="center"
+      width="100%"
+    >
       {data &&
         data.articles.map((article: Articles_articles) => (
           <Box
             key={article.articleID}
+            role="articleItem"
             my="16px"
             px="12px"
             w={{

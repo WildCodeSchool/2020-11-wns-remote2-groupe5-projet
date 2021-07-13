@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint src/**/* web-client",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**/* web-client --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "build": "tsc",
     "start": "node dist/index.js",
-    "start:watch": "npm run build && (tsc -w & nodemon dist/index.js)",
-    "start:bogoss": "nodemon dist/index.js & tsc -w"
+    "start:watch": "npm run build && (tsc -w & nodemon dist/index.js)"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,8 @@
     "@types/bcrypt": "^3.0.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/graphql-upload": "^8.0.6",
+    "@types/jest": "^26.0.16",
+    "@types/supertest": "^2.0.10",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",
@@ -35,8 +37,10 @@
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2",
     "rimraf": "^2.6.3",
+    "supertest": "^6.0.1",
+    "ts-jest": "^26.4.4",
     "ts-node": "^9.0.0",
-    "typescript": "^4.0.5"
+    "typescript": "^4.3.5"
   },
   "dependencies": {
     "apollo-server-express": "^2.19.0",

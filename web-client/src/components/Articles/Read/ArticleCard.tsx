@@ -22,8 +22,6 @@ export default function ArticleCard({
 }: ArticleCardProps): JSX.Element {
   const [image, setImage] = useState<String | null>(null);
 
-  console.log('article', article);
-
   useEffect(() => {
     const firstImage = article.contentFields.find(
       (item) => item.contentType === 'Image'
