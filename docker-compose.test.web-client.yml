@@ -1,0 +1,9 @@
+version: '3'
+services:
+  test-web-client:
+    build: ./web-client
+    command: npm test
+    tty: true
+    environment:
+      - NODE_ENV=development
+      - CI=true

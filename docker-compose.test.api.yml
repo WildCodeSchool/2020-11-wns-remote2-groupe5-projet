@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mock-db:
+    image: postgres:13.2
+    environment:
+      - POSTGRES_PASSWORD=password
+  test-api:
+    build: .
+    command: npm test
+    depends_on:
+      - mock-db
+    tty: true
+    environment:
+      - NODE_ENV=development
+      - TYPEORM_CONNECTION=postgres
+      - TYPEORM_HOST=mock-db
+      - TYPEORM_PORT=5432
+      - TYPEORM_DATABASE=postgres
+      - TYPEORM_USERNAME=postgres
+      - TYPEORM_PASSWORD=password

@@ -1,0 +1,8 @@
+version: '3'
+services:
+  test-api:
+    command: npm test -- --watchAll
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./src:/app/src
