@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Box, Flex } from '@chakra-ui/react';
 import { Articles_articles } from '../../schemaTypes';
@@ -8,7 +7,6 @@ import { GET_ALL_ARTICLES } from '../../queries/article-queries';
 export default function HomePage(): JSX.Element {
   const { data } = useQuery(GET_ALL_ARTICLES, { fetchPolicy: 'no-cache' });
 
-  console.log('articles', data);
   return (
     <Flex
       role="articlesList"
@@ -35,9 +33,9 @@ export default function HomePage(): JSX.Element {
             <ArticleCard
               article={{
                 ...article,
-                contentFields: article.contentFields.sort(
-                  (a, b) => a.placeNumber - b.placeNumber
-                ),
+                contentFields: article.contentFields
+                  .slice()
+                  .sort((a, b) => a.placeNumber - b.placeNumber),
               }}
             />
           </Box>

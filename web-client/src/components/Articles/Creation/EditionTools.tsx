@@ -44,6 +44,7 @@ export default function EditionTools({
       boxShadow="1px 2px 15px -1px rgba(0,0,0,0.66)"
       className={slideOutClass}
       alignSelf="flex-end"
+      width={['140px', '150px', '200px', '200px']}
     >
       {contentTypes.map((contentType, index) => {
         return (
