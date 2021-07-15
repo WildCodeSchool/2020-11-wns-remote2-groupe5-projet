@@ -12,6 +12,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { createUploadLink } from 'apollo-upload-client';
 import { getMainDefinition } from '@apollo/client/utilities';
+import '@fontsource/quicksand/700.css';
 import theme from './theme';
 import './index.css';
 require('dotenv').config();

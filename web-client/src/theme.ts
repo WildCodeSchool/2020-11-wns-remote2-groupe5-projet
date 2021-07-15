@@ -1,10 +1,11 @@
-import { extendTheme } from "@chakra-ui/react"
+import { extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
   fonts: {
-    heading: "Lato",
-    body: "Quicksand",
+    heading: 'Lato',
+    body: 'Quicksand',
+    mono: 'Lato',
   },
-})
+});
 
-export default theme
+export default theme;
