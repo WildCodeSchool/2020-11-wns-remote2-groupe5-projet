@@ -32,7 +32,7 @@ export default function ArticleCard({
   }, [article]);
 
   return (
-    <Box>
+    <Box role="articleItem">
       <ArticleHeader article={article} />
       <Box borderBottomRadius={'2xl'} bgColor="white">
         <Flex direction="column">
