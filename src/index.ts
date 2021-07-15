@@ -14,11 +14,8 @@ const main = async () => {
     entities: ['dist/models/*.js'],
   });
 
-  const {
-    expressServer,
-    apolloServer,
-    graphQLSchema,
-  } = await getExpressServer();
+  const { expressServer, apolloServer, graphQLSchema } =
+    await getExpressServer();
 
   const server = createServer(expressServer);
   server.listen(4000, () => {

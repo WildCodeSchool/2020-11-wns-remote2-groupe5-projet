@@ -103,6 +103,10 @@ export interface Articles {
   articles: Articles_articles[];
 }
 
+export interface ArticlesVariables {
+  offset: number;
+}
+
 /* tslint:disable */
 /* eslint-disable */
 // @generated

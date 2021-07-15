@@ -51,6 +51,9 @@ export default class ArticleResolver {
         'likesArticle.user',
         'community',
       ],
+      order: {
+        date: 'DESC',
+      },
     });
   }
 

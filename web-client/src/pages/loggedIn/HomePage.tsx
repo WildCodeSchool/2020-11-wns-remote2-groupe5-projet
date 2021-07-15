@@ -6,7 +6,8 @@ import ArticleCard from '../../components/Articles/Read/ArticleCard';
 import { GET_ALL_ARTICLES } from '../../queries/article-queries';
 
 export default function HomePage(): JSX.Element {
-  const { data } = useQuery(GET_ALL_ARTICLES, { fetchPolicy: 'no-cache' });
+  const { data } = useQuery(GET_ALL_ARTICLES);
+
   return (
     <Flex flexDir="column" align="center" justify="center" width="100%">
       {data &&
@@ -26,9 +27,9 @@ export default function HomePage(): JSX.Element {
             <ArticleCard
               article={{
                 ...article,
-                contentFields: article.contentFields.sort(
-                  (a, b) => a.placeNumber - b.placeNumber
-                ),
+                contentFields: article.contentFields
+                  .slice()
+                  .sort((a, b) => a.placeNumber - b.placeNumber),
               }}
             />
           </Box>
